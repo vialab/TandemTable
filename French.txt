@@ -1,0 +1,70 @@
+package Languages;
+
+public class French {
+	public static final String[] introQuestions1 = {
+			"- Présentez-vous.",
+			"- Te familiariser avec votre partenaire, demander-les:",
+			"- De quel pays venez vous?",
+			"- Quel âge avez-vous?", 
+			"- Où habitez-vous?", 
+			"- Quelle est votre profession?", 
+			"- Où êtes-vous allé à l'école et pour quoi?", 
+			"- Discutez de vos intérêts et passe-temps.",
+			"- Discutez pourquoi vous essayez d'apprendre cette langue." 
+			
+	};
+	
+	public static final String[] introQuestions = {
+		"Présentez-vous.",
+		"Te familiariser avec votre partenaire,","Demander-les:",
+		"De quel pays venez vous?",
+		"Quel âge avez-vous?", 
+		"Où habitez-vous?", 
+		"Quelle est votre profession?", 
+		"Où êtes-vous allé à l'école et pour quoi?", 
+		"Discutez:","De vos intérêts et passe-temps.",
+		"Pourquoi vous essayez d'apprendre cette langue.",
+		"Quels parties de la langue vous êtes bon en",
+		"et quel parties vous essayez d'ameliorer le plus.",
+		"- Vocabulaire",
+		"- Grammaire", 
+		"- Parlant", 
+		"- La lecture",  
+		"Discutez comment votre partenaire peut vous aider.",
+		"Discutez comment vous et votre partenaire corrigera",
+		"l'usage de langue les uns des autres."
+	};
+	
+	public static final String[] introQuestions2 = {
+			"- Discutez quels parties de la langue vous êtes bon en",
+			"  et quel parties vous essayez d'ameliorer le plus.",
+			"- Vocabulaire",
+			"- Grammaire", 
+			"- Parlant", 
+			"- La lecture",  
+			"- Discutez comment votre partenaire peut vous aider.",
+			"- Discutez comment vous et votre partenaire corrigera",
+			"  l'usage de langue les uns des autres."
+	};
+	
+	public static final String next = "Prochaine";
+	public static final String moreQ = "Plus de Questions";
+	public static final String ranTopics = "Randomisez les Sujets ";
+	public static final String choAnoTop = "Choisissez une Autre Sujet";
+	public static final String choAnoAct = "Choisissez une Autre Activité";
+	public static final String newLang = "Nouvelle Langue";
+	public static final String morePics = "Plus de Photos";
+	public static final String tweetWord = "Recherche Twitter Pour le Mot Sélectionné";
+	public static final String moreNews = "Plus de Titres de l'Actualité";
+	public static final String back2Heads = "Revenir à Titres de l'Actualité";
+	
+	public static final String[] activities =  {"Twitter", "Titres de l'Actualité", "Photos", "Vidéos", "Jeu D'Images"};
+
+	// 15 topics
+	public static final String[] topics = {
+		"Sport", "Religion", "Danse", "École", "Films", "Livres", "Musique",
+		"Nourriture", "Science", "Culture", "Art", "Langage", "Histoire", "Noms", "Vacances"
+		};
+	
+	
+}

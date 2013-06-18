@@ -1,0 +1,107 @@
+package Languages;
+
+public class English {
+	public static final String[] introQuestions1 = {
+			"- Introduce yourself.",
+			"- Get to know your partner. Ask them:",
+			"- Where are you from?",
+			"- How old are you?", 
+			"- Where do you live?", 
+			"- What is your profession?", 
+			"- Where did you last attend school and for what?",
+			"- Discuss your interests and hobbies.",
+			"- Discuss why you are learning this language."
+			
+	};
+	
+	public static final String[] introQuestions = {"Introduce yourself.",
+		"Get to know your partner."," Ask them:",
+		"Where are you from?",
+		"How old are you?", 
+		"Where do you live?", 
+		"What is your profession?", 
+		"Where did you last attend school?",
+		"What program did you take?",
+		"Discuss the following things:" +
+		"- Your interests and hobbies.",
+		"- Why you are learning this language.",
+		"- What areas of the language you are good at",
+		"and what area you are trying to improve the most.",
+		"- Vocabulary", 
+		"- Grammar", 
+		"- Speaking", 
+		"- Reading",
+		"Discuss how your partner can help you.",
+		"Discuss how you and your partner will correct each",
+		"other's language use."};
+	
+	public static final String[] introQuestions2 = {
+			"- Discuss what areas of the language you are good at",
+			"  and what area you are trying to improve the most.",
+			"- Vocabulary", 
+			"- Grammar", 
+			"- Speaking", 
+			"- Reading",
+			"- Discuss how your partner can help you.",
+			"- Discuss how you and your partner will correct each",
+			"  other's language use."
+	};
+	
+	public static final String next = "Next";
+	public static final String moreQ = "More Questions";
+	public static final String ranTopics = "Randomize Topics";
+	public static final String choAnoTop = "Choose Another Topic";
+	public static final String choAnoAct = "Choose Another Activity";
+	public static final String newLang = "New Language";
+	public static final String morePics = "More Pictures";
+	public static final String tweetWord = "Search Twitter for Selected Word";
+	public static final String moreNews = "More Headlines";
+	public static final String back2Heads = "Back To Headlines";
+	
+	public static final String[] activities =  {"Twitter", "News Headlines", "Pictures", "Videos", "Picture Game"};
+	
+	// 15 topics
+	public static final String[] topics = {
+		"Sports", "Religion", "Dance", "School", "Movies", "Books", "Music",
+		"Food", "Science", "Culture", "Art", "Language", "History", "Names", "Holidays"
+		};
+	
+	///////////////////////////////////////////////
+	//Query Expansion
+	/////////////////////////////////////////////
+	public static final String[] sports = {"sport", "athlete", "baseball", "snowboarding", "skateboarding", "wakeboarding", "hockey", "basketball", 
+		"lacrosse", "racing"};
+	
+	public static final String[] religion = {"religion", "hinduism", "buddhism", "shinto", "sikhism", "baha'i faith", "jainism", "islam", "christianity", "judaism"};
+	
+	public static final String[] dance = {"samba", "dance", "rumba", "conga", "belly dance", "disco", "krump",
+		 "breakdancing", "b-boying", "hip-hop dance"};
+	
+	public static final String[] school = {"school", "academy", "university", "college", "education", "high school",
+		 "elementary school", "kindergarten", "graduate school", "grade school"};
+	
+	public static final String[] movies = {"movie", "movies", "cinema", "film", "motion-picture", "action movie", "movie theatre", "movie preview", "movie trailer", "film industry"};
+	
+	public static final String[] books = {"books", "library", "bibliophile", "bibliomania", "bookstall", "bookshelf", "bookstore", "librarian"};
+	
+	public static final String[] music = {"music", "hip-hop", "rap", "disco", "pop music", "rock music", "song", "reggae", "dubstep", "soca music"};
+	
+	public static final String[] food = {"food", "vegetables", "meat", "dairy", "bread", "fruits", "cereals",  "fast food", "candy", "organic food"};
+	
+	public static final String[] science = {"science", "knowledge", "technology", "biology", "chemistry", "computer science", "physics", "neurology", "physical science", "cognitive science"};
+	
+	public static final String[] culture = {"culture", "subculture", "underground movement", "western culture", "asian culture", "russian culture", "european culture", "african culture", "australian culture", "canadian culture"};
+	
+	public static final String[] art = {"art", "artwork", "craft", "artistry", "artistic", "painting", "drawing", "sculpting", "mosaic", "visual arts"};
+	
+	public static final String[] language = {"language", "linguistics", "communication", "sign language", "artificial language", "animal communication", "dialect", "speech", "indo-european languages", "sino-tibetan languages"};
+	
+	public static final String[] history = {"history", "historic", "ancient history", "middle ages", "historiography", "historical literature", "stone age", "paleolithic age", "mesolithic age", "bronze age"};
+	
+	public static final String[] names = {"name", "title", "nickname", "label", "identification", "id", "middle name", "alias", "brand", "stage name"};
+	
+	public static final String[] holidays = {"holiday", "vacation", "winter holidays", "summer holidays", "Canada day", "earth day", "mother's day", "father's day", "valentine's day", "pi day"};
+
+	public static final String[][] topicsExpanded = {sports, religion, dance, school, movies, books, music, food, science, culture, art, language, history, names, holidays}; 
+
+}

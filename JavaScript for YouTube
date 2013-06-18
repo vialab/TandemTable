@@ -1,0 +1,18 @@
+javascript:isIE=/*@cc_on!@*/false; 
+isIE ? swfHTML=document.getElementById('movie_player').getElementsByTagName('param')[1].value:swfHTML=document.getElementById('movie_player').getAttribute('flashvars'); 
+
+
+javascript:swfHTML=document.getElementById('movie_player').getElementsByTagName('param')[1].value;
+w=swfHTML.split('&'); 
+for(i=0;i<=w.length-1;i++) 
+	if(w[i].split('=')[0] == 'url_encoded_fmt_stream_map'){ 
+	links=unescape(w[i].split('=')[1]); 
+	break; 
+	} 
+	abc = links.split(',url='); 
+	fmt=abc[0].split('|')[0]; 
+	url = fmt.substring(4,fmt.indexOf('fallback_host')-1); 
+	url = unescape(unescape(url)); 
+	combineurl = url; 
+	combineurl = combineurl + '&title=' + (((document.title.replace('#',' ')).replace('@',' ')).replace('*',' ')).replace('|',' '); 
+	window.location.href = combineurl.substring(0, 2000);
