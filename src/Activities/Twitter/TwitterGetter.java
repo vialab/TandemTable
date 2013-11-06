@@ -9,7 +9,7 @@ import java.util.List;
 import processing.core.PApplet;
 import twitter4j.Query;
 import twitter4j.QueryResult;
-import twitter4j.Tweet;
+import twitter4j.Status;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.conf.ConfigurationBuilder;
@@ -26,11 +26,11 @@ public class TwitterGetter extends Thread {
 	TwitterActivity twitterAct;
 	MainSketch sketch;
 	
-	List<Tweet> tweets1, tweets2;
+	List<Status> tweets1, tweets2;
 	RectZone loading;
 	
 
-	String replaceRegex = "[^a-zA-Z_0-9_'_Á_á_À _Â_à_Â_â_Ä_ä_Ã_ã_Å_å_Ç_ç_É_é_È_è_Ê_ê_Ë_ë_Í_í_Ì_ì_Î_î_Ï_ï_Ñ_ñ_Ó_ó_Ò_ò_Ô_ô_Ö_ö_Õ_õ_Ú_ú_Ù_ù_Û_û_Ü_ü_Ý_ý_ÿ]";
+	String replaceRegex = "[^a-zA-Z_0-9_'_ï¿½_ï¿½_ï¿½ _ï¿½_ï¿½_ï¿½_ï¿½_ï¿½_ï¿½_ï¿½_ï¿½_ï¿½_ï¿½_ï¿½_ï¿½_ï¿½_ï¿½_ï¿½_ï¿½_ï¿½_ï¿½_ï¿½_ï¿½_ï¿½_ï¿½_ï¿½_ï¿½_ï¿½_ï¿½_ï¿½_ï¿½_ï¿½_ï¿½_ï¿½_ï¿½_ï¿½_ï¿½_ï¿½_ï¿½_ï¿½_ï¿½_ï¿½_ï¿½_ï¿½_ï¿½_ï¿½_ï¿½_ï¿½_ï¿½_ï¿½_ï¿½_ï¿½_ï¿½_ï¿½]";
 	String regex = "[ \t\n\f\r]+";
 
 
@@ -123,10 +123,10 @@ public class TwitterGetter extends Thread {
 				if(user == 1){
 					twitterAct.tweetIndex1 = 0;
 					query = new Query(topic);
-					query.setRpp(twitterAct.MAX_TWEETS);
+					query.setCount(twitterAct.MAX_TWEETS);
 					//query.setResultType(Query.POPULAR);
 					query.setLang(twitterAct.langQuery1);
-					query.setPage(twitterAct.pageOffset1);
+					//****////query.setPage(twitterAct.pageOffset1);
 					result = sketch.twitter.search(query);
 	
 					tweets1 = result.getTweets();
@@ -143,10 +143,10 @@ public class TwitterGetter extends Thread {
 				} else if (user == 2){
 					twitterAct.tweetIndex2 = 0;
 					query = new Query(topic);
-					query.setRpp(twitterAct.MAX_TWEETS);
+					query.setCount(twitterAct.MAX_TWEETS);
 					//query.setResultType(Query.POPULAR);
 					query.setLang(twitterAct.langQuery2);
-					query.setPage(twitterAct.pageOffset2);
+					//****////query.setPage(twitterAct.pageOffset2);
 					result = sketch.twitter.search(query);
 					tweets2 = result.getTweets();
 	
@@ -257,7 +257,7 @@ public class TwitterGetter extends Thread {
 			if(!twitterAct.errorFlag ){
 				if(user == 1){
 					if((i + twitterAct.tweetIndex1) < tweets1.size()){
-						text = "@" + tweets1.get(i + twitterAct.tweetIndex1).getFromUser() + ":" + "\n" + tweets1.get(i + twitterAct.tweetIndex1).getText();
+						text = "@" + tweets1.get(i + twitterAct.tweetIndex1).getUser().getName() + ":" + "\n" + tweets1.get(i + twitterAct.tweetIndex1).getText();
 					} else {
 						if(twitterAct.pageOffset1 < sketch.NUM_PAGES){
 							twitterAct.pageOffset1++;
@@ -268,7 +268,7 @@ public class TwitterGetter extends Thread {
 					}
 				} else if (user == 2){	
 					if((i + twitterAct.tweetIndex2) < tweets2.size()){
-						text = "@" + tweets2.get(i + twitterAct.tweetIndex2).getFromUser() + ":" + "\n" + tweets2.get(i + twitterAct.tweetIndex2).getText();
+						text = "@" + tweets2.get(i + twitterAct.tweetIndex2).getUser().getName() + ":" + "\n" + tweets2.get(i + twitterAct.tweetIndex2).getText();
 					} else {
 						if(twitterAct.pageOffset2 < sketch.NUM_PAGES){
 							twitterAct.pageOffset2++;

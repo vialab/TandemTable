@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="Activities/PGame/CopyOfPGame.java|Activities/PGame/CopyOfPGameGetter.java" kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry kind="lib" path="libs/TimingFramework.jar"/>
+	<classpathentry kind="lib" path="libs/core.jar"/>
+	<classpathentry kind="lib" path="libs/Google/gdata-client-1.0.jar"/>
+	<classpathentry kind="lib" path="libs/Google/gdata-client-meta-1.0.jar"/>
+	<classpathentry kind="lib" path="libs/Google/gdata-core-1.0.jar"/>
+	<classpathentry kind="lib" path="libs/Google/gdata-media-1.0.jar"/>
+	<classpathentry kind="lib" path="libs/Google/gdata-youtube-2.0.jar"/>
+	<classpathentry kind="lib" path="libs/Google/gdata-youtube-meta-2.0.jar"/>
+	<classpathentry kind="lib" path="libs/Google/guava-r07.jar"/>
+	<classpathentry kind="lib" path="libs/flickrapi-1.2.jar"/>
+	<classpathentry kind="lib" path="libs/Google/mailapi.jar"/>
+	<classpathentry kind="lib" path="libs/microsoft-translator-java-api-0.6.1-jar-with-dependencies.jar"/>
+	<classpathentry kind="lib" path="libs/gifAnimation.jar"/>
+	<classpathentry kind="lib" path="libs/json.jar"/>
+	<classpathentry kind="lib" path="libs/xom-1.2.8.jar"/>
+	<classpathentry kind="lib" path="libs/mouseToTUIO_Paluka.jar"/>
+	<classpathentry kind="lib" path="libs/libTUIO.jar"/>
+	<classpathentry kind="lib" path="libs/vlcj-2.0.0.jar"/>
+	<classpathentry kind="lib" path="libs/twitter4j-core-3.0.5.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Erik-SimpleMultiTouch"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
