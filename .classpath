@@ -17,10 +17,10 @@
 	<classpathentry kind="lib" path="libs/gifAnimation.jar"/>
 	<classpathentry kind="lib" path="libs/json.jar"/>
 	<classpathentry kind="lib" path="libs/xom-1.2.8.jar"/>
-	<classpathentry kind="lib" path="libs/mouseToTUIO_Paluka.jar"/>
 	<classpathentry kind="lib" path="libs/libTUIO.jar"/>
 	<classpathentry kind="lib" path="libs/vlcj-2.0.0.jar"/>
 	<classpathentry kind="lib" path="libs/twitter4j-core-3.0.5.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Erik-SimpleMultiTouch"/>
+	<classpathentry kind="lib" path="libs/SMT-v1.jar"/>
+	<classpathentry kind="lib" path="libs/mouseToTUIO.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
