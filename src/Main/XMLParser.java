@@ -1,5 +1,6 @@
 package Main;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 
 import nu.xom.Builder;
@@ -22,7 +23,8 @@ public class XMLParser {
 		try {
 
 			Builder parser = new Builder();
-			Document doc = parser.build("./data/tags.xml");
+			FileInputStream fs = new FileInputStream("./data/tags.xml");
+			Document doc = parser.build(fs);
 			Element root = doc.getRootElement();
 			
 			for(int i = 0; i < root.getChildCount(); i++){
@@ -319,7 +321,8 @@ public class XMLParser {
 		try {
 
 			Builder parser = new Builder();
-			Document doc = parser.build("./data/languages.xml");
+			FileInputStream fs = new FileInputStream("./data/languages.xml");
+			Document doc = parser.build(fs);
 			Element root = doc.getRootElement();
 			read(root);
 			

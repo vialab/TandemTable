@@ -19,10 +19,8 @@ public class UserCreation {
 	UserProfilePicker profilePicker;
 	UserRegistration userRegistration;
 	
-	Zone newUser1, newUser2, drawUser1, drawUser2;
-	
-	boolean zoneFlipped;
-	
+	Zone drawUser1, drawUser2;
+		
 	public UserCreation(TouchClient client, MainSketch sketch, UserProfilePicker profilePicker, UserRegistration userRegistration){
 		applet = client.getParent();
 		this.sketch = sketch;
@@ -30,105 +28,10 @@ public class UserCreation {
 		this.profilePicker = profilePicker;
 		this.userRegistration = userRegistration;
 
-		createNewUserButtons();
 	}
-	
-	public void createNewUserButtons(){
-		//New User1 Button
-		newUser1 = new TextZone(applet.getX()+1, applet.screenHeight - sketch.buttonHeight-1, sketch.buttonWidth, sketch.buttonHeight, 
-				sketch.radius, Colours.pFont, "New User", sketch.textSize, "CENTER", "CENTER"){
-
-			public void tapEvent(TapEvent e){
-				if (tappable){
-					createDrawUser(1);
-					e.setHandled(tappableHandled);
-
-				}
-			}
-		};
-
-		((TextZone) newUser1).setTextColour(Colours.zoneText.getRed(), Colours.zoneText.getGreen(), Colours.zoneText.getBlue());
-		((TextZone) newUser1).setColour(Colours.unselectedZone.getRed(), Colours.unselectedZone.getGreen(), Colours.unselectedZone.getBlue());
-		newUser1.setGestureEnabled("TAP", true, true);
-		newUser1.setDrawBorder(false);
-		client.addZone(newUser1);
-
-		//New User2 Button
-		newUser2 = new TextZone(applet.getX() + 1, applet.getY() +1, sketch.buttonWidth, sketch.buttonHeight, 
-				sketch.radius, Colours.pFont, "New User", sketch.textSize, "CENTER", "CENTER"){
-
-			public void tapEvent(TapEvent e){
-				if (tappable){
-					createDrawUser(2);
-					e.setHandled(tappableHandled);
-
-				}
-			}
-		};
-		newUser2.rotate((float) (Colours.PI));
-		((TextZone) newUser2).setTextColour(Colours.zoneText.getRed(), Colours.zoneText.getGreen(), Colours.zoneText.getBlue());
-		((TextZone) newUser2).setColour(Colours.unselectedZone.getRed(), Colours.unselectedZone.getGreen(), Colours.unselectedZone.getBlue());
-		newUser2.setGestureEnabled("TAP", true, true);
-		newUser2.setDrawBorder(false);
-		client.addZone(newUser2);
-
-
-	}
-
 	
 
 	public void createDrawUser(int user){
-		//Deactivate the zones used to choose an old profile
-
-		if(user == 1){
-			newUser1.setActive(false);
-			profilePicker.arrows[0].setActive(false);
-			profilePicker.arrows[1].setActive(false);
-			profilePicker.swipe1.setActive(false);
-
-			if(profilePicker.newLang1 != null){
-				profilePicker.newLang1.setActive(false);
-			}
-			if(profilePicker.lastLang1 != null){
-				profilePicker.lastLang1.setActive(false);
-			}
-			
-			if(userRegistration.english1 != null){
-				userRegistration.english1.setActive(false);
-				userRegistration.french1.setActive(false);
-				userRegistration.spanish1.setActive(false);
-				userRegistration.portuguese1.setActive(false);
-			}
-
-		} else if (user == 2){
-			newUser2.setActive(false);
-			profilePicker.arrows[2].setActive(false);
-			profilePicker.arrows[3].setActive(false);
-			profilePicker.swipe2.setActive(false);
-
-			if(profilePicker.newLang2 != null){
-				profilePicker.newLang2.setActive(false);
-			}
-			if(profilePicker.lastLang2 != null){
-				profilePicker.lastLang2.setActive(false);
-			}
-			
-			if(userRegistration.english2 != null){
-				userRegistration.english2.setActive(false);
-				userRegistration.french2.setActive(false);
-				userRegistration.spanish2.setActive(false);
-				userRegistration.portuguese2.setActive(false);
-			}
-
-		}
-
-		for(int i = 0; i < 7; i++){
-			if(user ==1){
-				profilePicker.userImg[i].setActive(false);
-			} else {
-				profilePicker.userImg[i+7].setActive(false);
-			}
-		}
 
 		int dX = applet.screenWidth/4;
 		int dY1 = applet.screenHeight/2 + sketch.yOffset;
@@ -179,25 +82,31 @@ public class UserCreation {
 	public void loadDrawnImage(int user){
 
 		if(user == 1){
+			
+			if(profilePicker.userImg[3] == null){
+				profilePicker.userImg[3] = new ImageZone(0, 0, 1, 1);
+				client.addZone(profilePicker.userImg[3]);
+				
+			}
+			
 			profilePicker.userImg[3].setXYWH(applet.screenWidth-2*profilePicker.minSize, applet.screenHeight-2*profilePicker.minSize, 2*profilePicker.minSize, 2*profilePicker.minSize);
 			((ImageZone) profilePicker.userImg[3]).setImage(applet.loadImage("\\users\\images\\user" + (((RotatableDrawZone) drawUser1).getFilesCount()) + ".png"));
 			profilePicker.userImg[3].setGestureEnabled("TAP", false);
 			profilePicker.userImg[3].setActive(true);
-			//userImg[3].setDrawBorder(false);
+			
 			
 		} else if (user == 2) {
-			if(!zoneFlipped){
-				profilePicker.userImg[3+7].rotate((float) Colours.PI);
-				profilePicker.userImg[3+7].setXYWH(applet.getX() + applet.getWidth() - 2*profilePicker.minSize, applet.getY(), 2*profilePicker.minSize, 2*profilePicker.minSize);
-				profilePicker.userImg[3+7].rotate((float) Colours.PI);
+			if(profilePicker.userImg[3+7] == null){
+				profilePicker.userImg[3+7] = new ImageZone(0, 0, 1, 1);
+				client.addZone(profilePicker.userImg[3+7]);
+				profilePicker.userImg[3+7].setXYWH(applet.screenWidth-2*profilePicker.minSize, 0, 2*profilePicker.minSize, 2*profilePicker.minSize);
 
-			} else {
-				profilePicker.userImg[3+7].rotate((float) Colours.PI);
 			}
+
+			profilePicker.userImg[3+7].rotate((float) Colours.PI);
 			((ImageZone) profilePicker.userImg[3+7]).setImage(applet.loadImage("\\users\\images\\user" + (((RotatableDrawZone) drawUser2).getFilesCount()) + ".png"));
 			profilePicker.userImg[3+7].setGestureEnabled("TAP", false);
 			profilePicker.userImg[3+7].setActive(true);
-			//userImg[3+7].setDrawBorder(false);
 			
 
 		}

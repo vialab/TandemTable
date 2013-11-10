@@ -52,12 +52,11 @@ public class UserProfilePicker {
 
 		loadImages();
 		//create images starting at index 0
-		createImages();
-		loadArrows();
+		
 
 	}
 
-	public void loadArrows(){
+	public void loadArrows(int user){
 
 		int arrowSize = applet.screenHeight/10;
 		int leftSideX = applet.getX();
@@ -65,87 +64,91 @@ public class UserProfilePicker {
 		int arrowBY = applet.getY() + applet.screenHeight/2 + arrowSize/2;
 		int arrowTY = applet.getY() + applet.screenHeight/2 -arrowSize - arrowSize/2;
 
+
 		//For User1
-		arrows[0] = new ImageZone(applet.loadImage("lArrow.png"), leftSideX, arrowBY, arrowSize, arrowSize){
-			public void tapEvent(TapEvent e){
-				if (tappable){
-					if (index1 > 0){
-						index1--;
-					} else {
-						index1 = numProfiles;
+		if(user == 1){
+			arrows[0] = new ImageZone(applet.loadImage("lArrow.png"), leftSideX, arrowBY, arrowSize, arrowSize){
+				public void tapEvent(TapEvent e){
+					if (tappable){
+						if (index1 > 0){
+							index1--;
+						} else {
+							index1 = numProfiles;
+						}
+
+						//load images starting at index
+						loadImages(1, index1);
+						e.setHandled(tappableHandled);
+
 					}
-
-					//load images starting at index
-					loadImages(1, index1);
-					e.setHandled(tappableHandled);
-
 				}
-			}
-		};
+			};
 
-		arrows[1] = new ImageZone(applet.loadImage("rArrow.png"), rightSizeX, arrowBY, arrowSize, arrowSize){
-			public void tapEvent(TapEvent e){
+			arrows[1] = new ImageZone(applet.loadImage("rArrow.png"), rightSizeX, arrowBY, arrowSize, arrowSize){
+				public void tapEvent(TapEvent e){
 
-				if (tappable){
-					if(index1 == numProfiles){
-						index1 = 0;
-					} else {
-						index1++;
+					if (tappable){
+						if(index1 == numProfiles){
+							index1 = 0;
+						} else {
+							index1++;
+						}
+						//load images starting at index
+						loadImages(1, index1);
+						e.setHandled(tappableHandled);
 					}
-					//load images starting at index
-					loadImages(1, index1);
-					e.setHandled(tappableHandled);
 				}
-			}
-		};
-		arrows[0].setGestureEnabled("Tap", true, true);
-		arrows[1].setGestureEnabled("Tap", true, true);
+			};
+			arrows[0].setGestureEnabled("Tap", true, true);
+			arrows[1].setGestureEnabled("Tap", true, true);
 
-		arrows[0].setDrawBorder(false);
-		arrows[1].setDrawBorder(false);
-		client.addZone(arrows[0]);
-		client.addZone(arrows[1]);
+			arrows[0].setDrawBorder(false);
+			arrows[1].setDrawBorder(false);
+			client.addZone(arrows[0]);
+			client.addZone(arrows[1]);
+		} else {
 
-		//For User2
-		arrows[2] = new ImageZone(applet.loadImage("rArrow.png"), rightSizeX, arrowTY, arrowSize, arrowSize){
-			public void tapEvent(TapEvent e){
-				if (tappable){
-					if (index2 > 0){
-						index2--;
-					} else {
-						index2 = numProfiles;
+			//For User2
+			arrows[2] = new ImageZone(applet.loadImage("rArrow.png"), rightSizeX, arrowTY, arrowSize, arrowSize){
+				public void tapEvent(TapEvent e){
+					if (tappable){
+						if (index2 > 0){
+							index2--;
+						} else {
+							index2 = numProfiles;
+						}
+
+						//load images starting at index
+						loadImages(2, index2);
+						e.setHandled(tappableHandled);
+
 					}
-
-					//load images starting at index
-					loadImages(2, index2);
-					e.setHandled(tappableHandled);
-
 				}
-			}
-		};
+			};
 
-		arrows[3] = new ImageZone(applet.loadImage("lArrow.png"), leftSideX, arrowTY, arrowSize, arrowSize){
-			public void tapEvent(TapEvent e){
+			arrows[3] = new ImageZone(applet.loadImage("lArrow.png"), leftSideX, arrowTY, arrowSize, arrowSize){
+				public void tapEvent(TapEvent e){
 
-				if (tappable){
-					if(index2 == numProfiles){
-						index2 = 0;
-					} else {
-						index2++;
+					if (tappable){
+						if(index2 == numProfiles){
+							index2 = 0;
+						} else {
+							index2++;
+						}
+						//load images starting at index
+						loadImages(2, index2);
+						e.setHandled(tappableHandled);
 					}
-					//load images starting at index
-					loadImages(2, index2);
-					e.setHandled(tappableHandled);
 				}
-			}
-		};
-		arrows[2].setGestureEnabled("Tap", true, true);
-		arrows[3].setGestureEnabled("Tap", true, true);
+			};
+			arrows[2].setGestureEnabled("Tap", true, true);
+			arrows[3].setGestureEnabled("Tap", true, true);
 
-		arrows[2].setDrawBorder(false);
-		arrows[3].setDrawBorder(false);
-		client.addZone(arrows[2]);
-		client.addZone(arrows[3]);
+			arrows[2].setDrawBorder(false);
+			arrows[3].setDrawBorder(false);
+			client.addZone(arrows[2]);
+			client.addZone(arrows[3]);
+		}
 
 
 	}
@@ -159,7 +162,7 @@ public class UserProfilePicker {
 		}
 	}
 
-	public void createImages(){
+	public void createImageZones(int user){
 		int loadIndex = 0;
 		int x = 0;
 
@@ -167,243 +170,249 @@ public class UserProfilePicker {
 		int width = 0;
 		int height = 0;
 
-		swipe1 = new RectZone(0, applet.getHeight()/2, applet.getWidth(), minSize*2 + sketch.yOffset){
-			public void hSwipeEvent(HSwipeEvent e){
+		if(user == 1){
+			swipe1 = new RectZone(0, applet.getHeight()/2, applet.getWidth(), minSize*2 + sketch.yOffset){
+				public void hSwipeEvent(HSwipeEvent e){
 
-				if (index1 > 0 && index1 <= numProfiles && e.getSwipeType() == 1){
-					index1--;
-				} else if(index1 < numProfiles && e.getSwipeType() == -1){
-					index1++;
-				} else if (index1 == 0) {
-					index1 = numProfiles;
-				} else if (index1 == numProfiles) {
-					index1 = 0;
-				}
-
-				//load images starting at index
-				loadImages(1, index1);
-				e.setHandled(hSwipeableHandled);
-			}
-
-		};
-		swipe1.setGestureEnabled("HSwipe", true, true);
-		swipe1.setDrawBorder(false);
-		swipe1.setHSwipeDist(sketch.qSwipeThreshold);
-		client.addZone(swipe1);
-
-		swipe2 = new RectZone(0, applet.getHeight()/2-minSize*2 - sketch.yOffset, applet.getWidth(), minSize*2 + sketch.yOffset){
-			public void hSwipeEvent(HSwipeEvent e){
-
-				if (index2 > 0 && index2 <= numProfiles && e.getSwipeType() == -1){
-					index2--;
-				} else if(index2 < numProfiles && e.getSwipeType() == 1){
-					index2++;
-				} else if (index2 == 0) {
-					index2 = numProfiles;
-				} else if (index2 == numProfiles) {
-					index2 = 0;
-				}
-
-				//load images starting at index
-				loadImages(2, index2);
-				e.setHandled(hSwipeableHandled);
-			}
-
-		};
-		swipe2.setGestureEnabled("HSwipe", true, true);
-		swipe2.setDrawBorder(false);
-		swipe2.setHSwipeDist(sketch.qSwipeThreshold);
-		client.addZone(swipe2);
-
-
-		//For user1
-		for(int i = 0; i < 7; i++){
-
-
-
-			if (i== 0){
-				x = (i+1)*applet.screenWidth/10;
-				width = minSize;
-				height = minSize;
-			} else if (i == 1){
-				x = (i+1)*applet.screenWidth/10;
-				width = (int)(minSize*1.2);
-				height = (int)(minSize*1.2);
-			} else if (i == 2){
-				x = (i+1)*applet.screenWidth/10 + minSize/5;
-				width = (int)(minSize*1.5);
-				height = (int)(minSize*1.5);
-			} else if (i == 3){
-				x = (i+1)*applet.screenWidth/10 + (int)(minSize/2);
-				width = minSize*2;
-				height = minSize*2;
-			} else if (i == 4){
-				//x = (int)(applet.screenWidth - 3*applet.screenWidth/12 - minSize*3);
-				width = (int)(minSize*1.5);
-				height = (int)(minSize*1.5);
-				x = applet.getWidth() - (i+1)*applet.screenWidth/10 - minSize/5+width;
-			} else if (i == 5){
-				//x = (int)(applet.screenWidth - 3*applet.screenWidth/12 - minSize*1.2);
-				width = (int)(minSize*1.2);
-				height = (int)(minSize*1.2);
-				x = applet.getWidth() - 2*applet.getWidth()/10 - width;
-			} else if (i == 6){
-				x = applet.screenWidth - 2*applet.screenWidth/12;
-				width = minSize;
-				height = minSize;
-			}		
-
-			if (i == 3){
-				//the index of the picture to load
-				userImg[i] = new ImageZone(images[loadIndex], x, y, width, height){
-					public void tapEvent(TapEvent e){
-						if (tappable && index1 != chosenProfile2){
-							chosenProfile1 = index1;
-							removeUserProfilesPicker(1);
-							e.setHandled(tappableHandled);
-						}
-					}
-				};
-				userImg[i].setGestureEnabled("TAP", true, true);
-				userImg[i].setDrawBorder(true);
-				userImg[i].setBorderColour(Colours.zoneBorder);
-				userImg[i].setBorderWeight(10);
-			} else {
-				userImg[i] = new ImageZone(images[loadIndex], x, y, width, height){
-					public void hSwipeEvent(HSwipeEvent e){
-
-						if (index1 > 0 && index1 <= numProfiles && e.getSwipeType() == 1){
-							index1--;
-						} else if(index1 < numProfiles && e.getSwipeType() == -1){
-							index1++;
-						} else if (index1 == 0) {
-							index1 = numProfiles;
-						} else if (index1 == numProfiles) {
-							index1 = 0;
-						}
-
-						//load images starting at index
-						loadImages(1, index1);
-						e.setHandled(hSwipeableHandled);
+					if (index1 > 0 && index1 <= numProfiles && e.getSwipeType() == 1){
+						index1--;
+					} else if(index1 < numProfiles && e.getSwipeType() == -1){
+						index1++;
+					} else if (index1 == 0) {
+						index1 = numProfiles;
+					} else if (index1 == numProfiles) {
+						index1 = 0;
 					}
 
-				};
-				userImg[i].setGestureEnabled("HSwipe", true, true);
-				userImg[i].setHSwipeDist(sketch.qSwipeThreshold);
-				userImg[i].setDrawBorder(false);
-			}
+					//load images starting at index
+					loadImages(1, index1);
+					e.setHandled(hSwipeableHandled);
+				}
 
-			client.addZone(userImg[i]);
+			};
 
-			if(loadIndex == numProfiles){
-				loadIndex = 0;
-			} else {
-				loadIndex++;
+			swipe1.setGestureEnabled("HSwipe", true, true);
+			swipe1.setDrawBorder(false);
+			swipe1.setHSwipeDist(sketch.qSwipeThreshold);
+			client.addZone(swipe1);
+
+			//For user1
+			for(int i = 0; i < 7; i++){
+
+
+
+				if (i== 0){
+					x = (i+1)*applet.screenWidth/10;
+					width = minSize;
+					height = minSize;
+				} else if (i == 1){
+					x = (i+1)*applet.screenWidth/10;
+					width = (int)(minSize*1.2);
+					height = (int)(minSize*1.2);
+				} else if (i == 2){
+					x = (i+1)*applet.screenWidth/10 + minSize/5;
+					width = (int)(minSize*1.5);
+					height = (int)(minSize*1.5);
+				} else if (i == 3){
+					x = (i+1)*applet.screenWidth/10 + (int)(minSize/2);
+					width = minSize*2;
+					height = minSize*2;
+				} else if (i == 4){
+					//x = (int)(applet.screenWidth - 3*applet.screenWidth/12 - minSize*3);
+					width = (int)(minSize*1.5);
+					height = (int)(minSize*1.5);
+					x = applet.getWidth() - (i+1)*applet.screenWidth/10 - minSize/5+width;
+				} else if (i == 5){
+					//x = (int)(applet.screenWidth - 3*applet.screenWidth/12 - minSize*1.2);
+					width = (int)(minSize*1.2);
+					height = (int)(minSize*1.2);
+					x = applet.getWidth() - 2*applet.getWidth()/10 - width;
+				} else if (i == 6){
+					x = applet.screenWidth - 2*applet.screenWidth/12;
+					width = minSize;
+					height = minSize;
+				}		
+
+				if (i == 3){
+					//the index of the picture to load
+					userImg[i] = new ImageZone(images[loadIndex], x, y, width, height){
+						public void tapEvent(TapEvent e){
+							if (tappable && index1 != chosenProfile2){
+								chosenProfile1 = index1;
+								removeUserProfilesPicker(1);
+								e.setHandled(tappableHandled);
+							}
+						}
+					};
+					userImg[i].setGestureEnabled("TAP", true, true);
+					userImg[i].setDrawBorder(true);
+					userImg[i].setBorderColour(Colours.zoneBorder);
+					userImg[i].setBorderWeight(10);
+				} else {
+					userImg[i] = new ImageZone(images[loadIndex], x, y, width, height){
+						public void hSwipeEvent(HSwipeEvent e){
+
+							if (index1 > 0 && index1 <= numProfiles && e.getSwipeType() == 1){
+								index1--;
+							} else if(index1 < numProfiles && e.getSwipeType() == -1){
+								index1++;
+							} else if (index1 == 0) {
+								index1 = numProfiles;
+							} else if (index1 == numProfiles) {
+								index1 = 0;
+							}
+
+							//load images starting at index
+							loadImages(1, index1);
+							e.setHandled(hSwipeableHandled);
+						}
+
+					};
+					userImg[i].setGestureEnabled("HSwipe", true, true);
+					userImg[i].setHSwipeDist(sketch.qSwipeThreshold);
+					userImg[i].setDrawBorder(false);
+				}
+
+				client.addZone(userImg[i]);
+
+				if(loadIndex == numProfiles){
+					loadIndex = 0;
+				} else {
+					loadIndex++;
+				}
+			}	
+
+		} else {
+			swipe2 = new RectZone(0, applet.getHeight()/2-minSize*2 - sketch.yOffset, applet.getWidth(), minSize*2 + sketch.yOffset){
+				public void hSwipeEvent(HSwipeEvent e){
+
+					if (index2 > 0 && index2 <= numProfiles && e.getSwipeType() == -1){
+						index2--;
+					} else if(index2 < numProfiles && e.getSwipeType() == 1){
+						index2++;
+					} else if (index2 == 0) {
+						index2 = numProfiles;
+					} else if (index2 == numProfiles) {
+						index2 = 0;
+					}
+
+					//load images starting at index
+					loadImages(2, index2);
+					e.setHandled(hSwipeableHandled);
+				}
+
+			};
+			swipe2.setGestureEnabled("HSwipe", true, true);
+			swipe2.setDrawBorder(false);
+			swipe2.setHSwipeDist(sketch.qSwipeThreshold);
+			client.addZone(swipe2);
+			
+			loadIndex = 0;
+			x = 0;
+			width = 0;
+			height = 0;
+
+			//For user2
+			for(int i = 0; i < 7; i++){
+				if (i== 0){
+					width = minSize;
+					height = minSize;
+					y = applet.getHeight()/2-height - sketch.yOffset;
+					x = applet.getWidth() - (i+1)*applet.screenWidth/10-width;
+				} else if (i == 1){
+
+					width = (int)(minSize*1.2);
+					height = (int)(minSize*1.2);
+					y = applet.getHeight()/2-height - sketch.yOffset;
+
+					x = applet.getWidth() - (i+1)*applet.screenWidth/10-width;
+				} else if (i == 2){
+					width = (int)(minSize*1.5);
+					height = (int)(minSize*1.5);
+					y = applet.getHeight()/2-height - sketch.yOffset;
+
+					x = applet.getWidth() - (i+1)*applet.screenWidth/10 - minSize/5-width;
+				} else if (i == 3){
+
+					width = minSize*2;
+					height = minSize*2;
+					y = applet.getHeight()/2-height - sketch.yOffset;
+
+					x = applet.getWidth() - (i+1)*applet.screenWidth/10 - (int)(minSize/2)-width;
+				} else if (i == 4){
+
+					width = (int)(minSize*1.5);
+					height = (int)(minSize*1.5);
+					y = applet.getHeight()/2-height - sketch.yOffset;
+					x = (2)*applet.screenWidth/10 + minSize/5 + width;
+					//x = (int) (3*applet.screenWidth/12 + minSize*1.5-width);
+				} else if (i == 5){
+					width = (int)(minSize*1.2);
+					height = (int)(minSize*1.2);
+					y = applet.getHeight()/2-height - sketch.yOffset;
+					x = applet.getX() + 2*applet.getWidth()/10;
+					//x = (int) (3*applet.screenWidth/12 + minSize/2)-width;
+				} else if (i == 6){
+					width = minSize;
+					height = minSize;
+					y = applet.getHeight()/2-height - sketch.yOffset;
+
+					x = 2*applet.screenWidth/12 - width;
+				}		
+
+				if (i == 3){
+					//the index of the picture to load
+					userImg[i+7] = new ImageZone(images[loadIndex], x, y, width, height){
+						public void tapEvent(TapEvent e){
+							if (tappable && index2 != chosenProfile1){
+								chosenProfile2 = index2;
+								removeUserProfilesPicker(2);
+								e.setHandled(tappableHandled);
+							}
+						}
+					};
+					userImg[i+7].setGestureEnabled("TAP", true, true);
+					userImg[i+7].setBorderColour(Colours.zoneBorder);
+					userImg[i+7].setBorderWeight(10);
+				} else {
+					userImg[i+7] = new ImageZone(images[loadIndex], x, y, width, height){
+						public void hSwipeEvent(HSwipeEvent e){
+
+							if (index2 > 0 && index2 <= numProfiles && e.getSwipeType() == -1){
+								index2--;
+							} else if(index2 < numProfiles && e.getSwipeType() == 1){
+								index2++;
+							} else if (index2 == 0) {
+								index2 = numProfiles;
+							} else if (index2 == numProfiles) {
+								index2 = 0;
+							}
+
+							//load images starting at index
+							loadImages(2, index2);
+							e.setHandled(hSwipeableHandled);
+						}
+
+					};
+					userImg[i+7].setGestureEnabled("HSwipe", true, true);
+					userImg[i+7].setDrawBorder(false);
+					userImg[i+7].setHSwipeDist(sketch.qSwipeThreshold);
+				}
+
+				userImg[i+7].rotate((float) Colours.PI);
+				client.addZone(userImg[i+7]);
+
+				if(loadIndex == numProfiles){
+					loadIndex = 0;
+				} else {
+					loadIndex++;
+				}
 			}
 		}
 
-		loadIndex = 0;
-		x = 0;
-		width = 0;
-		height = 0;
 
-		//For user2
-		for(int i = 0; i < 7; i++){
-			if (i== 0){
-				width = minSize;
-				height = minSize;
-				y = applet.getHeight()/2-height - sketch.yOffset;
-				x = applet.getWidth() - (i+1)*applet.screenWidth/10-width;
-			} else if (i == 1){
 
-				width = (int)(minSize*1.2);
-				height = (int)(minSize*1.2);
-				y = applet.getHeight()/2-height - sketch.yOffset;
-
-				x = applet.getWidth() - (i+1)*applet.screenWidth/10-width;
-			} else if (i == 2){
-				width = (int)(minSize*1.5);
-				height = (int)(minSize*1.5);
-				y = applet.getHeight()/2-height - sketch.yOffset;
-
-				x = applet.getWidth() - (i+1)*applet.screenWidth/10 - minSize/5-width;
-			} else if (i == 3){
-
-				width = minSize*2;
-				height = minSize*2;
-				y = applet.getHeight()/2-height - sketch.yOffset;
-
-				x = applet.getWidth() - (i+1)*applet.screenWidth/10 - (int)(minSize/2)-width;
-			} else if (i == 4){
-
-				width = (int)(minSize*1.5);
-				height = (int)(minSize*1.5);
-				y = applet.getHeight()/2-height - sketch.yOffset;
-				x = (2)*applet.screenWidth/10 + minSize/5 + width;
-				//x = (int) (3*applet.screenWidth/12 + minSize*1.5-width);
-			} else if (i == 5){
-				width = (int)(minSize*1.2);
-				height = (int)(minSize*1.2);
-				y = applet.getHeight()/2-height - sketch.yOffset;
-				x = applet.getX() + 2*applet.getWidth()/10;
-				//x = (int) (3*applet.screenWidth/12 + minSize/2)-width;
-			} else if (i == 6){
-				width = minSize;
-				height = minSize;
-				y = applet.getHeight()/2-height - sketch.yOffset;
-
-				x = 2*applet.screenWidth/12 - width;
-			}		
-
-			if (i == 3){
-				//the index of the picture to load
-				userImg[i+7] = new ImageZone(images[loadIndex], x, y, width, height){
-					public void tapEvent(TapEvent e){
-						if (tappable && index2 != chosenProfile1){
-							chosenProfile2 = index2;
-							removeUserProfilesPicker(2);
-							userRegistration.userCreation.zoneFlipped = true;
-							e.setHandled(tappableHandled);
-						}
-					}
-				};
-				userImg[i+7].setGestureEnabled("TAP", true, true);
-				userImg[i+7].setBorderColour(Colours.zoneBorder);
-				userImg[i+7].setBorderWeight(10);
-			} else {
-				userImg[i+7] = new ImageZone(images[loadIndex], x, y, width, height){
-					public void hSwipeEvent(HSwipeEvent e){
-
-						if (index2 > 0 && index2 <= numProfiles && e.getSwipeType() == -1){
-							index2--;
-						} else if(index2 < numProfiles && e.getSwipeType() == 1){
-							index2++;
-						} else if (index2 == 0) {
-							index2 = numProfiles;
-						} else if (index2 == numProfiles) {
-							index2 = 0;
-						}
-
-						//load images starting at index
-						loadImages(2, index2);
-						e.setHandled(hSwipeableHandled);
-					}
-
-				};
-				userImg[i+7].setGestureEnabled("HSwipe", true, true);
-				userImg[i+7].setDrawBorder(false);
-				userImg[i+7].setHSwipeDist(sketch.qSwipeThreshold);
-			}
-
-			userImg[i+7].rotate((float) Colours.PI);
-			client.addZone(userImg[i+7]);
-
-			if(loadIndex == numProfiles){
-				loadIndex = 0;
-			} else {
-				loadIndex++;
-			}
-		}
+		
 	}
 
 	public void loadImages(int user, int loadIndex){
@@ -555,7 +564,7 @@ public class UserProfilePicker {
 				reader = new FileReader(".\\data\\users\\info\\" + chosenProfile2 + ".user");
 				bReader = new BufferedReader(reader);
 				lastLangUsed = bReader.readLine();
-				
+
 				if(lastLangUsed.equalsIgnoreCase("English")){
 					userRegistration.english2.tapEvent(new TapEvent(0,0, fakeCursors, 1));
 				} else if(lastLangUsed.equalsIgnoreCase("French")){

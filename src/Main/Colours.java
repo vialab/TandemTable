@@ -50,7 +50,7 @@ public class Colours {
 	//From UserRegistration.java
 	public static Color zoneText = new Color(255, 255, 255);
 	public static Color unselectedZone = new Color(79, 129, 189);
-	public static Color selectedZone = new Color(255, 0, 0);
+	public static Color selectedZone = new Color(79, 157, 189);
 	public static Color fadedOutZone = new Color(191, 191, 191);//(185, 205, 229);//(166, 206, 227);//(220, 230, 242);
 	public static int zoneBorder = 103; //56. 93, 138
 
@@ -74,7 +74,7 @@ public class Colours {
 	
 	//From Graph.java
 	public static Color unselectedNode = new Color(79, 129, 189);
-	public static Color selectedNode = new Color(255, 0, 0);
+	public static Color selectedNode = new Color(135, 140, 100);
 	public static Color visitedNode = new Color(185, 205, 229);
 	public static Color currentNode = new Color(77, 175, 74);
 	public static Color edgeColour = new Color(79, 129, 189);
