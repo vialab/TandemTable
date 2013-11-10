@@ -1,32 +1,26 @@
-package Activities.Videos;
+package activities.videos;
 
 
 import java.awt.Color;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
+
+import main.ColourEval;
+import main.Colours;
+import main.Languages;
+import main.MainSketch;
 
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.Animator.RepeatBehavior;
 import org.jdesktop.animation.timing.interpolation.PropertySetter;
-
-import processing.core.PConstants;
 
 import vialab.simpleMultiTouch.CurrentZone;
 import vialab.simpleMultiTouch.RectZone;
 import vialab.simpleMultiTouch.TextZone;
 import vialab.simpleMultiTouch.Zone;
 import vialab.simpleMultiTouch.events.TapEvent;
-import Main.ColourEval;
-import Main.Colours;
-import Main.Languages;
-import Main.MainSketch;
 
-import com.google.gdata.client.youtube.YouTubeQuery;
 import com.google.gdata.client.youtube.YouTubeService;
 import com.google.gdata.data.youtube.VideoFeed;
-import com.google.gdata.util.ServiceException;
 
 public class VideoActivity {
 	MainSketch sketch;

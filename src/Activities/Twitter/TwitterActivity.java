@@ -1,8 +1,14 @@
-package Activities.Twitter;
+package activities.twitter;
 
 
 
 import java.awt.Color;
+
+import main.ColourEval;
+import main.Colours;
+import main.Languages;
+import main.LayoutManager;
+import main.MainSketch;
 
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.Animator.RepeatBehavior;
@@ -14,11 +20,6 @@ import vialab.simpleMultiTouch.TextZone;
 import vialab.simpleMultiTouch.TouchClient;
 import vialab.simpleMultiTouch.events.TapEvent;
 import vialab.simpleMultiTouch.events.VSwipeEvent;
-import Main.ColourEval;
-import Main.Colours;
-import Main.Languages;
-import Main.LayoutManager;
-import Main.MainSketch;
 
 import com.memetix.mst.language.Language;
 

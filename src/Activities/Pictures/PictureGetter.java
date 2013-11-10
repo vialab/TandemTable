@@ -1,10 +1,13 @@
-package Activities.Pictures;
+package activities.pictures;
 
 import gifAnimation.Gif;
 
 import java.io.IOException;
 
 import javax.xml.parsers.ParserConfigurationException;
+
+import main.Colours;
+import main.MainSketch;
 
 import org.xml.sax.SAXException;
 
@@ -13,15 +16,12 @@ import com.aetrion.flickr.FlickrException;
 import com.aetrion.flickr.REST;
 import com.aetrion.flickr.RequestContext;
 import com.aetrion.flickr.photos.Photo;
-import com.aetrion.flickr.photos.PhotoList;
 import com.aetrion.flickr.photos.SearchParameters;
 
 import processing.core.PApplet;
 import processing.core.PImage;
 import vialab.simpleMultiTouch.ImageZone;
 import vialab.simpleMultiTouch.RectZone;
-import Main.Colours;
-import Main.MainSketch;
 
 public class PictureGetter extends Thread {
 	MainSketch sketch;

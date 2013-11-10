@@ -1,8 +1,12 @@
-package Activities.Twitter;
+package activities.twitter;
 
 import java.awt.Color;
 
 import javax.swing.SwingUtilities;
+
+import main.ColourEval;
+import main.Colours;
+import main.MainSketch;
 
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.Animator.RepeatBehavior;
@@ -13,10 +17,7 @@ import com.google.gdata.client.youtube.YouTubeService;
 import vialab.simpleMultiTouch.RectZone;
 import vialab.simpleMultiTouch.TextZone;
 import vialab.simpleMultiTouch.events.TapEvent;
-import Activities.Videos.VideoPlayer;
-import Main.ColourEval;
-import Main.Colours;
-import Main.MainSketch;
+import activities.videos.VideoPlayer;
 
 public class VideoController {
 	MainSketch sketch;

@@ -1,4 +1,4 @@
-package Main;
+package main;
 import java.awt.Color;
 import java.util.Random;
 import java.util.Vector;
@@ -12,7 +12,7 @@ import processing.core.PApplet;
 import processing.core.PConstants;
 import twitter4j.Twitter;
 import vialab.simpleMultiTouch.TouchClient;
-import Main.UserRegistration.LoginScreen;
+import main.login.LoginScreen;
 
 @SuppressWarnings("serial")
 public class MainSketch extends PApplet {

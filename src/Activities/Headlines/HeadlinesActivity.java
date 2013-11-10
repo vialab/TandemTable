@@ -1,7 +1,13 @@
-package Activities.Headlines;
+package activities.headlines;
 
 import java.awt.Color;
 import java.util.HashMap;
+
+import main.ColourEval;
+import main.Colours;
+import main.Languages;
+import main.LayoutManager;
+import main.MainSketch;
 
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.Animator.RepeatBehavior;
@@ -15,18 +21,12 @@ import com.memetix.mst.language.Language;
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PGraphics;
-import vialab.simpleMultiTouch.CircleZone;
 import vialab.simpleMultiTouch.PGraphicsZone;
 import vialab.simpleMultiTouch.RectZone;
 import vialab.simpleMultiTouch.TextZone;
 import vialab.simpleMultiTouch.events.DragEvent;
 import vialab.simpleMultiTouch.events.TapEvent;
 import vialab.simpleMultiTouch.events.VSwipeEvent;
-import Main.ColourEval;
-import Main.Colours;
-import Main.Languages;
-import Main.LayoutManager;
-import Main.MainSketch;
 
 public class HeadlinesActivity {
 

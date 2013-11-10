@@ -1,4 +1,4 @@
-package Activities.Twitter;
+package activities.twitter;
 
 import gifAnimation.Gif;
 
@@ -6,6 +6,8 @@ import java.awt.Color;
 import java.util.HashMap;
 import java.util.List;
 
+import main.Colours;
+import main.MainSketch;
 import processing.core.PApplet;
 import twitter4j.Query;
 import twitter4j.QueryResult;
@@ -16,8 +18,6 @@ import twitter4j.conf.ConfigurationBuilder;
 import vialab.simpleMultiTouch.RectZone;
 import vialab.simpleMultiTouch.TextZone;
 import vialab.simpleMultiTouch.events.TapEvent;
-import Main.Colours;
-import Main.MainSketch;
 
 import com.memetix.mst.language.Language;
 import com.memetix.mst.translate.Translate;
@@ -37,6 +37,7 @@ public class TwitterGetter extends Thread {
 	HashMap<Integer, ContentGetter>[] hmap1, hmap2;
 	ContentGetter currentGetter1 = null, currentGetter2 = null;
 
+	@SuppressWarnings("unchecked")
 	public TwitterGetter(MainSketch sketch, TwitterActivity twitterAct){
 
 		this.twitterAct = twitterAct;

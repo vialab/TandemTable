@@ -1,12 +1,11 @@
-package Activities.Headlines;
+package activities.headlines;
 
 import gifAnimation.Gif;
+import main.Colours;
+import main.MainSketch;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import Main.Colours;
-import Main.MainSketch;
 
 import com.memetix.mst.language.Language;
 import com.memetix.mst.translate.Translate;

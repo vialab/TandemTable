@@ -1,7 +1,7 @@
-package Main.UserRegistration;
+package main.login;
 
-import Main.Colours;
-import Main.MainSketch;
+import main.Colours;
+import main.MainSketch;
 import processing.core.PApplet;
 import vialab.simpleMultiTouch.ImageZone;
 import vialab.simpleMultiTouch.RotatableDrawZone;

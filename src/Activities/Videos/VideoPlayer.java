@@ -1,17 +1,13 @@
-package Activities.Videos;
+package activities.videos;
 
-
-
-import java.io.IOException;
-import java.io.InputStream;
 import javax.swing.JFrame;
 
 
 import processing.core.PApplet;
 import uk.co.caprica.vlcj.component.EmbeddedMediaPlayerComponent;
 import uk.co.caprica.vlcj.player.MediaPlayer;
-import Activities.Twitter.ContentGetter;
-import Activities.Twitter.VideoController;
+import activities.twitter.ContentGetter;
+import activities.twitter.VideoController;
 
 public class VideoPlayer{
 	public EmbeddedMediaPlayerComponent mediaPlayerComponent;

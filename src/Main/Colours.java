@@ -1,4 +1,4 @@
-package Main;
+package main;
 import java.awt.Color;
 
 import processing.core.PFont;
@@ -47,7 +47,7 @@ public class Colours {
 
 	
 	
-	//From UserRegistration.java
+	//From Main.login
 	public static Color zoneText = new Color(255, 255, 255);
 	public static Color unselectedZone = new Color(79, 129, 189);
 	public static Color selectedZone = new Color(79, 157, 189);

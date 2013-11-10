@@ -1,4 +1,4 @@
-package Main;
+package main;
 import java.awt.Color;
 
 import org.jdesktop.animation.timing.Animator;
@@ -12,11 +12,11 @@ import vialab.simpleMultiTouch.TextZone;
 import vialab.simpleMultiTouch.Zone;
 import vialab.simpleMultiTouch.events.HSwipeEvent;
 import vialab.simpleMultiTouch.events.TapEvent;
-import Activities.Headlines.HeadlinesActivity;
-import Activities.PGame.PGame;
-import Activities.Pictures.PictureActivity;
-import Activities.Twitter.TwitterActivity;
-import Activities.Videos.VideoActivity;
+import activities.headlines.HeadlinesActivity;
+import activities.pGame.PGame;
+import activities.pictures.PictureActivity;
+import activities.twitter.TwitterActivity;
+import activities.videos.VideoActivity;
 
 import com.memetix.mst.translate.Translate;
 

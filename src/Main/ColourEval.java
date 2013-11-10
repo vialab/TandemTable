@@ -1,4 +1,4 @@
-package Main;
+package main;
 import java.awt.Color;
 
 import org.jdesktop.animation.timing.interpolation.Evaluator;

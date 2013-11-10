@@ -1,16 +1,16 @@
-package Main.UserRegistration;
+package main.login;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import main.Colours;
+import main.MainSketch;
 import processing.core.PApplet;
 import vialab.simpleMultiTouch.RotatableDrawZone;
 import vialab.simpleMultiTouch.TextZone;
 import vialab.simpleMultiTouch.TouchClient;
 import vialab.simpleMultiTouch.Zone;
 import vialab.simpleMultiTouch.events.TapEvent;
-import Main.Colours;
-import Main.MainSketch;
 
 public class LoginScreen {
 
@@ -67,7 +67,7 @@ public class LoginScreen {
 		};
 		
 		titleZone1.setTextColour(Colours.zoneText.getRed(), Colours.zoneText.getGreen(), Colours.zoneText.getBlue());
-		titleZone1.setColour(Colours.unselectedZone.getRed(), Colours.unselectedZone.getGreen(), Colours.unselectedZone.getBlue());
+		//titleZone1.setColour(Colours.unselectedZone.getRed(), Colours.unselectedZone.getGreen(), Colours.unselectedZone.getBlue());
 		titleZone1.setGestureEnabled("Tap", true);
 
 		titleZone1.setDrawBorder(false);

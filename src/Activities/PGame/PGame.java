@@ -1,22 +1,18 @@
-package Activities.PGame;
+package activities.pGame;
 
 import java.awt.Color;
 
-import org.jdesktop.animation.timing.Animator;
-import org.jdesktop.animation.timing.Animator.RepeatBehavior;
-import org.jdesktop.animation.timing.interpolation.PropertySetter;
+import main.Colours;
+import main.Languages;
+import main.MainSketch;
+
 
 import processing.core.PConstants;
 import processing.core.PImage;
-
 import vialab.simpleMultiTouch.ImageZone;
 import vialab.simpleMultiTouch.RectZone;
 import vialab.simpleMultiTouch.TextZone;
 import vialab.simpleMultiTouch.events.TapEvent;
-import Main.ColourEval;
-import Main.Colours;
-import Main.Languages;
-import Main.MainSketch;
 
 public class PGame {
 	MainSketch sketch;

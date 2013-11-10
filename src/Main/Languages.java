@@ -1,4 +1,4 @@
-package Main;
+package main;
 
 public class Languages {
 	public static String[] introQuestionsEnglish = new String[MainSketch.NUM_QUESTIONS];

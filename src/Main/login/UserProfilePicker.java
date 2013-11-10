@@ -1,4 +1,4 @@
-package Main.UserRegistration;
+package main.login;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -6,8 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-import Main.Colours;
-import Main.MainSketch;
+import main.Colours;
+import main.MainSketch;
 
 
 import processing.core.PApplet;

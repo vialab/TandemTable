@@ -1,5 +1,9 @@
-package Activities.Pictures;
+package activities.pictures;
 
+
+import main.Colours;
+import main.Languages;
+import main.MainSketch;
 
 import org.jdesktop.animation.timing.Animator;
 
@@ -11,9 +15,6 @@ import vialab.simpleMultiTouch.ImageZone;
 import vialab.simpleMultiTouch.RectZone;
 import vialab.simpleMultiTouch.TouchClient;
 import vialab.simpleMultiTouch.Zone;
-import Main.Colours;
-import Main.Languages;
-import Main.MainSketch;
 
 public class PictureActivity {
 	MainSketch sketch;

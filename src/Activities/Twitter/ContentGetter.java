@@ -1,10 +1,13 @@
-package Activities.Twitter;
+package activities.twitter;
 
 import gifAnimation.Gif;
 
 import java.awt.Color;
 import java.util.HashMap;
 import java.util.Vector;
+
+import main.Colours;
+import main.MainSketch;
 
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.interpolation.PropertySetter;
@@ -19,11 +22,8 @@ import processing.core.PImage;
 import vialab.simpleMultiTouch.ImageZone;
 import vialab.simpleMultiTouch.PGraphicsZone;
 import vialab.simpleMultiTouch.RectZone;
-import vialab.simpleMultiTouch.Touch;
 import vialab.simpleMultiTouch.events.DragEvent;
 import vialab.simpleMultiTouch.events.TapEvent;
-import Main.Colours;
-import Main.MainSketch;
 
 public class ContentGetter extends Thread{
 	

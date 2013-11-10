@@ -1,25 +1,23 @@
-package Activities.Videos;
+package activities.videos;
 
 import java.awt.Color;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Random;
 
 import javax.swing.SwingUtilities;
 
+import main.Colours;
+import main.MainSketch;
 import processing.core.PConstants;
 import processing.core.PImage;
 import vialab.simpleMultiTouch.ImageZone;
 import vialab.simpleMultiTouch.RectZone;
 import vialab.simpleMultiTouch.TextZone;
-import vialab.simpleMultiTouch.TouchClient;
 import vialab.simpleMultiTouch.Zone;
 import vialab.simpleMultiTouch.events.DragEvent;
 import vialab.simpleMultiTouch.events.TapEvent;
-import Main.Colours;
-import Main.MainSketch;
 
 import com.google.gdata.client.youtube.YouTubeQuery;
 import com.google.gdata.data.youtube.VideoEntry;
