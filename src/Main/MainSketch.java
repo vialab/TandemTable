@@ -12,7 +12,7 @@ import processing.core.PApplet;
 import processing.core.PConstants;
 import twitter4j.Twitter;
 import vialab.simpleMultiTouch.TouchClient;
-import Main.UserRegistration.UserRegistration;
+import Main.UserRegistration.LoginScreen;
 
 @SuppressWarnings("serial")
 public class MainSketch extends PApplet {
@@ -25,6 +25,8 @@ public class MainSketch extends PApplet {
 	public REST rest;
 	public RequestContext requestContext;
 	public Twitter twitter;
+	
+	public UserLogger logger;
 	
 	public boolean youTubeInit = false;
 	public boolean flickrInit = false;
@@ -68,7 +70,7 @@ public class MainSketch extends PApplet {
 		qSwipeThreshold = getWidth()/15;
 		tSwipeThreshold = getHeight()/15;
 
-		UserRegistration startScreen = new UserRegistration();
+		LoginScreen startScreen = new LoginScreen();
 		startScreen.initialize(client, this);
 		//layout = new LayoutManager(this, "English", "French");
 		//drawMainLayout = true;
@@ -105,6 +107,10 @@ public class MainSketch extends PApplet {
 
 
 	public void initializeMainScreen(String lang1, String lang2){
+		//TODO
+		//LOGGING
+		//logger = new UserLogger();
+		//logger.logInfo(, "User" + "" + " " + lang1);
 		layout = new LayoutManager(this, lang1, lang2);
 		drawMainLayout = true;
 	}

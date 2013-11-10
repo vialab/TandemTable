@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import processing.core.PApplet;
+import vialab.simpleMultiTouch.RotatableDrawZone;
 import vialab.simpleMultiTouch.TextZone;
 import vialab.simpleMultiTouch.TouchClient;
 import vialab.simpleMultiTouch.Zone;
@@ -11,7 +12,7 @@ import vialab.simpleMultiTouch.events.TapEvent;
 import Main.Colours;
 import Main.MainSketch;
 
-public class UserRegistration {
+public class LoginScreen {
 
 
 	int minSize;
@@ -30,8 +31,9 @@ public class UserRegistration {
 	boolean langSelect1 = false, langSelect2 = false;
 
 	Zone english1, french1, portuguese1, spanish1, english2, french2, portuguese2, spanish2, 
-		pickLang1, pickLang2, newUser1, newUser2;
+		login1, login2, newUser1, newUser2;
 
+	TextZone titleZone1, titleZone2;
 	String pickedLang1, pickedLang2;
 
 
@@ -40,43 +42,95 @@ public class UserRegistration {
 		this.sketch = sketch;
 		this.client = client;
 
-		createLoginButtons();
+		createLoadingScreen();
 		profilePicker = new UserProfilePicker(client, sketch, this);
 		userCreation = new UserCreation(client, sketch, profilePicker, this);
 
 	}
 
-	public void createLoginButtons(){
-		
-		pickLang1 = new TextZone(applet.screenWidth/2-sketch.buttonWidth-1, applet.screenHeight/2+sketch.buttonHeight, sketch.buttonWidth, sketch.buttonHeight, 
-				sketch.radius, Colours.pFont, "Login", sketch.textSize, "CENTER", "CENTER"){
+	/**
+	 * Create the title screen and load the profile images
+	 */
+	public void createLoadingScreen(){
+		titleZone1 = new TextZone(applet.screenWidth/2-sketch.buttonWidth-1, applet.screenHeight/2+sketch.buttonHeight, sketch.buttonWidth, sketch.buttonHeight, 
+				sketch.radius, Colours.pFont, "TandemTable", sketch.textSize, "CENTER", "CENTER"){
 			public void tapEvent(TapEvent e){
 
 				if (tappable){
-					this.setGestureEnabled("Tap", false);
-					pickLang1.setActive(false);
-					newUser1.setActive(false);
-					profilePicker.createImageZones(1);
-					profilePicker.loadArrows(1);
+					createLoginButtons();
+					client.removeZone(this);
+					client.removeZone(titleZone2);
+
 					e.setHandled(tappableHandled);
 				}
 			}
 		};
-		((TextZone) pickLang1).setTextColour(Colours.zoneText.getRed(), Colours.zoneText.getGreen(), Colours.zoneText.getBlue());
-		((TextZone) pickLang1).setColour(Colours.unselectedZone.getRed(), Colours.unselectedZone.getGreen(), Colours.unselectedZone.getBlue());
-		pickLang1.setGestureEnabled("Tap", true);
+		
+		titleZone1.setTextColour(Colours.zoneText.getRed(), Colours.zoneText.getGreen(), Colours.zoneText.getBlue());
+		titleZone1.setColour(Colours.unselectedZone.getRed(), Colours.unselectedZone.getGreen(), Colours.unselectedZone.getBlue());
+		titleZone1.setGestureEnabled("Tap", true);
 
-		pickLang1.setDrawBorder(false);
-		client.addZone(pickLang1);
+		titleZone1.setDrawBorder(false);
+		client.addZone(titleZone1);
+		
+		titleZone2 = new TextZone(applet.screenWidth/2-sketch.buttonWidth-1, applet.screenHeight/2+sketch.buttonHeight, sketch.buttonWidth, sketch.buttonHeight, 
+				sketch.radius, Colours.pFont, "TandemTable", sketch.textSize, "CENTER", "CENTER"){
+			public void tapEvent(TapEvent e){
+
+				if (tappable){
+					createLoginButtons();
+					client.removeZone(this);
+					client.removeZone(titleZone1);
+
+					e.setHandled(tappableHandled);
+				}
+			}
+		};
+		
+		titleZone2.setTextColour(Colours.zoneText.getRed(), Colours.zoneText.getGreen(), Colours.zoneText.getBlue());
+		titleZone2.setColour(Colours.unselectedZone.getRed(), Colours.unselectedZone.getGreen(), Colours.unselectedZone.getBlue());
+		titleZone2.setGestureEnabled("Tap", true);
+
+		titleZone2.setDrawBorder(false);
+		client.addZone(titleZone2);
+		
+		
+		
+	}
+	
+	public void createLoginButtons(){
+		//*****************
+		// User 1
+		//*****************
+		//Login button for user 1
+		login1 = new TextZone(applet.screenWidth/2-sketch.buttonWidth-1, applet.screenHeight/2+sketch.buttonHeight, sketch.buttonWidth, sketch.buttonHeight, 
+				sketch.radius, Colours.pFont, "Login", sketch.textSize, "CENTER", "CENTER"){
+			public void tapEvent(TapEvent e){
+
+				if (tappable){
+					
+					login1.setActive(false);
+					newUser1.setActive(false);
+					profilePicker.activateProfilePicker(1);
+					e.setHandled(tappableHandled);
+				}
+			}
+		};
+		((TextZone) login1).setTextColour(Colours.zoneText.getRed(), Colours.zoneText.getGreen(), Colours.zoneText.getBlue());
+		((TextZone) login1).setColour(Colours.unselectedZone.getRed(), Colours.unselectedZone.getGreen(), Colours.unselectedZone.getBlue());
+		login1.setGestureEnabled("Tap", true);
+
+		login1.setDrawBorder(false);
+		client.addZone(login1);
 
 		newUser1 = new TextZone(applet.screenWidth/2 +1, applet.screenHeight/2+sketch.buttonHeight, sketch.buttonWidth, sketch.buttonHeight, 
 				sketch.radius, Colours.pFont, "New User", sketch.textSize, "CENTER", "CENTER"){
 			public void tapEvent(TapEvent e){
 
 				if (tappable){
-					this.setGestureEnabled("Tap", false);
-					pickLang1.setActive(false);
+					login1.setActive(false);
 					newUser1.setActive(false);
+					userCreation.createCancel(1);
 					userCreation.createDrawUser(1);
 					e.setHandled(tappableHandled);
 				}
@@ -89,35 +143,37 @@ public class UserRegistration {
 		newUser1.setDrawBorder(false);
 		client.addZone(newUser1);
 		
-		pickLang2 = new TextZone(applet.screenWidth/2-sketch.buttonWidth-1, applet.screenHeight/2-2*sketch.buttonHeight, sketch.buttonWidth, sketch.buttonHeight, 
+		//*******************
+		// User 2
+		//******************
+		//Login button for user 2
+		login2 = new TextZone(applet.screenWidth/2-sketch.buttonWidth-1, applet.screenHeight/2-2*sketch.buttonHeight, sketch.buttonWidth, sketch.buttonHeight, 
 				sketch.radius, Colours.pFont, "Login", sketch.textSize, "CENTER", "CENTER"){
 			public void tapEvent(TapEvent e){
 
 				if (tappable){
-					this.setGestureEnabled("Tap", false);
-					pickLang2.setActive(false);
+					login2.setActive(false);
 					newUser2.setActive(false);
-					profilePicker.createImageZones(2);
-					profilePicker.loadArrows(2);
+					profilePicker.activateProfilePicker(2);
 					e.setHandled(tappableHandled);
 				}
 			}
 		};
-		((TextZone) pickLang2).setTextColour(Colours.zoneText.getRed(), Colours.zoneText.getGreen(), Colours.zoneText.getBlue());
-		((TextZone) pickLang2).setColour(Colours.unselectedZone.getRed(), Colours.unselectedZone.getGreen(), Colours.unselectedZone.getBlue());
-		pickLang2.rotate((float) Colours.PI);
-		pickLang2.setGestureEnabled("Tap", true);
-		pickLang2.setDrawBorder(false);
-		client.addZone(pickLang2);
+		((TextZone) login2).setTextColour(Colours.zoneText.getRed(), Colours.zoneText.getGreen(), Colours.zoneText.getBlue());
+		((TextZone) login2).setColour(Colours.unselectedZone.getRed(), Colours.unselectedZone.getGreen(), Colours.unselectedZone.getBlue());
+		login2.rotate((float) Colours.PI);
+		login2.setGestureEnabled("Tap", true);
+		login2.setDrawBorder(false);
+		client.addZone(login2);
 
 		newUser2 = new TextZone(applet.screenWidth/2+1, applet.screenHeight/2-2*sketch.buttonHeight, sketch.buttonWidth, sketch.buttonHeight, 
 				sketch.radius, Colours.pFont, "New User", sketch.textSize, "CENTER", "CENTER"){
 			public void tapEvent(TapEvent e){
 
 				if (tappable){
-					this.setGestureEnabled("Tap", false);
-					pickLang2.setActive(false);
+					login2.setActive(false);
 					newUser2.setActive(false);
+					userCreation.createCancel(2);
 					userCreation.createDrawUser(2);						
 					e.setHandled(tappableHandled);
 				}
@@ -150,7 +206,7 @@ public class UserRegistration {
 
 							if(langSelect2){
 								removeZones();
-								enterMainScreen();
+								sketch.initializeMainScreen(pickedLang1, pickedLang2);
 							}
 						}
 
@@ -181,7 +237,7 @@ public class UserRegistration {
 							if(langSelect2){
 								
 								removeZones();
-								enterMainScreen();
+								sketch.initializeMainScreen(pickedLang1, pickedLang2);
 							}
 						}
 
@@ -199,67 +255,21 @@ public class UserRegistration {
 
 			//Portuguese language Button
 			portuguese1 = new TextZone(applet.screenWidth/2, applet.screenHeight/2+sketch.buttonHeight, sketch.buttonWidth, sketch.buttonHeight, 
-					sketch.radius, Colours.pFont, "Portuguese", sketch.textSize, "CENTER", "CENTER"){
-
-				public void tapEvent(TapEvent e){
-					if (tappable){
-						if(!langSelect1){
-							((TextZone) portuguese1).setColour(Colours.selectedZone.getRed(), Colours.selectedZone.getGreen(), Colours.selectedZone.getBlue());
-							newUser1.setActive(false);
-							langSelect1 = true;
-							pickedLang1 = "German";
-
-							if(langSelect2){
-								
-								removeZones();
-								enterMainScreen();
-							}
-						}
-
-						e.setHandled(tappableHandled);
-
-					}
-				}
-			};
+					sketch.radius, Colours.pFont, "Portuguese", sketch.textSize, "CENTER", "CENTER");
 
 			((TextZone) portuguese1).setTextColour(Colours.fadedText.getRed(), Colours.fadedText.getGreen(), Colours.fadedText.getBlue());
 			((TextZone) portuguese1).setColour(Colours.fadedOutZone.getRed(), Colours.fadedOutZone.getGreen(), Colours.fadedOutZone.getBlue());
-			//TODO
-			//portuguese1.setGestureEnabled("TAP", true, true);
 			portuguese1.setDrawBorder(false);
 			client.addZone(portuguese1);
 
 			//Spanish language Button
 			spanish1 = new TextZone(applet.screenWidth/2 + sketch.buttonWidth +1, applet.screenHeight/2+sketch.buttonHeight, sketch.buttonWidth, sketch.buttonHeight, 
-					sketch.radius, Colours.pFont, "Spanish", sketch.textSize, "CENTER", "CENTER"){
-
-				public void tapEvent(TapEvent e){
-					if (tappable){
-						if(!langSelect1){
-							((TextZone) spanish1).setColour(Colours.selectedZone.getRed(), Colours.selectedZone.getGreen(), Colours.selectedZone.getBlue());
-							newUser1.setActive(false);
-							langSelect1 = true;
-							pickedLang1 = "Spanish";
-
-							if(langSelect2){
-								
-								removeZones();
-								enterMainScreen();
-							}
-						}
-
-						e.setHandled(tappableHandled);
-
-					}
-				}
-			};
-
+					sketch.radius, Colours.pFont, "Spanish", sketch.textSize, "CENTER", "CENTER");
 			((TextZone) spanish1).setTextColour(Colours.fadedText.getRed(), Colours.fadedText.getGreen(), Colours.fadedText.getBlue());
 			((TextZone) spanish1).setColour(Colours.fadedOutZone.getRed(), Colours.fadedOutZone.getGreen(), Colours.fadedOutZone.getBlue());
-			//TODO
-			//spanish1.setGestureEnabled("TAP", true, true);
 			spanish1.setDrawBorder(false);
 			client.addZone(spanish1);
+			
 		} else if (user == 2){
 
 			english2 = new TextZone(applet.screenWidth/2-2*sketch.buttonWidth-2, applet.screenHeight/2 - 2*sketch.buttonHeight, sketch.buttonWidth, sketch.buttonHeight, 
@@ -276,7 +286,7 @@ public class UserRegistration {
 							if(langSelect1){
 								
 								removeZones();
-								enterMainScreen();
+								sketch.initializeMainScreen(pickedLang1, pickedLang2);
 							}
 						}
 
@@ -308,7 +318,7 @@ public class UserRegistration {
 							if(langSelect1){
 								
 								removeZones();
-								enterMainScreen();
+								sketch.initializeMainScreen(pickedLang1, pickedLang2);
 							}
 						}
 
@@ -328,33 +338,10 @@ public class UserRegistration {
 
 			//Portuguese language Button
 			portuguese2 = new TextZone(applet.screenWidth/2, applet.screenHeight/2 - 2*sketch.buttonHeight, sketch.buttonWidth, sketch.buttonHeight, 
-					sketch.radius, Colours.pFont, "Portuguese", sketch.textSize, "CENTER", "CENTER"){
-
-				public void tapEvent(TapEvent e){
-					if (tappable){
-						if(!langSelect2){
-							((TextZone) portuguese2).setColour(Colours.selectedZone.getRed(), Colours.selectedZone.getGreen(), Colours.selectedZone.getBlue());
-							newUser2.setActive(false);
-							langSelect2 = true;
-							pickedLang2 = "German";
-
-							if(langSelect1){
-								
-								removeZones();
-								enterMainScreen();
-							}
-						}
-
-						e.setHandled(tappableHandled);
-
-					}
-				}
-			};
+					sketch.radius, Colours.pFont, "Portuguese", sketch.textSize, "CENTER", "CENTER");
 
 			((TextZone) portuguese2).setTextColour(Colours.fadedText.getRed(), Colours.fadedText.getGreen(), Colours.fadedText.getBlue());
 			((TextZone) portuguese2).setColour(Colours.fadedOutZone.getRed(), Colours.fadedOutZone.getGreen(), Colours.fadedOutZone.getBlue());
-			//TODO
-			//portuguese2.setGestureEnabled("TAP", true, true);
 			portuguese2.setDrawBorder(false);
 			portuguese2.rotate((float) Colours.PI);
 
@@ -362,33 +349,10 @@ public class UserRegistration {
 
 			//Spanish language Button
 			spanish2 = new TextZone(applet.screenWidth/2 + sketch.buttonWidth +1, applet.screenHeight/2 - 2*sketch.buttonHeight, sketch.buttonWidth, sketch.buttonHeight, 
-					sketch.radius, Colours.pFont, "Spanish", sketch.textSize, "CENTER", "CENTER"){
-
-				public void tapEvent(TapEvent e){
-					if (tappable){
-						if(!langSelect2){
-							((TextZone) spanish2).setColour(Colours.selectedZone.getRed(), Colours.selectedZone.getGreen(), Colours.selectedZone.getBlue());
-							newUser2.setActive(false);
-							langSelect2 = true;
-							pickedLang2 = "Spanish";
-
-							if(langSelect1){
-								
-								removeZones();
-								enterMainScreen();
-							}
-						}
-
-						e.setHandled(tappableHandled);
-
-					}
-				}
-			};
+					sketch.radius, Colours.pFont, "Spanish", sketch.textSize, "CENTER", "CENTER");
 
 			((TextZone) spanish2).setTextColour(Colours.fadedText.getRed(), Colours.fadedText.getGreen(), Colours.fadedText.getBlue());
 			((TextZone) spanish2).setColour(Colours.fadedOutZone.getRed(), Colours.fadedOutZone.getGreen(), Colours.fadedOutZone.getBlue());
-			//TODO
-			//spanish2.setGestureEnabled("TAP", true, true);
 			spanish2.setDrawBorder(false);
 			spanish2.rotate((float) Colours.PI);
 
@@ -438,34 +402,6 @@ public class UserRegistration {
 		client.removeZone(userCreation.drawUser1);
 		client.removeZone(userCreation.drawUser2);
 
-	}
-
-	public void enterMainScreen(){
-
-		try {
-			writer = new FileWriter(".\\data\\users\\info\\" + profilePicker.chosenProfile1 + ".user");
-			bWriter = new BufferedWriter(writer);
-			bWriter.write(pickedLang1);
-			bWriter.newLine();
-			bWriter.write(Integer.toString(profilePicker.index1));
-			bWriter.flush();
-			bWriter.close();
-			writer.close();
-			
-			writer = new FileWriter(".\\data\\users\\info\\" + profilePicker.chosenProfile2 + ".user");
-			bWriter = new BufferedWriter(writer);
-			bWriter.write(pickedLang2);
-			bWriter.newLine();
-			bWriter.write(Integer.toString(profilePicker.index2));
-			bWriter.flush();
-			bWriter.close();
-			writer.close();
-			
-			sketch.initializeMainScreen(pickedLang1, pickedLang2);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	public void chooseNewLang(){
