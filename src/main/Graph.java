@@ -7,7 +7,6 @@ import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.Animator.RepeatBehavior;
 import org.jdesktop.animation.timing.interpolation.PropertySetter;
 
-import processing.core.PApplet;
 import processing.core.PConstants;
 import vialab.simpleMultiTouch.CircleZone;
 import vialab.simpleMultiTouch.Touch;
@@ -191,9 +190,9 @@ public class Graph {
 								animator[i].stop();
 								
 								if(visitedNodes[i]){
-									nodes[i].setColour(Colours.visitedNode.getRed(), Colours.visitedNode.getGreen(), Colours.visitedNode.getBlue());	
+									nodes[i].setFillColor(Colours.visitedNode.getRed(), Colours.visitedNode.getGreen(), Colours.visitedNode.getBlue());	
 								} else {
-									nodes[i].setColour(Colours.unselectedNode.getRed(), Colours.unselectedNode.getGreen(), Colours.unselectedNode.getBlue());
+									nodes[i].setFillColor(Colours.unselectedNode.getRed(), Colours.unselectedNode.getGreen(), Colours.unselectedNode.getBlue());
 								}
 								nodeFlag[i] = false;
 							}
@@ -220,12 +219,12 @@ public class Graph {
 							nodeFlag[k] = true;
 						} else if (this.getNumIds() >= 2 ){
 							if (lastSelectedNode != -1){
-								nodes[lastSelectedNode].setColour(Colours.visitedNode.getRed(), Colours.visitedNode.getGreen(), Colours.visitedNode.getBlue());	
+								nodes[lastSelectedNode].setFillColor(Colours.visitedNode.getRed(), Colours.visitedNode.getGreen(), Colours.visitedNode.getBlue());	
 							}
 							nodeFlag[k] = false;
 							lastSelectedNode = k;
 							animator[k].stop();
-							nodes[k].setColour(Colours.currentNode.getRed(), Colours.currentNode.getGreen(), Colours.currentNode.getBlue());
+							nodes[k].setFillColor(Colours.currentNode.getRed(), Colours.currentNode.getGreen(), Colours.currentNode.getBlue());
 							visitedNodes[k] = true;
 							
 							layoutManager.enableActivityButtons(k, topics1[k], randFlag, index);
@@ -331,7 +330,7 @@ public class Graph {
 						sketch.popMatrix();
 					}
 				};
-				nodes[k].setColour(Colours.unselectedNode.getRed(), Colours.unselectedNode.getGreen(), Colours.unselectedNode.getBlue());
+				nodes[k].setFillColor(Colours.unselectedNode.getRed(), Colours.unselectedNode.getGreen(), Colours.unselectedNode.getBlue());
 				nodes[k].setStroke(false);
 				nodes[k].setDrawBorder(false);
 

@@ -8,10 +8,7 @@ import java.io.IOException;
 
 import main.Colours;
 import main.MainSketch;
-
-
 import processing.core.PApplet;
-import processing.core.PConstants;
 import processing.core.PImage;
 import vialab.simpleMultiTouch.ImageZone;
 import vialab.simpleMultiTouch.RectZone;
@@ -267,7 +264,7 @@ public class UserProfilePicker {
 			}		
 
 			if (i == 3){
-				final int ii = i;
+				//final int ii = i;
 				//the index of the picture to load
 				userImg[i] = new ImageZone(images[loadIndex], x, y, width, height){
 					public void tapEvent(TapEvent e){

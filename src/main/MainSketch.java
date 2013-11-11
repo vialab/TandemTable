@@ -102,7 +102,7 @@ public class MainSketch extends PApplet {
 	}
 
 	public static void main(String[] args) {
-		PApplet.main(new String[]{"--present", "Main.MainSketch"});
+		PApplet.main(new String[]{"--present", "main.MainSketch"});
 	}
 
 
