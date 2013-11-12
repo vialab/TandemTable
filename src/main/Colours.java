@@ -47,9 +47,9 @@ public class Colours {
 
 	//Title Screen Colours
 	//Colours of the circles used in the Title Screen
-	public static Color[] circTitle = {new Color(30, 210, 10, 255), new Color(130, 210, 90, 255), new Color(230, 210, 10, 255), new Color(10, 10, 210, 255)};
+	public static Color[] circTitle = {new Color(30, 210, 10, 255), new Color(130, 210, 90, 255)};
 	//Colour of "TandemTable"
-	public static Color titleColor = new Color(255, 102, 0, 255);
+	public static Color titleColor = new Color(135, 158, 208, 255);
 	
 	//From Main.login
 	public static Color zoneText = new Color(255, 255, 255);

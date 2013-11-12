@@ -1,5 +1,4 @@
 package main.login;
-import java.awt.Color;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 
@@ -13,6 +12,10 @@ import vialab.simpleMultiTouch.TouchClient;
 import vialab.simpleMultiTouch.Zone;
 import vialab.simpleMultiTouch.events.TapEvent;
 
+/**
+ * Class responsible for initializing the login screen
+ *
+ */
 public class LoginScreen {
 
 
@@ -34,8 +37,8 @@ public class LoginScreen {
 	Zone english1, french1, portuguese1, spanish1, english2, french2, portuguese2, spanish2, 
 		login1, login2, newUser1, newUser2;
 	
-	//Circle graphics rendered during title screen
-	CircleZone[] circZone;
+	//Zone responsible for graphics rendered during title screen
+	RectZone bkgZone;
 	//Zones used in the title screen
 	TextZone titleZone1, titleZone2;
 	
@@ -57,102 +60,65 @@ public class LoginScreen {
 	 * Create the title screen and load the profile images
 	 */
 	public void createLoadingScreen(){
-		circZone = new CircleZone[Colours.circTitle.length];
-		int widthSpacing = -sketch.getWidth()/4;
-		int heightSpacing = -sketch.getWidth()/6;
+		final int circX1 = sketch.getWidth()/4;
+		final int circX2 = (int) (sketch.getWidth()/1.5);
+		final int circY = sketch.getHeight()/3;
+		final int circDiam = sketch.getWidth();
 		
-		for(int i = 0; i < Colours.circTitle.length/2; i++){
-			//Create big circles
-			int diam = (int) sketch.random(sketch.getWidth(), (float) (sketch.getWidth()*1.2)),
-					x, y, mult;
+		bkgZone = new RectZone(0, 0, sketch.getWidth(), sketch.getHeight()){
+			public void drawZone(){
+				sketch.fill(Colours.circTitle[0].getRed(), Colours.circTitle[0].getGreen(), Colours.circTitle[0].getBlue());
+				sketch.stroke(Colours.circTitle[0].getRed(), Colours.circTitle[0].getGreen(), Colours.circTitle[0].getBlue());
+				sketch.ellipse(circX1, circY, circDiam, circDiam);     
+				
+				sketch.fill(Colours.circTitle[1].getRed(), Colours.circTitle[1].getGreen(), Colours.circTitle[1].getBlue());
+				sketch.stroke(Colours.circTitle[1].getRed(), Colours.circTitle[1].getGreen(), Colours.circTitle[1].getBlue());
+				sketch.ellipse(circX2, circY, circDiam, circDiam);     
+			}			
+		};
 			
-			mult = (i % 2 == 0) ? 0:1;
-			x = widthSpacing + (int) sketch.random((float) (sketch.getWidth()/1.8),(float) (sketch.getWidth()/1.5))*mult;
-			
-			mult = (i > 2) ? 1:0;
-			y = heightSpacing + (int) sketch.random((float) (sketch.getHeight()/3), (float) (sketch.getHeight()/2))*mult;
-			
-			
-			circZone[i] = new CircleZone(x, y, diam, diam);
-			circZone[i].setFillColor(Colours.circTitle[i]);
-			circZone[i].setStrokeColor(Colours.circTitle[i]);
-			circZone[i].setDrawBorder(false);
-			client.addZone(circZone[i]);
-		}
-		for(int i = 0; i < Colours.circTitle.length/2; i++){
-			//Create small circles
-			
-			//Create big circles
-			int diam = (int) sketch.random((float) (sketch.getWidth()/5), (float) (sketch.getWidth()/3));
-			
-			int mult = (i % 2 == 0) ? 0:1;
-			int x = -widthSpacing + (int) sketch.random((float) (sketch.getWidth()/4),(float) (sketch.getWidth()/2))*mult;
-			
-			mult = (i > 2) ? 1:0;
-			int y = -heightSpacing + (int) sketch.random((float) (sketch.getHeight()/3), (float) (sketch.getHeight()/2))*mult;
-			
-			int i2 = i + 2;
-			circZone[i2] = new CircleZone(x, y, diam, diam);
-			circZone[i2].setFillColor(Colours.circTitle[i2]);
-			circZone[i2].setStrokeColor(Colours.circTitle[i2]);
-			circZone[i2].setDrawBorder(false);
-			client.addZone(circZone[i2]);
-		}
+		bkgZone.setDrawBorder(false);
+		bkgZone.setGestureEnabled("TAP", true, true);
+		client.addZone(bkgZone);
 		
-		titleZone1 = new TextZone(0, applet.screenHeight/2+sketch.buttonHeight, sketch.getWidth(), sketch.getHeight()/2, 
+		titleZone1 = new TextZone(0, applet.screenHeight/2, sketch.getWidth(), sketch.getHeight()/2, 
 				Colours.pFont, "TandemTable", sketch.textSize*4, "CENTER", "CENTER"){
 			public void tapEvent(TapEvent e){
-
 				if (tappable){
 					createLoginButtons();
+					client.removeZone(bkgZone);
 					client.removeZone(this);
 					client.removeZone(titleZone2);
 					
-					for(CircleZone circ:circZone){
-						client.removeZone(circ);
-					}
-
 					e.setHandled(tappableHandled);
 				}
 			}
 		};
 		
 		titleZone1.setTextColour(Colours.titleColor.getRed(), Colours.titleColor.getGreen(), Colours.titleColor.getBlue(), Colours.titleColor.getAlpha());
-		
-		//titleZone1.setColour(Colours.unselectedZone.getRed(), Colours.unselectedZone.getGreen(), Colours.unselectedZone.getBlue());
 		titleZone1.setGestureEnabled("Tap", true);
-
 		titleZone1.setDrawBorder(false);
 		client.addZone(titleZone1);
 		
-		titleZone2 = new TextZone(0, -sketch.buttonHeight, sketch.getWidth(), sketch.getHeight()/2, 
+		titleZone2 = new TextZone(0, 0, sketch.getWidth(), sketch.getHeight()/2, 
 				Colours.pFont, "TandemTable", sketch.textSize*4, "CENTER", "CENTER"){
 			public void tapEvent(TapEvent e){
-
 				if (tappable){
 					createLoginButtons();
+					client.removeZone(bkgZone);
 					client.removeZone(this);
 					client.removeZone(titleZone1);
 					
-					for(CircleZone circ:circZone){
-						client.removeZone(circ);
-					}
-
 					e.setHandled(tappableHandled);
 				}
 			}
 		};
 		
 		titleZone2.setTextColour(Colours.titleColor.getRed(), Colours.titleColor.getGreen(), Colours.titleColor.getBlue());
-		//titleZone2.setColour(Colours.unselectedZone.getRed(), Colours.unselectedZone.getGreen(), Colours.unselectedZone.getBlue());
 		titleZone2.rotate((float) Colours.PI);
 		titleZone2.setGestureEnabled("Tap", true);
-
 		titleZone2.setDrawBorder(false);
 		client.addZone(titleZone2);
-		
-		
-		
 	}
 	
 	public void createLoginButtons(){

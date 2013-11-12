@@ -50,10 +50,9 @@ public class MainSketch extends PApplet {
 	public void setup() {
 		size(screenWidth, screenHeight, P3D);
 		client = new TouchClient(this, true, false);
-		//client.setDrawTouchPoints(false);
 		client.applyZonesMatrix(true);
 		client.setDrawTouchPointsSize(getHeight()/30);
-		client.setDrawTouchPoints(false);
+		//client.setDrawTouchPoints(false);
 		Colours.pFont = loadFont(Colours.font);
 
 		XMLParser parser = new XMLParser();
