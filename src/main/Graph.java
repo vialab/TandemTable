@@ -8,9 +8,9 @@ import org.jdesktop.animation.timing.Animator.RepeatBehavior;
 import org.jdesktop.animation.timing.interpolation.PropertySetter;
 
 import processing.core.PConstants;
-import vialab.simpleMultiTouch.CircleZone;
 import vialab.simpleMultiTouch.Touch;
 import vialab.simpleMultiTouch.TouchClient;
+import vialab.simpleMultiTouch.zones.CircleZone;
 
 
 public class Graph {

@@ -10,11 +10,11 @@ import org.jdesktop.animation.timing.Animator;
 import com.aetrion.flickr.photos.PhotoList;
 
 import processing.core.PImage;
-import vialab.simpleMultiTouch.GarbageZone;
-import vialab.simpleMultiTouch.ImageZone;
-import vialab.simpleMultiTouch.RectZone;
 import vialab.simpleMultiTouch.TouchClient;
-import vialab.simpleMultiTouch.Zone;
+import vialab.simpleMultiTouch.zones.GarbageZone;
+import vialab.simpleMultiTouch.zones.ImageZone;
+import vialab.simpleMultiTouch.zones.RectZone;
+import vialab.simpleMultiTouch.zones.Zone;
 
 public class PictureActivity {
 	MainSketch sketch;

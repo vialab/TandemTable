@@ -8,10 +8,10 @@ import org.jdesktop.animation.timing.triggers.TimingTrigger;
 import org.jdesktop.animation.timing.triggers.TimingTriggerEvent;
 
 import processing.core.PConstants;
-import vialab.simpleMultiTouch.TextZone;
-import vialab.simpleMultiTouch.Zone;
 import vialab.simpleMultiTouch.events.HSwipeEvent;
 import vialab.simpleMultiTouch.events.TapEvent;
+import vialab.simpleMultiTouch.zones.TextZone;
+import vialab.simpleMultiTouch.zones.Zone;
 import activities.headlines.HeadlinesActivity;
 import activities.pGame.PGame;
 import activities.pictures.PictureActivity;
@@ -209,7 +209,7 @@ public class LayoutManager {
 			final int ii = i;
 			questionZone1[i] = new TextZone(sketch.lineX, sketch.getHeight(), (int)(textWidth*1.2), zoneHeight, Colours.pFont, s, questionTextSize,"LEFT", "BOTTOM" ){
 				public void hSwipeEvent(HSwipeEvent e){
-					if(hSwipeable){
+					if(isHSwipeable()){
 
 
 						animQuestion11[animIndex1].stop();
@@ -336,7 +336,7 @@ public class LayoutManager {
 			final int ii = i;
 			questionZone2[i] = new TextZone(sketch.lineX, -zoneHeight2[i], (int)(textWidth*1.2), zoneHeight2[i], Colours.pFont, s, questionTextSize,"LEFT", "BOTTOM" ){
 				public void hSwipeEvent(HSwipeEvent e){
-					if(hSwipeable){
+					if(isHSwipeable()){
 
 
 						animQuestion12[animIndex2].stop();
@@ -458,7 +458,7 @@ public class LayoutManager {
 		nextB1 = new TextZone(buttonX, buttonYb, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner1.next, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
-				if (tappable){
+				if (getTappable()){
 
 					if(!next1 && !next2){
 						animNext[1].start();
@@ -514,7 +514,7 @@ public class LayoutManager {
 		nextB2  = new TextZone(buttonX, buttonYt, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner2.next, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
-				if (tappable){
+				if (getTappable()){
 
 					if(!next2 && !next1){
 						animNext[0].start();
@@ -581,7 +581,7 @@ public class LayoutManager {
 		randTopicsB1 = new TextZone(buttonX, buttonYb, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner1.ranTopics, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
-				if (tappable){
+				if (getTappable()){
 					/*if(!bottomBSelect1 && !bottomBSelect2){
 						animRand[1].start();
 						this.setColour(Colours.selectedZone);
@@ -628,7 +628,7 @@ public class LayoutManager {
 		randTopicsB2  = new TextZone(buttonX, buttonYt, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner2.ranTopics, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
-				if (tappable){
+				if (getTappable()){
 
 
 					/*if(!bottomBSelect2 && !bottomBSelect1){
@@ -681,7 +681,7 @@ public class LayoutManager {
 		newLang1 = new TextZone(buttonX, buttonYb2, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner1.newLang, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
-				if (tappable){
+				if (getTappable()){
 
 					if(!newLangSelect1 && !newLangSelect2){
 						animNewLang[1].start();
@@ -737,7 +737,7 @@ public class LayoutManager {
 		newLang2 = new TextZone(buttonX, buttonYt2, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner2.newLang, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
-				if (tappable){
+				if (getTappable()){
 
 					if(!newLangSelect1 && !newLangSelect2){
 						animNewLang[0].start();
@@ -927,7 +927,7 @@ public class LayoutManager {
 					Colours.pFont, sketch.learner1.activities[index], sketch.textSize, "CENTER", "CENTER"){
 
 				public void tapEvent(TapEvent e){
-					if (tappable && activityBFlag){
+					if (getTappable() && activityBFlag){
 						for(int j = 0; j < MainSketch.NUM_ACTIVITIES; j++){
 							if(j != index && (activityFlags1[j] == true || activityFlags2[j] == true)){
 								animA2[j].stop();
@@ -1000,7 +1000,7 @@ public class LayoutManager {
 					Colours.pFont, sketch.learner2.activities[index], sketch.textSize, "CENTER", "CENTER"){
 
 				public void tapEvent(TapEvent e){
-					if (tappable && activityBFlag){
+					if (getTappable() && activityBFlag){
 						for(int j = 0; j < MainSketch.NUM_ACTIVITIES; j++){
 							if(j != index && (activityFlags1[j] == true || activityFlags2[j] == true)){
 								animA2[j].stop();
@@ -1091,7 +1091,7 @@ public class LayoutManager {
 		switchAct1 = new TextZone(buttonX, buttonYb, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner1.choAnoAct, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
-				if (tappable){
+				if (getTappable()){
 
 					if(!bottomBSelect1 && !bottomBSelect2){
 						animSwitchAct[1].start();
@@ -1141,7 +1141,7 @@ public class LayoutManager {
 		switchAct2  = new TextZone(buttonX, buttonYt, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner2.choAnoAct, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
-				if (tappable){
+				if (getTappable()){
 					if(!bottomBSelect2 && !bottomBSelect1){
 						animSwitchAct[0].start();
 						((TextZone) switchAct2).setColour(Colours.selectedZone);

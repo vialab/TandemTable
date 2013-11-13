@@ -21,12 +21,12 @@ import com.memetix.mst.language.Language;
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PGraphics;
-import vialab.simpleMultiTouch.PGraphicsZone;
-import vialab.simpleMultiTouch.RectZone;
-import vialab.simpleMultiTouch.TextZone;
 import vialab.simpleMultiTouch.events.DragEvent;
 import vialab.simpleMultiTouch.events.TapEvent;
 import vialab.simpleMultiTouch.events.VSwipeEvent;
+import vialab.simpleMultiTouch.zones.PGraphicsZone;
+import vialab.simpleMultiTouch.zones.RectZone;
+import vialab.simpleMultiTouch.zones.TextZone;
 
 public class HeadlinesActivity {
 
@@ -363,7 +363,7 @@ public class HeadlinesActivity {
 		// Back Button for user 1		
 		backButton1 = new TextZone(layoutManager.buttonX, layoutManager.buttonYb2, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, back1, sketch.textSize, "CENTER", "CENTER"){
 			public void tapEvent(TapEvent e){
-				if (tappable){
+				if (getTappable()){
 					sketch.client.removeZone(body1);
 					setBackButton(this, 1, false);
 					activateHeadlines(1);
@@ -386,7 +386,7 @@ public class HeadlinesActivity {
 		backButton2 = new TextZone(layoutManager.buttonX, layoutManager.buttonYt2, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, back2, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
-				if (tappable){
+				if (getTappable()){
 					sketch.client.removeZone(body2);
 					setBackButton(this, 2, false);
 					activateHeadlines(2);
@@ -481,7 +481,7 @@ public class HeadlinesActivity {
 			headlines1[i] = new TextZone(sketch.lineX + widthOffset/4, (int) (y1 + (i+1.13)*textYOffset + (i*height)), widthBody, height, sketch.radius, Colours.pFont, "", textSize, "CENTER", "CENTER"){
 
 				public void tapEvent(TapEvent e){
-					if (tappable && !tapFlag1 && !errorFlag1){
+					if (getTappable() && !tapFlag1 && !errorFlag1){
 						tapFlag1 = true;
 						inactivateHeadlines(1);
 						setBackButton(this, 1, true);
@@ -708,7 +708,7 @@ public class HeadlinesActivity {
 								}
 
 								public void dragEvent(DragEvent e){
-									if(draggable){
+									if(isDraggable()){
 										int dist = (int) (e.getYDistance()/10 + this.getYOffset());
 
 										if(dist <= graphicsHeight-bodyHeight && dist >= 0){
@@ -800,7 +800,7 @@ public class HeadlinesActivity {
 
 				public void tapEvent(TapEvent e){
 
-					if (tappable && !tapFlag2 && !errorFlag2){
+					if (getTappable() && !tapFlag2 && !errorFlag2){
 						tapFlag2 = true;
 						inactivateHeadlines(2);
 						setBackButton(this, 2, true);
@@ -1029,7 +1029,7 @@ public class HeadlinesActivity {
 								}
 
 								public void dragEvent(DragEvent e){
-									if(draggable){
+									if(isDraggable()){
 										int dist = (int) (e.getYDistance()/10 + this.getYOffset());
 
 										if(dist <= graphicsHeight-bodyHeight && dist >= 0){

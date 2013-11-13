@@ -14,9 +14,9 @@ import org.jdesktop.animation.timing.interpolation.PropertySetter;
 
 import com.google.gdata.client.youtube.YouTubeService;
 
-import vialab.simpleMultiTouch.RectZone;
-import vialab.simpleMultiTouch.TextZone;
 import vialab.simpleMultiTouch.events.TapEvent;
+import vialab.simpleMultiTouch.zones.RectZone;
+import vialab.simpleMultiTouch.zones.TextZone;
 import activities.videos.VideoPlayer;
 
 public class VideoController {
@@ -88,7 +88,7 @@ public class VideoController {
 	public void createCancelBackground(){
 		cancelBackground1 = new RectZone(sketch.lineX, sketch.getHeight()/2, sketch.getWidth()-sketch.lineX, sketch.getHeight()/2){
 			public void tapEvent(TapEvent e){
-				if(tappable){
+				if(getTappable()){
 					accept1.setActive(false);
 					this.setActive(false);
 				}
@@ -98,7 +98,7 @@ public class VideoController {
 		
 		cancelBackground2 = new RectZone(sketch.lineX, 0, sketch.getWidth()-sketch.lineX, sketch.getHeight()/2){
 			public void tapEvent(TapEvent e){
-				if(tappable){
+				if(getTappable()){
 					accept2.setActive(false);
 					this.setActive(false);
 				}
@@ -127,7 +127,7 @@ public class VideoController {
 		accept1 = new TextZone(x, y, width, height, sketch.radius, Colours.pFont, sketch.learner1.playVideo, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
-				if (tappable){
+				if (getTappable()){
 					accept1.setActive(false);
 					setVideoControlsVisible();
 					startVideo(2);
@@ -149,7 +149,7 @@ public class VideoController {
 		accept2 = new TextZone(x, y, width, height, sketch.radius, Colours.pFont, sketch.learner2.playVideo, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
-				if (tappable){
+				if (getTappable()){
 					accept2.setActive(false);
 					setVideoControlsVisible();
 					startVideo(1);
@@ -351,7 +351,7 @@ public class VideoController {
 		play1 = new TextZone(videoControlsX, sketch.layout.buttonYb, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner1.play, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
-				if (tappable && !errorFlag && playerActive && videoPlayer1.mediaPlayerComponent.getMediaPlayer().isPlayable() && !videoPlayer1.mediaPlayerComponent.getMediaPlayer().isPlaying()){
+				if (getTappable() && !errorFlag && playerActive && videoPlayer1.mediaPlayerComponent.getMediaPlayer().isPlayable() && !videoPlayer1.mediaPlayerComponent.getMediaPlayer().isPlaying()){
 					
 					if(playFlag2){
 						animPlay1.stop();
@@ -413,7 +413,7 @@ public class VideoController {
 		pause1 = new TextZone(videoControlsX, sketch.layout.buttonYb2, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner1.pause, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
-				if (tappable && !errorFlag && playerActive && videoPlayer1.mediaPlayerComponent.getMediaPlayer().isPlaying()){
+				if (getTappable() && !errorFlag && playerActive && videoPlayer1.mediaPlayerComponent.getMediaPlayer().isPlaying()){
 					
 
 					if(pauseFlag2){
@@ -469,7 +469,7 @@ public class VideoController {
 		stop1 = new TextZone(videoControlsX, sketch.layout.buttonYb3, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner1.stop, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
-				if (tappable && !errorFlag && playerActive){
+				if (getTappable() && !errorFlag && playerActive){
 					
 					if(stopFlag2){
 						animStop1.stop();
@@ -515,7 +515,7 @@ public class VideoController {
 		play2 = new TextZone(videoControlsX, sketch.layout.buttonYt, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner2.play, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
-				if (tappable && !errorFlag && playerActive && videoPlayer2.mediaPlayerComponent.getMediaPlayer().isPlayable() && !videoPlayer2.mediaPlayerComponent.getMediaPlayer().isPlaying()){
+				if (getTappable() && !errorFlag && playerActive && videoPlayer2.mediaPlayerComponent.getMediaPlayer().isPlayable() && !videoPlayer2.mediaPlayerComponent.getMediaPlayer().isPlaying()){
 					if(playFlag1){
 						animPlay2.stop();
 						playFlag1 = false;
@@ -577,7 +577,7 @@ public class VideoController {
 		pause2 = new TextZone(videoControlsX, sketch.layout.buttonYt2, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner2.pause, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
-				if (tappable && !errorFlag && playerActive && videoPlayer2.mediaPlayerComponent.getMediaPlayer().isPlaying()){
+				if (getTappable() && !errorFlag && playerActive && videoPlayer2.mediaPlayerComponent.getMediaPlayer().isPlaying()){
 					if(pauseFlag1){
 						animPause2.stop();
 						pauseFlag1 = false;
@@ -634,7 +634,7 @@ public class VideoController {
 		stop2 = new TextZone(videoControlsX, sketch.layout.buttonYt3, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner2.stop, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
-				if (tappable && !errorFlag && playerActive){
+				if (getTappable() && !errorFlag && playerActive){
 					if(stopFlag1){
 						animStop2.stop();
 						stopFlag1 = false;

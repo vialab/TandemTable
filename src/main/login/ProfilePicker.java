@@ -10,23 +10,22 @@ import main.Colours;
 import main.MainSketch;
 import processing.core.PApplet;
 import processing.core.PImage;
-import vialab.simpleMultiTouch.ImageZone;
-import vialab.simpleMultiTouch.RectZone;
-import vialab.simpleMultiTouch.TextZone;
 import vialab.simpleMultiTouch.TouchClient;
-import vialab.simpleMultiTouch.Zone;
 import vialab.simpleMultiTouch.events.HSwipeEvent;
 import vialab.simpleMultiTouch.events.TapEvent;
+import vialab.simpleMultiTouch.zones.ImageZone;
+import vialab.simpleMultiTouch.zones.RectZone;
+import vialab.simpleMultiTouch.zones.Zone;
 
-public class UserProfilePicker {
+public class ProfilePicker {
 
 	PApplet applet;
 	TouchClient client;
 	MainSketch sketch;
 	LoginScreen loginScreen;
 
-	Zone[] arrows, userImg;
-	Zone swipe1, swipe2, newLang1, lastLang1, newLang2, lastLang2;
+	ImageZone[] arrows, userImg;
+	Zone swipe1, swipe2;
 	PImage[] images;
 	FileReader reader;
 	BufferedReader bReader;
@@ -36,29 +35,29 @@ public class UserProfilePicker {
 	int index2 = 0;
 	int chosenProfile1 = -1;
 	int chosenProfile2 = -1;
-
+	
 	final int IMG_ONSCR = 7;
 
-	public UserProfilePicker(TouchClient client, MainSketch sketch, LoginScreen loginScreen){
-		applet = client.getParent();
+	public ProfilePicker(TouchClient client, MainSketch sketch, LoginScreen loginScreen){
+		applet = TouchClient.getPApplet();
 		this.sketch = sketch;
 		this.client = client;
 		this.loginScreen = loginScreen;
 
-		arrows = new Zone[4];
-		userImg = new Zone[14];
+		arrows = new ImageZone[4];
+		userImg = new ImageZone[14];
 		minSize = applet.screenWidth/15;
 
 
-		loadImages();
+		loadPImages();
+		createSwipeAreas();
+		createArrows();
+
 		//create images starting at index 0
-		createImageZones();
-		loadArrows();
-
-
+		createProfileImgZones();
 	}
 
-	public void loadArrows(){
+	public void createArrows(){
 
 		int arrowSize = applet.screenHeight/10;
 		int leftSideX = applet.getX();
@@ -71,7 +70,7 @@ public class UserProfilePicker {
 
 		arrows[0] = new ImageZone(applet.loadImage("lArrow.png"), leftSideX, arrowBY, arrowSize, arrowSize){
 			public void tapEvent(TapEvent e){
-				if (tappable){
+				if (getTappable()){
 					if (index1 > 0){
 						index1--;
 					} else {
@@ -89,7 +88,7 @@ public class UserProfilePicker {
 		arrows[1] = new ImageZone(applet.loadImage("rArrow.png"), rightSizeX, arrowBY, arrowSize, arrowSize){
 			public void tapEvent(TapEvent e){
 
-				if (tappable){
+				if (getTappable()){
 					if(index1 == numProfiles){
 						index1 = 0;
 					} else {
@@ -115,7 +114,7 @@ public class UserProfilePicker {
 		//For User2
 		arrows[2] = new ImageZone(applet.loadImage("rArrow.png"), rightSizeX, arrowTY, arrowSize, arrowSize){
 			public void tapEvent(TapEvent e){
-				if (tappable){
+				if (getTappable()){
 					if (index2 > 0){
 						index2--;
 					} else {
@@ -133,7 +132,7 @@ public class UserProfilePicker {
 		arrows[3] = new ImageZone(applet.loadImage("lArrow.png"), leftSideX, arrowTY, arrowSize, arrowSize){
 			public void tapEvent(TapEvent e){
 
-				if (tappable){
+				if (getTappable()){
 					if(index2 == numProfiles){
 						index2 = 0;
 					} else {
@@ -159,45 +158,11 @@ public class UserProfilePicker {
 
 	}
 
-	public void loadImages(){
-		numProfiles = new File(".\\data\\users\\images").list().length - 2;
-		images = new PImage[numProfiles+1];
-
-		for(int i = 0; i <= numProfiles; i++){
-			images[i] = applet.loadImage("\\users\\images\\user" + (i) + ".png");
-		}
-	}
-	
-	public void activateProfilePicker(int user){
-		if(user == 1){
-			arrows[0].setActive(true);
-			arrows[1].setActive(true);
-			swipe1.setActive(true);
-			
-			for(int i = 0; i < IMG_ONSCR; i ++){
-				userImg[i].setActive(true);
-			}
-					
-		} else {
-			arrows[2].setActive(true);
-			arrows[3].setActive(true);
-			swipe2.setActive(true);
-			
-			for(int i = 0; i < IMG_ONSCR; i ++){
-				userImg[i+IMG_ONSCR].setActive(true);
-			}
-		}
-		
-		
-	}
-
-	public void createImageZones(){
-		int loadIndex = 0;
-		int x = 0;
-
-		int y = applet.screenHeight/2 + sketch.yOffset;
-		int width = 0;
-		int height = 0;
+	/**
+	 * Creates a RectZone used to sense horizontal swipes over
+	 * the profile picker for each user
+	 */
+	public void createSwipeAreas(){
 
 
 		swipe1 = new RectZone(0, applet.getHeight()/2, applet.getWidth(), minSize*2 + sketch.yOffset){
@@ -226,10 +191,44 @@ public class UserProfilePicker {
 		swipe1.setActive(false);
 		client.addZone(swipe1);
 
+		swipe2 = new RectZone(0, applet.getHeight()/2-minSize*2 - sketch.yOffset, applet.getWidth(), minSize*2 + sketch.yOffset){
+			public void hSwipeEvent(HSwipeEvent e){
+
+				if (index2 > 0 && index2 <= numProfiles && e.getSwipeType() == -1){
+					index2--;
+				} else if(index2 < numProfiles && e.getSwipeType() == 1){
+					index2++;
+				} else if (index2 == 0) {
+					index2 = numProfiles;
+				} else if (index2 == numProfiles) {
+					index2 = 0;
+				}
+
+				//load images starting at index
+				loadImages(2, index2);
+				e.setHandled(hSwipeableHandled);
+			}
+
+		};
+		swipe2.setGestureEnabled("HSwipe", true, true);
+		swipe2.setDrawBorder(false);
+		swipe2.setHSwipeDist(sketch.qSwipeThreshold);
+		swipe2.setActive(false);
+		client.addZone(swipe2);
+	}
+
+	public void createProfileImgZones(){
+		int loadIndex = 0;
+		int x = 0;
+
+		int y = applet.screenHeight/2 + sketch.yOffset;
+		int width = 0;
+		int height = 0;
+
+		//*****************
 		//For user1
+		//*****************
 		for(int i = 0; i < IMG_ONSCR; i++){
-
-
 
 			if (i== 0){
 				x = (i+1)*applet.screenWidth/10;
@@ -248,12 +247,10 @@ public class UserProfilePicker {
 				width = minSize*2;
 				height = minSize*2;
 			} else if (i == 4){
-				//x = (int)(applet.screenWidth - 3*applet.screenWidth/12 - minSize*3);
 				width = (int)(minSize*1.5);
 				height = (int)(minSize*1.5);
 				x = applet.getWidth() - (i+1)*applet.screenWidth/10 - minSize/5+width;
 			} else if (i == 5){
-				//x = (int)(applet.screenWidth - 3*applet.screenWidth/12 - minSize*1.2);
 				width = (int)(minSize*1.2);
 				height = (int)(minSize*1.2);
 				x = applet.getWidth() - 2*applet.getWidth()/10 - width;
@@ -264,17 +261,16 @@ public class UserProfilePicker {
 			}		
 
 			if (i == 3){
-				//final int ii = i;
 				//the index of the picture to load
 				userImg[i] = new ImageZone(images[loadIndex], x, y, width, height){
 					public void tapEvent(TapEvent e){
-						if (tappable && index1 != chosenProfile2){
+						if (getTappable() && index1 != chosenProfile2){
 							chosenProfile1 = index1;
-							//((ImageZone)userImg[IMG_ONSCR + ii]).setFilterLvl(PConstants.BLUR, 5);
-							//((ImageZone)userImg[IMG_ONSCR + ii]).setFilter(true);
-							///////////////////////////////////////////((ImageZone)userImg[IMG_ONSCR + ii]).setDisabled(true);
-							System.out.println(index1);
 							removeUserProfilesPicker(1);
+							loginScreen.createLanguageOptions(1);
+							userImg[3].setXYWH(applet.screenWidth-2*minSize, applet.screenHeight-2*minSize, 2*minSize, 2*minSize);
+							userImg[3].setGestureEnabled("TAP", false);
+							userImg[3].setActive(true);
 							e.setHandled(tappableHandled);
 						}
 					}
@@ -319,38 +315,14 @@ public class UserProfilePicker {
 			}
 		}	
 
-
-		swipe2 = new RectZone(0, applet.getHeight()/2-minSize*2 - sketch.yOffset, applet.getWidth(), minSize*2 + sketch.yOffset){
-			public void hSwipeEvent(HSwipeEvent e){
-
-				if (index2 > 0 && index2 <= numProfiles && e.getSwipeType() == -1){
-					index2--;
-				} else if(index2 < numProfiles && e.getSwipeType() == 1){
-					index2++;
-				} else if (index2 == 0) {
-					index2 = numProfiles;
-				} else if (index2 == numProfiles) {
-					index2 = 0;
-				}
-
-				//load images starting at index
-				loadImages(2, index2);
-				e.setHandled(hSwipeableHandled);
-			}
-
-		};
-		swipe2.setGestureEnabled("HSwipe", true, true);
-		swipe2.setDrawBorder(false);
-		swipe2.setHSwipeDist(sketch.qSwipeThreshold);
-		swipe2.setActive(false);
-		client.addZone(swipe2);
-
 		loadIndex = 0;
 		x = 0;
 		width = 0;
 		height = 0;
 
+		//*****************
 		//For user2
+		//*****************
 		for(int i = 0; i < IMG_ONSCR; i++){
 			if (i== 0){
 				width = minSize;
@@ -383,13 +355,11 @@ public class UserProfilePicker {
 				height = (int)(minSize*1.5);
 				y = applet.getHeight()/2-height - sketch.yOffset;
 				x = (2)*applet.screenWidth/10 + minSize/5 + width;
-				//x = (int) (3*applet.screenWidth/12 + minSize*1.5-width);
 			} else if (i == 5){
 				width = (int)(minSize*1.2);
 				height = (int)(minSize*1.2);
 				y = applet.getHeight()/2-height - sketch.yOffset;
 				x = applet.getX() + 2*applet.getWidth()/10;
-				//x = (int) (3*applet.screenWidth/12 + minSize/2)-width;
 			} else if (i == 6){
 				width = minSize;
 				height = minSize;
@@ -402,9 +372,14 @@ public class UserProfilePicker {
 				//the index of the picture to load
 				userImg[i+IMG_ONSCR] = new ImageZone(images[loadIndex], x, y, width, height){
 					public void tapEvent(TapEvent e){
-						if (tappable && index2 != chosenProfile1){
+						if (getTappable() && index2 != chosenProfile1){
 							chosenProfile2 = index2;
 							removeUserProfilesPicker(2);
+							loginScreen.createLanguageOptions(2);
+
+							userImg[3 + IMG_ONSCR].setXYWH(applet.getX(), applet.screenHeight-4*minSize, 2*minSize, 2*minSize);
+							userImg[3 + IMG_ONSCR].setGestureEnabled("TAP", false);
+							userImg[3 + IMG_ONSCR].setActive(true);
 							e.setHandled(tappableHandled);
 						}
 					}
@@ -447,20 +422,62 @@ public class UserProfilePicker {
 				loadIndex++;
 			}
 		}
+	}
 
+	/**
+	 * Loads the profile images into PImages
+	 */
+	public void loadPImages(){
+		numProfiles = new File(".\\data\\users\\images").list().length - 2;
+		images = new PImage[numProfiles+1];
 
+		for(int i = 0; i <= numProfiles; i++){
+			images[i] = applet.loadImage("\\users\\images\\user" + (i) + ".png");
+		}
+	}
 
+	/**
+	 * Activates the profile picker zones for the specified user
+	 * @param user
+	 */
+	public void activateProfilePicker(int user){
+		if(user == 1){
+			arrows[0].setActive(true);
+			arrows[1].setActive(true);
+			swipe1.setActive(true);
+
+			for(int i = 0; i < IMG_ONSCR; i ++){
+				userImg[i].setActive(true);
+			}
+
+		} else {
+			arrows[2].setActive(true);
+			arrows[3].setActive(true);
+			swipe2.setActive(true);
+
+			for(int i = 0; i < IMG_ONSCR; i ++){
+				userImg[i+IMG_ONSCR].setActive(true);
+			}
+		}
 
 
 	}
 
+	/**
+	 * Load the profile pictures into the ImageZones
+	 * @param user
+	 * @param loadIndex
+	 */
 	public void loadImages(int user, int loadIndex){
+		
 		for(int i = 0; i < IMG_ONSCR; i++){
 			if(user == 1){
-				((ImageZone) userImg[i]).setImage(images[loadIndex]);
+				userImg[i].setImage(images[loadIndex]);
+				
 			} else {
-				((ImageZone) userImg[i+IMG_ONSCR]).setImage(images[loadIndex]);
+				userImg[i+IMG_ONSCR].setImage(images[loadIndex]);
 			}
+			
 			if(loadIndex == numProfiles){
 				loadIndex = 0;
 			} else {
@@ -469,9 +486,13 @@ public class UserProfilePicker {
 		}
 	}
 
+	/**
+	 * Disables the profile picker zones
+	 * @param user
+	 */
 	public void removeUserProfilesPicker(int user){
 		for(int i = 0; i < IMG_ONSCR; i++){
-			if(user ==1){
+			if(user == 1){
 				userImg[i].setActive(false);
 			} else {
 				userImg[i+IMG_ONSCR].setActive(false);
@@ -483,99 +504,12 @@ public class UserProfilePicker {
 			arrows[1].setActive(false);
 			swipe1.setActive(false);
 
-			userImg[3].setXYWH(applet.screenWidth-2*minSize, applet.screenHeight-2*minSize, 2*minSize, 2*minSize);
-			userImg[3].setGestureEnabled("TAP", false);
-			userImg[3].setActive(true);
-
-			newLang1 = new TextZone(applet.screenWidth/2-sketch.buttonWidth-1, applet.screenHeight/2+sketch.buttonHeight, sketch.buttonWidth, sketch.buttonHeight, 
-					sketch.radius, Colours.pFont, "New Language", sketch.textSize, "CENTER", "CENTER"){
-				public void tapEvent(TapEvent e){
-
-					if (tappable){
-						this.setGestureEnabled("Tap", false);
-						newLang1.setActive(false);
-						lastLang1.setActive(false);
-						loginScreen.selectLang(1);
-						e.setHandled(tappableHandled);
-					}
-				}
-			};
-			((TextZone) newLang1).setTextColour(Colours.zoneText.getRed(), Colours.zoneText.getGreen(), Colours.zoneText.getBlue());
-			((TextZone) newLang1).setColour(Colours.unselectedZone.getRed(), Colours.unselectedZone.getGreen(), Colours.unselectedZone.getBlue());
-			newLang1.setGestureEnabled("Tap", true);
-
-			newLang1.setDrawBorder(false);
-			client.addZone(newLang1);
-
-			lastLang1 = new TextZone(applet.screenWidth/2 +1, applet.screenHeight/2+sketch.buttonHeight, sketch.buttonWidth, sketch.buttonHeight, 
-					sketch.radius, Colours.pFont, "Last Language Used", sketch.textSize, "CENTER", "CENTER"){
-				public void tapEvent(TapEvent e){
-
-					if (tappable){
-						this.setGestureEnabled("Tap", false);
-						newLang1.setActive(false);
-						lastLang1.setActive(false);
-						readProfile(1);
-						e.setHandled(tappableHandled);
-					}
-				}
-			};
-			((TextZone) lastLang1).setTextColour(Colours.zoneText.getRed(), Colours.zoneText.getGreen(), Colours.zoneText.getBlue());
-			((TextZone) lastLang1).setColour(Colours.unselectedZone.getRed(), Colours.unselectedZone.getGreen(), Colours.unselectedZone.getBlue());
-			lastLang1.setGestureEnabled("Tap", true);
-
-			lastLang1.setDrawBorder(false);
-			client.addZone(lastLang1);
 
 		} else {
 			arrows[2].setActive(false);
 			arrows[3].setActive(false);
 			swipe2.setActive(false);
 
-			userImg[3+IMG_ONSCR].setXYWH(applet.getX(), applet.screenHeight-4*minSize, 2*minSize, 2*minSize);
-			userImg[3+IMG_ONSCR].setGestureEnabled("TAP", false);
-			userImg[3+IMG_ONSCR].setActive(true);
-
-			newLang2 = new TextZone(applet.screenWidth/2-sketch.buttonWidth-1, applet.screenHeight/2-2*sketch.buttonHeight, sketch.buttonWidth, sketch.buttonHeight, 
-					sketch.radius, Colours.pFont, "New Language", sketch.textSize, "CENTER", "CENTER"){
-				public void tapEvent(TapEvent e){
-
-					if (tappable){
-						newLang2.setActive(false);
-						lastLang2.setActive(false);
-						this.setGestureEnabled("Tap", false);
-						loginScreen.selectLang(2);						
-						e.setHandled(tappableHandled);
-					}
-				}
-			};
-			((TextZone) newLang2).setTextColour(Colours.zoneText.getRed(), Colours.zoneText.getGreen(), Colours.zoneText.getBlue());
-			((TextZone) newLang2).setColour(Colours.unselectedZone.getRed(), Colours.unselectedZone.getGreen(), Colours.unselectedZone.getBlue());
-			newLang2.rotate((float) Colours.PI);
-			newLang2.setGestureEnabled("Tap", true);
-			newLang2.setDrawBorder(false);
-			client.addZone(newLang2);
-
-			lastLang2 = new TextZone(applet.screenWidth/2+1, applet.screenHeight/2-2*sketch.buttonHeight, sketch.buttonWidth, sketch.buttonHeight, 
-					sketch.radius, Colours.pFont, "Last Language Used", sketch.textSize, "CENTER", "CENTER"){
-				public void tapEvent(TapEvent e){
-
-					if (tappable){
-						newLang2.setActive(false);
-						lastLang2.setActive(false);
-						this.setGestureEnabled("Tap", false);
-						readProfile(2);
-						e.setHandled(tappableHandled);
-					}
-				}
-			};
-			((TextZone) lastLang2).setTextColour(Colours.zoneText.getRed(), Colours.zoneText.getGreen(), Colours.zoneText.getBlue());
-			((TextZone) lastLang2).setColour(Colours.unselectedZone.getRed(), Colours.unselectedZone.getGreen(), Colours.unselectedZone.getBlue());
-			lastLang2.setGestureEnabled("Tap", true);
-
-			lastLang2.setDrawBorder(false);
-			lastLang2.rotate((float) Colours.PI);
-			client.addZone(lastLang2);
 		}
 	}
 
@@ -583,7 +517,7 @@ public class UserProfilePicker {
 		try {	
 			String lastLangUsed;
 			long[] fakeCursors = {1, 1};
-			loginScreen.selectLang(user);
+			loginScreen.createLanguageButtons(user);
 			if(user == 1){
 
 				reader = new FileReader(".\\data\\users\\info\\" + chosenProfile1 + ".user");
@@ -608,11 +542,11 @@ public class UserProfilePicker {
 					loginScreen.english2.tapEvent(new TapEvent(0,0, fakeCursors, 1));
 				} else if(lastLangUsed.equalsIgnoreCase("French")){
 					loginScreen.french2.tapEvent(new TapEvent(0,0, fakeCursors, 1));
-				} else if(lastLangUsed.equalsIgnoreCase("German")){
+				} /*else if(lastLangUsed.equalsIgnoreCase("German")){
 					//TODO
 				} else if(lastLangUsed.equalsIgnoreCase("Spanish")){
 					//TODO
-				}   
+				}  */ 
 			}
 			bReader.close();
 			reader.close();
@@ -625,3 +559,19 @@ public class UserProfilePicker {
 	}
 
 }
+
+//TODO
+//TODO
+//TODO
+//TODO
+/**
+ * 
+				//Sets the ImageZone to be 'disabled' when the other user
+				//has already chosen it as their profile picture
+				if(index1 == loadIndex  && loadIndex == chosenProfile2){
+					System.out.println(loadIndex + " " + index1 + " " +  chosenProfile2);
+					userImg[3].setFilterColFlag(true);
+				} else {
+					userImg[i].setFilterColFlag(false);
+				}
+				**/

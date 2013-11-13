@@ -19,11 +19,11 @@ import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PGraphics;
 import processing.core.PImage;
-import vialab.simpleMultiTouch.ImageZone;
-import vialab.simpleMultiTouch.PGraphicsZone;
-import vialab.simpleMultiTouch.RectZone;
 import vialab.simpleMultiTouch.events.DragEvent;
 import vialab.simpleMultiTouch.events.TapEvent;
+import vialab.simpleMultiTouch.zones.ImageZone;
+import vialab.simpleMultiTouch.zones.PGraphicsZone;
+import vialab.simpleMultiTouch.zones.RectZone;
 
 public class ContentGetter extends Thread{
 	
@@ -88,7 +88,7 @@ public class ContentGetter extends Thread{
 			
 			background = new RectZone(sketch.lineX, sketch.getHeight()/2, sketch.getWidth()-sketch.lineX, sketch.getHeight()/2){
 				public void tapEvent(TapEvent e){
-					if(tappable){
+					if(getTappable()){
 						deactivateZones();
 						tg.currentGetter1 = cg;
 					}
@@ -105,7 +105,7 @@ public class ContentGetter extends Thread{
 			
 			background = new RectZone(sketch.lineX, 0, sketch.getWidth()-sketch.lineX, sketch.getHeight()/2){
 				public void tapEvent(TapEvent e){
-					if(tappable){
+					if(getTappable()){
 						deactivateZones();
 						tg.currentGetter2 = cg;
 					}
@@ -286,7 +286,7 @@ public class ContentGetter extends Thread{
 					img1 = new ImageZone(pimg, sketch.lineX + wSpace, sketch.getHeight()/2 + hSpace, w, h, sketch.radius){
 
 						public void tapEvent(TapEvent e){
-							if (tappable){
+							if (getTappable()){
 
 								if(getImageIndex()+1 < getImageArray().length-1){
 									int index = getImageIndex() + 1;
@@ -552,7 +552,7 @@ public class ContentGetter extends Thread{
 					img1 = new ImageZone(pimg, sketch.lineX + wSpace, - hSpace, w, h+ 4*sketch.shadowOffset, sketch.radius){
 
 						public void tapEvent(TapEvent e){
-							if (tappable){
+							if (getTappable()){
 
 								if(getImageIndex()+1 < getImageArray().length-1){
 									int index = getImageIndex() + 1;
@@ -964,7 +964,7 @@ public class ContentGetter extends Thread{
 			}
 
 			public void dragEvent(DragEvent e){
-				if(draggable){
+				if(isDraggable()){
 					float dist = (e.getYDistance()/10 + this.getYOffset());
 
 					if(dist <= graphicsHeight-bodyHeight && dist >= 0){
@@ -1223,7 +1223,7 @@ public class ContentGetter extends Thread{
 			}
 
 			public void dragEvent(DragEvent e){
-				if(draggable){
+				if(isDraggable()){
 					float dist = (e.getYDistance()/10 + this.getYOffset());
 
 					if(dist <= graphicsHeight-bodyHeight && dist >= 0){

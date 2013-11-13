@@ -20,8 +20,8 @@ import com.aetrion.flickr.photos.SearchParameters;
 
 import processing.core.PApplet;
 import processing.core.PImage;
-import vialab.simpleMultiTouch.ImageZone;
-import vialab.simpleMultiTouch.RectZone;
+import vialab.simpleMultiTouch.zones.ImageZone;
+import vialab.simpleMultiTouch.zones.RectZone;
 
 public class PictureGetter extends Thread {
 	MainSketch sketch;

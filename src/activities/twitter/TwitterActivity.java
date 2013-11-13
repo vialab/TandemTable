@@ -15,11 +15,11 @@ import org.jdesktop.animation.timing.Animator.RepeatBehavior;
 import org.jdesktop.animation.timing.interpolation.PropertySetter;
 
 import processing.core.PConstants;
-import vialab.simpleMultiTouch.RectZone;
-import vialab.simpleMultiTouch.TextZone;
 import vialab.simpleMultiTouch.TouchClient;
 import vialab.simpleMultiTouch.events.TapEvent;
 import vialab.simpleMultiTouch.events.VSwipeEvent;
+import vialab.simpleMultiTouch.zones.RectZone;
+import vialab.simpleMultiTouch.zones.TextZone;
 
 import com.memetix.mst.language.Language;
 
@@ -404,7 +404,7 @@ public class TwitterActivity {
 		tweetWord1 = new TextZone(layoutManager.buttonX, layoutManager.buttonYb2, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, tweetsS1, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
-				if (tappable && !errorFlag){
+				if (getTappable() && !errorFlag){
 					tg.queryWord(selectedWord, 1);
 					removeTweets(1);
 					tg.createTweetZones(1);
@@ -433,7 +433,7 @@ public class TwitterActivity {
 		tweetWord2 = new TextZone(layoutManager.buttonX, layoutManager.buttonYt2, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, tweetsS2, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
-				if (tappable && !errorFlag){
+				if (getTappable() && !errorFlag){
 					tg.queryWord(selectedWord, 2);
 					removeTweets(2);
 					tg.createTweetZones(2);

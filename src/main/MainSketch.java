@@ -52,6 +52,7 @@ public class MainSketch extends PApplet {
 		client = new TouchClient(this, true, false);
 		client.applyZonesMatrix(true);
 		client.setDrawTouchPointsSize(getHeight()/30);
+		//client.setDebugMode(true);
 		//client.setDrawTouchPoints(false);
 		Colours.pFont = loadFont(Colours.font);
 

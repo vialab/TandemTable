@@ -11,7 +11,7 @@ import com.memetix.mst.language.Language;
 import com.memetix.mst.translate.Translate;
 
 import processing.core.PApplet;
-import vialab.simpleMultiTouch.RectZone;
+import vialab.simpleMultiTouch.zones.RectZone;
 
 public class HeadlineGetter extends Thread {
 	MainSketch sketch;

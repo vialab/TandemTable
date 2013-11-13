@@ -12,12 +12,12 @@ import main.Colours;
 import main.MainSketch;
 import processing.core.PConstants;
 import processing.core.PImage;
-import vialab.simpleMultiTouch.ImageZone;
-import vialab.simpleMultiTouch.RectZone;
-import vialab.simpleMultiTouch.TextZone;
-import vialab.simpleMultiTouch.Zone;
 import vialab.simpleMultiTouch.events.DragEvent;
 import vialab.simpleMultiTouch.events.TapEvent;
+import vialab.simpleMultiTouch.zones.ImageZone;
+import vialab.simpleMultiTouch.zones.RectZone;
+import vialab.simpleMultiTouch.zones.TextZone;
+import vialab.simpleMultiTouch.zones.Zone;
 
 import com.google.gdata.client.youtube.YouTubeQuery;
 import com.google.gdata.data.youtube.VideoEntry;

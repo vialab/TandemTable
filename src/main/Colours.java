@@ -43,8 +43,10 @@ public class Colours {
 	public static final double PI = 3.14159265358979;
 
 	//From MainSketch.java
-	public static Color backgroundColour = new Color(255, 255, 255);
+	public static Color backgroundColour = new Color(255, 255, 255);//Color(179, 255, 174);
 
+	//Disabled ImageZone colour in profile picker
+	public static Color disabledZone = new Color(200, 200, 200, 255);
 	//Title Screen Colours
 	//Colours of the circles used in the Title Screen
 	public static Color[] circTitle = {new Color(30, 210, 10, 255), new Color(130, 210, 90, 255)};
