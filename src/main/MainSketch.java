@@ -14,6 +14,11 @@ import twitter4j.Twitter;
 import vialab.simpleMultiTouch.TouchClient;
 import main.login.LoginScreen;
 
+/**
+ * Main Class of TandemTable
+ * @author Erik Paluka - Copyright 2012-2013
+ *
+ */
 @SuppressWarnings("serial")
 public class MainSketch extends PApplet {
 	public TouchClient client;
@@ -64,7 +69,7 @@ public class MainSketch extends PApplet {
 		textSize = screenWidth/50;
 		buttonWidth = screenWidth/6;
 		buttonHeight = screenHeight/8;
-		radius = screenHeight/25;//screenHeight/15;
+		radius = screenHeight/25;
 		shadowOffset = getHeight()/60;
 		lineX = (int) (getWidth()/5.9);
 		qSwipeThreshold = getWidth()/15;
@@ -72,8 +77,6 @@ public class MainSketch extends PApplet {
 
 		LoginScreen startScreen = new LoginScreen();
 		startScreen.initialize(client, this);
-		//layout = new LayoutManager(this, "English", "French");
-		//drawMainLayout = true;
 
 
 	}

@@ -9,15 +9,17 @@ import vialab.simpleMultiTouch.TouchClient;
 import vialab.simpleMultiTouch.zones.ImageZone;
 import vialab.simpleMultiTouch.zones.RotatableDrawZone;
 
-public class UserCreation {
+public class ProfileCreation {
 	PApplet applet;
 	TouchClient client;
 	MainSketch sketch;
 	ProfilePicker profilePicker;
 	LoginScreen loginScreen;
 	RotatableDrawZone drawUser1, drawUser2;
+	ImageZone profileImg1, profileImg2;
+	
 
-	public UserCreation(TouchClient client, MainSketch sketch, ProfilePicker profilePicker, LoginScreen loginScreen){
+	public ProfileCreation(TouchClient client, MainSketch sketch, ProfilePicker profilePicker, LoginScreen loginScreen){
 		applet = TouchClient.getPApplet();
 		this.sketch = sketch;
 		this.client = client;
@@ -42,7 +44,8 @@ public class UserCreation {
 					super.addTouch(t);
 					if(drawUser1.getCapturedStatus() == true){
 						drawUser1.setActive(false);
-						loadDrawnImage(1, drawUser1.getImage());
+						loadProfileImage(1, drawUser1.getImage());
+						loginScreen.activateLanguageButtons(1);
 					}
 					return false;
 
@@ -61,7 +64,8 @@ public class UserCreation {
 
 					if(drawUser2.getCapturedStatus() == true){
 						drawUser2.setActive(false);
-						loadDrawnImage(2, drawUser2.getImage());
+						loadProfileImage(2, drawUser2.getImage());
+						loginScreen.activateLanguageButtons(2);
 					}
 					return false;
 				}
@@ -74,44 +78,30 @@ public class UserCreation {
 		}
 	}
 
-	public void loadDrawnImage(int user, PImage img){
+	/**
+	 * Load the user drawn image (user's avatar) into a ImageZone
+	 * @param user
+	 * @param img
+	 */
+	public void loadProfileImage(int user, PImage img){
 
 		if(user == 1){
-
-			if(profilePicker.userImg[3] == null){
-				profilePicker.userImg[3] = new ImageZone(0, 0, 1, 1);
-				client.addZone(profilePicker.userImg[3]);
-			}
-
-			profilePicker.userImg[3].setXYWH(applet.screenWidth-2*profilePicker.minSize, applet.screenHeight-2*profilePicker.minSize, 2*profilePicker.minSize, 2*profilePicker.minSize);
-			profilePicker.userImg[3].setImage(img);
-			//profilePicker.userImg[3].setImage(applet.loadImage("\\users\\images\\user" + (drawUser1.getFilesCount()) + ".png"));
-			profilePicker.userImg[3].setGestureEnabled("TAP", false);
-			profilePicker.userImg[3].setActive(true);
-
+			profileImg1 = new ImageZone(applet.screenWidth-2*profilePicker.imgSize, applet.screenHeight-2*profilePicker.imgSize, 2*profilePicker.imgSize, 2*profilePicker.imgSize);
+			profileImg1.setImage(img);
+			//profileImg1.setImage(applet.loadImage("\\users\\images\\user" + (drawUser1.getFilesCount()) + ".png"));
+			client.addZone(profileImg1);
 			loginScreen.cancel1.setActive(false);
 
 		} else if (user == 2) {
-			if(profilePicker.userImg[3 + 7] == null){
-				profilePicker.userImg[3 + 7] = new ImageZone(0, 0, 1, 1);
-				client.addZone(profilePicker.userImg[3 + 7]);
-				//profilePicker.userImg[3 + 7].setXYWH(applet.screenWidth-2*profilePicker.minSize, 0, 2*profilePicker.minSize, 2*profilePicker.minSize);
-
-			}
-			//profilePicker.userImg[3 + 7].setXYWH(applet.screenWidth-2*profilePicker.minSize, 0, 2*profilePicker.minSize, 2*profilePicker.minSize);
-			profilePicker.userImg[3 + 7].setXYWH(0, applet.getHeight()/2 + 10, 2*profilePicker.minSize, 2*profilePicker.minSize);
-
-			//profilePicker.userImg[3 + 7].rotate((float) Colours.PI);
-			profilePicker.userImg[3 + 7].setImage(img);
-			//((ImageZone) profilePicker.userImg[3 + profilePicker.IMG_ONSCR]).setImage(applet.loadImage("\\users\\images\\user" + (drawUser2.getFilesCount()) + ".png"));
-			profilePicker.userImg[3 + 7].setGestureEnabled("TAP", false);
-			profilePicker.userImg[3 + 7].setActive(true);
-			
+			profileImg2 = new ImageZone(applet.screenWidth-2*profilePicker.imgSize, 0, 2*profilePicker.imgSize, 2*profilePicker.imgSize);
+			//profileImg2 = new ImageZone(0, applet.getHeight()/2 + 10, 2*profilePicker.imgSize, 2*profilePicker.imgSize);
+			profileImg2.rotate((float) Colours.PI);
+			profileImg2.setImage(img);
+			//.setImage(applet.loadImage("\\users\\images\\user" + (drawUser2.getFilesCount()) + ".png"));
+			client.addZone(profileImg2);		
 			loginScreen.cancel2.setActive(false);
 
 		}
 
-		
-		loginScreen.createLanguageButtons(user);
 	}
 }
