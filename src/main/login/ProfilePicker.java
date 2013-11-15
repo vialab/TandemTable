@@ -7,7 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import main.Colours;
-import main.MainSketch;
+import main.Sketch;
 import processing.core.PApplet;
 import processing.core.PImage;
 import vialab.simpleMultiTouch.TouchClient;
@@ -26,7 +26,7 @@ public class ProfilePicker {
 
 	PApplet applet;
 	TouchClient client;
-	MainSketch sketch;
+	Sketch sketch;
 	LoginScreen loginScreen;
 
 	ImageZone[] arrows, userImg;
@@ -64,7 +64,7 @@ public class ProfilePicker {
 	 * @param sketch
 	 * @param loginScreen
 	 */
-	public ProfilePicker(TouchClient client, MainSketch sketch, LoginScreen loginScreen){
+	public ProfilePicker(TouchClient client, Sketch sketch, LoginScreen loginScreen){
 		applet = TouchClient.getPApplet();
 		this.sketch = sketch;
 		this.client = client;
@@ -99,7 +99,7 @@ public class ProfilePicker {
 
 		arrows[0] = new ImageZone(applet.loadImage("lArrow.png"), leftSideX, arrowBY, arrowSize, arrowSize){
 			public void tapEvent(TapEvent e){
-				if (getTappable()){
+				if (isTappable()){
 					if (index1 > 0){
 						index1--;
 					} else {
@@ -118,7 +118,7 @@ public class ProfilePicker {
 		arrows[1] = new ImageZone(applet.loadImage("rArrow.png"), rightSizeX, arrowBY, arrowSize, arrowSize){
 			public void tapEvent(TapEvent e){
 
-				if (getTappable()){
+				if (isTappable()){
 					if(index1 == numProfiles){
 						index1 = 0;
 					} else {
@@ -145,7 +145,7 @@ public class ProfilePicker {
 		//For User2
 		arrows[2] = new ImageZone(applet.loadImage("rArrow.png"), rightSizeX, arrowTY, arrowSize, arrowSize){
 			public void tapEvent(TapEvent e){
-				if (getTappable()){
+				if (isTappable()){
 					if (index2 > 0){
 						index2--;
 					} else {
@@ -164,7 +164,7 @@ public class ProfilePicker {
 		arrows[3] = new ImageZone(applet.loadImage("lArrow.png"), leftSideX, arrowTY, arrowSize, arrowSize){
 			public void tapEvent(TapEvent e){
 
-				if (getTappable()){
+				if (isTappable()){
 					if(index2 == numProfiles){
 						index2 = 0;
 					} else {
@@ -289,7 +289,7 @@ public class ProfilePicker {
 			//the index of the picture to load
 			userImg[i] = new ImageZone(images[loadIndex], x, y, width, height){
 				public void tapEvent(TapEvent e){
-					if (ii == 3 && getTappable() && index1 != chosenProfile2){
+					if (ii == 3 && isTappable() && index1 != chosenProfile2){
 						chosenProfile1 = index1;
 						if(chosenProfile2 == -1) disableProfile(2, index1);
 						removeUserProfilesPicker(1);
@@ -381,7 +381,7 @@ public class ProfilePicker {
 			//the index of the picture to load
 			userImg[i+IMG_ONSCR] = new ImageZone(images[loadIndex], x, y, width, height){
 				public void tapEvent(TapEvent e){
-					if (ii == 3 && getTappable() && index2 != chosenProfile1){
+					if (ii == 3 && isTappable() && index2 != chosenProfile1){
 						chosenProfile2 = index2;
 						if(chosenProfile1 != -1) disableProfile(2, index2);
 						removeUserProfilesPicker(2);

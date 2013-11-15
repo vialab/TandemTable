@@ -2,7 +2,7 @@ package activities.headlines;
 
 import gifAnimation.Gif;
 import main.Colours;
-import main.MainSketch;
+import main.Sketch;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,13 +14,13 @@ import processing.core.PApplet;
 import vialab.simpleMultiTouch.zones.RectZone;
 
 public class HeadlineGetter extends Thread {
-	MainSketch sketch;
+	Sketch sketch;
 	HeadlinesActivity headAct;
 	RectZone loading;
 	String replaceRegex = "[^a-zA-Z_0-9_'_Á_á_À _Â_à_Â_â_Ä_ä_Ã_ã_Å_å_Ç_ç_É_é_È_è_Ê_ê_Ë_ë_Í_í_Ì_ì_Î_î_Ï_ï_Ñ_ñ_Ó_ó_Ò_ò_Ô_ô_Ö_ö_Õ_õ_Ú_ú_Ù_ù_Û_û_Ü_ü_Ý_ý_ÿ]";
 	String requestURL = "http://api.feedzilla.com/v1/articles/search.json?";
 
-	public HeadlineGetter(MainSketch sketch, HeadlinesActivity headAct){
+	public HeadlineGetter(Sketch sketch, HeadlinesActivity headAct){
 		this.sketch = sketch;
 		this.headAct = headAct;
 

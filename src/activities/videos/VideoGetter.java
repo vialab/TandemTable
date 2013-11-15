@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import javax.swing.SwingUtilities;
 
 import main.Colours;
-import main.MainSketch;
+import main.Sketch;
 import processing.core.PConstants;
 import processing.core.PImage;
 import vialab.simpleMultiTouch.events.DragEvent;
@@ -27,7 +27,7 @@ import com.google.gdata.util.ServiceException;
 
 public class VideoGetter extends Thread {
 	VideoActivity vAct;
-	MainSketch sketch;
+	Sketch sketch;
 
 	boolean imgsLoaded1 = false;
 	boolean imgsLoaded2 = false;
@@ -48,7 +48,7 @@ public class VideoGetter extends Thread {
 	int videoWidth;
 	PImage play, playSelected;
 
-	public VideoGetter(MainSketch sketch, VideoActivity vAct, int startX, int videoWidth){
+	public VideoGetter(Sketch sketch, VideoActivity vAct, int startX, int videoWidth){
 		this.vAct = vAct;
 		this.sketch = sketch;
 		this.videoWidth = videoWidth;
@@ -575,10 +575,10 @@ public class VideoGetter extends Thread {
 	public void pullToTop(){
 		sketch.client.pullToTop(vAct.coverRect);
 
-		sketch.client.pullToTop(vAct.sketch.layout.graph.nodes[vAct.sketch.layout.graph.lastSelectedNode]);
-		sketch.client.pullToTop(vAct.sketch.layout.switchAct1);
+		sketch.client.pullToTop(sketch.mainSection.graph.nodes[sketch.mainSection.graph.lastSelectedNode]);
+		sketch.client.pullToTop(sketch.mainSection.switchAct1);
 		sketch.client.pullToTop(vAct.moreVideos1);
-		sketch.client.pullToTop(vAct.sketch.layout.switchAct2);
+		sketch.client.pullToTop(sketch.mainSection.switchAct2);
 		sketch.client.pullToTop(vAct.moreVideos2);
 		if(vAct.bothL){
 

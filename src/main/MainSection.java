@@ -4,11 +4,7 @@ import java.awt.Color;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.Animator.RepeatBehavior;
 import org.jdesktop.animation.timing.interpolation.PropertySetter;
-import org.jdesktop.animation.timing.triggers.TimingTrigger;
-import org.jdesktop.animation.timing.triggers.TimingTriggerEvent;
 
-import processing.core.PConstants;
-import vialab.simpleMultiTouch.events.HSwipeEvent;
 import vialab.simpleMultiTouch.events.TapEvent;
 import vialab.simpleMultiTouch.zones.TextZone;
 import vialab.simpleMultiTouch.zones.Zone;
@@ -20,9 +16,16 @@ import activities.videos.VideoActivity;
 
 import com.memetix.mst.translate.Translate;
 
-
-public class LayoutManager {
-	MainSketch sketch;
+/**
+ * Main section of TandemTable. In this section, users are
+ * shown a node-link diagram which holds discussion topics 
+ * within each node. Users may select a topic by placing
+ * two fingers on the node at the same time. Users can then
+ * go into the different associated activity sections.
+ */
+public class MainSection {
+	Sketch sketch;
+	IntroSection intro;
 	public Graph graph;
 	TwitterActivity twitterAct;
 	HeadlinesActivity headlinesAct;
@@ -32,21 +35,19 @@ public class LayoutManager {
 	
 
 	Animator[] animA1, animA2;
-	Animator[] animNext = new Animator[2];
+	
 	Animator[] animNextTopic = new Animator[2];
 	Animator[] animSwitchTopic = new Animator[2];
 	Animator[] animSwitchAct = new Animator[2];
 	Animator[] animNewLang = new Animator[2];
-	Animator[] animQuestion11, animQuestion12;
+	
 
 
 	public int animationTime = 1400;
-	int animIndex1 = 0, animIndex2 = 0;
-	TextZone[] questionZone1, questionZone2;
 	TextZone[] activityB1;
 	TextZone[] activityB2;
 
-	Zone nextB1, nextB2, newLang1, newLang2;
+	Zone newLang1, newLang2;
 	public Zone switchAct1, switchAct2;
 
 	boolean leftCenterLineFlag = true;
@@ -56,8 +57,7 @@ public class LayoutManager {
 
 
 	boolean activityBFlag = false;
-	boolean next1 = false;
-	boolean next2 = false;
+	
 	boolean bottomBSelect1 = false;
 	boolean bottomBSelect2 = false;
 	boolean newLangSelect1 = false;
@@ -95,37 +95,36 @@ public class LayoutManager {
 	float textOffsetY, textOffsetX, lastNodeX, lastNodeY;
 
 	String lang1, lang2;
-	//String[] quest1, quest2;
 
-	float[] start1x, start2x, end1x, end2x, start1y, start2y, 
-	end1y, end2y, xMaxTranslation1, yMaxTranslation1,
-	xMaxTranslation2, yMaxTranslation2, zoneHeight2;
 
-	final int TIME = 4000;
-	final int FINAL_TIME = 1000;
-	float maxWidthQuestions;
-
-	public LayoutManager(MainSketch sketch, String lang1, String lang2){
+	/**
+	 * Main section of TandemTable. In this section, users are
+	 * shown a node-link diagram which holds discussion topics 
+	 * within each node. Users may select a topic by placing
+	 * two fingers on the node at the same time. Users can then
+	 * go into the different associated activity sections.
+	 * 
+	 * @param sketch
+	 * @param lang1
+	 * @param lang2
+	 */
+	public MainSection(Sketch sketch, String lang1, String lang2){
 		//this.sketch.client = sketch.client;
 		this.sketch = sketch;
 		//this.sketch = sketch.client.getParent();
 		this.lang1 = lang1;
 		this.lang2 = lang2;
-		maxWidthQuestions = 3*(sketch.getWidth()-sketch.lineX)/4;
 		textOffsetY = sketch.getHeight()/20;
 		textOffsetX = sketch.getWidth()/30;
 
-		animQuestion11= new Animator[MainSketch.NUM_QUESTIONS];
-		animQuestion12 = new Animator[MainSketch.NUM_QUESTIONS];
-
-		animA1 = new Animator[MainSketch.NUM_ACTIVITIES];
-		animA2 = new Animator[MainSketch.NUM_ACTIVITIES];
-		activityB1 = new TextZone[MainSketch.NUM_ACTIVITIES];
-		activityB2 = new TextZone[MainSketch.NUM_ACTIVITIES];
-		activityFlags1 = new boolean[MainSketch.NUM_ACTIVITIES];
-		activityFlags2 = new boolean[MainSketch.NUM_ACTIVITIES];
-		activityBars1 = new Color[MainSketch.NUM_TOPICS];
-		activityBars2 = new Color[MainSketch.NUM_TOPICS];
+		animA1 = new Animator[Sketch.NUM_ACTIVITIES];
+		animA2 = new Animator[Sketch.NUM_ACTIVITIES];
+		activityB1 = new TextZone[Sketch.NUM_ACTIVITIES];
+		activityB2 = new TextZone[Sketch.NUM_ACTIVITIES];
+		activityFlags1 = new boolean[Sketch.NUM_ACTIVITIES];
+		activityFlags2 = new boolean[Sketch.NUM_ACTIVITIES];
+		activityBars1 = new Color[Sketch.NUM_TOPICS];
+		activityBars2 = new Color[Sketch.NUM_TOPICS];
 
 
 
@@ -152,270 +151,13 @@ public class LayoutManager {
 
 		actBHeight = (int) (sketch.getHeight()/6.5);
 
-		createNextButtons();
-
-		/*if(lang1.equalsIgnoreCase("English")){
-			
-			quest1 = sketch.introQuestionsEnglish;
-		} else if(lang1.equalsIgnoreCase("French")){
-			quest1 = sketch.introQuestionsFrench;
-		}
-
-		if(lang2.equalsIgnoreCase("English")){
-			quest2 = sketch.introQuestionsEnglish;
-		} else if(lang2.equalsIgnoreCase("French")){
-			quest2 = sketch.introQuestionsFrench;
-		}
-*/
-		questionZones1();
-		questionZones2();
-	}
-	public void questionZones1() {
-		String[] quest1 = sketch.learner1.introQuestions;
-		questionZone1 = new TextZone[MainSketch.NUM_QUESTIONS];
-
-		int questionTextSize = 55;
 		
-
-		start1x = new float[MainSketch.NUM_QUESTIONS];
-		end1x = new float[MainSketch.NUM_QUESTIONS];
-		start1y = new float[MainSketch.NUM_QUESTIONS];
-		end1y = new float[MainSketch.NUM_QUESTIONS];
-		xMaxTranslation1 = new float[MainSketch.NUM_QUESTIONS];
-		yMaxTranslation1 = new float[MainSketch.NUM_QUESTIONS];
-		for(int i = 0; i < MainSketch.NUM_QUESTIONS; i++){
-			String s = quest1[i];
-			
-			sketch.textFont(Colours.pFont, questionTextSize);
-			sketch.textAlign(PConstants.LEFT, PConstants.BOTTOM);
-			float textWidth = sketch.textWidth(s);
-			boolean changeWidthFlag = false;
-			if(textWidth > maxWidthQuestions){
-				textWidth = maxWidthQuestions;
-				changeWidthFlag = true;
-			}
-
-			xMaxTranslation1[i] =  ((sketch.getWidth() - sketch.lineX)/2 - textWidth/2);
-			yMaxTranslation1[i] = -(sketch.getHeight()/3);
-			start1x[i] = sketch.lineX;
-			end1x[i] = xMaxTranslation1[i] + sketch.lineX;
-			start1y[i] = sketch.getHeight();
-			end1y[i] = sketch.getHeight() + yMaxTranslation1[i];
-
-			float zoneHeight = questionTextSize;
-			if(changeWidthFlag) {
-				zoneHeight *=3;
-			}
-			final int ii = i;
-			questionZone1[i] = new TextZone(sketch.lineX, sketch.getHeight(), (int)(textWidth*1.2), zoneHeight, Colours.pFont, s, questionTextSize,"LEFT", "BOTTOM" ){
-				public void hSwipeEvent(HSwipeEvent e){
-					if(isHSwipeable()){
-
-
-						animQuestion11[animIndex1].stop();
-
-						animQuestion11[animIndex1] = new Animator(FINAL_TIME, this);
-						start1x[ii] = this.getX();
-						end1x[ii] = this.getX() + (sketch.getWidth()-this.getX());
-						start1y[ii] = this.getY();
-						end1y[ii] = this.getY();
-						animQuestion11[animIndex1].setResolution(5);
-						animQuestion11[animIndex1].start();
-
-
-						animIndex1 = animIndex1 + 1;
-
-
-						if(animIndex1 == MainSketch.NUM_QUESTIONS){
-							//animQuestion11[0].stop();
-							animQuestion11[0] = new Animator(TIME, questionZone1[0]);
-							animQuestion11[0].setResolution(5);
-							questionZone1[0].setXY(sketch.lineX, sketch.getHeight());
-							start1x[0] = sketch.lineX;
-							end1x[0] = xMaxTranslation1[0] + sketch.lineX;
-							start1y[0] = sketch.getHeight();
-							end1y[0] = sketch.getHeight() + yMaxTranslation1[0];
-							TimingTrigger.addTrigger(animQuestion11[animIndex1-1], animQuestion11[0], TimingTriggerEvent.STOP);
-
-							animIndex1 = 0;
-							questionZone1[0].setGestureEnabled("HSwipe", true);
-							/*questionZone1[1].setXY(sketch.lineX, sketch.getHeight());
-							start1x[1] = sketch.lineX;
-							end1x[1] = xMaxTranslation+sketch.lineX;
-							start1y[1] = sketch.getHeight();
-							end1y[1] = sketch.getHeight()+yMaxTranslation;
-							TimingTrigger.addTrigger(animQuestion11[0], animQuestion11[1], TimingTriggerEvent.STOP);*/
-						} else if(animIndex1 < MainSketch.NUM_QUESTIONS){
-							//animQuestion11[animIndex1].stop();
-							animQuestion11[animIndex1] = new Animator(TIME, questionZone1[animIndex1]);
-							animQuestion11[animIndex1].setResolution(5);
-
-							questionZone1[animIndex1].setXY(sketch.lineX, sketch.getHeight());
-							start1x[animIndex1] = sketch.lineX;
-							end1x[animIndex1] = xMaxTranslation1[animIndex1] + sketch.lineX;
-							start1y[animIndex1] = sketch.getHeight();
-							end1y[animIndex1] = sketch.getHeight() + yMaxTranslation1[animIndex1];
-							TimingTrigger.addTrigger(animQuestion11[animIndex1-1], animQuestion11[animIndex1], TimingTriggerEvent.STOP);
-
-							questionZone1[animIndex1].setGestureEnabled("HSwipe", true);
-
-						}
-
-						this.setGestureEnabled("HSwipe", false);
-					}
-					e.setHandled(true);
-
-				}
-
-				public void timingEvent(float fraction) {
-					// Simple linear interpolation to find current position
-					float currentX = (start1x[ii] + (end1x[ii] - start1x[ii]) * fraction);
-					float currentY = (start1y[ii] + (end1y[ii] - start1y[ii]) * fraction);
-
-					setXY(currentX, currentY);
-				}
-			};
-			questionZone1[i].setGestureEnabled("HSwipe", true);
-			questionZone1[i].setDrawBorder(false);
-			questionZone1[i].setTextColour(Color.BLACK);
-			questionZone1[i].setHSwipeDist(sketch.qSwipeThreshold);
-			sketch.client.addZone(questionZone1[i]);
-
-
-
-
-		}
-		animQuestion11[0] = new Animator(TIME, questionZone1[0]);
-		animQuestion11[0].setResolution(5);
-		animQuestion11[0].start();	
+		intro = new IntroSection(sketch, this);
 	}
-
-	public void questionZones2() {
-		String[] quest2 = sketch.learner2.introQuestions;
-		questionZone2 = new TextZone[MainSketch.NUM_QUESTIONS];
-		final int questionTextSize = 55;
-		
-
-		start2x = new float[MainSketch.NUM_QUESTIONS];
-		end2x = new float[MainSketch.NUM_QUESTIONS];
-		start2y = new float[MainSketch.NUM_QUESTIONS];
-		end2y = new float[MainSketch.NUM_QUESTIONS];
-		xMaxTranslation2 = new float[MainSketch.NUM_QUESTIONS];
-		yMaxTranslation2 = new float[MainSketch.NUM_QUESTIONS];
-		zoneHeight2 = new float[MainSketch.NUM_QUESTIONS];
-
-
-
-		for(int i = 0; i < MainSketch.NUM_QUESTIONS; i++){
-			String s = quest2[i];
-
-			sketch.textFont(Colours.pFont, questionTextSize);
-			sketch.textAlign(PConstants.LEFT, PConstants.BOTTOM);
-			float textWidth = sketch.textWidth(s);
-			
-			boolean changeWidthFlag = false;
-			if(textWidth > maxWidthQuestions){
-				textWidth = maxWidthQuestions;
-				changeWidthFlag = true;
-			}
-			xMaxTranslation2[i] = (float) -((sketch.getWidth() - sketch.lineX)/2 - textWidth/1.5);
-			yMaxTranslation2[i] = -(sketch.getHeight()/3);
-
-			zoneHeight2[i] = questionTextSize;
-			if(changeWidthFlag) {
-				zoneHeight2[i] *=3;
-			}
-
-			start2x[i] = sketch.lineX;
-			end2x[i] = xMaxTranslation2[i] + sketch.lineX;
-			start2y[i] = -zoneHeight2[i];
-			end2y[i] = -zoneHeight2[i] + yMaxTranslation2[i];
-
-			
-			
-			final int ii = i;
-			questionZone2[i] = new TextZone(sketch.lineX, -zoneHeight2[i], (int)(textWidth*1.2), zoneHeight2[i], Colours.pFont, s, questionTextSize,"LEFT", "BOTTOM" ){
-				public void hSwipeEvent(HSwipeEvent e){
-					if(isHSwipeable()){
-
-
-						animQuestion12[animIndex2].stop();
-
-
-
-						animQuestion12[animIndex2] = new Animator(FINAL_TIME, this);
-						animQuestion12[animIndex2].setResolution(5);
-						start2x[ii] = this.getX();
-						end2x[ii] = this.getX() - (sketch.getWidth()-this.getX());
-						start2y[ii] = this.getY();
-						end2y[ii] = this.getY();
-						animQuestion12[animIndex2].start();
-
-
-						animIndex2 = animIndex2 + 1;
-
-
-
-						if(animIndex2 == MainSketch.NUM_QUESTIONS){
-							//animQuestion12[0].stop();
-							animQuestion12[0] = new Animator(TIME, questionZone2[0]);
-							animQuestion12[0].setResolution(5);
-							questionZone2[0].setXY(sketch.lineX, sketch.getHeight());
-							start2x[0] = sketch.lineX;
-							end2x[0] = xMaxTranslation2[0] + sketch.lineX;
-							start2y[0] = -zoneHeight2[0];
-							end2y[0] = -zoneHeight2[0] + yMaxTranslation2[0];
-							TimingTrigger.addTrigger(animQuestion12[animIndex2-1], animQuestion12[0], TimingTriggerEvent.STOP);
-
-							animIndex2 = 0;
-							questionZone2[0].setGestureEnabled("HSwipe", true);
-							/*questionZone2[1].setXY(sketch.lineX, sketch.getHeight());
-								start2x[1] = sketch.lineX;
-								end2x[1] = xMaxTranslation+sketch.lineX;
-								start2y[1] = sketch.getHeight();
-								end2y[1] = sketch.getHeight()+yMaxTranslation;
-								TimingTrigger.addTrigger(animQuestion12[0], animQuestion12[1], TimingTriggerEvent.STOP);*/
-						} else if(animIndex2 < MainSketch.NUM_QUESTIONS){
-							//animQuestion12[animIndex2].stop();
-							animQuestion12[animIndex2] = new Animator(TIME, questionZone2[animIndex2]);
-							animQuestion12[animIndex2].setResolution(5);
-
-							questionZone2[animIndex2].setXY(sketch.lineX, sketch.getHeight());
-							start2x[animIndex2] = sketch.lineX;
-							end2x[animIndex2] = xMaxTranslation2[animIndex2] + sketch.lineX;
-							start2y[animIndex2] = -zoneHeight2[animIndex2];
-							end2y[animIndex2] = -zoneHeight2[animIndex2] + yMaxTranslation2[animIndex2];
-							TimingTrigger.addTrigger(animQuestion12[animIndex2-1], animQuestion12[animIndex2], TimingTriggerEvent.STOP);
-
-							questionZone2[animIndex2].setGestureEnabled("HSwipe", true);
-
-						}
-						this.setGestureEnabled("HSwipe", false);
-					}
-					e.setHandled(true);
-
-				}
-
-				public void timingEvent(float fraction) {
-					// Simple linear interpolation to find current position
-					float currentX = (start2x[ii] + (end2x[ii] - start2x[ii]) * fraction);
-					float currentY = (start2y[ii] + (end2y[ii] - start2y[ii]) * fraction);
-
-					setXY(currentX, currentY);
-				}
-			};
-			questionZone2[i].setGestureEnabled("HSwipe", true);
-			questionZone2[i].setDrawBorder(false);
-			questionZone2[i].setTextColour(Color.BLACK);
-			questionZone2[i].rotate((float) Colours.PI);
-			questionZone2[i].setHSwipeDist(sketch.qSwipeThreshold);
-			sketch.client.addZone(questionZone2[i]);
-
-		}
-		animQuestion12[0] = new Animator(TIME, questionZone2[0]);
-		animQuestion12[0].setResolution(5);
-		animQuestion12[0].start();	
-	}
+	
+	/**
+	 * Used to draw the different lines used in the different sections/activities
+	 */
 	public void drawLayout(){
 		if(verticalLineFlag){
 			sketch.strokeWeight(5);
@@ -441,132 +183,11 @@ public class LayoutManager {
 			sketch.stroke(Colours.lineColour.getRed(), Colours.lineColour.getGreen(), Colours.lineColour.getBlue());
 			graph.displayEdges();
 		}
-	}
+	}	
 
-
-
-	public void createNextButtons(){
-		//New next1 Button for user 1
-		//String s1 = "";
-		//String s2 = "";
-
-		/*if(lang1.equalsIgnoreCase("English")){
-			s1 = sketch.nextE;
-		} else if(lang1.equalsIgnoreCase("French")){
-			s1 = sketch.nextF;
-		}*/
-		nextB1 = new TextZone(buttonX, buttonYb, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner1.next, sketch.textSize, "CENTER", "CENTER"){
-
-			public void tapEvent(TapEvent e){
-				if (getTappable()){
-
-					if(!next1 && !next2){
-						animNext[1].start();
-						this.setColour(Colours.selectedZone);
-						next1 = true;
-					} else if (next1 && !next2){
-						animNext[1].stop();
-						((TextZone) nextB2).setColour(Colours.unselectedZone);
-						((TextZone) nextB1).setColour(Colours.unselectedZone);
-						next1 = false;
-					} else if (next2){
-						animNext[0].stop();
-						animNext[1].stop();
-						((TextZone) nextB2).setColour(Colours.unselectedZone);
-						((TextZone) nextB1).setColour(Colours.unselectedZone);
-						next2 = false;
-						next1 = false;
-						removeQuestions();
-						createSwitchLanguageButtons();
-						createGraph();
-						createActivityButtons();
-
-					}
-
-					e.setHandled(tappableHandled);
-
-				}
-			}
-		};
-
-		((TextZone) nextB1).setTextColour(Colours.zoneText);
-		((TextZone) nextB1).setColour(Colours.unselectedZone);
-		nextB1.setGestureEnabled("TAP", true, true);
-		nextB1.setDrawBorder(false);
-		sketch.client.addZone(nextB1);
-
-		animNext[0] = PropertySetter.createAnimator(animationTime, nextB1, 
-				"colour", new ColourEval(), Colours.unselectedZone, Colours.selectedZone);
-
-		animNext[0].setRepeatBehavior(RepeatBehavior.REVERSE);
-		animNext[0].setRepeatCount(Animator.INFINITE);
-
-
-
-		//New next2 Button for user 2
-
-		/*if(lang2.equalsIgnoreCase("English")){
-			s1 = sketch.nextE;
-		} else if(lang2.equalsIgnoreCase("French")){
-			s1 = sketch.nextF;
-		}*/
-		nextB2  = new TextZone(buttonX, buttonYt, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner2.next, sketch.textSize, "CENTER", "CENTER"){
-
-			public void tapEvent(TapEvent e){
-				if (getTappable()){
-
-					if(!next2 && !next1){
-						animNext[0].start();
-						this.setColour(Colours.selectedZone);
-						next2 = true;
-					} else if (next2 && !next1){
-						animNext[0].stop();
-						((TextZone) nextB2).setColour(Colours.unselectedZone);
-						((TextZone) nextB1).setColour(Colours.unselectedZone);
-						next2 = false;
-					} else if (next1){
-						animNext[1].stop();
-						animNext[0].stop();
-						((TextZone) nextB2).setColour(Colours.unselectedZone);
-						((TextZone) nextB1).setColour(Colours.unselectedZone);
-						next2 = false;
-						next1 = false;
-						removeQuestions();
-						createSwitchLanguageButtons();
-						createGraph();
-						createActivityButtons();
-					}
-
-					e.setHandled(tappableHandled);
-				}
-			}
-		};
-
-		nextB2.rotate((float) (Colours.PI));
-		((TextZone) nextB2).setTextColour(Colours.zoneText);
-		((TextZone) nextB2).setColour(Colours.unselectedZone);
-		nextB2.setGestureEnabled("TAP", true, true);
-		nextB2.setDrawBorder(false);
-		sketch.client.addZone(nextB2);
-
-		animNext[1] = PropertySetter.createAnimator(animationTime, nextB2, 
-				"colour", new ColourEval(), Colours.unselectedZone, Colours.selectedZone);
-
-		animNext[1].setRepeatBehavior(RepeatBehavior.REVERSE);
-		animNext[1].setRepeatCount(Animator.INFINITE);
-
-	}
-
-	public void removeQuestions(){
-		sketch.client.removeZone(nextB1);
-		sketch.client.removeZone(nextB2);
-
-		for(int i = 0; i < MainSketch.NUM_QUESTIONS; i++){
-			sketch.client.removeZone(questionZone1[i]);
-			sketch.client.removeZone(questionZone2[i]);
-		}
-	}
-
+	/**
+	 * Creates the switch target language buttons
+	 */
 	public void createSwitchLanguageButtons(){
 		//String s = "";
 
@@ -580,7 +201,7 @@ public class LayoutManager {
 		newLang1 = new TextZone(buttonX, buttonYb2, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner1.newLang, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
-				if (getTappable()){
+				if (isTappable()){
 
 					if(!newLangSelect1 && !newLangSelect2){
 						animNewLang[1].start();
@@ -636,7 +257,7 @@ public class LayoutManager {
 		newLang2 = new TextZone(buttonX, buttonYt2, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner2.newLang, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
-				if (getTappable()){
+				if (isTappable()){
 
 					if(!newLangSelect1 && !newLangSelect2){
 						animNewLang[0].start();
@@ -680,19 +301,31 @@ public class LayoutManager {
 		animNewLang[1].setRepeatBehavior(RepeatBehavior.REVERSE);
 		animNewLang[1].setRepeatCount(Animator.INFINITE);*/
 	}
+	
+	/**
+	 * Create the node-link diagram used to encapsulate the topic suggestions
+	 */
 	public void createGraph(){
 		graph = new Graph(sketch, this, sketch.lineX, lang1, lang2);
 		centerLineFlag = false;
 		edgesFlag = true;
 
 	}
-
+	
+	
+	/** Enable the activity buttons that are associated with the node (topic) that
+	 * has been chosen by the users
+	 * @param index
+	 * @param topic
+	 * @param randFlag
+	 * @param randIndex
+	 */
 	public void enableActivityButtons(int index, String topic, boolean randFlag, int randIndex){
 		selectedTopicIndex = index;
 		//selectedTopic = English.topics[index];
 		activityBFlag = true;
 
-		for(int i = 0; i < MainSketch.NUM_ACTIVITIES; i++){
+		for(int i = 0; i < Sketch.NUM_ACTIVITIES; i++){
 
 
 			if(activityFlags1[i] == true){
@@ -727,25 +360,17 @@ public class LayoutManager {
 				activityB1[i].setTextColour(Colours.zoneText);
 				activityB2[i].setTextColour(Colours.zoneText);
 			}
-
-
-			//TODO
-			//Delete when web search is implemented
-			/*if(i == 4){
-				activityB1[i].setGestureEnabled("Tap", false);
-				activityB2[i].setGestureEnabled("Tap", false);
-				activityB1[i].setTextColour(Colours.fadedText);
-				activityB2[i].setTextColour(Colours.fadedText);
-				activityB1[i].setColour(Colours.fadedOutZone);
-				activityB2[i].setColour(Colours.fadedOutZone);
-			}*/
-
 		}
 
 	}
 
+	/**
+	 * Switches back to the main interface. The user has
+	 * chosen to leave the current activity
+	 * @param activity
+	 */
 	public void switchActivity(String activity){
-		for(int i = 0; i < MainSketch.NUM_ACTIVITIES; i++){
+		for(int i = 0; i < Sketch.NUM_ACTIVITIES; i++){
 			activityB1[i].setActive(true);
 			activityB2[i].setActive(true);
 		}
@@ -795,9 +420,14 @@ public class LayoutManager {
 
 
 
+	/**
+	 * Creates the activity buttons used to start
+	 * an activity whose content is related to the
+	 * chosen topic of discussion.
+	 */
 	public void createActivityButtons(){
 
-		for(int i = 0; i < MainSketch.NUM_TOPICS; i++){
+		for(int i = 0; i < Sketch.NUM_TOPICS; i++){
 			activityBars1[i] = Colours.fadedText;
 			activityBars2[i] = Colours.fadedText;
 		}
@@ -817,7 +447,7 @@ public class LayoutManager {
 		int x;
 		int y = sketch.getHeight() - actBHeight - offset;
 
-		for(int i = 0; i < MainSketch.NUM_ACTIVITIES; i++){
+		for(int i = 0; i < Sketch.NUM_ACTIVITIES; i++){
 			final int index = i;
 
 			x = (int) (sketch.getWidth()/5.8) + index*(int)((sketch.getWidth()-sketch.lineX)/5.0);
@@ -826,8 +456,8 @@ public class LayoutManager {
 					Colours.pFont, sketch.learner1.activities[index], sketch.textSize, "CENTER", "CENTER"){
 
 				public void tapEvent(TapEvent e){
-					if (getTappable() && activityBFlag){
-						for(int j = 0; j < MainSketch.NUM_ACTIVITIES; j++){
+					if (isTappable() && activityBFlag){
+						for(int j = 0; j < Sketch.NUM_ACTIVITIES; j++){
 							if(j != index && (activityFlags1[j] == true || activityFlags2[j] == true)){
 								animA2[j].stop();
 								animA1[j].stop();
@@ -891,7 +521,7 @@ public class LayoutManager {
 
 		y = sketch.getY() + offset;
 
-		for(int i = 0; i < MainSketch.NUM_ACTIVITIES; i++){
+		for(int i = 0; i < Sketch.NUM_ACTIVITIES; i++){
 			final int index = i;
 			x = (int) (sketch.getWidth()/5.8) + index*(int)((sketch.getWidth()-sketch.lineX)/5.0);
 
@@ -899,8 +529,8 @@ public class LayoutManager {
 					Colours.pFont, sketch.learner2.activities[index], sketch.textSize, "CENTER", "CENTER"){
 
 				public void tapEvent(TapEvent e){
-					if (getTappable() && activityBFlag){
-						for(int j = 0; j < MainSketch.NUM_ACTIVITIES; j++){
+					if (isTappable() && activityBFlag){
+						for(int j = 0; j < Sketch.NUM_ACTIVITIES; j++){
 							if(j != index && (activityFlags1[j] == true || activityFlags2[j] == true)){
 								animA2[j].stop();
 								animA1[j].stop();
@@ -957,13 +587,17 @@ public class LayoutManager {
 
 	}
 
+	/**
+	 * Initialize the GUI for the chosen activity
+	 * @param activity
+	 */
 	public void initializeActivityScreen(String activity){
 
 		lastNodeX = graph.nodes[graph.lastSelectedNode].getX();
 		lastNodeY = graph.nodes[graph.lastSelectedNode].getY();
 		graph.nodes[graph.lastSelectedNode].setXY(sketch.lineX/2 - graph.nodes[graph.lastSelectedNode].getWidth()/2, sketch.getHeight()/2 - graph.nodes[graph.lastSelectedNode].getHeight()/2);
 
-		for(int i = 0; i < MainSketch.NUM_ACTIVITIES; i++){
+		for(int i = 0; i < Sketch.NUM_ACTIVITIES; i++){
 			activityFlags1[i] = false;
 			activityFlags2[i] = false;
 			activityB1[i].setActive(false);
@@ -990,7 +624,7 @@ public class LayoutManager {
 		switchAct1 = new TextZone(buttonX, buttonYb, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner1.choAnoAct, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
-				if (getTappable()){
+				if (isTappable()){
 
 					if(!bottomBSelect1 && !bottomBSelect2){
 						animSwitchAct[1].start();
@@ -1040,7 +674,7 @@ public class LayoutManager {
 		switchAct2  = new TextZone(buttonX, buttonYt, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner2.choAnoAct, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
-				if (getTappable()){
+				if (isTappable()){
 					if(!bottomBSelect2 && !bottomBSelect1){
 						animSwitchAct[0].start();
 						((TextZone) switchAct2).setColour(Colours.selectedZone);
@@ -1114,6 +748,11 @@ public class LayoutManager {
 		}
 	}
 
+	/**
+	 * Sets the colour of the bar visualization in the middle of each node
+	 * @param index
+	 * @param randomFlag
+	 */
 	public void setBarColour(int index, boolean randomFlag){
 		
 			// Colour indicator
@@ -1179,28 +818,31 @@ public class LayoutManager {
 
 	}
 
+	/**
+	 * Removes all the MainSection zones
+	 */
 	public void removeAllItems(){
 		centerLineFlag = false;
 		verticalLineFlag = false;
 		edgesFlag = false;
 
-		next1 = false;
-		next2 = false;
+		intro.next1 = false;
+		intro.next2 = false;
 		bottomBSelect1 = false;
 		bottomBSelect2 = false;
 		newLangSelect1 = false;
 		newLangSelect2 = false;
 		twitterFlag = false;
 
-		for(int i = 0; i < MainSketch.NUM_ACTIVITIES; i++){
+		for(int i = 0; i < Sketch.NUM_ACTIVITIES; i++){
 			activityFlags1[i] = false;
 			activityFlags2[i] = false;
 			sketch.client.removeZone(activityB1[i]);
 			sketch.client.removeZone(activityB2[i]);
 		}
 
-		sketch.client.removeZone(nextB1);
-		sketch.client.removeZone(nextB2);
+		sketch.client.removeZone(intro.nextB1);
+		sketch.client.removeZone(intro.nextB2);
 
 		sketch.client.removeZone(switchAct1);
 		sketch.client.removeZone(switchAct2);

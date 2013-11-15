@@ -1,7 +1,7 @@
 package main.login;
 
 import main.Colours;
-import main.MainSketch;
+import main.Sketch;
 import processing.core.PApplet;
 import processing.core.PImage;
 import vialab.simpleMultiTouch.Touch;
@@ -17,7 +17,7 @@ import vialab.simpleMultiTouch.zones.RotatableDrawZone;
 public class ProfileCreation {
 	PApplet applet;
 	TouchClient client;
-	MainSketch sketch;
+	Sketch sketch;
 	ProfilePicker profilePicker;
 	LoginScreen loginScreen;
 	RotatableDrawZone drawUser1, drawUser2;
@@ -31,7 +31,7 @@ public class ProfileCreation {
 	 * @param profilePicker
 	 * @param loginScreen
 	 */
-	public ProfileCreation(TouchClient client, MainSketch sketch, ProfilePicker profilePicker, LoginScreen loginScreen){
+	public ProfileCreation(TouchClient client, Sketch sketch, ProfilePicker profilePicker, LoginScreen loginScreen){
 		applet = TouchClient.getPApplet();
 		this.sketch = sketch;
 		this.client = client;

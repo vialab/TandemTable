@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import main.Colours;
-import main.MainSketch;
+import main.Sketch;
 import processing.core.PApplet;
 import twitter4j.Query;
 import twitter4j.QueryResult;
@@ -24,7 +24,7 @@ import com.memetix.mst.translate.Translate;
 
 public class TwitterGetter extends Thread {
 	TwitterActivity twitterAct;
-	MainSketch sketch;
+	Sketch sketch;
 	
 	List<Status> tweets1, tweets2;
 	RectZone loading;
@@ -38,7 +38,7 @@ public class TwitterGetter extends Thread {
 	ContentGetter currentGetter1 = null, currentGetter2 = null;
 
 	@SuppressWarnings("unchecked")
-	public TwitterGetter(MainSketch sketch, TwitterActivity twitterAct){
+	public TwitterGetter(Sketch sketch, TwitterActivity twitterAct){
 
 		this.twitterAct = twitterAct;
 		this.sketch = sketch;
@@ -308,7 +308,7 @@ public class TwitterGetter extends Thread {
 						final String ss2 = ss;
 						twitterAct.tweetZones1[i][j] = new TextZone(twitterAct.tweetZones1[i][j].getX(), twitterAct.tweetZones1[i][j].getY(), twitterAct.tweetZones1[i][j].getWidth(), twitterAct.tweetZones1[i][j].getHeight(), Colours.pFont, twitterAct.tweetZones1[i][j].getText(), (float)twitterAct.tweetTextSize, "LEFT", "BOTTOM"){
 							public void tapEvent(TapEvent e){
-								if(getTappable()){
+								if(isTappable()){
 
 									twitterAct.started = true;
 									queryWord(ss2, 1);
@@ -337,7 +337,7 @@ public class TwitterGetter extends Thread {
 
 							twitterAct.tweetZones1[i][j] = new TextZone(twitterAct.tweetZones1[i][j].getX(), twitterAct.tweetZones1[i][j].getY(), twitterAct.tweetZones1[i][j].getWidth(), twitterAct.tweetZones1[i][j].getHeight(), Colours.pFont, twitterAct.tweetZones1[i][j].getText(), (float)twitterAct.tweetTextSize, "LEFT", "BOTTOM"){
 								public void tapEvent(TapEvent e){
-									if(getTappable()){
+									if(isTappable()){
 										currentGetter1 = hmap1[ii].get(jj);
 										hmap1[ii].get(jj).activated = true;
 										sketch.client.pullToTop(twitterAct.middleTweet);
@@ -393,7 +393,7 @@ public class TwitterGetter extends Thread {
 						final String ss2 = ss;
 						twitterAct.tweetZones1[i][j] = new TextZone(twitterAct.tweetZones1[i][j].getX(), twitterAct.tweetZones1[i][j].getY(), twitterAct.tweetZones1[i][j].getWidth(), twitterAct.tweetZones1[i][j].getHeight(), Colours.pFont, twitterAct.tweetZones1[i][j].getText(), (float)twitterAct.tweetTextSize, "LEFT", "BOTTOM"){
 							public void tapEvent(TapEvent e){
-								if(getTappable()){
+								if(isTappable()){
 									twitterAct.lastUser = 1;
 									twitterAct.tweetWord1.setGestureEnabled("Tap", true);
 									twitterAct.tweetWord1.setColour(Colours.unselectedZone);
@@ -445,7 +445,7 @@ public class TwitterGetter extends Thread {
 						final String ss2 = ss;
 						twitterAct.tweetZones2[i][j] = new TextZone(twitterAct.tweetZones2[i][j].getX(), twitterAct.tweetZones2[i][j].getY(), twitterAct.tweetZones2[i][j].getWidth(), twitterAct.tweetZones2[i][j].getHeight(), Colours.pFont, twitterAct.tweetZones2[i][j].getText(), (float)twitterAct.tweetTextSize, "LEFT", "BOTTOM"){
 							public void tapEvent(TapEvent e){
-								if(getTappable()){
+								if(isTappable()){
 
 									twitterAct.started = true;
 									queryWord(ss2, 2);
@@ -474,7 +474,7 @@ public class TwitterGetter extends Thread {
 
 							twitterAct.tweetZones2[i][j] = new TextZone(twitterAct.tweetZones2[i][j].getX(), twitterAct.tweetZones2[i][j].getY(), twitterAct.tweetZones2[i][j].getWidth(), twitterAct.tweetZones2[i][j].getHeight(), Colours.pFont, twitterAct.tweetZones2[i][j].getText(), (float)twitterAct.tweetTextSize, "LEFT", "BOTTOM"){
 								public void tapEvent(TapEvent e){
-									if(getTappable()){
+									if(isTappable()){
 										currentGetter2 = hmap2[ii].get(jj);
 										hmap2[ii].get(jj).activated = true;
 										sketch.client.pullToTop(twitterAct.middleTweet);
@@ -530,7 +530,7 @@ public class TwitterGetter extends Thread {
 						final String ss2 = ss;
 						twitterAct.tweetZones2[i][j] = new TextZone(twitterAct.tweetZones2[i][j].getX(), twitterAct.tweetZones2[i][j].getY(), twitterAct.tweetZones2[i][j].getWidth(), twitterAct.tweetZones2[i][j].getHeight(), Colours.pFont, twitterAct.tweetZones2[i][j].getText(), (float)twitterAct.tweetTextSize, "LEFT", "BOTTOM"){
 							public void tapEvent(TapEvent e){
-								if(getTappable()){
+								if(isTappable()){
 									twitterAct.lastUser = 2;
 									twitterAct.tweetWord2.setGestureEnabled("Tap", true);
 									twitterAct.tweetWord2.setColour(Colours.unselectedZone);

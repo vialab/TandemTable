@@ -7,7 +7,7 @@ import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
 
 import main.Colours;
-import main.MainSketch;
+import main.Sketch;
 
 import org.xml.sax.SAXException;
 
@@ -24,12 +24,12 @@ import vialab.simpleMultiTouch.zones.ImageZone;
 import vialab.simpleMultiTouch.zones.RectZone;
 
 public class PictureGetter extends Thread {
-	MainSketch sketch;
+	Sketch sketch;
 	PictureActivity picAct;
 	
 	ImageZone imgZone;
 
-	public PictureGetter(MainSketch sketch, PictureActivity picAct){
+	public PictureGetter(Sketch sketch, PictureActivity picAct){
 		this.sketch = sketch;
 		this.picAct = picAct;
 		

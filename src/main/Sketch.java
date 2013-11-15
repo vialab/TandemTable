@@ -20,9 +20,9 @@ import main.login.LoginScreen;
  *
  */
 @SuppressWarnings("serial")
-public class MainSketch extends PApplet {
+public class Sketch extends PApplet {
 	public TouchClient client;
-	public LayoutManager layout;
+	public MainSection mainSection;
 	public Languages learner1, learner2;
 	
 	public YouTubeService myService;
@@ -86,7 +86,7 @@ public class MainSketch extends PApplet {
 
 
 		if(drawMainLayout){
-			layout.drawLayout();
+			mainSection.drawLayout();
 		} else {
 			strokeWeight(5);
 			stroke(Colours.lineColour.getRed(), Colours.lineColour.getGreen(), Colours.lineColour.getBlue());
@@ -105,7 +105,7 @@ public class MainSketch extends PApplet {
 	}
 
 	public static void main(String[] args) {
-		PApplet.main(new String[]{"--present", "main.MainSketch"});
+		PApplet.main(new String[]{"--present", "main.Sketch"});
 	}
 
 
@@ -114,7 +114,7 @@ public class MainSketch extends PApplet {
 		//LOGGING
 		//logger = new UserLogger();
 		//logger.logInfo(, "User" + "" + " " + lang1);
-		layout = new LayoutManager(this, lang1, lang2);
+		mainSection = new MainSection(this, lang1, lang2);
 		drawMainLayout = true;
 	}
 

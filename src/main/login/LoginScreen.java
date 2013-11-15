@@ -1,6 +1,6 @@
 package main.login;
 import main.Colours;
-import main.MainSketch;
+import main.Sketch;
 import processing.core.PApplet;
 import vialab.simpleMultiTouch.TouchClient;
 import vialab.simpleMultiTouch.events.TapEvent;
@@ -18,7 +18,7 @@ import vialab.simpleMultiTouch.zones.Zone;
 public class LoginScreen {
 	PApplet applet;
 	TouchClient client;
-	MainSketch sketch;
+	Sketch sketch;
 	ProfilePicker profilePicker;
 	ProfileCreation profileCreation;
 
@@ -43,7 +43,7 @@ public class LoginScreen {
 	 * @param client
 	 * @param sketch
 	 */
-	public void initialize(TouchClient client, MainSketch sketch){
+	public void initialize(TouchClient client, Sketch sketch){
 		applet = TouchClient.getPApplet();
 		this.sketch = sketch;
 		this.client = client;
@@ -85,7 +85,7 @@ public class LoginScreen {
 		titleZone1 = new TextZone(0, applet.screenHeight/2, sketch.getWidth(), sketch.getHeight()/2, 
 				Colours.pFont, "TandemTable", sketch.textSize*4, "CENTER", "CENTER"){
 			public void tapEvent(TapEvent e){
-				if (getTappable()){
+				if (isTappable()){
 					createLoginButtons();
 					client.removeZone(bkgZone);
 					client.removeZone(this);
@@ -104,7 +104,7 @@ public class LoginScreen {
 		titleZone2 = new TextZone(0, 0, sketch.getWidth(), sketch.getHeight()/2, 
 				Colours.pFont, "TandemTable", sketch.textSize*4, "CENTER", "CENTER"){
 			public void tapEvent(TapEvent e){
-				if (getTappable()){
+				if (isTappable()){
 					createLoginButtons();
 					client.removeZone(bkgZone);
 					client.removeZone(this);
@@ -130,7 +130,7 @@ public class LoginScreen {
 				sketch.radius, Colours.pFont, "Cancel", sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
-				if (getTappable()){
+				if (isTappable()){
 
 					if(profileCreation.drawUser1 != null){profileCreation.drawUser1.setActive(false);}
 
@@ -180,7 +180,7 @@ public class LoginScreen {
 				sketch.radius, Colours.pFont, "Cancel", sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
-				if (getTappable()){
+				if (isTappable()){
 					if(profileCreation.drawUser2 != null){profileCreation.drawUser2.setActive(false);}
 
 					cancel2.setActive(false);
@@ -240,7 +240,7 @@ public class LoginScreen {
 				sketch.radius, Colours.pFont, "Login", sketch.textSize, "CENTER", "CENTER"){
 			public void tapEvent(TapEvent e){
 
-				if (getTappable()){
+				if (isTappable()){
 
 					login1.setActive(false);
 					newUser1.setActive(false);
@@ -261,7 +261,7 @@ public class LoginScreen {
 				sketch.radius, Colours.pFont, "New User", sketch.textSize, "CENTER", "CENTER"){
 			public void tapEvent(TapEvent e){
 
-				if (getTappable()){
+				if (isTappable()){
 					login1.setActive(false);
 					newUser1.setActive(false);
 					cancel1.setActive(true);
@@ -285,7 +285,7 @@ public class LoginScreen {
 				sketch.radius, Colours.pFont, "Login", sketch.textSize, "CENTER", "CENTER"){
 			public void tapEvent(TapEvent e){
 
-				if (getTappable()){
+				if (isTappable()){
 					login2.setActive(false);
 					newUser2.setActive(false);
 					profilePicker.activateProfilePicker(2);
@@ -305,7 +305,7 @@ public class LoginScreen {
 				sketch.radius, Colours.pFont, "New User", sketch.textSize, "CENTER", "CENTER"){
 			public void tapEvent(TapEvent e){
 
-				if (getTappable()){
+				if (isTappable()){
 					login2.setActive(false);
 					newUser2.setActive(false);
 					cancel2.setActive(true);
@@ -335,7 +335,7 @@ public class LoginScreen {
 				sketch.radius, Colours.pFont, "New Language", sketch.textSize, "CENTER", "CENTER"){
 			public void tapEvent(TapEvent e){
 
-				if (getTappable()){
+				if (isTappable()){
 					newLang1.setActive(false);
 					lastLang1.setActive(false);
 					activateLanguageButtons(1);
@@ -354,7 +354,7 @@ public class LoginScreen {
 				sketch.radius, Colours.pFont, "Last Language Used", sketch.textSize, "CENTER", "CENTER"){
 			public void tapEvent(TapEvent e){
 
-				if (getTappable()){
+				if (isTappable()){
 					newLang1.setActive(false);
 					lastLang1.setActive(false);
 					profilePicker.readProfile(1);
@@ -377,7 +377,7 @@ public class LoginScreen {
 				sketch.radius, Colours.pFont, "New Language", sketch.textSize, "CENTER", "CENTER"){
 			public void tapEvent(TapEvent e){
 
-				if (getTappable()){
+				if (isTappable()){
 					newLang2.setActive(false);
 					lastLang2.setActive(false);
 					activateLanguageButtons(2);						
@@ -397,7 +397,7 @@ public class LoginScreen {
 				sketch.radius, Colours.pFont, "Last Language Used", sketch.textSize, "CENTER", "CENTER"){
 			public void tapEvent(TapEvent e){
 
-				if (getTappable()){
+				if (isTappable()){
 					newLang2.setActive(false);
 					lastLang2.setActive(false);
 					profilePicker.readProfile(2);
@@ -441,7 +441,7 @@ public class LoginScreen {
 				sketch.radius, Colours.pFont, "English", sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
-				if (getTappable()){
+				if (isTappable()){
 					if(!langSelect1){
 						english1.setColour(Colours.selectedZone.getRed(), Colours.selectedZone.getGreen(), Colours.selectedZone.getBlue());
 						newUser1.setActive(false);
@@ -472,7 +472,7 @@ public class LoginScreen {
 				sketch.radius, Colours.pFont, "French", sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
-				if (getTappable()){
+				if (isTappable()){
 					if(!langSelect1){
 						french1.setColour(Colours.selectedZone.getRed(), Colours.selectedZone.getGreen(), Colours.selectedZone.getBlue());
 						newUser1.setActive(false);
@@ -513,7 +513,7 @@ public class LoginScreen {
 		german1 = new TextZone(applet.screenWidth/2 + sketch.buttonWidth +1, applet.screenHeight/2+sketch.buttonHeight, sketch.buttonWidth, sketch.buttonHeight, 
 				sketch.radius, Colours.pFont, "German", sketch.textSize, "CENTER", "CENTER"){
 			public void tapEvent(TapEvent e){
-				if (getTappable()){
+				if (isTappable()){
 					if(!langSelect1){
 						german1.setColour(Colours.selectedZone.getRed(), Colours.selectedZone.getGreen(), Colours.selectedZone.getBlue());
 						newUser1.setActive(false);
@@ -547,7 +547,7 @@ public class LoginScreen {
 				sketch.radius, Colours.pFont, "English", sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
-				if (getTappable()){
+				if (isTappable()){
 					if(!langSelect2){
 						english2.setColour(Colours.selectedZone.getRed(), Colours.selectedZone.getGreen(), Colours.selectedZone.getBlue());
 						newUser2.setActive(false);
@@ -580,7 +580,7 @@ public class LoginScreen {
 				sketch.radius, Colours.pFont, "French", sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
-				if (getTappable()){
+				if (isTappable()){
 					if(!langSelect2){
 						french2.setColour(Colours.selectedZone.getRed(), Colours.selectedZone.getGreen(), Colours.selectedZone.getBlue());
 						newUser2.setActive(false);

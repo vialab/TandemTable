@@ -7,8 +7,8 @@ import java.awt.Color;
 import main.ColourEval;
 import main.Colours;
 import main.Languages;
-import main.LayoutManager;
-import main.MainSketch;
+import main.MainSection;
+import main.Sketch;
 
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.Animator.RepeatBehavior;
@@ -25,8 +25,8 @@ import com.memetix.mst.language.Language;
 
 public class TwitterActivity {
 	TouchClient client;
-	MainSketch sketch;
-	LayoutManager layoutManager;
+	Sketch sketch;
+	MainSection layoutManager;
 	VideoController videoController;
 
 	boolean errorFlag = false;
@@ -81,7 +81,7 @@ public class TwitterActivity {
 	
 	String lang1, lang2;
 
-	public TwitterActivity(MainSketch sketch, LayoutManager layoutManager, int topicIndex, String lang1, String lang2){
+	public TwitterActivity(Sketch sketch, MainSection layoutManager, int topicIndex, String lang1, String lang2){
 		this.client = sketch.client;
 		this.sketch = sketch;
 		this.layoutManager = layoutManager;
@@ -404,7 +404,7 @@ public class TwitterActivity {
 		tweetWord1 = new TextZone(layoutManager.buttonX, layoutManager.buttonYb2, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, tweetsS1, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
-				if (getTappable() && !errorFlag){
+				if (isTappable() && !errorFlag){
 					tg.queryWord(selectedWord, 1);
 					removeTweets(1);
 					tg.createTweetZones(1);
@@ -433,7 +433,7 @@ public class TwitterActivity {
 		tweetWord2 = new TextZone(layoutManager.buttonX, layoutManager.buttonYt2, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, tweetsS2, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
-				if (getTappable() && !errorFlag){
+				if (isTappable() && !errorFlag){
 					tg.queryWord(selectedWord, 2);
 					removeTweets(2);
 					tg.createTweetZones(2);

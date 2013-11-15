@@ -4,7 +4,7 @@ import java.awt.Color;
 
 import main.Colours;
 import main.Languages;
-import main.MainSketch;
+import main.Sketch;
 
 
 import processing.core.PConstants;
@@ -15,7 +15,7 @@ import vialab.simpleMultiTouch.zones.RectZone;
 import vialab.simpleMultiTouch.zones.TextZone;
 
 public class PGame {
-	MainSketch sketch;
+	Sketch sketch;
 	
 	int topicIndex, offset, level = 0;;
 	
@@ -54,7 +54,7 @@ public class PGame {
 	String[] tagArray2 = null;
 	String[] tags;
 	
-	public PGame(MainSketch sketch, int topicIndex, String lang1, String lang2){
+	public PGame(Sketch sketch, int topicIndex, String lang1, String lang2){
 		this.sketch = sketch;
 		this.topicIndex = topicIndex;
 		this.lang1 = lang1;

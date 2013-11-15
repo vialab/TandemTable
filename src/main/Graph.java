@@ -15,8 +15,8 @@ import vialab.simpleMultiTouch.zones.CircleZone;
 
 public class Graph {
 	TouchClient client;
-	MainSketch sketch;
-	LayoutManager layoutManager;
+	Sketch sketch;
+	MainSection layoutManager;
 	final int NUM_NODES = 15;
 	boolean[] nodeFlag = new boolean[NUM_NODES];
 	boolean[] visitedNodes = new boolean[NUM_NODES];
@@ -41,7 +41,7 @@ public class Graph {
 	int[][] randActs;
 
 
-	public Graph(MainSketch sketch, LayoutManager layoutManager, int lineX, String lang1, String lang2) {
+	public Graph(Sketch sketch, MainSection layoutManager, int lineX, String lang1, String lang2) {
 		this.client = sketch.client;
 		this.sketch = sketch;
 		this.layoutManager = layoutManager;
@@ -68,11 +68,11 @@ public class Graph {
 
 		for(int i = 0; i < randNumNodes; i++){
 			int numAct = randGen.nextInt(2) + 1;
-			int[] acts = randNotEqual(numAct, MainSketch.NUM_ACTIVITIES);
+			int[] acts = randNotEqual(numAct, Sketch.NUM_ACTIVITIES);
 			randActs1[i] = acts;
 		}
 
-		randActs = new int[randNumNodes][MainSketch.NUM_ACTIVITIES];
+		randActs = new int[randNumNodes][Sketch.NUM_ACTIVITIES];
 
 		for(int i = 0; i < randNumNodes; i++){
 
@@ -201,7 +201,7 @@ public class Graph {
 							animator[k].start();
 
 							layoutManager.activityBFlag = false;
-							for(int i = 0; i < MainSketch.NUM_ACTIVITIES; i++){
+							for(int i = 0; i < Sketch.NUM_ACTIVITIES; i++){
 								if(layoutManager.activityFlags1[i] == true){
 									layoutManager.animA2[i].stop();
 									layoutManager.activityFlags1[i] = false;

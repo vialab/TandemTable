@@ -6,8 +6,8 @@ import java.util.HashMap;
 import main.ColourEval;
 import main.Colours;
 import main.Languages;
-import main.LayoutManager;
-import main.MainSketch;
+import main.MainSection;
+import main.Sketch;
 
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.Animator.RepeatBehavior;
@@ -30,8 +30,8 @@ import vialab.simpleMultiTouch.zones.TextZone;
 
 public class HeadlinesActivity {
 
-	MainSketch sketch;
-	LayoutManager layoutManager;
+	Sketch sketch;
+	MainSection layoutManager;
 
 	int spaceX, topicIndex, index1 = 0, index2 = 0;
 	int textSize;
@@ -98,7 +98,7 @@ public class HeadlinesActivity {
 
 	HeadlineGetter hg;
 
-	public HeadlinesActivity(MainSketch sketch, LayoutManager layoutManager, int topicIndex, String lang1, String lang2) {
+	public HeadlinesActivity(Sketch sketch, MainSection layoutManager, int topicIndex, String lang1, String lang2) {
 		this.sketch = sketch;
 		this.layoutManager = layoutManager;
 		spaceX = sketch.getWidth() - sketch.lineX;
@@ -363,7 +363,7 @@ public class HeadlinesActivity {
 		// Back Button for user 1		
 		backButton1 = new TextZone(layoutManager.buttonX, layoutManager.buttonYb2, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, back1, sketch.textSize, "CENTER", "CENTER"){
 			public void tapEvent(TapEvent e){
-				if (getTappable()){
+				if (isTappable()){
 					sketch.client.removeZone(body1);
 					setBackButton(this, 1, false);
 					activateHeadlines(1);
@@ -386,7 +386,7 @@ public class HeadlinesActivity {
 		backButton2 = new TextZone(layoutManager.buttonX, layoutManager.buttonYt2, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, back2, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
-				if (getTappable()){
+				if (isTappable()){
 					sketch.client.removeZone(body2);
 					setBackButton(this, 2, false);
 					activateHeadlines(2);
@@ -481,7 +481,7 @@ public class HeadlinesActivity {
 			headlines1[i] = new TextZone(sketch.lineX + widthOffset/4, (int) (y1 + (i+1.13)*textYOffset + (i*height)), widthBody, height, sketch.radius, Colours.pFont, "", textSize, "CENTER", "CENTER"){
 
 				public void tapEvent(TapEvent e){
-					if (getTappable() && !tapFlag1 && !errorFlag1){
+					if (isTappable() && !tapFlag1 && !errorFlag1){
 						tapFlag1 = true;
 						inactivateHeadlines(1);
 						setBackButton(this, 1, true);
@@ -800,7 +800,7 @@ public class HeadlinesActivity {
 
 				public void tapEvent(TapEvent e){
 
-					if (getTappable() && !tapFlag2 && !errorFlag2){
+					if (isTappable() && !tapFlag2 && !errorFlag2){
 						tapFlag2 = true;
 						inactivateHeadlines(2);
 						setBackButton(this, 2, true);

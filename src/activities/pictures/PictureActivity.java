@@ -3,7 +3,7 @@ package activities.pictures;
 
 import main.Colours;
 import main.Languages;
-import main.MainSketch;
+import main.Sketch;
 
 import org.jdesktop.animation.timing.Animator;
 
@@ -17,7 +17,7 @@ import vialab.simpleMultiTouch.zones.RectZone;
 import vialab.simpleMultiTouch.zones.Zone;
 
 public class PictureActivity {
-	MainSketch sketch;
+	Sketch sketch;
 	PictureActivity pAct = this;
 	String lang1, lang2, tagsStr;
 	String[] tags, topic;
@@ -45,7 +45,7 @@ public class PictureActivity {
 	RectZone loading;
 	int imgSize;
 
-	public PictureActivity(MainSketch sketch, int topicIndex, String lang1, String lang2) {
+	public PictureActivity(Sketch sketch, int topicIndex, String lang1, String lang2) {
 		this.sketch = sketch;
 		imgSize = sketch.getWidth()/5;
 		spaceX = sketch.getWidth() - sketch.lineX;

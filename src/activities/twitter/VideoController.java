@@ -6,7 +6,7 @@ import javax.swing.SwingUtilities;
 
 import main.ColourEval;
 import main.Colours;
-import main.MainSketch;
+import main.Sketch;
 
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.Animator.RepeatBehavior;
@@ -20,7 +20,7 @@ import vialab.simpleMultiTouch.zones.TextZone;
 import activities.videos.VideoPlayer;
 
 public class VideoController {
-	MainSketch sketch;
+	Sketch sketch;
 	public RectZone cBackground;
 	RectZone cancelBackground1, cancelBackground2;
 	TwitterActivity tAct;
@@ -43,7 +43,7 @@ public class VideoController {
 
 //	String playStr1, playStr2, pauseStr1, pauseStr2, stopStr1, stopStr2, playVideoStr1, playVideoStr2;
 	
-	public VideoController(MainSketch sketch, TwitterActivity tAct){
+	public VideoController(Sketch sketch, TwitterActivity tAct){
 		this.tAct = tAct;
 		this.sketch = sketch;
 		
@@ -88,7 +88,7 @@ public class VideoController {
 	public void createCancelBackground(){
 		cancelBackground1 = new RectZone(sketch.lineX, sketch.getHeight()/2, sketch.getWidth()-sketch.lineX, sketch.getHeight()/2){
 			public void tapEvent(TapEvent e){
-				if(getTappable()){
+				if(isTappable()){
 					accept1.setActive(false);
 					this.setActive(false);
 				}
@@ -98,7 +98,7 @@ public class VideoController {
 		
 		cancelBackground2 = new RectZone(sketch.lineX, 0, sketch.getWidth()-sketch.lineX, sketch.getHeight()/2){
 			public void tapEvent(TapEvent e){
-				if(getTappable()){
+				if(isTappable()){
 					accept2.setActive(false);
 					this.setActive(false);
 				}
@@ -127,7 +127,7 @@ public class VideoController {
 		accept1 = new TextZone(x, y, width, height, sketch.radius, Colours.pFont, sketch.learner1.playVideo, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
-				if (getTappable()){
+				if (isTappable()){
 					accept1.setActive(false);
 					setVideoControlsVisible();
 					startVideo(2);
@@ -149,7 +149,7 @@ public class VideoController {
 		accept2 = new TextZone(x, y, width, height, sketch.radius, Colours.pFont, sketch.learner2.playVideo, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
-				if (getTappable()){
+				if (isTappable()){
 					accept2.setActive(false);
 					setVideoControlsVisible();
 					startVideo(1);
@@ -348,10 +348,10 @@ public class VideoController {
 	
 	public void createVideoControlButtons1(){
 
-		play1 = new TextZone(videoControlsX, sketch.layout.buttonYb, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner1.play, sketch.textSize, "CENTER", "CENTER"){
+		play1 = new TextZone(videoControlsX, sketch.mainSection.buttonYb, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner1.play, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
-				if (getTappable() && !errorFlag && playerActive && videoPlayer1.mediaPlayerComponent.getMediaPlayer().isPlayable() && !videoPlayer1.mediaPlayerComponent.getMediaPlayer().isPlaying()){
+				if (isTappable() && !errorFlag && playerActive && videoPlayer1.mediaPlayerComponent.getMediaPlayer().isPlayable() && !videoPlayer1.mediaPlayerComponent.getMediaPlayer().isPlaying()){
 					
 					if(playFlag2){
 						animPlay1.stop();
@@ -404,16 +404,16 @@ public class VideoController {
 		play1.setActive(false);
 		sketch.client.addZone(play1);
 		
-		animPlay1 = PropertySetter.createAnimator(sketch.layout.animationTime, play1, 
+		animPlay1 = PropertySetter.createAnimator(sketch.mainSection.animationTime, play1, 
 				"colour", new ColourEval(), Colours.unselectedZone, Colours.selectedZone);
 
 		animPlay1.setRepeatBehavior(RepeatBehavior.REVERSE);
 		animPlay1.setRepeatCount(Animator.INFINITE);
 
-		pause1 = new TextZone(videoControlsX, sketch.layout.buttonYb2, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner1.pause, sketch.textSize, "CENTER", "CENTER"){
+		pause1 = new TextZone(videoControlsX, sketch.mainSection.buttonYb2, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner1.pause, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
-				if (getTappable() && !errorFlag && playerActive && videoPlayer1.mediaPlayerComponent.getMediaPlayer().isPlaying()){
+				if (isTappable() && !errorFlag && playerActive && videoPlayer1.mediaPlayerComponent.getMediaPlayer().isPlaying()){
 					
 
 					if(pauseFlag2){
@@ -460,16 +460,16 @@ public class VideoController {
 		pause1.setActive(false);
 		sketch.client.addZone(pause1);
 		
-		animPause1 = PropertySetter.createAnimator(sketch.layout.animationTime, pause1, 
+		animPause1 = PropertySetter.createAnimator(sketch.mainSection.animationTime, pause1, 
 				"colour", new ColourEval(), Colours.unselectedZone, Colours.selectedZone);
 
 		animPause1.setRepeatBehavior(RepeatBehavior.REVERSE);
 		animPause1.setRepeatCount(Animator.INFINITE);
 
-		stop1 = new TextZone(videoControlsX, sketch.layout.buttonYb3, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner1.stop, sketch.textSize, "CENTER", "CENTER"){
+		stop1 = new TextZone(videoControlsX, sketch.mainSection.buttonYb3, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner1.stop, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
-				if (getTappable() && !errorFlag && playerActive){
+				if (isTappable() && !errorFlag && playerActive){
 					
 					if(stopFlag2){
 						animStop1.stop();
@@ -501,7 +501,7 @@ public class VideoController {
 		stop1.setActive(false);
 		sketch.client.addZone(stop1);
 		
-		animStop1 = PropertySetter.createAnimator(sketch.layout.animationTime, stop1, 
+		animStop1 = PropertySetter.createAnimator(sketch.mainSection.animationTime, stop1, 
 				"colour", new ColourEval(), Colours.unselectedZone, Colours.selectedZone);
 
 		animStop1.setRepeatBehavior(RepeatBehavior.REVERSE);
@@ -512,10 +512,10 @@ public class VideoController {
 
 	public void createVideoControlButtons2(){
 
-		play2 = new TextZone(videoControlsX, sketch.layout.buttonYt, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner2.play, sketch.textSize, "CENTER", "CENTER"){
+		play2 = new TextZone(videoControlsX, sketch.mainSection.buttonYt, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner2.play, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
-				if (getTappable() && !errorFlag && playerActive && videoPlayer2.mediaPlayerComponent.getMediaPlayer().isPlayable() && !videoPlayer2.mediaPlayerComponent.getMediaPlayer().isPlaying()){
+				if (isTappable() && !errorFlag && playerActive && videoPlayer2.mediaPlayerComponent.getMediaPlayer().isPlayable() && !videoPlayer2.mediaPlayerComponent.getMediaPlayer().isPlaying()){
 					if(playFlag1){
 						animPlay2.stop();
 						playFlag1 = false;
@@ -568,16 +568,16 @@ public class VideoController {
 		play2.rotate((float) Colours.PI);
 		sketch.client.addZone(play2);
 		
-		animPlay2 = PropertySetter.createAnimator(sketch.layout.animationTime, play2, 
+		animPlay2 = PropertySetter.createAnimator(sketch.mainSection.animationTime, play2, 
 				"colour", new ColourEval(), Colours.unselectedZone, Colours.selectedZone);
 
 		animPlay2.setRepeatBehavior(RepeatBehavior.REVERSE);
 		animPlay2.setRepeatCount(Animator.INFINITE);
 
-		pause2 = new TextZone(videoControlsX, sketch.layout.buttonYt2, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner2.pause, sketch.textSize, "CENTER", "CENTER"){
+		pause2 = new TextZone(videoControlsX, sketch.mainSection.buttonYt2, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner2.pause, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
-				if (getTappable() && !errorFlag && playerActive && videoPlayer2.mediaPlayerComponent.getMediaPlayer().isPlaying()){
+				if (isTappable() && !errorFlag && playerActive && videoPlayer2.mediaPlayerComponent.getMediaPlayer().isPlaying()){
 					if(pauseFlag1){
 						animPause2.stop();
 						pauseFlag1 = false;
@@ -625,16 +625,16 @@ public class VideoController {
 		pause2.rotate((float) Colours.PI);
 		sketch.client.addZone(pause2);
 		
-		animPause2 = PropertySetter.createAnimator(sketch.layout.animationTime, pause2, 
+		animPause2 = PropertySetter.createAnimator(sketch.mainSection.animationTime, pause2, 
 				"colour", new ColourEval(), Colours.unselectedZone, Colours.selectedZone);
 
 		animPause2.setRepeatBehavior(RepeatBehavior.REVERSE);
 		animPause2.setRepeatCount(Animator.INFINITE);
 
-		stop2 = new TextZone(videoControlsX, sketch.layout.buttonYt3, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner2.stop, sketch.textSize, "CENTER", "CENTER"){
+		stop2 = new TextZone(videoControlsX, sketch.mainSection.buttonYt3, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner2.stop, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
-				if (getTappable() && !errorFlag && playerActive){
+				if (isTappable() && !errorFlag && playerActive){
 					if(stopFlag1){
 						animStop2.stop();
 						stopFlag1 = false;
@@ -665,7 +665,7 @@ public class VideoController {
 		stop2.rotate((float) Colours.PI);
 		sketch.client.addZone(stop2);
 		
-		animStop2 = PropertySetter.createAnimator(sketch.layout.animationTime, stop2, 
+		animStop2 = PropertySetter.createAnimator(sketch.mainSection.animationTime, stop2, 
 				"colour", new ColourEval(), Colours.unselectedZone, Colours.selectedZone);
 
 		animStop2.setRepeatBehavior(RepeatBehavior.REVERSE);

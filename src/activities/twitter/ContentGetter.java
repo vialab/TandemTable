@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Vector;
 
 import main.Colours;
-import main.MainSketch;
+import main.Sketch;
 
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.interpolation.PropertySetter;
@@ -31,7 +31,7 @@ public class ContentGetter extends Thread{
 	RectZone background;
 	ImageZone img1;
 	PGraphicsZone tZone1;
-	MainSketch sketch;
+	Sketch sketch;
 	TwitterGetter tg;
 	ContentGetter cg;
 	Animator animZoneX, animZoneY, animZoneWidth, animZoneHeight,  animtZone1;
@@ -61,7 +61,7 @@ public class ContentGetter extends Thread{
 
 
 
-	public ContentGetter(final MainSketch sketch, int user, final TwitterGetter tg, int i, int j){
+	public ContentGetter(final Sketch sketch, int user, final TwitterGetter tg, int i, int j){
 		
 		this.sketch = sketch;
 		this.user = user;
@@ -88,7 +88,7 @@ public class ContentGetter extends Thread{
 			
 			background = new RectZone(sketch.lineX, sketch.getHeight()/2, sketch.getWidth()-sketch.lineX, sketch.getHeight()/2){
 				public void tapEvent(TapEvent e){
-					if(getTappable()){
+					if(isTappable()){
 						deactivateZones();
 						tg.currentGetter1 = cg;
 					}
@@ -105,7 +105,7 @@ public class ContentGetter extends Thread{
 			
 			background = new RectZone(sketch.lineX, 0, sketch.getWidth()-sketch.lineX, sketch.getHeight()/2){
 				public void tapEvent(TapEvent e){
-					if(getTappable()){
+					if(isTappable()){
 						deactivateZones();
 						tg.currentGetter2 = cg;
 					}
@@ -286,7 +286,7 @@ public class ContentGetter extends Thread{
 					img1 = new ImageZone(pimg, sketch.lineX + wSpace, sketch.getHeight()/2 + hSpace, w, h, sketch.radius){
 
 						public void tapEvent(TapEvent e){
-							if (getTappable()){
+							if (isTappable()){
 
 								if(getImageIndex()+1 < getImageArray().length-1){
 									int index = getImageIndex() + 1;
@@ -552,7 +552,7 @@ public class ContentGetter extends Thread{
 					img1 = new ImageZone(pimg, sketch.lineX + wSpace, - hSpace, w, h+ 4*sketch.shadowOffset, sketch.radius){
 
 						public void tapEvent(TapEvent e){
-							if (getTappable()){
+							if (isTappable()){
 
 								if(getImageIndex()+1 < getImageArray().length-1){
 									int index = getImageIndex() + 1;
