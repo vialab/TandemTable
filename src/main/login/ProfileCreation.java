@@ -9,6 +9,11 @@ import vialab.simpleMultiTouch.TouchClient;
 import vialab.simpleMultiTouch.zones.ImageZone;
 import vialab.simpleMultiTouch.zones.RotatableDrawZone;
 
+/**
+ * Class responsible for creating and managing the
+ * avatar creation by the users.
+ *
+ */
 public class ProfileCreation {
 	PApplet applet;
 	TouchClient client;
@@ -17,8 +22,15 @@ public class ProfileCreation {
 	LoginScreen loginScreen;
 	RotatableDrawZone drawUser1, drawUser2;
 	ImageZone profileImg1, profileImg2;
-	
 
+	/**
+	 * Initializes the profile creation object
+	 * 
+	 * @param client
+	 * @param sketch
+	 * @param profilePicker
+	 * @param loginScreen
+	 */
 	public ProfileCreation(TouchClient client, MainSketch sketch, ProfilePicker profilePicker, LoginScreen loginScreen){
 		applet = TouchClient.getPApplet();
 		this.sketch = sketch;
@@ -28,6 +40,10 @@ public class ProfileCreation {
 
 	}
 
+	/**
+	 * Creates the canvases for the users to draw their avatar
+	 * @param user
+	 */
 	public void createDrawUser(int user){
 
 		int dX = applet.screenWidth/4;
@@ -86,20 +102,28 @@ public class ProfileCreation {
 	public void loadProfileImage(int user, PImage img){
 
 		if(user == 1){
-			profileImg1 = new ImageZone(applet.screenWidth-2*profilePicker.imgSize, applet.screenHeight-2*profilePicker.imgSize, 2*profilePicker.imgSize, 2*profilePicker.imgSize);
+			if(profileImg1 == null){
+				profileImg1 = new ImageZone(applet.screenWidth-2*profilePicker.imgSize, applet.screenHeight-2*profilePicker.imgSize, 2*profilePicker.imgSize, 2*profilePicker.imgSize);
+				client.addZone(profileImg1);
+			}
 			profileImg1.setImage(img);
+			profileImg1.setActive(true);
+
 			//profileImg1.setImage(applet.loadImage("\\users\\images\\user" + (drawUser1.getFilesCount()) + ".png"));
-			client.addZone(profileImg1);
-			loginScreen.cancel1.setActive(false);
+
+			//loginScreen.cancel1.setActive(false);
 
 		} else if (user == 2) {
-			profileImg2 = new ImageZone(applet.screenWidth-2*profilePicker.imgSize, 0, 2*profilePicker.imgSize, 2*profilePicker.imgSize);
-			//profileImg2 = new ImageZone(0, applet.getHeight()/2 + 10, 2*profilePicker.imgSize, 2*profilePicker.imgSize);
-			profileImg2.rotate((float) Colours.PI);
+			if(profileImg2 == null) {
+				profileImg2 = new ImageZone(applet.screenWidth-2*profilePicker.imgSize, 0, 2*profilePicker.imgSize, 2*profilePicker.imgSize);
+				//profileImg2 = new ImageZone(0, applet.getHeight()/2 + 10, 2*profilePicker.imgSize, 2*profilePicker.imgSize);
+				profileImg2.rotate((float) Colours.PI);
+				client.addZone(profileImg2);		
+			}
 			profileImg2.setImage(img);
+			profileImg2.setActive(true);
 			//.setImage(applet.loadImage("\\users\\images\\user" + (drawUser2.getFilesCount()) + ".png"));
-			client.addZone(profileImg2);		
-			loginScreen.cancel2.setActive(false);
+			//loginScreen.cancel2.setActive(false);
 
 		}
 

@@ -41,10 +41,10 @@ public class ProfilePicker {
 	int imgSize;
 	//middle profile picture's position
 	int midX1, midY1, midX2, midY2;
-	
+
 	int index1 = 0;
 	int index2 = 0;
-	
+
 	//Profiles chosen by the use
 	int chosenProfile1 = -1;
 	int chosenProfile2 = -1;
@@ -54,7 +54,7 @@ public class ProfilePicker {
 
 	//Number of profiles on screen
 	final int IMG_ONSCR = 7;
-	
+
 	//Middle ImageZone (0-6)
 	final int MID = 3;
 
@@ -272,68 +272,58 @@ public class ProfilePicker {
 			}
 			width = imgSize;
 			height = imgSize;
-		
+
 			if (i == 3){
-				//the index of the picture to load
-				userImg[i] = new ImageZone(images[loadIndex], x, y, width*2, height*2){
-					public void tapEvent(TapEvent e){
-						if (getTappable() && index1 != chosenProfile2){
-							chosenProfile1 = index1;
-							removeUserProfilesPicker(1);
-							loginScreen.activateNewLastButtons(1);
-							loginScreen.profileCreation.loadProfileImage(1, this.getImage());
-							e.setHandled(tappableHandled);
-						}
+				width *= 2;
+				height *= 2;
+			}
+
+			final int ii = i;
+
+			//the index of the picture to load
+			userImg[i] = new ImageZone(images[loadIndex], x, y, width, height){
+				public void tapEvent(TapEvent e){
+					if (ii == 3 && getTappable() && index1 != chosenProfile2){
+						chosenProfile1 = index1;
+						removeUserProfilesPicker(1);
+						loginScreen.activateNewLastButtons(1);
+						loginScreen.profileCreation.loadProfileImage(1, this.getImage());
+						e.setHandled(tappableHandled);
 					}
-					public void hSwipeEvent(HSwipeEvent e){
+				}
+				public void hSwipeEvent(HSwipeEvent e){
 
 
-						if (index1 > 0 && index1 <= numProfiles && e.getSwipeType() == 1){
-							index1--;
-						} else if(index1 < numProfiles && e.getSwipeType() == -1){
-							index1++;
-						} else if (index1 == 0) {
-							index1 = numProfiles;
-						} else if (index1 == numProfiles) {
-							index1 = 0;
-						}
-
-						//load images starting at index
-						loadImages(1, index1);
-						e.setHandled(hSwipeableHandled);
+					if (index1 > 0 && index1 <= numProfiles && e.getSwipeType() == 1){
+						index1--;
+					} else if(index1 < numProfiles && e.getSwipeType() == -1){
+						index1++;
+					} else if (index1 == 0) {
+						index1 = numProfiles;
+					} else if (index1 == numProfiles) {
+						index1 = 0;
 					}
 
-				};
+					//load images starting at index
+					loadImages(1, index1);
+					e.setHandled(hSwipeableHandled);
+				}
+
+			};
+
+			if(i == 3){
 				userImg[i].setGestureEnabled("TAP", true, true);
 				userImg[i].setDrawBorder(true);
 				userImg[i].setBorderColour(Colours.zoneBorder);
 				userImg[i].setBorderWeight(10);
 			} else {
-				userImg[i] = new ImageZone(images[loadIndex], x, y, width, height){
-					public void hSwipeEvent(HSwipeEvent e){
 
 
-						if (index1 > 0 && index1 <= numProfiles && e.getSwipeType() == 1){
-							index1--;
-						} else if(index1 < numProfiles && e.getSwipeType() == -1){
-							index1++;
-						} else if (index1 == 0) {
-							index1 = numProfiles;
-						} else if (index1 == numProfiles) {
-							index1 = 0;
-						}
-
-						//load images starting at index
-						loadImages(1, index1);
-						e.setHandled(hSwipeableHandled);
-					}
-
-				};
-				userImg[i].setHSwipeDist(sketch.qSwipeThreshold);
 				userImg[i].setDrawBorder(false);
 			}
-			
+
 			userImg[i].setGestureEnabled("HSwipe", true, true);
+			userImg[i].setHSwipeDist(sketch.qSwipeThreshold);
 			userImg[i].setActive(false);
 			client.addZone(userImg[i]);
 
@@ -352,83 +342,73 @@ public class ProfilePicker {
 		width = 0;
 		height = 0;
 
-		
+
 		for(int i = 0; i < IMG_ONSCR; i++){
 			width = imgSize;
 			height = imgSize;
-			
+			y = applet.getHeight()/2-height - sketch.yOffset;
+
 			if(i > 3){
 				x = (int) ((i+1)*applet.screenWidth/9.2 + imgSize);
 			} else {
-				y = applet.getHeight()/2-height - sketch.yOffset;
 				x = (int) ((i+1)*applet.screenWidth/9.2);
-				
+
 				if(i == 3){
 					midX2 = x;
 					midY2 = y - height;
 				}
 			}
-			
-		
+
+
 			if (i == 3){
-				//the index of the picture to load
-				userImg[i+IMG_ONSCR] = new ImageZone(images[loadIndex], x, y - height, width*2, height*2){
-					public void tapEvent(TapEvent e){
-						if (getTappable() && index2 != chosenProfile1){
-							chosenProfile2 = index2;
-							removeUserProfilesPicker(2);
-							loginScreen.activateNewLastButtons(2);
-							loginScreen.profileCreation.loadProfileImage(2, this.getImage());
-							e.setHandled(tappableHandled);
-						}
-						
-						
-					}
-					
-					public void hSwipeEvent(HSwipeEvent e){
+				y -= height;
+				width *= 2;
+				height *= 2;
+			}
 
-						if (index2 > 0 && index2 <= numProfiles && e.getSwipeType() == -1){
-							index2--;
-						} else if(index2 < numProfiles && e.getSwipeType() == 1){
-							index2++;
-						} else if (index2 == 0) {
-							index2 = numProfiles;
-						} else if (index2 == numProfiles) {
-							index2 = 0;
-						}
+			final int ii = i;
 
-						//load images starting at index
-						loadImages(2, index2);
-						e.setHandled(hSwipeableHandled);
+			//the index of the picture to load
+			userImg[i+IMG_ONSCR] = new ImageZone(images[loadIndex], x, y, width, height){
+				public void tapEvent(TapEvent e){
+					if (ii == 3 && getTappable() && index2 != chosenProfile1){
+						chosenProfile2 = index2;
+						removeUserProfilesPicker(2);
+						loginScreen.activateNewLastButtons(2);
+						loginScreen.profileCreation.loadProfileImage(2, this.getImage());
+						e.setHandled(tappableHandled);
 					}
-				};
+
+
+				}
+
+				public void hSwipeEvent(HSwipeEvent e){
+
+					if (index2 > 0 && index2 <= numProfiles && e.getSwipeType() == -1){
+						index2--;
+					} else if(index2 < numProfiles && e.getSwipeType() == 1){
+						index2++;
+					} else if (index2 == 0) {
+						index2 = numProfiles;
+					} else if (index2 == numProfiles) {
+						index2 = 0;
+					}
+
+					//load images starting at index
+					loadImages(2, index2);
+					e.setHandled(hSwipeableHandled);
+				}
+			};
+			
+			if(ii == 3){
 				userImg[i+IMG_ONSCR].setGestureEnabled("TAP", true, true);
 				userImg[i+IMG_ONSCR].setBorderColour(Colours.zoneBorder);
 				userImg[i+IMG_ONSCR].setBorderWeight(10);
 			} else {
-				userImg[i+IMG_ONSCR] = new ImageZone(images[loadIndex], x, y, width, height){
-					public void hSwipeEvent(HSwipeEvent e){
-
-						if (index2 > 0 && index2 <= numProfiles && e.getSwipeType() == -1){
-							index2--;
-						} else if(index2 < numProfiles && e.getSwipeType() == 1){
-							index2++;
-						} else if (index2 == 0) {
-							index2 = numProfiles;
-						} else if (index2 == numProfiles) {
-							index2 = 0;
-						}
-
-						//load images starting at index
-						loadImages(2, index2);
-						e.setHandled(hSwipeableHandled);
-					}
-
-				};
-				
 				userImg[i+IMG_ONSCR].setDrawBorder(false);
 				userImg[i+IMG_ONSCR].setHSwipeDist(sketch.qSwipeThreshold);
 			}
+
 
 			userImg[i+IMG_ONSCR].setGestureEnabled("HSwipe", true, true);
 			userImg[i+IMG_ONSCR].rotate((float) Colours.PI);
@@ -488,49 +468,11 @@ public class ProfilePicker {
 	 * @param loadIndex
 	 */
 	public void loadImages(int user, int loadIndex){
-		//Disable the already chosen profile pictures
-		if(chosenProfile1 != -1 || chosenProfile2 != -1){
-			int profile;
-			if(user == 1){
-				profile = chosenProfile2;
-			} else {
-				profile = chosenProfile1;
-			}
-			int zoneToDisable;
-			int middle = 3;
-			/*if(loadIndex > middle+20){
-				if(user == 2 && loadIndex >= 3){
-					zoneToDisable = middle - loadIndex + IMG_ONSCR + 1 + profile;
-				} else {
-					zoneToDisable = middle - loadIndex + IMG_ONSCR + 1 + profile;
-				}
-			} */
-
-			if(loadIndex < 5){
-				zoneToDisable = middle - loadIndex + profile;
-			} else {
-				zoneToDisable = loadIndex - profile;// - profile - 1;
-			}
-
-			System.out.println(loadIndex + " " + profile + " " + zoneToDisable);
-			
-			if(user == 1 && chosenProfile2 != -1){
-				if(zoneToDisable < IMG_ONSCR) userImg[zoneToDisable].setFilterColFlag(true);
-				if(lastDisabled1 < IMG_ONSCR) userImg[lastDisabled1].setFilterColFlag(false);
-				lastDisabled1 = zoneToDisable;
-			} 
-
-			if(user == 2 && chosenProfile1 != -1){
-				if(zoneToDisable < IMG_ONSCR) userImg[zoneToDisable + IMG_ONSCR].setFilterColFlag(true);
-				if(lastDisabled2 < IMG_ONSCR + IMG_ONSCR) userImg[lastDisabled2].setFilterColFlag(false);
-				lastDisabled2 = zoneToDisable + IMG_ONSCR;
-			}
-		}
-
 		//Load Profile Pictures into the ImageZones
 		for(int i = 0; i < IMG_ONSCR; i++){
 			if(user == 1){
-				userImg[i].setImage(images[loadIndex]);				
+				userImg[i].setImage(images[loadIndex]);
+				disableProfile(1, loadIndex);
 			} else {
 				userImg[i+IMG_ONSCR].setImage(images[loadIndex]);
 			}
@@ -539,6 +481,54 @@ public class ProfilePicker {
 				loadIndex = 0;
 			} else {
 				loadIndex++;
+			}
+		}
+	}
+
+	/**
+	 * Disable the profile picture that has already been chosen
+	 * by the other user
+	 * @param user
+	 * @param loadIndex
+	 */
+	public void disableProfile(int user, int loadIndex){
+		//Disable the already chosen profile pictures
+		if(chosenProfile1 != -1 || chosenProfile2 != -1){
+			int profile;
+			if(user == 1){
+				profile = chosenProfile2;
+			} else {
+				profile = chosenProfile1;
+			}
+			int zoneToDisable = 0;
+			//int middle = 3;
+			/*if(loadIndex > middle+20){
+						if(user == 2 && loadIndex >= 3){
+							zoneToDisable = middle - loadIndex + IMG_ONSCR + 1 + profile;
+						} else {
+							zoneToDisable = middle - loadIndex + IMG_ONSCR + 1 + profile;
+						}
+					} */
+
+			if(loadIndex < 4){
+				zoneToDisable = IMG_ONSCR - 4 - loadIndex + profile;
+			} else if(Math.abs(profile - loadIndex) <= IMG_ONSCR){
+				zoneToDisable = (numProfiles - loadIndex - (profile - (profile - 5)))%7 + 4;
+			}
+			//zoneToDisable = Math.abs(profile +loadIndex - (numProfiles -7));//- (numProfiles - loadIndex) + middle);
+
+			System.out.println(loadIndex + " " + profile + " " + zoneToDisable);
+
+			if(user == 1 && chosenProfile2 != -1 && zoneToDisable != -1){
+				if(zoneToDisable < IMG_ONSCR) userImg[zoneToDisable].setFilterColFlag(true);
+				if(lastDisabled1 < IMG_ONSCR) userImg[lastDisabled1].setFilterColFlag(false);
+				lastDisabled1 = zoneToDisable;
+			} 
+
+			if(user == 2 && chosenProfile1 != -1 && zoneToDisable != -1){
+				if(zoneToDisable < IMG_ONSCR) userImg[zoneToDisable + IMG_ONSCR].setFilterColFlag(true);
+				if(lastDisabled2 < IMG_ONSCR + IMG_ONSCR) userImg[lastDisabled2].setFilterColFlag(false);
+				lastDisabled2 = zoneToDisable + IMG_ONSCR;
 			}
 		}
 	}
@@ -569,9 +559,13 @@ public class ProfilePicker {
 
 		}
 	}
-	
+
 	/**
 	 * Read-in user profiles ('#.user')
+	 * Used currently to allow the user to select their 
+	 * last target language used from their last 
+	 * learning session.
+	 * 
 	 * @param user
 	 */
 	public void readProfile(int user){

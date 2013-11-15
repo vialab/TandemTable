@@ -10,6 +10,9 @@ import vialab.simpleMultiTouch.zones.Zone;
 
 /**
  * Class responsible for initializing the login screen
+ * where users choose a previously created avatar or 
+ * where they can create their own. Target languages are
+ * selected after that.
  *
  */
 public class LoginScreen {
@@ -142,7 +145,17 @@ public class LoginScreen {
 					portuguese1.setActive(false);
 					german1.setActive(false);
 					
-
+					english1.setGestureEnabled("TAP", true);
+					french1.setGestureEnabled("TAP", true);
+					
+					english1.setColour(Colours.unselectedZone.getRed(), Colours.unselectedZone.getGreen(), Colours.unselectedZone.getBlue());
+					french1.setColour(Colours.unselectedZone.getRed(), Colours.unselectedZone.getGreen(), Colours.unselectedZone.getBlue());
+					
+					profilePicker.userImg[profilePicker.lastDisabled2].setFilterColFlag(false);
+					
+					if(profileCreation.profileImg1 != null) profileCreation.profileImg1.setActive(false);
+					langSelect1 = false;
+					pickedLang1 = "";
 
 					profilePicker.chosenProfile1 = -1;
 					profilePicker.userImg[profilePicker.MID].setGestureEnabled("TAP", true);
@@ -179,11 +192,24 @@ public class LoginScreen {
 					portuguese2.setActive(false);
 					german2.setActive(false);
 
+					english2.setGestureEnabled("TAP", true);
+					french2.setGestureEnabled("TAP", true);
+					
+					english2.setColour(Colours.unselectedZone.getRed(), Colours.unselectedZone.getGreen(), Colours.unselectedZone.getBlue());
+					french2.setColour(Colours.unselectedZone.getRed(), Colours.unselectedZone.getGreen(), Colours.unselectedZone.getBlue());
+					
 					profilePicker.chosenProfile2 = -1;
 					profilePicker.userImg[profilePicker.MID + profilePicker.IMG_ONSCR].setGestureEnabled("TAP", true);
 
 					//if(profilePicker.userImg[profileCreation.MID + profilePicker.IMG_ONSCR] != null) profilePicker.userImg[profileCreation.MID + profilePicker.IMG_ONSCR].setXYWH(profilePicker.midX2, profilePicker.midY2, profilePicker.imgSize*2, profilePicker.imgSize*2);
 					profilePicker.removeUserProfilesPicker(2);
+					
+					profilePicker.userImg[profilePicker.lastDisabled1].setFilterColFlag(false);
+					
+					if(profileCreation.profileImg2 != null) profileCreation.profileImg2.setActive(false);
+					langSelect2 = false;
+					pickedLang2 = "";
+
 					login2.setActive(true);
 					newUser2.setActive(true);
 					e.setHandled(tappableHandled);
@@ -202,6 +228,9 @@ public class LoginScreen {
 
 	}
 
+	/**
+	 * Create the login and new user buttons
+	 */
 	public void createLoginButtons(){
 		//*****************
 		// User 1
@@ -307,7 +336,6 @@ public class LoginScreen {
 			public void tapEvent(TapEvent e){
 
 				if (getTappable()){
-					this.setGestureEnabled("Tap", false);
 					newLang1.setActive(false);
 					lastLang1.setActive(false);
 					activateLanguageButtons(1);
@@ -327,7 +355,6 @@ public class LoginScreen {
 			public void tapEvent(TapEvent e){
 
 				if (getTappable()){
-					this.setGestureEnabled("Tap", false);
 					newLang1.setActive(false);
 					lastLang1.setActive(false);
 					profilePicker.readProfile(1);
@@ -353,7 +380,6 @@ public class LoginScreen {
 				if (getTappable()){
 					newLang2.setActive(false);
 					lastLang2.setActive(false);
-					this.setGestureEnabled("Tap", false);
 					activateLanguageButtons(2);						
 					e.setHandled(tappableHandled);
 				}
@@ -374,7 +400,6 @@ public class LoginScreen {
 				if (getTappable()){
 					newLang2.setActive(false);
 					lastLang2.setActive(false);
-					this.setGestureEnabled("Tap", false);
 					profilePicker.readProfile(2);
 					e.setHandled(tappableHandled);
 				}
