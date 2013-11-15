@@ -46,7 +46,7 @@ public class LayoutManager {
 	TextZone[] activityB1;
 	TextZone[] activityB2;
 
-	Zone nextB1, nextB2, randTopicsB1, randTopicsB2, newLang1, newLang2;
+	Zone nextB1, nextB2, newLang1, newLang2;
 	public Zone switchAct1, switchAct2;
 
 	boolean leftCenterLineFlag = true;
@@ -477,8 +477,7 @@ public class LayoutManager {
 						next2 = false;
 						next1 = false;
 						removeQuestions();
-						createRandomizeButtons();
-						createNewLanguageButtons();
+						createSwitchLanguageButtons();
 						createGraph();
 						createActivityButtons();
 
@@ -533,8 +532,7 @@ public class LayoutManager {
 						next2 = false;
 						next1 = false;
 						removeQuestions();
-						createRandomizeButtons();
-						createNewLanguageButtons();
+						createSwitchLanguageButtons();
 						createGraph();
 						createActivityButtons();
 					}
@@ -569,106 +567,7 @@ public class LayoutManager {
 		}
 	}
 
-	public void createRandomizeButtons(){		
-		//String s = "";
-		//New randomize topics Button for user 1
-
-		/*if(lang1.equalsIgnoreCase("English")){
-			s = sketch.ranTopicsE;
-		} else if(lang1.equalsIgnoreCase("French")){
-			s = sketch.ranTopicsF;
-		}*/
-		randTopicsB1 = new TextZone(buttonX, buttonYb, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner1.ranTopics, sketch.textSize, "CENTER", "CENTER"){
-
-			public void tapEvent(TapEvent e){
-				if (getTappable()){
-					/*if(!bottomBSelect1 && !bottomBSelect2){
-						animRand[1].start();
-						this.setColour(Colours.selectedZone);
-						bottomBSelect1 = true;
-					} else if (bottomBSelect1 && !bottomBSelect2){
-						animRand[1].stop();
-						((TextZone) randTopicsB2).setColour(Colours.unselectedZone);
-						((TextZone) randTopicsB1).setColour(Colours.unselectedZone);
-						bottomBSelect1 = false;
-					} else if (bottomBSelect2){
-						animRand[0].stop();
-						((TextZone) randTopicsB2).setColour(Colours.unselectedZone);
-						((TextZone) randTopicsB1).setColour(Colours.unselectedZone);
-						bottomBSelect2 = false;
-						bottomBSelect1 = false;
-						//TODO
-					}*/
-
-					e.setHandled(tappableHandled);
-
-				}
-			}
-		};
-
-		((TextZone) randTopicsB1).setTextColour(Colours.fadedText);
-		((TextZone) randTopicsB1).setColour(Colours.fadedOutZone);
-		randTopicsB1.setGestureEnabled("TAP", true, true);
-		randTopicsB1.setDrawBorder(false);
-		sketch.client.addZone(randTopicsB1);
-
-		/*animRand[0] = PropertySetter.createAnimator(animationTime, randTopicsB1, 
-				"colour", new ColourEval(), Colours.unselectedZone, Colours.selectedZone);
-
-		animRand[0].setRepeatBehavior(RepeatBehavior.REVERSE);
-		animRand[0].setRepeatCount(Animator.INFINITE);*/
-
-
-		//New randomize topics Button for user 2
-		/*if(lang2.equalsIgnoreCase("English")){
-			s = sketch.ranTopicsE;
-		} else if(lang2.equalsIgnoreCase("French")){
-			s = sketch.ranTopicsF;
-		}*/
-		randTopicsB2  = new TextZone(buttonX, buttonYt, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner2.ranTopics, sketch.textSize, "CENTER", "CENTER"){
-
-			public void tapEvent(TapEvent e){
-				if (getTappable()){
-
-
-					/*if(!bottomBSelect2 && !bottomBSelect1){
-						animRand[0].start();
-						((TextZone) randTopicsB2).setColour(Colours.selectedZone);
-						bottomBSelect2 = true;
-					} else if (bottomBSelect2 && !bottomBSelect1){
-						animRand[0].stop();
-						((TextZone) randTopicsB2).setColour(Colours.unselectedZone);
-						((TextZone) randTopicsB1).setColour(Colours.unselectedZone);
-						bottomBSelect2 = false;
-					} else if (bottomBSelect1){
-						animRand[1].stop();
-						((TextZone) randTopicsB2).setColour(Colours.unselectedZone);
-						((TextZone) randTopicsB1).setColour(Colours.unselectedZone);
-						bottomBSelect2 = false;
-						bottomBSelect1 = false;
-						//TODO
-					}*/
-					e.setHandled(tappableHandled);
-				}
-			}
-		};
-
-		randTopicsB2.rotate((float) (Colours.PI));
-		((TextZone) randTopicsB2).setTextColour(Colours.fadedText);
-		((TextZone) randTopicsB2).setColour(Colours.fadedOutZone);
-		randTopicsB2.setGestureEnabled("TAP", true, true);
-		randTopicsB2.setDrawBorder(false);
-		sketch.client.addZone(randTopicsB2);
-
-		/*animRand[1] = PropertySetter.createAnimator(animationTime, randTopicsB2, 
-				"colour", new ColourEval(), Colours.unselectedZone, Colours.selectedZone);
-
-		animRand[1].setRepeatBehavior(RepeatBehavior.REVERSE);
-		animRand[1].setRepeatCount(Animator.INFINITE);*/
-
-	}
-
-	public void createNewLanguageButtons(){
+	public void createSwitchLanguageButtons(){
 		//String s = "";
 
 		//New language Button for user 1
@@ -1303,8 +1202,6 @@ public class LayoutManager {
 		sketch.client.removeZone(nextB1);
 		sketch.client.removeZone(nextB2);
 
-		sketch.client.removeZone(randTopicsB1);
-		sketch.client.removeZone(randTopicsB2);
 		sketch.client.removeZone(switchAct1);
 		sketch.client.removeZone(switchAct2);
 		sketch.client.removeZone(newLang1);

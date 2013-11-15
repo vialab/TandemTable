@@ -688,15 +688,18 @@ public class LoginScreen {
 		
 		client.removeZone(profileCreation.profileImg1);
 		client.removeZone(profileCreation.profileImg2);
+		client.removeZone(profileCreation.drawUser1);
+		client.removeZone(profileCreation.drawUser2);
 		client.removeZone(newLang1);
 		client.removeZone(lastLang1);
 		client.removeZone(newLang2);
 		client.removeZone(lastLang2);
 		client.removeZone(newUser1);
 		client.removeZone(newUser2);
-		client.removeZone(profileCreation.drawUser1);
-		client.removeZone(profileCreation.drawUser2);
-
+		client.removeZone(login1);
+		client.removeZone(login2);
+		client.removeZone(cancel1);
+		client.removeZone(cancel2);
 	}
 
 	/**
