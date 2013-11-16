@@ -37,6 +37,9 @@ public class ProfilePicker {
 
 	//number of profiles in the system
 	int numProfiles;
+	//index of the last Image Zone for 
+	//the user profiles (numProfiles - 1)
+	int lastZoneIndex;
 	//size of the profile pictures
 	int imgSize;
 	//middle profile picture's position
@@ -75,7 +78,7 @@ public class ProfilePicker {
 		imgSize = applet.screenWidth/15;
 
 
-		loadPImages();
+		loadImages();
 		createSwipeAreas();
 		createArrows();
 
@@ -103,11 +106,11 @@ public class ProfilePicker {
 					if (index1 > 0){
 						index1--;
 					} else {
-						index1 = numProfiles;
+						index1 = lastZoneIndex;
 					}
 
 					//load images starting at index
-					loadImages(1, index1);
+					setImages(1, index1);
 					if(chosenProfile2 != -1) disableProfile(1, index1);
 					e.setHandled(tappableHandled);
 
@@ -119,13 +122,13 @@ public class ProfilePicker {
 			public void tapEvent(TapEvent e){
 
 				if (isTappable()){
-					if(index1 == numProfiles){
+					if(index1 == lastZoneIndex){
 						index1 = 0;
 					} else {
 						index1++;
 					}
 					//load images starting at index
-					loadImages(1, index1);
+					setImages(1, index1);
 					if(chosenProfile2 != -1) disableProfile(1, index1);
 					e.setHandled(tappableHandled);
 				}
@@ -149,11 +152,11 @@ public class ProfilePicker {
 					if (index2 > 0){
 						index2--;
 					} else {
-						index2 = numProfiles;
+						index2 = lastZoneIndex;
 					}
 
 					//load images starting at index
-					loadImages(2, index2);
+					setImages(2, index2);
 					if(chosenProfile1 != -1) disableProfile(2, index2);
 					e.setHandled(tappableHandled);
 
@@ -165,13 +168,13 @@ public class ProfilePicker {
 			public void tapEvent(TapEvent e){
 
 				if (isTappable()){
-					if(index2 == numProfiles){
+					if(index2 == lastZoneIndex){
 						index2 = 0;
 					} else {
 						index2++;
 					}
 					//load images starting at index
-					loadImages(2, index2);
+					setImages(2, index2);
 					if(chosenProfile1 != -1) disableProfile(2, index2);
 					e.setHandled(tappableHandled);
 				}
@@ -201,18 +204,18 @@ public class ProfilePicker {
 		swipe1 = new RectZone(0, applet.getHeight()/2, applet.getWidth(), imgSize*2 + sketch.yOffset){
 			public void hSwipeEvent(HSwipeEvent e){
 
-				if (index1 > 0 && index1 <= numProfiles && e.getSwipeType() == 1){
+				if (index1 > 0 && index1 <= lastZoneIndex && e.getSwipeType() == 1){
 					index1--;
-				} else if(index1 < numProfiles && e.getSwipeType() == -1){
+				} else if(index1 < lastZoneIndex && e.getSwipeType() == -1){
 					index1++;
 				} else if (index1 == 0) {
-					index1 = numProfiles;
-				} else if (index1 == numProfiles) {
+					index1 = lastZoneIndex;
+				} else if (index1 == lastZoneIndex) {
 					index1 = 0;
 				}
 
 				//load images starting at index
-				loadImages(1, index1);
+				setImages(1, index1);
 				if(chosenProfile2 != -1) disableProfile(1, index1);
 				e.setHandled(hSwipeableHandled);
 			}
@@ -228,18 +231,18 @@ public class ProfilePicker {
 		swipe2 = new RectZone(0, applet.getHeight()/2-imgSize*2 - sketch.yOffset, applet.getWidth(), imgSize*2 + sketch.yOffset){
 			public void hSwipeEvent(HSwipeEvent e){
 
-				if (index2 > 0 && index2 <= numProfiles && e.getSwipeType() == -1){
+				if (index2 > 0 && index2 <= lastZoneIndex && e.getSwipeType() == -1){
 					index2--;
-				} else if(index2 < numProfiles && e.getSwipeType() == 1){
+				} else if(index2 < lastZoneIndex && e.getSwipeType() == 1){
 					index2++;
 				} else if (index2 == 0) {
-					index2 = numProfiles;
-				} else if (index2 == numProfiles) {
+					index2 = lastZoneIndex;
+				} else if (index2 == lastZoneIndex) {
 					index2 = 0;
 				}
 
 				//load images starting at index
-				loadImages(2, index2);
+				setImages(2, index2);
 				if(chosenProfile1 != -1) disableProfile(2, index2);
 				e.setHandled(hSwipeableHandled);
 			}
@@ -302,18 +305,18 @@ public class ProfilePicker {
 				public void hSwipeEvent(HSwipeEvent e){
 
 
-					if (index1 > 0 && index1 <= numProfiles && e.getSwipeType() == 1){
+					if (index1 > 0 && index1 <= lastZoneIndex && e.getSwipeType() == 1){
 						index1--;
-					} else if(index1 < numProfiles && e.getSwipeType() == -1){
+					} else if(index1 < lastZoneIndex && e.getSwipeType() == -1){
 						index1++;
 					} else if (index1 == 0) {
-						index1 = numProfiles;
-					} else if (index1 == numProfiles) {
+						index1 = lastZoneIndex;
+					} else if (index1 == lastZoneIndex) {
 						index1 = 0;
 					}
 
 					//load images starting at index
-					loadImages(1, index1);
+					setImages(1, index1);
 					if(chosenProfile2 != -1) disableProfile(1, index1);
 					e.setHandled(hSwipeableHandled);
 				}
@@ -326,8 +329,6 @@ public class ProfilePicker {
 				userImg[i].setBorderColour(Colours.zoneBorder);
 				userImg[i].setBorderWeight(10);
 			} else {
-
-
 				userImg[i].setDrawBorder(false);
 			}
 
@@ -337,7 +338,7 @@ public class ProfilePicker {
 			userImg[i].setTapUp(true);
 			client.addZone(userImg[i]);
 
-			if(loadIndex == numProfiles){
+			if(loadIndex == lastZoneIndex){
 				loadIndex = 0;
 			} else {
 				loadIndex++;
@@ -395,18 +396,18 @@ public class ProfilePicker {
 
 				public void hSwipeEvent(HSwipeEvent e){
 
-					if (index2 > 0 && index2 <= numProfiles && e.getSwipeType() == -1){
+					if (index2 > 0 && index2 <= lastZoneIndex && e.getSwipeType() == -1){
 						index2--;
-					} else if(index2 < numProfiles && e.getSwipeType() == 1){
+					} else if(index2 < lastZoneIndex && e.getSwipeType() == 1){
 						index2++;
 					} else if (index2 == 0) {
-						index2 = numProfiles;
-					} else if (index2 == numProfiles) {
+						index2 = lastZoneIndex;
+					} else if (index2 == lastZoneIndex) {
 						index2 = 0;
 					}
 
 					//load images starting at index
-					loadImages(2, index2);
+					setImages(2, index2);
 					if(chosenProfile1 != -1) disableProfile(2, index2);
 					e.setHandled(hSwipeableHandled);
 				}
@@ -427,7 +428,7 @@ public class ProfilePicker {
 			userImg[i+IMG_ONSCR].setActive(false);
 			client.addZone(userImg[i+IMG_ONSCR]);
 
-			if(loadIndex == numProfiles){
+			if(loadIndex == lastZoneIndex){
 				loadIndex = 0;
 			} else {
 				loadIndex++;
@@ -438,11 +439,12 @@ public class ProfilePicker {
 	/**
 	 * Loads the profile images into PImages
 	 */
-	public void loadPImages(){
-		numProfiles = new File(".\\data\\users\\images").list().length - 2;
-		images = new PImage[numProfiles+1];
+	public void loadImages(){
+		numProfiles = new File(".\\data\\users\\images").list().length;
+		lastZoneIndex = numProfiles - 1;
+		images = new PImage[numProfiles];
 
-		for(int i = 0; i <= numProfiles; i++){
+		for(int i = 0; i < numProfiles; i++){
 			images[i] = applet.loadImage("\\users\\images\\user" + (i) + ".png");
 		}
 	}
@@ -479,7 +481,7 @@ public class ProfilePicker {
 	 * @param user
 	 * @param loadIndex
 	 */
-	public void loadImages(int user, int loadIndex){		
+	public void setImages(int user, int loadIndex){		
 		//Load Profile Pictures into the ImageZones
 		for(int i = 0; i < IMG_ONSCR; i++){
 			if(user == 1){
@@ -488,7 +490,7 @@ public class ProfilePicker {
 				userImg[i+IMG_ONSCR].setImage(images[loadIndex]);
 			}
 
-			if(loadIndex == numProfiles){
+			if(loadIndex == lastZoneIndex){
 				loadIndex = 0;
 			} else {
 				loadIndex++;
@@ -512,25 +514,22 @@ public class ProfilePicker {
 				profile = chosenProfile1;
 			}
 			int zoneToDisable = 0;
-			//int middle = 3;
-			/*if(loadIndex > middle+20){
-						if(user == 2 && loadIndex >= 3){
-							zoneToDisable = middle - loadIndex + IMG_ONSCR + 1 + profile;
-						} else {
-							zoneToDisable = middle - loadIndex + IMG_ONSCR + 1 + profile;
-						}
-					} */
+		
 
-			if(loadIndex < 4){
-				zoneToDisable = IMG_ONSCR - 4 - loadIndex + profile;
-			} else if(Math.abs(profile - loadIndex) <= IMG_ONSCR){
-				zoneToDisable = (numProfiles)%7 + loadIndex  + profile + 4;
-			}
-			//zoneToDisable = Math.abs(profile +loadIndex - (numProfiles -7));//- (numProfiles - loadIndex) + middle);
+			if(profile >= loadIndex - IMG_ONSCR || profile <= loadIndex + IMG_ONSCR){
+				//if(numProfiles - loadIndex <= IMG_ONSCR || loadIndex - 3 < 0){
+					///if(loadIndex < IMG_ONSCR && profile < IMG_ONSCR)	
+						
+				//if(loadIndex >=3)
+						//zoneToDisable = profile%IMG_ONSCR - loadIndex%IMG_ONSCR;
 
-			System.out.println(loadIndex + " " + profile + " " + zoneToDisable);
+				
+			} 
+
 
 			if(user == 1 && chosenProfile2 != -1 && zoneToDisable < IMG_ONSCR){
+				System.out.println(loadIndex + " " + profile + " " + zoneToDisable + " " + numProfiles);
+
 				userImg[zoneToDisable].setFilterColFlag(true);
 				userImg[lastDisabled1].setFilterColFlag(false);
 				lastDisabled1 = zoneToDisable;
