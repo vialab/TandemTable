@@ -1,4 +1,4 @@
-package activities.videos;
+package TandemTable.sections.activities.videos;
 
 import java.awt.Color;
 import java.io.IOException;
@@ -8,8 +8,6 @@ import java.util.ArrayList;
 
 import javax.swing.SwingUtilities;
 
-import main.Colours;
-import main.Sketch;
 import processing.core.PConstants;
 import processing.core.PImage;
 import vialab.simpleMultiTouch.events.DragEvent;
@@ -18,6 +16,8 @@ import vialab.simpleMultiTouch.zones.ImageZone;
 import vialab.simpleMultiTouch.zones.RectZone;
 import vialab.simpleMultiTouch.zones.TextZone;
 import vialab.simpleMultiTouch.zones.Zone;
+import TandemTable.Colours;
+import TandemTable.Sketch;
 
 import com.google.gdata.client.youtube.YouTubeQuery;
 import com.google.gdata.data.youtube.VideoEntry;

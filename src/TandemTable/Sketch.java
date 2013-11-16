@@ -1,7 +1,10 @@
-package main;
+package TandemTable;
 import java.awt.Color;
 import java.util.Random;
 import java.util.Vector;
+
+import TandemTable.sections.login.LoginScreen;
+import TandemTable.sections.mainSection.MainSection;
 
 import com.aetrion.flickr.Flickr;
 import com.aetrion.flickr.REST;
@@ -12,7 +15,6 @@ import processing.core.PApplet;
 import processing.core.PConstants;
 import twitter4j.Twitter;
 import vialab.simpleMultiTouch.TouchClient;
-import main.login.LoginScreen;
 
 /**
  * Main Class of TandemTable
@@ -44,10 +46,10 @@ public class Sketch extends PApplet {
 	public int buttonWidth, buttonHeight, radius, yOffset, textSize, shadowOffset, 	lineX,
 		qSwipeThreshold, tSwipeThreshold;
 
-	final static int NUM_QUESTIONS = 19;
-	final static int NUM_ACTIVITIES = 5;
-	final static int NUM_TOPICS = 15;
-	final static int NUM_SYN = 10;
+	public final static int NUM_QUESTIONS = 19;
+	public final static int NUM_ACTIVITIES = 5;
+	public final static int NUM_TOPICS = 15;
+	public final static int NUM_SYN = 10;
 	public final int NUM_PAGES = 200;
 	public final int TIMEOUT = 10000;
 	
@@ -105,7 +107,7 @@ public class Sketch extends PApplet {
 	}
 
 	public static void main(String[] args) {
-		PApplet.main(new String[]{"--present", "main.Sketch"});
+		PApplet.main(new String[]{"--present", "TandemTable.Sketch"});
 	}
 
 

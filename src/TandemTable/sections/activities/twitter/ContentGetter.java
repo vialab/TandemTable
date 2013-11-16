@@ -1,4 +1,4 @@
-package activities.twitter;
+package TandemTable.sections.activities.twitter;
 
 import gifAnimation.Gif;
 
@@ -6,15 +6,14 @@ import java.awt.Color;
 import java.util.HashMap;
 import java.util.Vector;
 
-import main.Colours;
-import main.Sketch;
-
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.interpolation.PropertySetter;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import TandemTable.Colours;
+import TandemTable.Sketch;
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PGraphics;

@@ -1,4 +1,4 @@
-package activities.twitter;
+package TandemTable.sections.activities.twitter;
 
 import gifAnimation.Gif;
 
@@ -6,8 +6,6 @@ import java.awt.Color;
 import java.util.HashMap;
 import java.util.List;
 
-import main.Colours;
-import main.Sketch;
 import processing.core.PApplet;
 import twitter4j.Query;
 import twitter4j.QueryResult;
@@ -18,6 +16,8 @@ import twitter4j.conf.ConfigurationBuilder;
 import vialab.simpleMultiTouch.events.TapEvent;
 import vialab.simpleMultiTouch.zones.RectZone;
 import vialab.simpleMultiTouch.zones.TextZone;
+import TandemTable.Colours;
+import TandemTable.Sketch;
 
 import com.memetix.mst.language.Language;
 import com.memetix.mst.translate.Translate;

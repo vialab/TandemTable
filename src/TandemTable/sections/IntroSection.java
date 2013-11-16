@@ -1,4 +1,4 @@
-package main;
+package TandemTable.sections;
 
 import java.awt.Color;
 
@@ -8,6 +8,10 @@ import org.jdesktop.animation.timing.interpolation.PropertySetter;
 import org.jdesktop.animation.timing.triggers.TimingTrigger;
 import org.jdesktop.animation.timing.triggers.TimingTriggerEvent;
 
+import TandemTable.ColourEval;
+import TandemTable.Colours;
+import TandemTable.Sketch;
+import TandemTable.sections.mainSection.MainSection;
 import processing.core.PConstants;
 import vialab.simpleMultiTouch.events.HSwipeEvent;
 import vialab.simpleMultiTouch.events.TapEvent;
@@ -24,7 +28,7 @@ public class IntroSection {
 	Sketch sketch;
 	MainSection mainSection;
 	TextZone[] questionZone1, questionZone2;
-	TextZone nextB1, nextB2;
+	public TextZone nextB1, nextB2;
 
 	Animator[] animQuestion11, animQuestion12;
 	Animator[] animNext = new Animator[2];
@@ -38,10 +42,9 @@ public class IntroSection {
 	int animIndex1 = 0, animIndex2 = 0;
 
 
-	final int TIME = 4000;
-	final int FINAL_TIME = 1000;
+	final int TIME = 4000, FINAL_TIME = 1000;
 
-	boolean next1 = false, next2 = false;
+	public boolean next1 = false, next2 = false;
 	
 	/**
 	 * Creates the next buttons and the questions textZones

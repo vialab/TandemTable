@@ -1,11 +1,12 @@
-package activities.headlines;
+package TandemTable.sections.activities.headlines;
 
 import gifAnimation.Gif;
-import main.Colours;
-import main.Sketch;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import TandemTable.Colours;
+import TandemTable.Sketch;
 
 import com.memetix.mst.language.Language;
 import com.memetix.mst.translate.Translate;

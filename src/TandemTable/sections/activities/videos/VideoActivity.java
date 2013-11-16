@@ -1,13 +1,8 @@
-package activities.videos;
+package TandemTable.sections.activities.videos;
 
 
 import java.awt.Color;
 import java.util.ArrayList;
-
-import main.ColourEval;
-import main.Colours;
-import main.Languages;
-import main.Sketch;
 
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.Animator.RepeatBehavior;
@@ -18,6 +13,10 @@ import vialab.simpleMultiTouch.zones.CurrentZone;
 import vialab.simpleMultiTouch.zones.RectZone;
 import vialab.simpleMultiTouch.zones.TextZone;
 import vialab.simpleMultiTouch.zones.Zone;
+import TandemTable.ColourEval;
+import TandemTable.Colours;
+import TandemTable.Languages;
+import TandemTable.Sketch;
 
 import com.google.gdata.client.youtube.YouTubeService;
 import com.google.gdata.data.youtube.VideoFeed;

@@ -1,4 +1,4 @@
-package main;
+package TandemTable;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;

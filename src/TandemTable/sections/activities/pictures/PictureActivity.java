@@ -1,11 +1,11 @@
-package activities.pictures;
+package TandemTable.sections.activities.pictures;
 
-
-import main.Colours;
-import main.Languages;
-import main.Sketch;
 
 import org.jdesktop.animation.timing.Animator;
+
+import TandemTable.Colours;
+import TandemTable.Languages;
+import TandemTable.Sketch;
 
 import com.aetrion.flickr.photos.PhotoList;
 

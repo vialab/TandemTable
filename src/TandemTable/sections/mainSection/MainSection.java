@@ -1,4 +1,4 @@
-package main;
+package TandemTable.sections.mainSection;
 import java.awt.Color;
 
 import org.jdesktop.animation.timing.Animator;
@@ -8,11 +8,16 @@ import org.jdesktop.animation.timing.interpolation.PropertySetter;
 import vialab.simpleMultiTouch.events.TapEvent;
 import vialab.simpleMultiTouch.zones.TextZone;
 import vialab.simpleMultiTouch.zones.Zone;
-import activities.headlines.HeadlinesActivity;
-import activities.pGame.PGame;
-import activities.pictures.PictureActivity;
-import activities.twitter.TwitterActivity;
-import activities.videos.VideoActivity;
+import TandemTable.ColourEval;
+import TandemTable.Colours;
+import TandemTable.Languages;
+import TandemTable.Sketch;
+import TandemTable.sections.IntroSection;
+import TandemTable.sections.activities.headlines.HeadlinesActivity;
+import TandemTable.sections.activities.pGame.PGame;
+import TandemTable.sections.activities.pictures.PictureActivity;
+import TandemTable.sections.activities.twitter.TwitterActivity;
+import TandemTable.sections.activities.videos.VideoActivity;
 
 import com.memetix.mst.translate.Translate;
 

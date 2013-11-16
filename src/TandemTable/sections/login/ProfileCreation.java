@@ -1,7 +1,7 @@
-package main.login;
+package TandemTable.sections.login;
 
-import main.Colours;
-import main.Sketch;
+import TandemTable.Colours;
+import TandemTable.Sketch;
 import processing.core.PApplet;
 import processing.core.PImage;
 import vialab.simpleMultiTouch.Touch;

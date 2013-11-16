@@ -1,13 +1,7 @@
-package activities.headlines;
+package TandemTable.sections.activities.headlines;
 
 import java.awt.Color;
 import java.util.HashMap;
-
-import main.ColourEval;
-import main.Colours;
-import main.Languages;
-import main.MainSection;
-import main.Sketch;
 
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.Animator.RepeatBehavior;
@@ -15,6 +9,12 @@ import org.jdesktop.animation.timing.interpolation.PropertySetter;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import TandemTable.ColourEval;
+import TandemTable.Colours;
+import TandemTable.Languages;
+import TandemTable.Sketch;
+import TandemTable.sections.mainSection.MainSection;
 
 import com.memetix.mst.language.Language;
 

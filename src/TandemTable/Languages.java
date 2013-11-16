@@ -1,4 +1,4 @@
-package main;
+package TandemTable;
 
 public class Languages {
 	public static String[] introQuestionsEnglish = new String[Sketch.NUM_QUESTIONS];

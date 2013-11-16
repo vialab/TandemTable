@@ -1,13 +1,14 @@
-package activities.videos;
+package TandemTable.sections.activities.videos;
 
 import javax.swing.JFrame;
+
 
 
 import processing.core.PApplet;
 import uk.co.caprica.vlcj.component.EmbeddedMediaPlayerComponent;
 import uk.co.caprica.vlcj.player.MediaPlayer;
-import activities.twitter.ContentGetter;
-import activities.twitter.VideoController;
+import TandemTable.sections.activities.twitter.ContentGetter;
+import TandemTable.sections.activities.twitter.VideoController;
 
 public class VideoPlayer{
 	public EmbeddedMediaPlayerComponent mediaPlayerComponent;

@@ -1,4 +1,4 @@
-package activities.pictures;
+package TandemTable.sections.activities.pictures;
 
 import gifAnimation.Gif;
 
@@ -6,10 +6,10 @@ import java.io.IOException;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import main.Colours;
-import main.Sketch;
-
 import org.xml.sax.SAXException;
+
+import TandemTable.Colours;
+import TandemTable.Sketch;
 
 import com.aetrion.flickr.Flickr;
 import com.aetrion.flickr.FlickrException;

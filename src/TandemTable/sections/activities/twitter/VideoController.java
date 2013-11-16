@@ -1,12 +1,8 @@
-package activities.twitter;
+package TandemTable.sections.activities.twitter;
 
 import java.awt.Color;
 
 import javax.swing.SwingUtilities;
-
-import main.ColourEval;
-import main.Colours;
-import main.Sketch;
 
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.Animator.RepeatBehavior;
@@ -17,7 +13,10 @@ import com.google.gdata.client.youtube.YouTubeService;
 import vialab.simpleMultiTouch.events.TapEvent;
 import vialab.simpleMultiTouch.zones.RectZone;
 import vialab.simpleMultiTouch.zones.TextZone;
-import activities.videos.VideoPlayer;
+import TandemTable.ColourEval;
+import TandemTable.Colours;
+import TandemTable.Sketch;
+import TandemTable.sections.activities.videos.VideoPlayer;
 
 public class VideoController {
 	Sketch sketch;

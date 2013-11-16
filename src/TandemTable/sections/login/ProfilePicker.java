@@ -1,4 +1,4 @@
-package main.login;
+package TandemTable.sections.login;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -6,8 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-import main.Colours;
-import main.Sketch;
+import TandemTable.Colours;
+import TandemTable.Sketch;
 import processing.core.PApplet;
 import processing.core.PImage;
 import vialab.simpleMultiTouch.TouchClient;

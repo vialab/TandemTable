@@ -1,10 +1,10 @@
-package activities.pGame;
+package TandemTable.sections.activities.pGame;
 
 import java.awt.Color;
 
-import main.Colours;
-import main.Languages;
-import main.Sketch;
+import TandemTable.Colours;
+import TandemTable.Languages;
+import TandemTable.Sketch;
 
 
 import processing.core.PConstants;

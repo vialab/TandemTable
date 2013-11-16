@@ -1,14 +1,8 @@
-package activities.twitter;
+package TandemTable.sections.activities.twitter;
 
 
 
 import java.awt.Color;
-
-import main.ColourEval;
-import main.Colours;
-import main.Languages;
-import main.MainSection;
-import main.Sketch;
 
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.Animator.RepeatBehavior;
@@ -20,6 +14,11 @@ import vialab.simpleMultiTouch.events.TapEvent;
 import vialab.simpleMultiTouch.events.VSwipeEvent;
 import vialab.simpleMultiTouch.zones.RectZone;
 import vialab.simpleMultiTouch.zones.TextZone;
+import TandemTable.ColourEval;
+import TandemTable.Colours;
+import TandemTable.Languages;
+import TandemTable.Sketch;
+import TandemTable.sections.mainSection.MainSection;
 
 import com.memetix.mst.language.Language;
 

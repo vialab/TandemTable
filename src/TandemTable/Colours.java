@@ -1,4 +1,4 @@
-package main;
+package TandemTable;
 import java.awt.Color;
 
 import processing.core.PFont;
