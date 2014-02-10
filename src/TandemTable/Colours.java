@@ -56,7 +56,7 @@ public class Colours {
 	//From Main.login
 	public static Color zoneText = new Color(255, 255, 255);
 	public static Color unselectedZone = new Color(79, 129, 189);
-	public static Color selectedZone = new Color(79, 157, 189);
+	public static Color selectedZone = new Color(189, 84, 79);
 	public static Color fadedOutZone = new Color(191, 191, 191);//(185, 205, 229);//(166, 206, 227);//(220, 230, 242);
 	public static int zoneBorder = 103; //56. 93, 138
 
