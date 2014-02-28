@@ -40,7 +40,7 @@ public class VideoPlayer{
 
 		mediaPlayerComponent = new EmbeddedMediaPlayerComponent(){
 			public void error(MediaPlayer mediaPlayer){
-				System.out.println("ERROR");
+				System.out.println("Video Player Error");
 				removePlayerVAct();
 			}
 
@@ -116,7 +116,7 @@ public class VideoPlayer{
 
 		mediaPlayerComponent = new EmbeddedMediaPlayerComponent(){
 			public void error(MediaPlayer mediaPlayer){
-				System.out.println("ERROR");
+				System.out.println("Video Player Error");
 				removePlayercg();
 			}
 

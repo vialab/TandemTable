@@ -100,19 +100,19 @@ public class PictureGetter extends Thread {
 
 		} catch (IOException e) {
 			picAct.failed = true;
-			System.out.println("Error: IOException");
+			System.out.println("Error: Flickr IOException");
 			e.printStackTrace();
 		} catch (SAXException e) {
 			picAct.failed = true;
-			System.out.println("Error: SAXException");
+			System.out.println("Error: Flickr SAXException");
 			e.printStackTrace();
 		} catch (FlickrException e) {
 			picAct.failed = true;
-			System.out.println("Error: FlickrException");
+			System.out.println("Error: Flickr FlickrException");
 			e.printStackTrace();
 		} catch (ParserConfigurationException e) {
 			picAct.failed = true;
-			System.out.println("Error: ParserConfigurationException");
+			System.out.println("Error: Flickr ParserConfigurationException");
 			e.printStackTrace();
 		}
 	}

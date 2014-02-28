@@ -203,7 +203,7 @@ public class IntroSection {
 			sketch.textFont(Colours.pFont, questionTextSize);
 			sketch.textAlign(PConstants.LEFT, PConstants.BOTTOM);
 			float textWidth = sketch.textWidth(s);
-			System.out.println(textWidth);
+			//System.out.println(textWidth);
 			boolean changeWidthFlag = false;
 			if(textWidth > maxWidthQuestions){
 				textWidth = maxWidthQuestions;

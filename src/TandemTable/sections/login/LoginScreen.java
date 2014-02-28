@@ -62,9 +62,9 @@ public class LoginScreen {
 	 */
 	public void createLoadingScreen(){
 		final int circX1 = sketch.getWidth()/4;
-		final int circX2 = (int) (sketch.getWidth()/1.5);
-		final int circY = sketch.getHeight()/3;
-		final int circDiam = sketch.getWidth();
+		final int circX2 = (int) (sketch.getWidth()/1.4);
+		final int circY = sketch.getHeight()/2;
+		final int circDiam = (int) (sketch.getWidth()*1.1);
 
 		bkgZone = new RectZone(0, 0, sketch.getWidth(), sketch.getHeight()){
 			public void drawZone(){

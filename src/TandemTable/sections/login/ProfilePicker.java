@@ -48,7 +48,7 @@ public class ProfilePicker {
 	int index1 = 0;
 	int index2 = 0;
 
-	//Profiles chosen by the use
+	//Profiles chosen by the user
 	int chosenProfile1 = -1;
 	int chosenProfile2 = -1;
 
@@ -111,7 +111,7 @@ public class ProfilePicker {
 
 					//load images starting at index
 					setImages(1, index1);
-					if(chosenProfile2 != -1) disableProfile(1, index1);
+					//if(chosenProfile2 != -1) disableProfile(1);
 					e.setHandled(tappableHandled);
 
 				}
@@ -129,7 +129,7 @@ public class ProfilePicker {
 					}
 					//load images starting at index
 					setImages(1, index1);
-					if(chosenProfile2 != -1) disableProfile(1, index1);
+					//if(chosenProfile2 != -1) disableProfile(1);
 					e.setHandled(tappableHandled);
 				}
 			}
@@ -157,7 +157,7 @@ public class ProfilePicker {
 
 					//load images starting at index
 					setImages(2, index2);
-					if(chosenProfile1 != -1) disableProfile(2, index2);
+					//if(chosenProfile1 != -1) disableProfile(2);
 					e.setHandled(tappableHandled);
 
 				}
@@ -175,7 +175,7 @@ public class ProfilePicker {
 					}
 					//load images starting at index
 					setImages(2, index2);
-					if(chosenProfile1 != -1) disableProfile(2, index2);
+					//if(chosenProfile1 != -1) disableProfile(2);
 					e.setHandled(tappableHandled);
 				}
 			}
@@ -216,7 +216,7 @@ public class ProfilePicker {
 
 				//load images starting at index
 				setImages(1, index1);
-				if(chosenProfile2 != -1) disableProfile(1, index1);
+				//if(chosenProfile2 != -1) disableProfile(1);
 				e.setHandled(hSwipeableHandled);
 			}
 
@@ -243,7 +243,7 @@ public class ProfilePicker {
 
 				//load images starting at index
 				setImages(2, index2);
-				if(chosenProfile1 != -1) disableProfile(2, index2);
+				//if(chosenProfile1 != -1) disableProfile(2);
 				e.setHandled(hSwipeableHandled);
 			}
 
@@ -294,7 +294,7 @@ public class ProfilePicker {
 				public void tapEvent(TapEvent e){
 					if (ii == 3 && isTappable() && index1 != chosenProfile2){
 						chosenProfile1 = index1;
-						if(chosenProfile2 == -1) disableProfile(2, index1);
+						//if(chosenProfile2 == -1) disableProfile(2);
 						removeUserProfilesPicker(1);
 						loginScreen.activateNewLastButtons(1);
 						loginScreen.profileCreation.loadProfileImage(1, this.getImage());
@@ -317,7 +317,7 @@ public class ProfilePicker {
 
 					//load images starting at index
 					setImages(1, index1);
-					if(chosenProfile2 != -1) disableProfile(1, index1);
+				//	if(chosenProfile2 != -1) disableProfile(1);
 					e.setHandled(hSwipeableHandled);
 				}
 
@@ -384,7 +384,7 @@ public class ProfilePicker {
 				public void tapEvent(TapEvent e){
 					if (ii == 3 && isTappable() && index2 != chosenProfile1){
 						chosenProfile2 = index2;
-						if(chosenProfile1 != -1) disableProfile(2, index2);
+						//if(chosenProfile1 == -1) disableProfile(1);
 						removeUserProfilesPicker(2);
 						loginScreen.activateNewLastButtons(2);
 						loginScreen.profileCreation.loadProfileImage(2, this.getImage());
@@ -408,7 +408,7 @@ public class ProfilePicker {
 
 					//load images starting at index
 					setImages(2, index2);
-					if(chosenProfile1 != -1) disableProfile(2, index2);
+					//if(chosenProfile1 != -1) disableProfile(2);
 					e.setHandled(hSwipeableHandled);
 				}
 			};
@@ -501,47 +501,50 @@ public class ProfilePicker {
 	/**
 	 * Disable the profile picture that has already been chosen
 	 * by the other user
-	 * @param user
+	 * @param user The user's image zone is disabled
 	 * @param loadIndex
 	 */
-	public void disableProfile(int user, int loadIndex){
-		//Disable the already chosen profile pictures
-		if(chosenProfile1 != -1 || chosenProfile2 != -1){
-			int profile;
-			if(user == 1){
-				profile = chosenProfile2;
-			} else {
-				profile = chosenProfile1;
-			}
-			int zoneToDisable = 0;
-		
+	/*public void disableProfile(int user){
 
-			if(profile >= loadIndex - IMG_ONSCR || profile <= loadIndex + IMG_ONSCR){
-				//if(numProfiles - loadIndex <= IMG_ONSCR || loadIndex - 3 < 0){
-					///if(loadIndex < IMG_ONSCR && profile < IMG_ONSCR)	
-						
-				//if(loadIndex >=3)
-						//zoneToDisable = profile%IMG_ONSCR - loadIndex%IMG_ONSCR;
-
-				
-			} 
-
-
-			if(user == 1 && chosenProfile2 != -1 && zoneToDisable < IMG_ONSCR){
-				System.out.println(loadIndex + " " + profile + " " + zoneToDisable + " " + numProfiles);
-
-				userImg[zoneToDisable].setFilterColFlag(true);
+			if(user == 1){// && loadIndex < IMG_ONSCR){
+				System.out.println("Disable user 1: " + index1 + " " + chosenProfile2 + "  " + numProfiles);
 				userImg[lastDisabled1].setFilterColFlag(false);
-				lastDisabled1 = zoneToDisable;
-			} 
-
-			if(user == 2 && chosenProfile1 != -1 && zoneToDisable < IMG_ONSCR){
-				userImg[zoneToDisable + IMG_ONSCR].setFilterColFlag(true);
+				int index = 3 - index1;
+				
+				if(index >= 0 || index <= -3 ) {
+					System.out.println(index);
+					if(index <= -(numProfiles - IMG_ONSCR)) {
+						index = 6 - index1%6 ;
+					}
+					System.out.println(index);
+					userImg[index].setFilterColFlag(true);
+					lastDisabled1 = index;
+				}
+				
+				
+			} else {
+				
 				userImg[lastDisabled2].setFilterColFlag(false);
-				lastDisabled2 = zoneToDisable + IMG_ONSCR;
+				int index = chosenProfile1 + 3 - index2;
+				
+				if(index >= 0 || index <= -3 ) {
+					System.out.println(index);
+					if(index <= -(numProfiles - IMG_ONSCR)) {
+						index = 6 - index1%6 ;
+					}
+					System.out.println(index);
+					userImg[index + IMG_ONSCR].setFilterColFlag(true);
+					lastDisabled2 = index + IMG_ONSCR;
+				}
+
+			//if(user == 2){// && loadIndex < IMG_ONSCR){
+				//System.out.println("Disable user 2: " + loadIndex + " " + chosenProfile1 + "  " + numProfiles);
+				//userImg[chosenProfile1 + IMG_ONSCR + 3].setFilterColFlag(true);
+				//userImg[lastDisabled2].setFilterColFlag(false);
+				//lastDisabled2 = chosenProfile1 + IMG_ONSCR + 3;
 			}
-		}
-	}
+		//}
+	}*/
 
 	/**
 	 * Disables the profile picker zones
