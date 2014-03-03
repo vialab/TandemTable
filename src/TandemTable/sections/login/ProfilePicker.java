@@ -111,7 +111,7 @@ public class ProfilePicker {
 
 					//load images starting at index
 					setImages(1, index1);
-					//if(chosenProfile2 != -1) disableProfile(1);
+					if(chosenProfile2 != -1) disableProfile(1);
 					e.setHandled(tappableHandled);
 
 				}
@@ -129,7 +129,7 @@ public class ProfilePicker {
 					}
 					//load images starting at index
 					setImages(1, index1);
-					//if(chosenProfile2 != -1) disableProfile(1);
+					if(chosenProfile2 != -1) disableProfile(1);
 					e.setHandled(tappableHandled);
 				}
 			}
@@ -157,7 +157,7 @@ public class ProfilePicker {
 
 					//load images starting at index
 					setImages(2, index2);
-					//if(chosenProfile1 != -1) disableProfile(2);
+					if(chosenProfile1 != -1) disableProfile(2);
 					e.setHandled(tappableHandled);
 
 				}
@@ -175,7 +175,7 @@ public class ProfilePicker {
 					}
 					//load images starting at index
 					setImages(2, index2);
-					//if(chosenProfile1 != -1) disableProfile(2);
+					if(chosenProfile1 != -1) disableProfile(2);
 					e.setHandled(tappableHandled);
 				}
 			}
@@ -216,7 +216,7 @@ public class ProfilePicker {
 
 				//load images starting at index
 				setImages(1, index1);
-				//if(chosenProfile2 != -1) disableProfile(1);
+				if(chosenProfile2 != -1) disableProfile(1);
 				e.setHandled(hSwipeableHandled);
 			}
 
@@ -243,7 +243,7 @@ public class ProfilePicker {
 
 				//load images starting at index
 				setImages(2, index2);
-				//if(chosenProfile1 != -1) disableProfile(2);
+				if(chosenProfile1 != -1) disableProfile(2);
 				e.setHandled(hSwipeableHandled);
 			}
 
@@ -294,7 +294,7 @@ public class ProfilePicker {
 				public void tapEvent(TapEvent e){
 					if (ii == 3 && isTappable() && index1 != chosenProfile2){
 						chosenProfile1 = index1;
-						//if(chosenProfile2 == -1) disableProfile(2);
+						if(chosenProfile2 == -1) disableProfile(2);
 						removeUserProfilesPicker(1);
 						loginScreen.activateNewLastButtons(1);
 						loginScreen.profileCreation.loadProfileImage(1, this.getImage());
@@ -317,7 +317,7 @@ public class ProfilePicker {
 
 					//load images starting at index
 					setImages(1, index1);
-				//	if(chosenProfile2 != -1) disableProfile(1);
+				  	if(chosenProfile2 != -1) disableProfile(1);
 					e.setHandled(hSwipeableHandled);
 				}
 
@@ -384,7 +384,7 @@ public class ProfilePicker {
 				public void tapEvent(TapEvent e){
 					if (ii == 3 && isTappable() && index2 != chosenProfile1){
 						chosenProfile2 = index2;
-						//if(chosenProfile1 == -1) disableProfile(1);
+						if(chosenProfile1 == -1) disableProfile(1);
 						removeUserProfilesPicker(2);
 						loginScreen.activateNewLastButtons(2);
 						loginScreen.profileCreation.loadProfileImage(2, this.getImage());
@@ -408,7 +408,7 @@ public class ProfilePicker {
 
 					//load images starting at index
 					setImages(2, index2);
-					//if(chosenProfile1 != -1) disableProfile(2);
+					if(chosenProfile1 != -1) disableProfile(2);
 					e.setHandled(hSwipeableHandled);
 				}
 			};
@@ -504,47 +504,56 @@ public class ProfilePicker {
 	 * @param user The user's image zone is disabled
 	 * @param loadIndex
 	 */
-	/*public void disableProfile(int user){
+	public void disableProfile(int user){
 
-			if(user == 1){// && loadIndex < IMG_ONSCR){
-				System.out.println("Disable user 1: " + index1 + " " + chosenProfile2 + "  " + numProfiles);
-				userImg[lastDisabled1].setFilterColFlag(false);
-				int index = 3 - index1;
-				
-				if(index >= 0 || index <= -3 ) {
-					System.out.println(index);
-					if(index <= -(numProfiles - IMG_ONSCR)) {
-						index = 6 - index1%6 ;
-					}
-					System.out.println(index);
-					userImg[index].setFilterColFlag(true);
-					lastDisabled1 = index;
-				}
-				
-				
-			} else {
-				
-				userImg[lastDisabled2].setFilterColFlag(false);
-				int index = chosenProfile1 + 3 - index2;
-				
-				if(index >= 0 || index <= -3 ) {
-					System.out.println(index);
-					if(index <= -(numProfiles - IMG_ONSCR)) {
-						index = 6 - index1%6 ;
-					}
-					System.out.println(index);
-					userImg[index + IMG_ONSCR].setFilterColFlag(true);
-					lastDisabled2 = index + IMG_ONSCR;
+		if(user == 1){
+			//System.out.println("Disable user 1: " + index1 + " " + chosenProfile2 + "  " + numProfiles);
+			userImg[lastDisabled1].setFilterColFlag(false);
+			int index = chosenProfile2 + MID - index1;
+			
+			if((index >= 0 && index < numProfiles) || index <= -MID ) {
+				if(index <= -(numProfiles - IMG_ONSCR)) {
+					//index = 6 - index2%6;
+					index = IMG_ONSCR - index1 % (IMG_ONSCR - 1) + chosenProfile2;
 				}
 
-			//if(user == 2){// && loadIndex < IMG_ONSCR){
-				//System.out.println("Disable user 2: " + loadIndex + " " + chosenProfile1 + "  " + numProfiles);
-				//userImg[chosenProfile1 + IMG_ONSCR + 3].setFilterColFlag(true);
-				//userImg[lastDisabled2].setFilterColFlag(false);
-				//lastDisabled2 = chosenProfile1 + IMG_ONSCR + 3;
+				userImg[index].setFilterColFlag(true);
+				lastDisabled1 = index;
+			} else if(index >= numProfiles && index < (numProfiles + MID)) {	
+				
+				index -= numProfiles;
+				userImg[index].setFilterColFlag(true);
+				lastDisabled1 = index;
 			}
-		//}
-	}*/
+			
+			
+		} else if(user == 2) {
+			
+			userImg[lastDisabled2].setFilterColFlag(false);
+			int index = chosenProfile1 + MID - index2;
+			
+			if((index >= 0 && index < numProfiles) || index <= -MID) {
+				//System.out.println(index);
+				if(index <= -(numProfiles - IMG_ONSCR)) {
+					//index = 6 - index2%6;
+					//index = IMG_ONSCR + (chosenProfile1 - index2 % (IMG_ONSCR - 1));
+					index = (IMG_ONSCR -1) - index2 % (IMG_ONSCR - 1) + chosenProfile1;
+					//System.out.println(index);
+
+				}
+				//System.out.println(index);
+
+				if(index >= IMG_ONSCR) return;
+				userImg[index + IMG_ONSCR].setFilterColFlag(true);
+				lastDisabled2 = index + IMG_ONSCR;
+			} else if(index >= numProfiles && index < (numProfiles + MID)) {	
+				index -= numProfiles;
+
+				userImg[index + IMG_ONSCR].setFilterColFlag(true);
+				lastDisabled2 = index + IMG_ONSCR;
+			}
+		}
+	}
 
 	/**
 	 * Disables the profile picker zones
