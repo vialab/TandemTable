@@ -620,7 +620,10 @@ public class VideoGetter extends Thread {
 				vAct.videoPlayer1 = new VideoPlayer(sketch, vAct, sketch.lineX + vAct.videSpaceX/4, height, videoWidth, height, 1);
 				vAct.videoPlayer2 = new VideoPlayer(sketch, vAct, sketch.lineX + vAct.videSpaceX/4, 0, videoWidth, height, 2);
 				//String link = vAct.videoPlayer1.getVideoStream(href);
+				
 				String link = href;
+				link = link.replace("&feature=youtube_gdata", "");
+				System.out.println(link);
 				vAct.videoPlayer1.init(link);
 				vAct.videoPlayer2.init(link);
 				vAct.videoPlayer1.startVideo();

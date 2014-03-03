@@ -1,5 +1,7 @@
 package TandemTable.sections.activities.videos;
 
+import java.util.List;
+
 import javax.swing.JFrame;
 
 
@@ -21,6 +23,16 @@ public class VideoPlayer{
 
 	int x, y, width, height;
 
+	/**
+	 * For Video activity
+	 * @param applet
+	 * @param vAct
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 * @param user
+	 */
 	@SuppressWarnings("serial")
 	public VideoPlayer(PApplet applet, final VideoActivity vAct, int x, int y, int width, int height, final int user){
 		this.vAct = vAct;
@@ -41,11 +53,30 @@ public class VideoPlayer{
 		mediaPlayerComponent = new EmbeddedMediaPlayerComponent(){
 			public void error(MediaPlayer mediaPlayer){
 				System.out.println("Video Player Error");
-				removePlayerVAct();
+				
+				List<String> subItems = mediaPlayer.subItems();
+                //System.out.println("subItems=" + subItems);
+				if(subItems != null && !subItems.isEmpty()) {
+                    // Pick the first sub-item, and play it...
+                    String subItemMrl = subItems.get(0);
+                    mediaPlayer.playMedia(subItemMrl);
+				} else {
+					removePlayerVAct();
+				}
 			}
 
 			public void finished(MediaPlayer mediaPlayer) {
-				removePlayerVAct();				
+				System.out.println("Finished video");
+
+				List<String> subItems = mediaPlayer.subItems();
+                //System.out.println("subItems=" + subItems);
+				if(subItems != null && !subItems.isEmpty()) {
+                    // Pick the first sub-item, and play it...
+                    String subItemMrl = subItems.get(0);
+                    mediaPlayer.playMedia(subItemMrl);
+				} else {
+					removePlayerVAct();
+				}				
 			}
 
 			protected String[] onGetMediaPlayerFactoryArgs() {
@@ -53,6 +84,7 @@ public class VideoPlayer{
 			}
 		};
 
+		mediaPlayerComponent.getMediaPlayer().setPlaySubItems(true);
 		frame.setContentPane(mediaPlayerComponent);
 		frame.setBounds(x, y, width, height);
 		frame.setUndecorated(true);
@@ -60,6 +92,79 @@ public class VideoPlayer{
 
 	}
 
+	/**
+	 * For Twitter activity
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 * @param applet
+	 * @param cg
+	 * @param vc
+	 * @param user
+	 */
+	@SuppressWarnings("serial")
+	public VideoPlayer(int x, int y, int width, int height, PApplet applet, final ContentGetter cg, final VideoController vc, int user){
+		this.cg = cg;
+		this.applet = applet;
+		this.user = user;
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+		cg.loading.setActive(true);
+		this.vc = vc;
+
+		String[] opt = new String[] {"--no-video-title-show"};
+		if(user == 2){
+			opt = new String[] {"--video-filter=transform", "--transform-type=180", "--no-video-title-show"};
+		}	
+		final String[] options = opt;
+
+
+		mediaPlayerComponent = new EmbeddedMediaPlayerComponent(){
+			public void error(MediaPlayer mediaPlayer){
+				System.out.println("Video Player Error");
+				List<String> subItems = mediaPlayer.subItems();
+                //System.out.println("subItems=" + subItems);
+				if(subItems != null && !subItems.isEmpty()) {
+                    // Pick the first sub-item, and play it...
+                    String subItemMrl = subItems.get(0);
+                    mediaPlayer.playMedia(subItemMrl);
+				} else {
+					removePlayercg();
+				}
+			}
+
+			public void finished(MediaPlayer mediaPlayer) {
+				System.out.println("Finished video");
+				
+				List<String> subItems = mediaPlayer.subItems();
+                //System.out.println("subItems=" + subItems);
+				if(subItems != null && !subItems.isEmpty()) {
+                    // Pick the first sub-item, and play it...
+                    String subItemMrl = subItems.get(0);
+                    mediaPlayer.playMedia(subItemMrl);
+				} else {
+					removePlayercg();
+				}
+			}
+
+			protected String[] onGetMediaPlayerFactoryArgs() {
+				return options;
+			}
+		};
+		
+		mediaPlayerComponent.getMediaPlayer().setPlaySubItems(true);
+		frame.setContentPane(mediaPlayerComponent);
+		frame.setBounds(x, y, width, height);
+		frame.setUndecorated(true);
+
+	}
+
+	/**
+	 * For Video activity
+	 */
 	public void removePlayerVAct(){
 		if(vAct.playerActive){
 			vAct.playerActive = false;
@@ -94,46 +199,10 @@ public class VideoPlayer{
 			}
 		}
 	}
-
-	@SuppressWarnings("serial")
-	public VideoPlayer(int x, int y, int width, int height, PApplet applet, final ContentGetter cg, final VideoController vc, int user){
-		this.cg = cg;
-		this.applet = applet;
-		this.user = user;
-		this.x = x;
-		this.y = y;
-		this.width = width;
-		this.height = height;
-		cg.loading.setActive(true);
-		this.vc = vc;
-
-		String[] opt = new String[] {"--no-video-title-show"};
-		if(user == 2){
-			opt = new String[] {"--video-filter=transform", "--transform-type=180", "--no-video-title-show"};
-		}	
-		final String[] options = opt;
-
-
-		mediaPlayerComponent = new EmbeddedMediaPlayerComponent(){
-			public void error(MediaPlayer mediaPlayer){
-				System.out.println("Video Player Error");
-				removePlayercg();
-			}
-
-			public void finished(MediaPlayer mediaPlayer) {
-				removePlayercg();
-			}
-
-			protected String[] onGetMediaPlayerFactoryArgs() {
-				return options;
-			}
-		};
-		frame.setContentPane(mediaPlayerComponent);
-		frame.setBounds(x, y, width, height);
-		frame.setUndecorated(true);
-
-	}
-
+	
+	/**
+	 * For Twitter activity
+	 */
 	public void removePlayercg(){
 		if(vc.playerActive){
 			vc.playerActive = false;
@@ -204,7 +273,7 @@ public class VideoPlayer{
 	}
 
 
-	public String getVideoStream(String href){
+	//public String getVideoStream(String href){
 		/////////////
 		// Old way
 
@@ -262,10 +331,10 @@ public class VideoPlayer{
 
 		 */
 
-		///////////
+		//////////////////////////
 		// New way
-		
-		String[] response = applet.loadStrings(href);
+		///////////////////////
+		/*String[] response = applet.loadStrings(href);
 		// create a script engine manager
 		// create a JavaScript engine
 		String resp2 = "";
@@ -284,7 +353,7 @@ public class VideoPlayer{
 
 
 		return links;
-	}
+	}*/
 
 	String convertStreamToString(java.io.InputStream is) {
 		java.util.Scanner s = new java.util.Scanner(is, "UTF-8").useDelimiter("\\A");

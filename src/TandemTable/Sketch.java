@@ -10,6 +10,7 @@ import com.aetrion.flickr.Flickr;
 import com.aetrion.flickr.REST;
 import com.aetrion.flickr.RequestContext;
 import com.google.gdata.client.youtube.YouTubeService;
+//import com.sun.jna.NativeLibrary;
 
 import processing.core.PApplet;
 import processing.core.PConstants;
@@ -77,6 +78,9 @@ public class Sketch extends PApplet {
 		qSwipeThreshold = getWidth()/15;
 		tSwipeThreshold = getHeight()/15;
 
+		// Needs to be set for each machine
+		//NativeLibrary.addSearchPath("libvlc", "C:\\Program Files (x86)\\VideoLAN\\VLC");
+		
 		LoginScreen startScreen = new LoginScreen();
 		startScreen.initialize(client, this);
 

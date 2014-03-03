@@ -164,7 +164,7 @@ public class VideoActivity {
 						cLang1 = false;
 						animCL2.stop();
 						changeL2.setColour(Colours.unselectedZone);
-
+						changeL1.setColour(Colours.unselectedZone);
 					} else {
 						cLang1 = true;
 						animCL2.start();
@@ -209,6 +209,7 @@ public class VideoActivity {
 					} else if(cLang2){
 						cLang2 = false;
 						animCL1.stop();
+						changeL2.setColour(Colours.unselectedZone);
 						changeL1.setColour(Colours.unselectedZone);
 
 					} else {
@@ -325,7 +326,7 @@ public class VideoActivity {
 						mvFlag1 = false;
 						animMV2.stop();
 						moreVideos2.setColour(Colours.unselectedZone);
-
+						moreVideos1.setColour(Colours.unselectedZone);
 					} else {
 						mvFlag1 = true;
 						animMV2.start();
@@ -378,6 +379,7 @@ public class VideoActivity {
 					} else if(mvFlag2){
 						mvFlag2 = false;
 						animMV1.stop();
+						moreVideos2.setColour(Colours.unselectedZone);
 						moreVideos1.setColour(Colours.unselectedZone);
 					} else {
 						mvFlag2 = true;

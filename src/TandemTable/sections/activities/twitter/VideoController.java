@@ -220,9 +220,13 @@ public class VideoController {
 					SwingUtilities.invokeLater(new Runnable() {
 						@Override
 						public void run() {
-							String href= videoPlayer1.getVideoStream(finalS);
-							videoPlayer1.init(href);
-							videoPlayer2.init(href);
+							//String href= videoPlayer1.getVideoStream(finalS);
+							String link = finalS;
+							link = link.replace("&feature=youtube_gdata", "");
+							System.out.println(link);
+							
+							videoPlayer1.init(link);
+							videoPlayer2.init(link);
 							videoPlayer1.startVideocg();
 							videoPlayer2.startVideocg();
 							pause1.setTextColour(Colours.zoneText);
