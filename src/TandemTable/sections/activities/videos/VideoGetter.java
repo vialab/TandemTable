@@ -334,7 +334,7 @@ public class VideoGetter extends Thread {
 	}
 
 	public void createImgZone1(PImage img, final int space, final int yPos, final int imageX, final String text, final int i, final float tSize){
-		float y = yPos+space/8;
+		float y = yPos+space/2;
 
 		currentImgs1[i] = new ImageZone(img, sketch.lineX-(sketch.getWidth()-sketch.lineX)/32, y, space/4, space/4){
 			public void tapEvent(TapEvent e){
@@ -619,7 +619,8 @@ public class VideoGetter extends Thread {
 			public void run() {
 				vAct.videoPlayer1 = new VideoPlayer(sketch, vAct, sketch.lineX + vAct.videSpaceX/4, height, videoWidth, height, 1);
 				vAct.videoPlayer2 = new VideoPlayer(sketch, vAct, sketch.lineX + vAct.videSpaceX/4, 0, videoWidth, height, 2);
-				String link = vAct.videoPlayer1.getVideoStream(href);
+				//String link = vAct.videoPlayer1.getVideoStream(href);
+				String link = href;
 				vAct.videoPlayer1.init(link);
 				vAct.videoPlayer2.init(link);
 				vAct.videoPlayer1.startVideo();

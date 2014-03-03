@@ -18,9 +18,9 @@
 	<classpathentry kind="lib" path="libs/json.jar"/>
 	<classpathentry kind="lib" path="libs/xom-1.2.8.jar"/>
 	<classpathentry kind="lib" path="libs/libTUIO.jar"/>
-	<classpathentry kind="lib" path="libs/vlcj-2.0.0.jar"/>
 	<classpathentry kind="lib" path="libs/twitter4j-core-3.0.5.jar"/>
 	<classpathentry kind="lib" path="libs/mouseToTUIO.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/SMT-v1"/>
+	<classpathentry kind="lib" path="libs/vlcj-3.0.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
