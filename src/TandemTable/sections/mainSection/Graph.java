@@ -93,10 +93,6 @@ public class Graph {
 					randActs[i][4] = 1;
 				}
 			}
-			
-			//TODO
-			/// AUTOMATICALLY DISABLE WEB SEARCH UNTIL IT GETS IMPLEMENTED
-			//randActs[i][4] = 1;
 
 		}
 
@@ -272,8 +268,6 @@ public class Graph {
 							sketch.fill(Colours.videos.getRed(), Colours.videos.getGreen(), Colours.videos.getBlue());
 							sketch.rect(getX()+actIndWidth*4, yTop, actIndWidth, yBot);
 
-							//TODO
-							//Uncomment when web search is implemented
 							sketch.fill(Colours.pGame.getRed(), Colours.pGame.getGreen(), Colours.pGame.getBlue());
 							sketch.rect(getX()+actIndWidth*5, yTop, actIndWidth, yBot);
 						} else {
@@ -312,9 +306,7 @@ public class Graph {
 								sketch.fill(Colours.fadedOutZone.getRed(), Colours.fadedOutZone.getGreen(), Colours.fadedOutZone.getBlue());
 							}	
 							sketch.rect(getX()+actIndWidth*4, yTop, actIndWidth, yBot);
-						//}//<-delete when web search is implemented
-							//TODO
-							///////////////////// Web Search Activity is automatically disabled until it gets implemented
+						
 							if(randActs[index][4] != 1){
 								sketch.fill(Colours.pGame.getRed(), Colours.pGame.getGreen(), Colours.pGame.getBlue());
 								
@@ -323,7 +315,12 @@ public class Graph {
 							}
 							sketch.rect(getX()+actIndWidth*5, yTop, actIndWidth, yBot);
 
-						}//<-uncomment when web search is implemented
+						}
+						
+						if(sketch.deactivateVideo) {
+							sketch.fill(Colours.fadedOutZone.getRed(), Colours.fadedOutZone.getGreen(), Colours.fadedOutZone.getBlue());
+							sketch.rect(getX()+actIndWidth*4, yTop, actIndWidth, yBot);
+						}
 
 						sketch.pushMatrix();
 						sketch.translate(getX() + getWidth(), getY() + getHeight()/2);
@@ -414,7 +411,7 @@ public class Graph {
 		}
 	}
 
-	public void inactivateNodes(){
+	public void deactivateNodes(){
 		//for(CircleZone cZone: nodes){
 		for(int i = 0; i < NUM_NODES; i++){
 			if(i != lastSelectedNode){

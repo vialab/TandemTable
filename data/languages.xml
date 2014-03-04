@@ -70,8 +70,8 @@
 	<play lang="french">Lecture</play>
 	<pause lang="english">Pause</pause>
 	<pause lang="french">Pause</pause>
-	<stop lang="english">Stop</stop>
-	<stop lang="french">Arrêter</stop>
+	<stop lang="english">Go Back</stop>
+	<stop lang="french">Retourner</stop>
 	<playVideo lang="english">Your Partner Selected A Video</playVideo>
 	<playVideo lang="french">Votre Partenaire A Sélectionné Une Vidéo</playVideo>
 </buttons>

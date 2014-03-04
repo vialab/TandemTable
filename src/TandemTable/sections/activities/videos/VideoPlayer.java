@@ -53,30 +53,50 @@ public class VideoPlayer{
 		mediaPlayerComponent = new EmbeddedMediaPlayerComponent(){
 			public void error(MediaPlayer mediaPlayer){
 				System.out.println("Video Player Error");
-				
 				List<String> subItems = mediaPlayer.subItems();
-                //System.out.println("subItems=" + subItems);
-				if(subItems != null && !subItems.isEmpty()) {
-                    // Pick the first sub-item, and play it...
-                    String subItemMrl = subItems.get(0);
-                    mediaPlayer.playMedia(subItemMrl);
+				
+				if(subItems != null && !subItems.isEmpty()) {// && !vAct.playingSubItem) {
+	                System.out.println("subItems=" + subItems);
+
+					String subItemMrl = subItems.get(0);
+                    //mediaPlayer.playMedia(subItemMrl);
+					vAct.videoPlayer1.mediaPlayerComponent.getMediaPlayer().playMedia(subItemMrl);
+					vAct.videoPlayer2.mediaPlayerComponent.getMediaPlayer().playMedia(subItemMrl);
+					vAct.videoPlayer2.mediaPlayerComponent.getMediaPlayer().mute(true);
+                    //if(user == 2){
+                    //	mediaPlayer.mute();
+            		//}
+                    
+                    vAct.playingSubItem = true;
 				} else {
-					removePlayerVAct();
+					//removePlayerVAct();
 				}
 			}
 
 			public void finished(MediaPlayer mediaPlayer) {
 				System.out.println("Finished video");
-
 				List<String> subItems = mediaPlayer.subItems();
-                //System.out.println("subItems=" + subItems);
-				if(subItems != null && !subItems.isEmpty()) {
-                    // Pick the first sub-item, and play it...
-                    String subItemMrl = subItems.get(0);
-                    mediaPlayer.playMedia(subItemMrl);
+				
+				if(subItems != null && !subItems.isEmpty()) {// && !vAct.playingSubItem) {
+					System.out.println("subItems=" + subItems);
+
+					String subItemMrl = subItems.get(0);
+                    //mediaPlayer.playMedia(subItemMrl);
+					vAct.videoPlayer1.mediaPlayerComponent.getMediaPlayer().playMedia(subItemMrl);
+					vAct.videoPlayer2.mediaPlayerComponent.getMediaPlayer().playMedia(subItemMrl);
+					vAct.videoPlayer2.mediaPlayerComponent.getMediaPlayer().mute(true);
+                    //if(user == 2){
+                    //	mediaPlayer.mute();
+            		//}
+                    
+                    vAct.playingSubItem = true;
 				} else {
-					removePlayerVAct();
+					//removePlayerVAct();
 				}				
+			}
+			
+			public void buffering(MediaPlayer mediaPlayer, float newCache) {
+				System.out.println("Buffering " + newCache);
 			}
 
 			protected String[] onGetMediaPlayerFactoryArgs() {
@@ -104,7 +124,7 @@ public class VideoPlayer{
 	 * @param user
 	 */
 	@SuppressWarnings("serial")
-	public VideoPlayer(int x, int y, int width, int height, PApplet applet, final ContentGetter cg, final VideoController vc, int user){
+	public VideoPlayer(int x, int y, int width, int height, PApplet applet, final ContentGetter cg, final VideoController vc, final int user){
 		this.cg = cg;
 		this.applet = applet;
 		this.user = user;
@@ -121,18 +141,23 @@ public class VideoPlayer{
 		}	
 		final String[] options = opt;
 
-
 		mediaPlayerComponent = new EmbeddedMediaPlayerComponent(){
 			public void error(MediaPlayer mediaPlayer){
 				System.out.println("Video Player Error");
 				List<String> subItems = mediaPlayer.subItems();
                 //System.out.println("subItems=" + subItems);
 				if(subItems != null && !subItems.isEmpty()) {
-                    // Pick the first sub-item, and play it...
-                    String subItemMrl = subItems.get(0);
+                   
+					String subItemMrl = subItems.get(0);
                     mediaPlayer.playMedia(subItemMrl);
+                    
+                    if(user == 2){
+                    	mediaPlayer.mute();
+            		}
+                    
+                    vAct.playingSubItem = true;
 				} else {
-					removePlayercg();
+					//removePlayercg();
 				}
 			}
 
@@ -142,9 +167,15 @@ public class VideoPlayer{
 				List<String> subItems = mediaPlayer.subItems();
                 //System.out.println("subItems=" + subItems);
 				if(subItems != null && !subItems.isEmpty()) {
-                    // Pick the first sub-item, and play it...
+
                     String subItemMrl = subItems.get(0);
                     mediaPlayer.playMedia(subItemMrl);
+                    
+                    if(user == 2){
+                    	mediaPlayer.mute();
+            		}
+                    
+                    vAct.playingSubItem = true;
 				} else {
 					removePlayercg();
 				}
@@ -230,7 +261,7 @@ public class VideoPlayer{
 
 	public void init(String videoLink){
 
-
+		
 		mediaPlayerComponent.getMediaPlayer().prepareMedia(videoLink);
 		frame.setVisible(true);
 		frame.setAlwaysOnTop(true);

@@ -366,6 +366,16 @@ public class MainSection {
 				activityB2[i].setTextColour(Colours.zoneText);
 			}
 		}
+		
+		if(sketch.deactivateVideo) {
+			activityB1[3].setGestureEnabled("Tap", false);
+			activityB2[3].setGestureEnabled("Tap", false);
+			activityB1[3].setTextColour(Colours.fadedText);
+			activityB2[3].setTextColour(Colours.fadedText);
+			activityB1[3].setColour(Colours.fadedOutZone);
+			activityB2[3].setColour(Colours.fadedOutZone);
+
+		}
 
 	}
 
@@ -617,7 +627,7 @@ public class MainSection {
 
 		edgesFlag = false;
 		leftCenterLineFlag = false;
-		graph.inactivateNodes();
+		graph.deactivateNodes();
 		//String s ="";
 
 		//New switch activity Button for user 1
@@ -818,6 +828,11 @@ public class MainSection {
 			activityBars2[2] = Colours.pictures;
 			activityBars2[3] = Colours.videos;
 			activityBars2[4] = Colours.pGame;
+		}
+		
+		if(sketch.deactivateVideo) {
+			activityBars1[3] = Colours.fadedText;
+			activityBars2[3] = Colours.fadedText;
 		}
 		
 

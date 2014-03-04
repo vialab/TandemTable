@@ -28,7 +28,7 @@ public class VideoActivity {
 	int videoControlsX, videSpaceX, videoWidth, startIndex1 = 1, topicIndex, totalResults = 0;
 	boolean errorFlag = false, playerActive = false, videoFlag1 = false, videoFlag2 = false;
 	boolean mvFlag1 = false, mvFlag2 = false, playFlag1 = false, playFlag2 = false, stopFlag1 = false, stopFlag2 = false, pauseFlag1 = false, pauseFlag2 = false;
-	boolean cLang1 = false, cLang2 = false;
+	boolean cLang1 = false, cLang2 = false, playingSubItem = false;
 	TextZone play1, pause1, stop1, play2, pause2, stop2, errorZone; 
 	VideoActivity vAct;
 	CurrentZone current1, current2;

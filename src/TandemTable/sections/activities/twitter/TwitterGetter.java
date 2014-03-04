@@ -342,7 +342,7 @@ public class TwitterGetter extends Thread {
 										hmap1[ii].get(jj).activated = true;
 										sketch.client.pullToTop(twitterAct.middleTweet);
 										hmap1[ii].get(jj).background.setActive(true);
-										if(currentGetter1.videoFlag){
+										if(currentGetter1.videoFlag && !sketch.deactivateVideo){
 											twitterAct.videoController.hashMap[0] = ii;
 											twitterAct.videoController.hashMap[1] = jj;
 											twitterAct.videoController.setAgreeButtonVisible(2);
@@ -479,7 +479,7 @@ public class TwitterGetter extends Thread {
 										hmap2[ii].get(jj).activated = true;
 										sketch.client.pullToTop(twitterAct.middleTweet);
 										hmap2[ii].get(jj).background.setActive(true);
-										if(currentGetter2.videoFlag){
+										if(currentGetter2.videoFlag && !sketch.deactivateVideo){
 											twitterAct.videoController.hashMap[0] = ii;
 											twitterAct.videoController.hashMap[1] = jj;
 											twitterAct.videoController.setAgreeButtonVisible(1);

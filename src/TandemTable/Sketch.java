@@ -10,7 +10,7 @@ import com.aetrion.flickr.Flickr;
 import com.aetrion.flickr.REST;
 import com.aetrion.flickr.RequestContext;
 import com.google.gdata.client.youtube.YouTubeService;
-//import com.sun.jna.NativeLibrary;
+import com.sun.jna.NativeLibrary;
 
 import processing.core.PApplet;
 import processing.core.PConstants;
@@ -42,6 +42,9 @@ public class Sketch extends PApplet {
 	
 	boolean drawMainLayout = false;
 	boolean showFrameRate = false;
+	
+	// Deactivating video activity for study
+	public boolean deactivateVideo = true;
 	
 
 	public int buttonWidth, buttonHeight, radius, yOffset, textSize, shadowOffset, 	lineX,
@@ -79,7 +82,7 @@ public class Sketch extends PApplet {
 		tSwipeThreshold = getHeight()/15;
 
 		// Needs to be set for each machine
-		//NativeLibrary.addSearchPath("libvlc", "C:\\Program Files (x86)\\VideoLAN\\VLC");
+		NativeLibrary.addSearchPath("libvlc", "C:\\Program Files\\VideoLAN\\VLC");
 		
 		LoginScreen startScreen = new LoginScreen();
 		startScreen.initialize(client, this);

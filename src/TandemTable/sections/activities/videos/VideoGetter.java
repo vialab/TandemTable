@@ -624,6 +624,7 @@ public class VideoGetter extends Thread {
 				String link = href;
 				link = link.replace("&feature=youtube_gdata", "");
 				System.out.println(link);
+				vAct.playingSubItem = false;
 				vAct.videoPlayer1.init(link);
 				vAct.videoPlayer2.init(link);
 				vAct.videoPlayer1.startVideo();
