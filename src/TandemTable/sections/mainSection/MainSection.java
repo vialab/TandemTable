@@ -41,7 +41,7 @@ public class MainSection {
 
 	Animator[] animA1, animA2;
 	
-	Animator[] animNextTopic = new Animator[2];
+	//Animator[] animNextTopic = new Animator[2];
 	Animator[] animSwitchTopic = new Animator[2];
 	Animator[] animSwitchAct = new Animator[2];
 	Animator[] animNewLang = new Animator[2];
@@ -89,6 +89,7 @@ public class MainSection {
 
 	// for activity buttons
 	int actBHeight;
+	int actBWidth;
 	//int questionIndex1 = 0;
 
 
@@ -155,7 +156,11 @@ public class MainSection {
 
 
 		actBHeight = (int) (sketch.getHeight()/6.5);
-
+		actBWidth = (int)((sketch.getWidth()-sketch.lineX)/5.1);
+		
+		if(sketch.removeVideoAct) {
+			actBWidth = (int)((sketch.getWidth()-sketch.lineX)/4.1);
+		}
 		
 		intro = new IntroSection(sketch, this);
 	}
@@ -386,6 +391,9 @@ public class MainSection {
 	 */
 	public void switchActivity(String activity){
 		for(int i = 0; i < Sketch.NUM_ACTIVITIES; i++){
+			if(sketch.removeVideoAct && i == 3) {
+				continue;
+			}
 			activityB1[i].setActive(true);
 			activityB2[i].setActive(true);
 		}
@@ -456,7 +464,7 @@ public class MainSection {
 			activityString = sketch.activitiesF;
 		}*/
 
-		int width = (int)((sketch.getWidth()-sketch.lineX)/5.1);
+		
 		int offset = 2;
 
 		int x;
@@ -466,8 +474,16 @@ public class MainSection {
 			final int index = i;
 
 			x = (int) (sketch.getWidth()/5.8) + index*(int)((sketch.getWidth()-sketch.lineX)/5.0);
-
-			activityB1[i] = new TextZone(x, y, width, actBHeight,
+			
+			if(sketch.removeVideoAct) {
+				if(i == 4) {
+					x = (int) (sketch.getWidth()/5.8) + (index - 1)*(int)((sketch.getWidth()-sketch.lineX)/4.0);
+				} else {
+					x = (int) (sketch.getWidth()/5.8) + index*(int)((sketch.getWidth()-sketch.lineX)/4.0);
+				}
+			}
+			
+			activityB1[i] = new TextZone(x, y, actBWidth, actBHeight,
 					Colours.pFont, sketch.learner1.activities[index], sketch.textSize, "CENTER", "CENTER"){
 
 				public void tapEvent(TapEvent e){
@@ -515,6 +531,10 @@ public class MainSection {
 
 			};
 
+			if(sketch.removeVideoAct && i == 3) {
+				activityB1[i].setActive(false);
+			}
+			
 			activityB1[i].setTextColour(Colours.fadedText);
 			activityB1[i].setColour(Colours.fadedOutZone);
 			activityB1[i].setGestureEnabled("TAP", true, true);
@@ -540,7 +560,15 @@ public class MainSection {
 			final int index = i;
 			x = (int) (sketch.getWidth()/5.8) + index*(int)((sketch.getWidth()-sketch.lineX)/5.0);
 
-			activityB2[i] = new TextZone(x, y, width, actBHeight,
+			if(sketch.removeVideoAct) {
+				if(i == 4) {
+					x = (int) (sketch.getWidth()/5.8) + (index - 1)*(int)((sketch.getWidth()-sketch.lineX)/4.0);
+				} else {
+					x = (int) (sketch.getWidth()/5.8) + index*(int)((sketch.getWidth()-sketch.lineX)/4.0);
+				}
+			}
+			
+			activityB2[i] = new TextZone(x, y, actBWidth, actBHeight,
 					Colours.pFont, sketch.learner2.activities[index], sketch.textSize, "CENTER", "CENTER"){
 
 				public void tapEvent(TapEvent e){
@@ -584,6 +612,10 @@ public class MainSection {
 				
 			};
 
+			if(sketch.removeVideoAct && i == 3) {
+				activityB2[i].setActive(false);
+			}
+			
 			activityB2[i].rotate((float) (Colours.PI));
 			activityB2[i].setTextColour(Colours.fadedText);
 			activityB2[i].setColour(Colours.fadedOutZone);

@@ -89,9 +89,13 @@ public class PictureActivity {
 				TouchClient.picker.removeMapping(z);
 				
 				if(!canceled){
-					PImage img = pg.loadImage();
-					if(img != null){
-						setImgZone((ImageZone)z, img);
+					PImage img = null;
+					while(img == null) {
+						img = pg.loadImage();
+					
+						if(img != null){
+							setImgZone((ImageZone)z, img);
+						}
 					}
 				}
 			}
@@ -107,9 +111,13 @@ public class PictureActivity {
 				TouchClient.picker.removeMapping(z);
 				
 				if(!canceled){
-					PImage img = pg.loadImage();
-					if(img != null){
-						setImgZone((ImageZone)z, img);
+					PImage img = null;
+					while(img == null) {
+						img = pg.loadImage();
+					
+						if(img != null){
+							setImgZone((ImageZone)z, img);
+						}
 					}
 				}
 			}
@@ -138,11 +146,11 @@ public class PictureActivity {
 		z.setImage(pImage);
 		int[] pos = findRandXY(imgSize);
 		z.setXY(pos[0], pos[1]);
-		float rot = (float) (0 + Math.random( ) * (2*Colours.PI - 0 + 1));
+		float rot = (float) (0 + Math.random( ) * (2*Colours.PI + 1));
 		z.rotate(rot);
 		z.setGestureEnabled("Drag", true);
-		//z.setGestureEnabled("Pinch", true);
-		//z.setGestureEnabled("Rotate", true);
+		z.setGestureEnabled("Pinch", true);
+		z.setGestureEnabled("Rotate", true);
 
 		//z.setImgRotated(true);
 		//z.setImgRotateAmount((float) Colours.PI);

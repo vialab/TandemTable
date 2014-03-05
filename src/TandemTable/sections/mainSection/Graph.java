@@ -55,8 +55,9 @@ public class Graph {
 		sizeNode = sketch.getWidth()/10;
 		randGen = new Random(System.currentTimeMillis());
 
-
-		randomlyPickNodes(randGen);
+		if(!sketch.activateAllAct) {
+			randomlyPickNodes(randGen);
+		}
 		createNodes();
 	}
 
@@ -168,12 +169,16 @@ public class Graph {
 				//********************************** for randomly deactivating activites
 				boolean randFlag1 = false;
 				int index1 = -1;
-				for(int i = 0; i < randNodes.length; i++){
-					if(k == randNodes[i]){
-						randFlag1 = true;
-						index1 = i;
+				
+				if(!sketch.activateAllAct) {
+					for(int i = 0; i < randNodes.length; i++){
+						if(k == randNodes[i]){
+							randFlag1 = true;
+							index1 = i;
+						}
 					}
 				}
+				
 				final int index = index1;
 				final boolean randFlag = randFlag1;
 				
@@ -252,6 +257,11 @@ public class Graph {
 
 						//Bar across middle
 						float actIndWidth = getWidth()/7;
+						
+						if(sketch.removeVideoAct) {
+							actIndWidth = getWidth()/6;
+						}
+						
 						float yTop = getY()+getHeight()/2 - (getHeight()/17)/2;
 						float yBot = getHeight()/17;
 
@@ -264,12 +274,19 @@ public class Graph {
 
 							sketch.fill(Colours.pictures.getRed(), Colours.pictures.getGreen(), Colours.pictures.getBlue());
 							sketch.rect(getX()+actIndWidth*3, yTop, actIndWidth, yBot);
+							
+							if(!sketch.removeVideoAct) {
+								sketch.fill(Colours.videos.getRed(), Colours.videos.getGreen(), Colours.videos.getBlue());
+								sketch.rect(getX()+actIndWidth*4, yTop, actIndWidth, yBot);
+								
+								sketch.fill(Colours.pGame.getRed(), Colours.pGame.getGreen(), Colours.pGame.getBlue());
+								sketch.rect(getX()+actIndWidth*5, yTop, actIndWidth, yBot);
+							} else {
+								sketch.fill(Colours.pGame.getRed(), Colours.pGame.getGreen(), Colours.pGame.getBlue());
+								sketch.rect(getX()+actIndWidth*4, yTop, actIndWidth, yBot);
+							}
 
-							sketch.fill(Colours.videos.getRed(), Colours.videos.getGreen(), Colours.videos.getBlue());
-							sketch.rect(getX()+actIndWidth*4, yTop, actIndWidth, yBot);
-
-							sketch.fill(Colours.pGame.getRed(), Colours.pGame.getGreen(), Colours.pGame.getBlue());
-							sketch.rect(getX()+actIndWidth*5, yTop, actIndWidth, yBot);
+							
 						} else {
 							if(randActs[index][0] != 1){
 								sketch.fill(Colours.twitter.getRed(), Colours.twitter.getGreen(), Colours.twitter.getBlue());
@@ -396,6 +413,7 @@ public class Graph {
 
 	}
 
+	//graph edges (lines between nodes)
 	public void displayEdges() {
 		for(int[] i : nodeConnect){
 			sketch.strokeWeight(3);

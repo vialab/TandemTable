@@ -43,9 +43,17 @@ public class Sketch extends PApplet {
 	boolean drawMainLayout = false;
 	boolean showFrameRate = false;
 	
-	// Deactivating video activity for study
-	public boolean deactivateVideo = true;
+	///////////////////////////////////////
+	// For study
+	//////////////////////////////////////
 	
+	// Deactivating video activity for study
+	public boolean deactivateVideo = false;
+	// Removing video activity for study
+	public boolean removeVideoAct = true;
+	// Activate all activities for all topics
+	public boolean activateAllAct = true;
+	///////////////////////////////////////
 
 	public int buttonWidth, buttonHeight, radius, yOffset, textSize, shadowOffset, 	lineX,
 		qSwipeThreshold, tSwipeThreshold;
