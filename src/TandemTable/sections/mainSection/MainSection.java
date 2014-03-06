@@ -55,8 +55,8 @@ public class MainSection {
 	Zone newLang1, newLang2;
 	public Zone switchAct1, switchAct2;
 
-	boolean leftCenterLineFlag = true;
-	boolean centerLineFlag = true;
+	public boolean leftCenterLineFlag = true;
+	boolean centerLineFlag = false;
 	boolean verticalLineFlag = true;
 	boolean edgesFlag = false;
 
@@ -69,7 +69,7 @@ public class MainSection {
 	boolean newLangSelect2 = false;
 	boolean twitterFlag = false;
 	boolean youtubeFlag = false;
-
+	
 	int selectedTopicIndex = -1;
 	//String selectedTopic = "";
 
@@ -162,7 +162,17 @@ public class MainSection {
 			actBWidth = (int)((sketch.getWidth()-sketch.lineX)/4.1);
 		}
 		
-		intro = new IntroSection(sketch, this);
+		leftCenterLineFlag = true;
+		
+		if(sketch.doneIntro) {
+			createSwitchLanguageButtons();
+			createGraph();
+			createActivityButtons();
+		} else {
+			leftCenterLineFlag = true;
+			intro = new IntroSection(sketch, this);
+		}
+		
 	}
 	
 	/**
@@ -202,13 +212,13 @@ public class MainSection {
 		//String s = "";
 
 		//New language Button for user 1
-		/*if(lang1.equalsIgnoreCase("English")){
-			s = sketch.newLangE;
-		} else if(lang1.equalsIgnoreCase("French")){
-			s = sketch.newLangF;
-		}*/
+		//if(lang1.equalsIgnoreCase("English")){
+		//	s = sketch.newLangE;
+		//} else if(lang1.equalsIgnoreCase("French")){
+		//	s = sketch.newLangF;
+		//}
 
-		newLang1 = new TextZone(buttonX, buttonYb2, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner1.newLang, sketch.textSize, "CENTER", "CENTER"){
+		newLang1 = new TextZone(buttonX, buttonYb, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner1.newLang, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
 				if (isTappable()){
@@ -231,9 +241,7 @@ public class MainSection {
 						newLangSelect1 = false;
 						removeAllItems();
 
-						///////////////////////////////
-						//TODO
-						//sketch.startScreen.chooseNewLang();
+						sketch.startScreen.chooseNewLang();
 					}
 
 					e.setHandled(tappableHandled);
@@ -242,29 +250,29 @@ public class MainSection {
 			}
 		};
 
-		((TextZone) newLang1).setTextColour(Colours.fadedText);
-		((TextZone) newLang1).setColour(Colours.fadedOutZone);
+		//((TextZone) newLang1).setTextColour(Colours.fadedText);
+		//((TextZone) newLang1).setColour(Colours.fadedOutZone);
 
-		//((TextZone) newLang1).setTextColour(Colours.zoneText);
-		//((TextZone) newLang1).setColour(Colours.unselectedZone);
-		//newLang1.setGestureEnabled("TAP", true, true);
+		((TextZone) newLang1).setTextColour(Colours.zoneText);
+		((TextZone) newLang1).setColour(Colours.unselectedZone);
+		newLang1.setGestureEnabled("TAP", true, true);
 		newLang1.setDrawBorder(false);
 		sketch.client.addZone(newLang1);
 
-		/*animNewLang[0] = PropertySetter.createAnimator(animationTime, newLang1, 
+		animNewLang[0] = PropertySetter.createAnimator(animationTime, newLang1, 
 				"colour", new ColourEval(), Colours.unselectedZone, Colours.selectedZone);
 
 		animNewLang[0].setRepeatBehavior(RepeatBehavior.REVERSE);
-		animNewLang[0].setRepeatCount(Animator.INFINITE);*/
+		animNewLang[0].setRepeatCount(Animator.INFINITE);
 
 		//New language Button for user 2
-		/*if(lang2.equalsIgnoreCase("English")){
-			s = sketch.newLangE;
-		} else if(lang2.equalsIgnoreCase("French")){
-			s = sketch.newLangF;
-		}*/
+		//if(lang2.equalsIgnoreCase("English")){
+		//	s = sketch.newLangE;
+		//} else if(lang2.equalsIgnoreCase("French")){
+		//	s = sketch.newLangF;
+		//}
 
-		newLang2 = new TextZone(buttonX, buttonYt2, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner2.newLang, sketch.textSize, "CENTER", "CENTER"){
+		newLang2 = new TextZone(buttonX, buttonYt, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner2.newLang, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
 				if (isTappable()){
@@ -286,7 +294,7 @@ public class MainSection {
 						newLangSelect2 = false;
 						newLangSelect1 = false;
 						removeAllItems();
-						//sketch.startScreen.chooseNewLang();
+						sketch.startScreen.chooseNewLang();
 					}
 
 					e.setHandled(tappableHandled);
@@ -295,21 +303,21 @@ public class MainSection {
 			}
 		};
 
-		((TextZone) newLang2).setTextColour(Colours.fadedText);
-		((TextZone) newLang2).setColour(Colours.fadedOutZone);
+		//((TextZone) newLang2).setTextColour(Colours.fadedText);
+		//((TextZone) newLang2).setColour(Colours.fadedOutZone);
 
 		newLang2.rotate((float) (Colours.PI));
-		//((TextZone) newLang2).setTextColour(Colours.zoneText);
-		//((TextZone) newLang2).setColour(Colours.unselectedZone);
-		//newLang2.setGestureEnabled("TAP", true, true);
+		((TextZone) newLang2).setTextColour(Colours.zoneText);
+		((TextZone) newLang2).setColour(Colours.unselectedZone);
+		newLang2.setGestureEnabled("TAP", true, true);
 		newLang2.setDrawBorder(false);
 		sketch.client.addZone(newLang2);
 
-		/*animNewLang[1] = PropertySetter.createAnimator(animationTime, newLang2, 
+		animNewLang[1] = PropertySetter.createAnimator(animationTime, newLang2, 
 				"colour", new ColourEval(), Colours.unselectedZone, Colours.selectedZone);
 
 		animNewLang[1].setRepeatBehavior(RepeatBehavior.REVERSE);
-		animNewLang[1].setRepeatCount(Animator.INFINITE);*/
+		animNewLang[1].setRepeatCount(Animator.INFINITE);
 	}
 	
 	/**
@@ -878,8 +886,13 @@ public class MainSection {
 		verticalLineFlag = false;
 		edgesFlag = false;
 
-		intro.next1 = false;
-		intro.next2 = false;
+		if(intro != null) {
+			intro.next1 = false;
+			intro.next2 = false;
+			sketch.client.removeZone(intro.nextB1);
+			sketch.client.removeZone(intro.nextB2);
+		}
+		
 		bottomBSelect1 = false;
 		bottomBSelect2 = false;
 		newLangSelect1 = false;
@@ -893,8 +906,7 @@ public class MainSection {
 			sketch.client.removeZone(activityB2[i]);
 		}
 
-		sketch.client.removeZone(intro.nextB1);
-		sketch.client.removeZone(intro.nextB2);
+		
 
 		sketch.client.removeZone(switchAct1);
 		sketch.client.removeZone(switchAct2);

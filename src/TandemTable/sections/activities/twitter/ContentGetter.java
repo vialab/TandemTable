@@ -164,9 +164,11 @@ public class ContentGetter extends Thread{
 
 			if(content){
 				if(user == 1){
-					tg.twitterAct.tweetZones1[x][c].setTextColour(Color.BLUE);
+					if(!((sketch.deactivateVideo || sketch.removeVideoAct) && videoFlag)) {
+						tg.twitterAct.tweetZones1[x][c].setTextColour(Color.BLUE);
+					}
 					
-					if(videoFlag){
+					if(videoFlag) {// && !(sketch.deactivateVideo || sketch.removeVideoAct)){
 						tg.twitterAct.contentVisual1[x][c] = Colours.videoIndicator; 
 					} else if(imgFlag){
 						tg.twitterAct.contentVisual1[x][c] = Colours.imageIndicator;
@@ -174,9 +176,11 @@ public class ContentGetter extends Thread{
 						tg.twitterAct.contentVisual1[x][c] = Colours.textIndicator;
 					}
 				} else if(user == 2){
-					tg.twitterAct.tweetZones2[x][c].setTextColour(Color.BLUE);
+					if(!((sketch.deactivateVideo || sketch.removeVideoAct) && videoFlag)) {
+						tg.twitterAct.tweetZones2[x][c].setTextColour(Color.BLUE);
+					}
 					
-					if(videoFlag){
+					if(videoFlag) {// && !(sketch.deactivateVideo || sketch.removeVideoAct)){
 						tg.twitterAct.contentVisual2[x][c] = Colours.videoIndicator; 
 					} else if(imgFlag){
 						tg.twitterAct.contentVisual2[x][c] = Colours.imageIndicator;
@@ -548,7 +552,7 @@ public class ContentGetter extends Thread{
 					imgVec.copyInto(pimg);
 
 
-					img1 = new ImageZone(pimg, sketch.lineX + wSpace, - hSpace, w, h+ 4*sketch.shadowOffset, sketch.radius){
+					img1 = new ImageZone(pimg, sketch.lineX + wSpace, - hSpace, w, h+ 8*sketch.shadowOffset, sketch.radius){
 
 						public void tapEvent(TapEvent e){
 							if (isTappable()){

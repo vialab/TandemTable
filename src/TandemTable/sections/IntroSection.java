@@ -61,6 +61,7 @@ public class IntroSection {
 		createNextButtons();
 		createQuestionZones1();
 		createQuestionZones2();
+		sketch.doneIntro = true;
 	}
 	
 	/**

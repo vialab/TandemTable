@@ -440,9 +440,9 @@ public class Graph {
 
 	public void removeNodes(){
 		for(int i = 0; i < NUM_NODES; i++){
-			if(i != lastSelectedNode){
+			//if(i != lastSelectedNode){
 				client.removeZone(nodes[i]);
-			}
+			//}
 		}
 	}
 	

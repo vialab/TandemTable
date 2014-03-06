@@ -342,7 +342,7 @@ public class TwitterGetter extends Thread {
 										hmap1[ii].get(jj).activated = true;
 										sketch.client.pullToTop(twitterAct.middleTweet);
 										hmap1[ii].get(jj).background.setActive(true);
-										if(currentGetter1.videoFlag && !sketch.deactivateVideo){
+										if(currentGetter1.videoFlag && !(sketch.deactivateVideo || sketch.removeVideoAct)){
 											twitterAct.videoController.hashMap[0] = ii;
 											twitterAct.videoController.hashMap[1] = jj;
 											twitterAct.videoController.setAgreeButtonVisible(2);
@@ -353,6 +353,7 @@ public class TwitterGetter extends Thread {
 
 												}
 												hmap1[ii].get(jj).img1.setActive(true);
+												hmap1[ii].get(jj).img1.pullToTop();
 												hmap1[ii].get(jj).imgFlag = true;
 											}
 											if(hmap1[ii].get(jj).tZone1 != null){
@@ -479,7 +480,7 @@ public class TwitterGetter extends Thread {
 										hmap2[ii].get(jj).activated = true;
 										sketch.client.pullToTop(twitterAct.middleTweet);
 										hmap2[ii].get(jj).background.setActive(true);
-										if(currentGetter2.videoFlag && !sketch.deactivateVideo){
+										if(currentGetter2.videoFlag && !(sketch.deactivateVideo || sketch.removeVideoAct)){
 											twitterAct.videoController.hashMap[0] = ii;
 											twitterAct.videoController.hashMap[1] = jj;
 											twitterAct.videoController.setAgreeButtonVisible(1);
@@ -491,6 +492,7 @@ public class TwitterGetter extends Thread {
 
 												}
 												hmap2[ii].get(jj).img1.setActive(true);
+												hmap2[ii].get(jj).img1.pullToTop();
 												hmap2[ii].get(jj).imgFlag = true;
 											}
 											if(hmap2[ii].get(jj).tZone1 != null){

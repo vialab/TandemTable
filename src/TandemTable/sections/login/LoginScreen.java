@@ -707,6 +707,7 @@ public class LoginScreen {
 	 */
 	public void chooseNewLang(){
 		english1.setActive(true);
+		english1.pullToTop();
 		english2.setActive(true);
 		french1.setActive(true);
 		french2.setActive(true);
@@ -715,7 +716,8 @@ public class LoginScreen {
 		portuguese1.setActive(true);
 		portuguese2.setActive(true);
 
-
+		sketch.mainSection.leftCenterLineFlag = false;
+		
 		langSelect1 = false;
 		langSelect2 = false;
 	}

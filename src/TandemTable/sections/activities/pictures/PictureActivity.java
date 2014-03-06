@@ -149,7 +149,7 @@ public class PictureActivity {
 		float rot = (float) (0 + Math.random( ) * (2*Colours.PI + 1));
 		z.rotate(rot);
 		z.setGestureEnabled("Drag", true);
-		z.setGestureEnabled("Pinch", true);
+		//z.setGestureEnabled("Pinch", true);
 		z.setGestureEnabled("Rotate", true);
 
 		//z.setImgRotated(true);

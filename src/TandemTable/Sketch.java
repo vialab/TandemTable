@@ -28,6 +28,7 @@ public class Sketch extends PApplet {
 	public MainSection mainSection;
 	public Languages learner1, learner2;
 	
+	public LoginScreen startScreen;
 	public YouTubeService myService;
 	public Flickr f;
 	public REST rest;
@@ -43,6 +44,10 @@ public class Sketch extends PApplet {
 	boolean drawMainLayout = false;
 	boolean showFrameRate = false;
 	
+	// If the learners have already 
+	//gone through the intro phase
+	public boolean doneIntro = false;
+		
 	///////////////////////////////////////
 	// For study
 	//////////////////////////////////////
@@ -92,7 +97,7 @@ public class Sketch extends PApplet {
 		// Needs to be set for each machine
 		NativeLibrary.addSearchPath("libvlc", "C:\\Program Files\\VideoLAN\\VLC");
 		
-		LoginScreen startScreen = new LoginScreen();
+		startScreen = new LoginScreen();
 		startScreen.initialize(client, this);
 
 
