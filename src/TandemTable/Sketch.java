@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.util.Random;
 import java.util.Vector;
 
+import TandemTable.sections.IntroSection;
 import TandemTable.sections.login.LoginScreen;
 import TandemTable.sections.mainSection.MainSection;
 
@@ -27,7 +28,7 @@ public class Sketch extends PApplet {
 	public TouchClient client;
 	public MainSection mainSection;
 	public Languages learner1, learner2;
-	
+	public IntroSection intro;
 	public LoginScreen startScreen;
 	public YouTubeService myService;
 	public Flickr f;
@@ -70,6 +71,13 @@ public class Sketch extends PApplet {
 	public final int NUM_PAGES = 200;
 	public final int TIMEOUT = 10000;
 	
+	// Stroke weight of lines
+	public int strokeW = 5;
+	// Name of the loading GIF picture
+	public String loadGIF = "ajaxGIF-blue.gif";
+	// Regex for replacement
+	public String replaceRegex ="[^a-zA-Z_0-9_'_Á_á_À _Â_à_Â_â_Ä_ä_Ã_ã_Å_å_Ç_ç_É_é_È_è_Ê_ê_Ë_ë_Í_í_Ì_ì_Î_î_Ï_ï_Ñ_ñ_Ó_ó_Ò_ò_Ô_ô_Ö_ö_Õ_õ_Ú_ú_Ù_ù_Û_û_Ü_ü_Ý_ý_ÿ]";
+	
 	
 	public void setup() {
 		size(screenWidth, screenHeight, P3D);
@@ -91,6 +99,9 @@ public class Sketch extends PApplet {
 		radius = screenHeight/25;
 		shadowOffset = getHeight()/60;
 		lineX = (int) (getWidth()/5.9);
+		
+		// How much the user has to swipe to activate
+		// a swipe event
 		qSwipeThreshold = getWidth()/15;
 		tSwipeThreshold = getHeight()/15;
 
@@ -110,7 +121,7 @@ public class Sketch extends PApplet {
 		if(drawMainLayout){
 			mainSection.drawLayout();
 		} else {
-			strokeWeight(5);
+			strokeWeight(strokeW);
 			stroke(Colours.lineColour.getRed(), Colours.lineColour.getGreen(), Colours.lineColour.getBlue());
 			line(getX(), getHeight()/2, getX() + getWidth(), getHeight()/2);
 		}
@@ -130,16 +141,25 @@ public class Sketch extends PApplet {
 		PApplet.main(new String[]{"--present", "TandemTable.Sketch"});
 	}
 
-
+	
 	public void initializeMainScreen(String lang1, String lang2){
 		//TODO
 		//LOGGING
 		//logger = new UserLogger();
 		//logger.logInfo(, "User" + "" + " " + lang1);
 		mainSection = new MainSection(this, lang1, lang2);
+		
+		if(doneIntro) {
+			mainSection.createMainScreen();
+		} else {
+			mainSection.centerLineFlag = true;
+			intro = new IntroSection(this, mainSection);
+		}
+		
 		drawMainLayout = true;
 	}
 
+	// Returns a predefine colour value
 	public Color getRandomColour(){
 		Random rand = new Random();
 		float num = rand.nextFloat();
@@ -171,6 +191,8 @@ public class Sketch extends PApplet {
 		
 		return c;
 	}
+	
+	// Scramble expanded topic words for activities
 	public String[] scrambleStrings(String[] stringsToScrambled){
 		String[] scrambled = new String[stringsToScrambled.length];
 		Vector<String> temp1 = new Vector<String>();

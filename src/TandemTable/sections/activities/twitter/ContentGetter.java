@@ -72,7 +72,7 @@ public class ContentGetter extends Thread{
 		x = i;
 		c = j;
 
-		final Gif ajaxGIF = new Gif(sketch, "ajaxGIF.gif");
+		final Gif ajaxGIF = new Gif(sketch, sketch.loadGIF);
 		final PApplet app = sketch;
 		ajaxGIF.loop();
 

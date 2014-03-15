@@ -65,6 +65,7 @@ public class TwitterActivity {
 	TextZone tweetWord1, tweetWord2;
 	TextZone[][] tweetZones1, tweetZones2;
 	TextZone lastHighlightZone;
+	// Tweet containers
 	RectZone[] background1, background2;
 	RectZone middleTweet, swipeBackground1, swipeBackground2;
 
@@ -187,12 +188,12 @@ public class TwitterActivity {
 	}
 
 	public void createBackground4Swipe(){
-		float halfH = sketch.getHeight()/2;
-		int y1 = (int)(halfH + (halfH*0.1));
-		int halfH2 = (int) (halfH - (halfH*0.1));
-		int width = sketch.getWidth()-sketch.lineX;
+		float halfH = sketch.getHeight()/2 - sketch.strokeW;
+		float y1 = sketch.getHeight()/2 + sketch.strokeW; //int y1 = (int)(halfH + (halfH*0.1));
+		//int halfH2 = (int) (halfH - (halfH*0.1));
+		float width = sketch.getWidth() - (sketch.lineX + sketch.strokeW);
 
-		swipeBackground1 = new RectZone(sketch.lineX, y1, width, halfH, sketch.radius){
+		swipeBackground1 = new RectZone(sketch.lineX + sketch.strokeW, y1, width, halfH, sketch.radius){
 			public void vSwipeEvent(VSwipeEvent e){
 				if (!errorFlag){
 					tg.currentGetter1 = null;
@@ -239,11 +240,11 @@ public class TwitterActivity {
 		swipeBackground1.setDrawBorder(false);
 		swipeBackground1.setGestureEnabled("VSWIPE", true);
 		swipeBackground1.setVSwipeDist(sketch.tSwipeThreshold);
-		swipeBackground1.setColour(255, 255, 255);
+		swipeBackground1.setColour(Colours.backgroundColour);
 		sketch.client.addZone(swipeBackground1);
 
 
-		swipeBackground2 = new RectZone(sketch.lineX, 0, width, halfH2, sketch.radius){
+		swipeBackground2 = new RectZone(sketch.lineX + sketch.strokeW, 0, width, halfH, sketch.radius){
 			public void vSwipeEvent(VSwipeEvent e){
 				if (!errorFlag){
 					tg.currentGetter2 = null;
@@ -291,7 +292,7 @@ public class TwitterActivity {
 		swipeBackground2.setDrawBorder(false);
 		swipeBackground2.setGestureEnabled("VSWIPE", true);
 		swipeBackground2.setVSwipeDist(sketch.tSwipeThreshold);
-		swipeBackground2.setColour(255, 255, 255);
+		swipeBackground2.setColour(Colours.backgroundColour);
 		sketch.client.addZone(swipeBackground2);
 	}
 	public void createMiddleTweet(){

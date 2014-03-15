@@ -12,7 +12,6 @@ import TandemTable.ColourEval;
 import TandemTable.Colours;
 import TandemTable.Languages;
 import TandemTable.Sketch;
-import TandemTable.sections.IntroSection;
 import TandemTable.sections.activities.headlines.HeadlinesActivity;
 import TandemTable.sections.activities.pGame.PGame;
 import TandemTable.sections.activities.pictures.PictureActivity;
@@ -30,7 +29,7 @@ import com.memetix.mst.translate.Translate;
  */
 public class MainSection {
 	Sketch sketch;
-	IntroSection intro;
+	
 	public Graph graph;
 	TwitterActivity twitterAct;
 	HeadlinesActivity headlinesAct;
@@ -56,7 +55,7 @@ public class MainSection {
 	public Zone switchAct1, switchAct2;
 
 	public boolean leftCenterLineFlag = true;
-	boolean centerLineFlag = false;
+	public boolean centerLineFlag = false;
 	boolean verticalLineFlag = true;
 	boolean edgesFlag = false;
 
@@ -163,16 +162,6 @@ public class MainSection {
 		}
 		
 		leftCenterLineFlag = true;
-		
-		if(sketch.doneIntro) {
-			createSwitchLanguageButtons();
-			createGraph();
-			createActivityButtons();
-		} else {
-			leftCenterLineFlag = true;
-			intro = new IntroSection(sketch, this);
-		}
-		
 	}
 	
 	/**
@@ -180,30 +169,37 @@ public class MainSection {
 	 */
 	public void drawLayout(){
 		if(verticalLineFlag){
-			sketch.strokeWeight(5);
+			sketch.strokeWeight(sketch.strokeW);
 			sketch.stroke(Colours.lineColour.getRed(), Colours.lineColour.getGreen(), Colours.lineColour.getBlue());
 			sketch.line(sketch.lineX, sketch.getY(), sketch.lineX, sketch.getHeight());
 		}
 
 		if(leftCenterLineFlag){
-			sketch.strokeWeight(5);
+			sketch.strokeWeight(sketch.strokeW);
 			sketch.stroke(Colours.lineColour.getRed(), Colours.lineColour.getGreen(), Colours.lineColour.getBlue());
 			sketch.line(sketch.getX(), sketch.getHeight()/2, sketch.lineX, sketch.getHeight()/2);
 		}
 
 		//Half Screen separator
 		if(centerLineFlag){
-			sketch.strokeWeight(5);
+			sketch.strokeWeight(sketch.strokeW);
 			sketch.stroke(Colours.lineColour.getRed(), Colours.lineColour.getGreen(), Colours.lineColour.getBlue());
 			sketch.line(sketch.lineX, sketch.getHeight()/2, sketch.getWidth(), sketch.getHeight()/2);
 		}
 		//graph edges (lines between nodes)
 		if (edgesFlag){
-			sketch.strokeWeight(5);
+			sketch.strokeWeight(sketch.strokeW);
 			sketch.stroke(Colours.lineColour.getRed(), Colours.lineColour.getGreen(), Colours.lineColour.getBlue());
 			graph.displayEdges();
 		}
 	}	
+	
+	public void createMainScreen() {
+		centerLineFlag = false;
+		createSwitchLanguageButtons();
+		createGraph();
+		createActivityButtons();
+	}
 
 	/**
 	 * Creates the switch target language buttons
@@ -886,12 +882,6 @@ public class MainSection {
 		verticalLineFlag = false;
 		edgesFlag = false;
 
-		if(intro != null) {
-			intro.next1 = false;
-			intro.next2 = false;
-			sketch.client.removeZone(intro.nextB1);
-			sketch.client.removeZone(intro.nextB2);
-		}
 		
 		bottomBSelect1 = false;
 		bottomBSelect2 = false;

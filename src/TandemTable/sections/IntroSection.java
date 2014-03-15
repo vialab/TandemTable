@@ -15,6 +15,7 @@ import TandemTable.sections.mainSection.MainSection;
 import processing.core.PConstants;
 import vialab.simpleMultiTouch.events.HSwipeEvent;
 import vialab.simpleMultiTouch.events.TapEvent;
+import vialab.simpleMultiTouch.zones.RectZone;
 import vialab.simpleMultiTouch.zones.TextZone;
 
 /**
@@ -26,8 +27,9 @@ import vialab.simpleMultiTouch.zones.TextZone;
 public class IntroSection {
 
 	Sketch sketch;
-	MainSection mainSection;
 	TextZone[] questionZone1, questionZone2;
+	RectZone background1, background2;
+	MainSection mainSection;
 	public TextZone nextB1, nextB2;
 
 	Animator[] animQuestion11, animQuestion12;
@@ -41,7 +43,7 @@ public class IntroSection {
 	
 	int animIndex1 = 0, animIndex2 = 0;
 
-
+	
 	final int TIME = 4000, FINAL_TIME = 1000;
 
 	public boolean next1 = false, next2 = false;
@@ -59,9 +61,43 @@ public class IntroSection {
 		maxWidthQuestions = 3*(sketch.getWidth()-sketch.lineX)/4;
 		
 		createNextButtons();
+		createBackgroundZones();
 		createQuestionZones1();
 		createQuestionZones2();
 		sketch.doneIntro = true;
+	}
+	
+	// Create background zones for swiping away questions
+	public void createBackgroundZones() {
+		// User 1
+		background1 = new RectZone(sketch.lineX, sketch.height/2, sketch.width - sketch.lineX, sketch.height) {
+			// Swipe away questions
+			public void hSwipeEvent(HSwipeEvent e){
+				questionSwipeEvent1(questionZone1[animIndex1]);
+				e.setHandled(true);
+
+			}
+
+		};
+		background1.setGestureEnabled("HSwipe", true);
+		background1.setDrawBorder(false);
+		background1.setHSwipeDist(sketch.qSwipeThreshold);
+		sketch.client.addZone(background1);
+		
+		// User 2
+		background2 = new RectZone(sketch.lineX, 0, sketch.width - sketch.lineX, sketch.height/2) {
+			// Swipe away questions
+			public void hSwipeEvent(HSwipeEvent e){
+				questionSwipeEvent2(questionZone2[animIndex2]);
+				e.setHandled(true);
+
+			}
+
+		};
+		background2.setGestureEnabled("HSwipe", true);
+		background2.setDrawBorder(false);
+		background2.setHSwipeDist(sketch.qSwipeThreshold);
+		sketch.client.addZone(background2);
 	}
 	
 	/**
@@ -70,15 +106,6 @@ public class IntroSection {
 	 */
 	public void createNextButtons(){
 		//New next1 Button for user 1
-		//String s1 = "";
-		//String s2 = "";
-
-		/*if(lang1.equalsIgnoreCase("English")){
-			s1 = sketch.nextE;
-		} else if(lang1.equalsIgnoreCase("French")){
-			s1 = sketch.nextF;
-		}*/
-		
 		nextB1 = new TextZone(mainSection.buttonX, mainSection.buttonYb, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner1.next, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
@@ -100,10 +127,8 @@ public class IntroSection {
 						((TextZone) nextB1).setColour(Colours.unselectedZone);
 						next2 = false;
 						next1 = false;
-						removeQuestions();
-						mainSection.createSwitchLanguageButtons();
-						mainSection.createGraph();
-						mainSection.createActivityButtons();
+						removeZones();
+						mainSection.createMainScreen();
 
 					}
 
@@ -128,12 +153,6 @@ public class IntroSection {
 
 
 		//New next2 Button for user 2
-
-		/*if(lang2.equalsIgnoreCase("English")){
-			s1 = sketch.nextE;
-		} else if(lang2.equalsIgnoreCase("French")){
-			s1 = sketch.nextF;
-		}*/
 		nextB2  = new TextZone(mainSection.buttonX, mainSection.buttonYt, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner2.next, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
@@ -155,10 +174,8 @@ public class IntroSection {
 						((TextZone) nextB1).setColour(Colours.unselectedZone);
 						next2 = false;
 						next1 = false;
-						removeQuestions();
-						mainSection.createSwitchLanguageButtons();
-						mainSection.createGraph();
-						mainSection.createActivityButtons();
+						removeZones();
+						mainSection.createMainScreen();
 					}
 
 					e.setHandled(tappableHandled);
@@ -224,61 +241,10 @@ public class IntroSection {
 			}
 			final int ii = i;
 			questionZone1[i] = new TextZone(sketch.lineX, sketch.getHeight(), (int)(textWidth*1.2), zoneHeight, Colours.pFont, s, questionTextSize,"LEFT", "BOTTOM" ){
+				
+				// Swipe away questions
 				public void hSwipeEvent(HSwipeEvent e){
-					if(isHSwipeable()){
-
-
-						animQuestion11[animIndex1].stop();
-
-						animQuestion11[animIndex1] = new Animator(FINAL_TIME, this);
-						start1x[ii] = this.getX();
-						end1x[ii] = this.getX() + (sketch.getWidth()-this.getX());
-						start1y[ii] = this.getY();
-						end1y[ii] = this.getY();
-						animQuestion11[animIndex1].setResolution(5);
-						animQuestion11[animIndex1].start();
-
-
-						animIndex1 = animIndex1 + 1;
-
-
-						if(animIndex1 == Sketch.NUM_QUESTIONS){
-							//animQuestion11[0].stop();
-							animQuestion11[0] = new Animator(TIME, questionZone1[0]);
-							animQuestion11[0].setResolution(5);
-							questionZone1[0].setXY(sketch.lineX, sketch.getHeight());
-							start1x[0] = sketch.lineX;
-							end1x[0] = xMaxTranslation1[0] + sketch.lineX;
-							start1y[0] = sketch.getHeight();
-							end1y[0] = sketch.getHeight() + yMaxTranslation1[0];
-							TimingTrigger.addTrigger(animQuestion11[animIndex1-1], animQuestion11[0], TimingTriggerEvent.STOP);
-
-							animIndex1 = 0;
-							questionZone1[0].setGestureEnabled("HSwipe", true);
-							/*questionZone1[1].setXY(sketch.lineX, sketch.getHeight());
-							start1x[1] = sketch.lineX;
-							end1x[1] = xMaxTranslation+sketch.lineX;
-							start1y[1] = sketch.getHeight();
-							end1y[1] = sketch.getHeight()+yMaxTranslation;
-							TimingTrigger.addTrigger(animQuestion11[0], animQuestion11[1], TimingTriggerEvent.STOP);*/
-						} else if(animIndex1 < Sketch.NUM_QUESTIONS){
-							//animQuestion11[animIndex1].stop();
-							animQuestion11[animIndex1] = new Animator(TIME, questionZone1[animIndex1]);
-							animQuestion11[animIndex1].setResolution(5);
-
-							questionZone1[animIndex1].setXY(sketch.lineX, sketch.getHeight());
-							start1x[animIndex1] = sketch.lineX;
-							end1x[animIndex1] = xMaxTranslation1[animIndex1] + sketch.lineX;
-							start1y[animIndex1] = sketch.getHeight();
-							end1y[animIndex1] = sketch.getHeight() + yMaxTranslation1[animIndex1];
-							TimingTrigger.addTrigger(animQuestion11[animIndex1-1], animQuestion11[animIndex1], TimingTriggerEvent.STOP);
-
-							questionZone1[animIndex1].setGestureEnabled("HSwipe", true);
-
-						}
-
-						this.setGestureEnabled("HSwipe", false);
-					}
+					questionSwipeEvent1(this);
 					e.setHandled(true);
 
 				}
@@ -351,66 +317,12 @@ public class IntroSection {
 			end2y[i] = -zoneHeight2[i] + yMaxTranslation2[i];
 
 			
-			
 			final int ii = i;
 			questionZone2[i] = new TextZone(sketch.lineX, -zoneHeight2[i], (int)(textWidth*1.2), zoneHeight2[i], Colours.pFont, s, questionTextSize,"LEFT", "BOTTOM" ){
+				
+				// Swipe away questions
 				public void hSwipeEvent(HSwipeEvent e){
-					if(isHSwipeable()){
-
-
-						animQuestion12[animIndex2].stop();
-
-
-
-						animQuestion12[animIndex2] = new Animator(FINAL_TIME, this);
-						animQuestion12[animIndex2].setResolution(5);
-						start2x[ii] = this.getX();
-						end2x[ii] = this.getX() - (sketch.getWidth()-this.getX());
-						start2y[ii] = this.getY();
-						end2y[ii] = this.getY();
-						animQuestion12[animIndex2].start();
-
-
-						animIndex2 = animIndex2 + 1;
-
-
-
-						if(animIndex2 == Sketch.NUM_QUESTIONS){
-							//animQuestion12[0].stop();
-							animQuestion12[0] = new Animator(TIME, questionZone2[0]);
-							animQuestion12[0].setResolution(5);
-							questionZone2[0].setXY(sketch.lineX, sketch.getHeight());
-							start2x[0] = sketch.lineX;
-							end2x[0] = xMaxTranslation2[0] + sketch.lineX;
-							start2y[0] = -zoneHeight2[0];
-							end2y[0] = -zoneHeight2[0] + yMaxTranslation2[0];
-							TimingTrigger.addTrigger(animQuestion12[animIndex2-1], animQuestion12[0], TimingTriggerEvent.STOP);
-
-							animIndex2 = 0;
-							questionZone2[0].setGestureEnabled("HSwipe", true);
-							/*questionZone2[1].setXY(sketch.lineX, sketch.getHeight());
-								start2x[1] = sketch.lineX;
-								end2x[1] = xMaxTranslation+sketch.lineX;
-								start2y[1] = sketch.getHeight();
-								end2y[1] = sketch.getHeight()+yMaxTranslation;
-								TimingTrigger.addTrigger(animQuestion12[0], animQuestion12[1], TimingTriggerEvent.STOP);*/
-						} else if(animIndex2 < Sketch.NUM_QUESTIONS){
-							//animQuestion12[animIndex2].stop();
-							animQuestion12[animIndex2] = new Animator(TIME, questionZone2[animIndex2]);
-							animQuestion12[animIndex2].setResolution(5);
-
-							questionZone2[animIndex2].setXY(sketch.lineX, sketch.getHeight());
-							start2x[animIndex2] = sketch.lineX;
-							end2x[animIndex2] = xMaxTranslation2[animIndex2] + sketch.lineX;
-							start2y[animIndex2] = -zoneHeight2[animIndex2];
-							end2y[animIndex2] = -zoneHeight2[animIndex2] + yMaxTranslation2[animIndex2];
-							TimingTrigger.addTrigger(animQuestion12[animIndex2-1], animQuestion12[animIndex2], TimingTriggerEvent.STOP);
-
-							questionZone2[animIndex2].setGestureEnabled("HSwipe", true);
-
-						}
-						this.setGestureEnabled("HSwipe", false);
-					}
+					questionSwipeEvent2(this);
 					e.setHandled(true);
 
 				}
@@ -436,16 +348,106 @@ public class IntroSection {
 		animQuestion12[0].start();	
 	}
 	
+	// User 1
+	// Create swipe away animation for current zone
+	// Create question moving animation for next zone
+	public void questionSwipeEvent1(TextZone tZone) {
+		if(tZone.isHSwipeable()){
+
+
+			animQuestion11[animIndex1].stop();
+
+			animQuestion11[animIndex1] = new Animator(FINAL_TIME, tZone);
+			start1x[animIndex1] = tZone.getX();
+			end1x[animIndex1] = tZone.getX() + (sketch.getWidth() - tZone.getX());
+			start1y[animIndex1] = tZone.getY();
+			end1y[animIndex1] = tZone.getY();
+			animQuestion11[animIndex1].setResolution(5);
+			animQuestion11[animIndex1].start();
+
+			int oldAnimIndex = animIndex1;
+			
+			animIndex1 = animIndex1 + 1;
+			
+			if(animIndex1 >= Sketch.NUM_QUESTIONS) {
+				animIndex1 = 0;
+			}
+
+			
+
+			animQuestion11[animIndex1] = new Animator(TIME, questionZone1[animIndex1]);
+			animQuestion11[animIndex1].setResolution(5);
+
+			questionZone1[animIndex1].setXY(sketch.lineX, sketch.getHeight());
+			start1x[animIndex1] = sketch.lineX;
+			end1x[animIndex1] = xMaxTranslation1[animIndex1] + sketch.lineX;
+			start1y[animIndex1] = sketch.getHeight();
+			end1y[animIndex1] = sketch.getHeight() + yMaxTranslation1[animIndex1];
+			TimingTrigger.addTrigger(animQuestion11[oldAnimIndex], animQuestion11[animIndex1], TimingTriggerEvent.STOP);
+
+			questionZone1[animIndex1].setGestureEnabled("HSwipe", true);
+
+			tZone.setGestureEnabled("HSwipe", false);
+		}
+	}
+	
+	// User 2
+	// Create swipe away animation for current zone
+	// Create question moving animation for next zone
+	public void questionSwipeEvent2(TextZone tZone) {
+		if(tZone.isHSwipeable()){
+			animQuestion12[animIndex2].stop();
+
+
+
+			animQuestion12[animIndex2] = new Animator(FINAL_TIME, tZone);
+			animQuestion12[animIndex2].setResolution(5);
+			start2x[animIndex2] = tZone.getX();
+			end2x[animIndex2] = tZone.getX() - (sketch.getWidth() - tZone.getX());
+			start2y[animIndex2] = tZone.getY();
+			end2y[animIndex2] = tZone.getY();
+			animQuestion12[animIndex2].start();
+
+
+			int oldAnimIndex = animIndex2;
+			animIndex2 = animIndex2 + 1;
+
+			if(animIndex2 >= Sketch.NUM_QUESTIONS) {
+				animIndex2 = 0;
+			}
+
+
+			animQuestion12[animIndex2] = new Animator(TIME, questionZone2[animIndex2]);
+			animQuestion12[animIndex2].setResolution(5);
+
+			questionZone2[animIndex2].setXY(sketch.lineX, sketch.getHeight());
+			start2x[animIndex2] = sketch.lineX;
+			end2x[animIndex2] = xMaxTranslation2[animIndex2] + sketch.lineX;
+			start2y[animIndex2] = -zoneHeight2[animIndex2];
+			end2y[animIndex2] = -zoneHeight2[animIndex2] + yMaxTranslation2[animIndex2];
+			TimingTrigger.addTrigger(animQuestion12[oldAnimIndex], animQuestion12[animIndex2], TimingTriggerEvent.STOP);
+
+			questionZone2[animIndex2].setGestureEnabled("HSwipe", true);
+
+			tZone.setGestureEnabled("HSwipe", false);
+		}
+	}
 	/**
 	 * Remove the user prompts TextZones
+	 * and next buttons
 	 */
-	public void removeQuestions(){
+	public void removeZones(){
+		next1 = false;
+		next2 = false;
 		sketch.client.removeZone(nextB1);
 		sketch.client.removeZone(nextB2);
-
+		sketch.client.removeZone(background1);
+		sketch.client.removeZone(background2);
+		
 		for(int i = 0; i < Sketch.NUM_QUESTIONS; i++){
 			sketch.client.removeZone(questionZone1[i]);
 			sketch.client.removeZone(questionZone2[i]);
 		}
+		
 	}
 }

@@ -43,7 +43,7 @@ public class Colours {
 	public static final double PI = 3.14159265358979;
 
 	//From MainSketch.java
-	public static Color backgroundColour = new Color(255, 255, 255);//Color(179, 255, 174);
+	public static Color backgroundColour = new Color(250, 253, 255);
 
 	//Disabled ImageZone colour in profile picker
 	public static Color disabledZone = new Color(200, 200, 200, 255);

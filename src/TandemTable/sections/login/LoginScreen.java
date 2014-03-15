@@ -706,17 +706,14 @@ public class LoginScreen {
 	 *  Resets the language options
 	 */
 	public void chooseNewLang(){
-		english1.setActive(true);
-		english1.pullToTop();
-		english2.setActive(true);
-		french1.setActive(true);
-		french2.setActive(true);
-		german1.setActive(true);
-		german2.setActive(true);
-		portuguese1.setActive(true);
-		portuguese2.setActive(true);
+		activateLanguageButtons(1);
+		activateLanguageButtons(2);
+		
+		//english1.pullToTop();
+		
 
-		sketch.mainSection.leftCenterLineFlag = false;
+		sketch.mainSection.leftCenterLineFlag = true;
+		sketch.mainSection.centerLineFlag = true;
 		
 		langSelect1 = false;
 		langSelect2 = false;

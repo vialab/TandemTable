@@ -194,12 +194,12 @@ public class HeadlinesActivity {
 	}
 
 	public void createBackground4Swipe(){
-		float halfH = sketch.getHeight()/2;
-		int y1 = (int)(halfH + (halfH*0.1));
-		int halfH2 = (int) (halfH - (halfH*0.1));
-		int width = sketch.getWidth()-sketch.lineX;
+		float halfH = sketch.getHeight()/2 - sketch.strokeW;
+		float y1 = sketch.getHeight()/2 + sketch.strokeW;//(int)(halfH + (halfH*0.1));
+		//float halfH2 = halfH;//(int) (halfH - (halfH*0.1));
+		float width = sketch.getWidth() - (sketch.lineX + sketch.strokeW);
 
-		swipeBackground1 = new RectZone(sketch.lineX, y1, width, halfH, sketch.radius){
+		swipeBackground1 = new RectZone(sketch.lineX + sketch.strokeW, y1, width, halfH, sketch.radius){
 			public void vSwipeEvent(VSwipeEvent e) {
 
 				if (!tapFlag1 && !errorFlag1){
@@ -229,11 +229,11 @@ public class HeadlinesActivity {
 		swipeBackground1.setDrawBorder(false);
 		swipeBackground1.setGestureEnabled("VSWIPE", true);
 		swipeBackground1.setVSwipeDist(sketch.tSwipeThreshold);
-		swipeBackground1.setColour(255, 255, 255);
+		swipeBackground1.setColour(Colours.backgroundColour);
 		sketch.client.addZone(swipeBackground1);
 
 
-		swipeBackground2 = new RectZone(sketch.lineX, 0, width, halfH2, sketch.radius){
+		swipeBackground2 = new RectZone(sketch.lineX + sketch.strokeW, 0, width, halfH, sketch.radius){
 			public void vSwipeEvent(VSwipeEvent e) {
 				if (!tapFlag2 && !errorFlag2){
 					if(index2 >= MAX_HEADLINES - NUM_HEADLINES - (MAX_HEADLINES % NUM_HEADLINES) || index2 >= results2.length()){
@@ -262,7 +262,7 @@ public class HeadlinesActivity {
 		swipeBackground2.setDrawBorder(false);
 		swipeBackground2.setGestureEnabled("VSWIPE", true);
 		swipeBackground2.setVSwipeDist(sketch.tSwipeThreshold);
-		swipeBackground2.setColour(255, 255, 255);
+		swipeBackground2.setColour(Colours.backgroundColour);
 		sketch.client.addZone(swipeBackground2);
 	}
 
@@ -529,7 +529,7 @@ public class HeadlinesActivity {
 							PGraphics pg = sketch.createGraphics(widthBody, graphicsHeight, PConstants.P3D);
 							final PGraphics backBuffer = sketch.createGraphics(widthBody, graphicsHeight, PConstants.P3D);
 
-							background1 = new RectZone(sketch.lineX, sketch.getHeight()/2, sketch.getWidth()-sketch.lineX, sketch.getHeight()/2){
+							background1 = new RectZone(sketch.lineX + sketch.strokeW, sketch.getHeight()/2 + sketch.strokeW, sketch.getWidth() - (sketch.lineX + sketch.strokeW), (sketch.getHeight()/2 - sketch.strokeW)){
 								public void tapEvent(TapEvent e){
 									sketch.client.removeZone(body1);
 									sketch.client.removeZone(this);
@@ -541,6 +541,7 @@ public class HeadlinesActivity {
 							};
 							background1.setGestureEnabled("Tap", true);
 							background1.setDrawBorder(false);
+							background1.setColour(Colours.backgroundColour);
 							sketch.client.addZone(background1);
 							sketch.client.pullToTop(middleZone);
 
@@ -848,7 +849,7 @@ public class HeadlinesActivity {
 							PGraphics pg = sketch.createGraphics(widthBody, graphicsHeight, PConstants.P3D);
 							final PGraphics backBuffer = sketch.createGraphics(widthBody, graphicsHeight, PConstants.P3D);
 
-							background2 = new RectZone(sketch.lineX, 0, sketch.getWidth()-sketch.lineX, sketch.getHeight()/2){
+							background2 = new RectZone(sketch.lineX + sketch.strokeW, 0, sketch.getWidth() - (sketch.lineX + sketch.strokeW), sketch.getHeight()/2 - sketch.strokeW){
 								public void tapEvent(TapEvent e){
 									sketch.client.removeZone(body2);
 									sketch.client.removeZone(this);
@@ -861,6 +862,7 @@ public class HeadlinesActivity {
 							};
 							background2.setGestureEnabled("Tap", true);
 							background2.setDrawBorder(false);
+							background2.setColour(Colours.backgroundColour);
 							sketch.client.addZone(background2);
 							sketch.client.pullToTop(middleZone);
 

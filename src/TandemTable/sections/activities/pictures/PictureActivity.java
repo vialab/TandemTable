@@ -44,6 +44,9 @@ public class PictureActivity {
 	GarbageZone gbZone1, gbZone2;
 	RectZone loading;
 	int imgSize;
+	
+	// Name of the garbage bin picture
+	String gbPic = "gb-blue.jpg";
 
 	public PictureActivity(Sketch sketch, int topicIndex, String lang1, String lang2) {
 		this.sketch = sketch;
@@ -80,7 +83,7 @@ public class PictureActivity {
 	}
 
 	public void createGBZone(){
-		PImage img = sketch.loadImage("gb.jpg");
+		PImage img = sketch.loadImage(gbPic);
 
 		gbZone1 = new GarbageZone(sketch.client, sketch.getWidth()-gbw, sketch.getHeight()-gbw, gbw, gbw, img){
 			public void gbTrigger(Zone z){

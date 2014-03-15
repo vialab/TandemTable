@@ -2,6 +2,8 @@ package TandemTable.sections.activities.pGame;
 
 import java.awt.Color;
 
+import org.jdesktop.animation.timing.Animator;
+
 import TandemTable.Colours;
 import TandemTable.Languages;
 import TandemTable.Sketch;
@@ -36,7 +38,7 @@ public class PGame {
 	boolean[] flag2;
 	
 	boolean nextLevel = false, started = false;
-	//Animator animMsgBox;
+	Animator animMsgBox;
 
 	RectZone[] box1 = new RectZone[NUM_IMAGES];
 	RectZone[] box2 = new RectZone[NUM_IMAGES];
@@ -47,6 +49,16 @@ public class PGame {
 	ImageZone[] imgs;
 	TextZone license;
 	RectZone bottomBox, topBox, msgBox;
+	
+	// Colours of the top and bottom boxes that
+	// contain the tag words at beginning of each round
+	Color bottomBoxC = new Color(0, 0, 200, 30);
+	Color topBoxC = new Color(0, 200, 0, 30);
+	
+	// Colours signalling completion status
+	// for each image
+	Color halfCompletedC = new Color(248, 144, 32);
+	Color completedC = new Color(71, 178, 0);
 	
 	String lang1, lang2;//, play1, play2;
 	
@@ -60,26 +72,14 @@ public class PGame {
 		this.lang1 = lang1;
 		this.lang2 = lang2;
 		
-		
-		
-		
 		createBoxes();
 
-		//for(int i = 0; i < NUM_IMAGES; i++){
-		//	flag1[i] = false;
-		//	flag2[i] = false;
-		//}
-
 		String[] scrambled = null;
-		//String topic = null;
 		
 		if(lang1.equalsIgnoreCase("English") || lang2.equalsIgnoreCase("English")){	
 			scrambled = sketch.scrambleStrings(Languages.topicsExpandedE[topicIndex]);
-			//topic = sketch.topicsE[topicIndex];
 		} else if(lang1.equalsIgnoreCase("French") || lang2.equalsIgnoreCase("French")){
 			scrambled = sketch.scrambleStrings(Languages.topicsExpandedF[topicIndex]);
-			//topic = sketch.topicsF[topicIndex];
-
 		}
 		
 
@@ -194,70 +194,58 @@ public class PGame {
 	
 	public void inactivateTagZones(){
 		
-		//for(int i = 0; i < completed.length; i++){
-		//	completed[i] = false;
-		//}
 		for(int i = 0; i < NUM_IMAGES; i++){
 			tagZones1[i].setActive(false);
 			tagZones2[i].setActive(false);
 		}
-		
-		
-		
+
 	}
 
+	// Top and bottom boxes that contain the tag 
+	// words at beginning of each round
 	public void createBoxes(){
 		int rows = 3;
 		int boxHeight = sketch.getHeight()/5;
 		float spaceY = (sketch.getHeight()- boxHeight*2)/rows;
 		int spacingY =  (int) (0.2*spaceY);
-		//int spaceX = sketch.getWidth()/100;
 
 
 		bottomBox = new RectZone(sketch.lineX, sketch.getHeight()-boxHeight+spacingY, sketch.getWidth()-sketch.lineX , boxHeight-spacingY);
-		bottomBox.setColour(new Color(0, 0, 200, 30));
+		bottomBox.setColour(bottomBoxC);
 		bottomBox.setDrawBorder(false);
 		sketch.client.addZone(bottomBox);
 
 		topBox = new RectZone(sketch.lineX, 0, sketch.getWidth()-sketch.lineX, boxHeight-spacingY);
-		topBox.setColour(new Color(0, 0, 200, 30));
+		topBox.setColour(topBoxC);
 		topBox.setDrawBorder(false);
 		sketch.client.addZone(topBox);
-
-
 	}
 
 	public void createMsgBox(){
-		/*float width = (sketch.getWidth() - sketch.lineX)/3;
-		float x = sketch.lineX + (sketch.getWidth() - sketch.lineX)/2 - width/2;
-		float height = sketch.getHeight()/4;
-		float y = sketch.getHeight()/2 + height;*/
+		
 
 		msgBox = new RectZone(sketch.lineX, 0, sketch.getWidth()-sketch.lineX, sketch.getHeight(), sketch.radius){
 			public void tapEvent(TapEvent e){
-				//if(nextLevel){
-					nextLevel = false;
-					this.setActive(false);
-					//animMsgBox.stop();
-					if(level < 2){
-						level++;
-					} else {
-						level = 0;
-					}
 					
-					for(TextZone z: tagZones1){
-						sketch.client.removeZone(z);
-					}
+				nextLevel = false;
+				this.setActive(false);
 
-					for(TextZone z: tagZones2){
-						sketch.client.removeZone(z);
-					}
-					
-					loadImages(NUM_IMAGES*level);
-				//} else {
-				//	animMsgBox.start();
-				//	nextLevel = true;
-				//}
+				if(level < 2){
+					level++;
+				} else {
+					level = 0;
+				}
+				
+				for(TextZone z: tagZones1){
+					sketch.client.removeZone(z);
+				}
+
+				for(TextZone z: tagZones2){
+					sketch.client.removeZone(z);
+				}
+				
+				loadImages(NUM_IMAGES*level);
+				
 				e.setHandled(true);
 			}
 			
@@ -271,7 +259,7 @@ public class PGame {
 				
 				textWidth = sketch.textWidth(sketch.learner2.playAgain);
 				sketch.pushMatrix();
-				sketch.translate(sketch.getWidth()-sketch.lineX - textWidth,  sketch.getHeight()/2 - sketch.textSize*4);
+				sketch.translate((float) (sketch.getWidth()-sketch.lineX - (textWidth*1.5)),  sketch.getHeight()/2 - sketch.textSize*4);
 				sketch.rotate((float) Colours.PI);
 				sketch.text(sketch.learner2.playAgain, 0, 0);
 				sketch.popMatrix();
@@ -282,15 +270,10 @@ public class PGame {
 		msgBox.setActive(false);
 		msgBox.setGestureEnabled("Tap", true);
 		sketch.client.addZone(msgBox);
-		
-		//animMsgBox = PropertySetter.createAnimator(sketch.layout.animationTime, msgBox, 
-		//		"colour", new ColourEval(), Colours.currentColour, Colours.selectedZone);
-
-		//animMsgBox.setRepeatBehavior(RepeatBehavior.REVERSE);
-		//animMsgBox.setRepeatCount(Animator.INFINITE);
 	}
 
 
+	// Create the image zones and answer boxes
 	public void createLayout(){
 
 		int boxHeight = (int) (sketch.getHeight()/4.4);
@@ -327,7 +310,7 @@ public class PGame {
 					}
 					imgs[index].setGestureEnabled("Tap", true);
 
-					int size = sketch.getWidth()/100;
+					int size = sketch.getWidth()/200;
 					imgs[index].setShadowX(-size);
 					imgs[index].setShadowY(-size);
 					imgs[index].setShadowW(size*2);
@@ -348,11 +331,14 @@ public class PGame {
 								if(this.contains(t.getXTimesMatrix() + t.getWidth()/2, t.getYTimesMatrix() + t.getHeight()/2) && !flag1[index]){
 									if(t.getNumIds() == 0){
 										if(!flag2[index]){
-											imgs[index].setShadowColour(Color.ORANGE);
+											this.setColour(halfCompletedC);
+											imgs[index].setShadowColour(halfCompletedC);
 											completed[index] = false;
 
 										} else {
-											imgs[index].setShadowColour(Color.GREEN);
+											this.setColour(completedC);
+											box2[index].setColour(completedC);
+											imgs[index].setShadowColour(completedC);
 											completed[index] = true;
 										}
 										
@@ -389,7 +375,7 @@ public class PGame {
 					};
 					box1[index].setBorderColour(0);
 					box1[index].setBorderWeight(5);
-					box1[index].setColour(255, 255, 255);
+					box1[index].setColour(bottomBoxC);
 					sketch.client.addZone(box1[index]);
 
 					box2[index] = new RectZone(myX, (float) (myY - (myHeight * 0.2)), myWidth, myHeight/6){
@@ -401,11 +387,14 @@ public class PGame {
 								if(this.contains(t.getXTimesMatrix() - t.getWidth()/2, t.getYTimesMatrix() - t.getHeight()/2) && !flag2[index]){
 									if(t.getNumIds() == 0){
 										if(!flag1[index]){
-											imgs[index].setShadowColour(Color.ORANGE);
+											this.setColour(halfCompletedC);
+											imgs[index].setShadowColour(halfCompletedC);
 											completed[index] = false;
 
 										} else {
-											imgs[index].setShadowColour(Color.GREEN);
+											this.setColour(completedC);
+											box1[index].setColour(completedC);
+											imgs[index].setShadowColour(completedC);
 											completed[index] = true;
 										}
 										
@@ -445,7 +434,7 @@ public class PGame {
 					};
 					box2[index].setBorderColour(0);
 					box2[index].setBorderWeight(5);
-					box2[index].setColour(255, 255, 255);
+					box2[index].setColour(topBoxC);
 					sketch.client.addZone(box2[index]);
 					myX += myWidth + spacingX;
 				//}
@@ -467,9 +456,6 @@ public class PGame {
 	}
 
 	public void getImages(){
-		
-		
-		
 		
 		for(int j = 0; j < ROWS; ++j){
 			for(int i = 0; i < COLUMNS; ++i){
@@ -498,28 +484,26 @@ public class PGame {
 		sketch.client.removeZone(msgBox);
 
 
-		//if(!Getter.failed){
-			for(ImageZone z: imgs){
-				sketch.client.removeZone(z);
-			}
+		for(ImageZone z: imgs){
+			sketch.client.removeZone(z);
+		}
 
-			for(TextZone z: tagZones1){
-				sketch.client.removeZone(z);
-			}
+		for(TextZone z: tagZones1){
+			sketch.client.removeZone(z);
+		}
 
-			for(TextZone z: tagZones2){
-				sketch.client.removeZone(z);
-			}
+		for(TextZone z: tagZones2){
+			sketch.client.removeZone(z);
+		}
 
-			for(RectZone z: box1){
-				sketch.client.removeZone(z);
-			}
+		for(RectZone z: box1){
+			sketch.client.removeZone(z);
+		}
 
-			for(RectZone z: box2){
-				sketch.client.removeZone(z);
-			}
+		for(RectZone z: box2){
+			sketch.client.removeZone(z);
+		}
 
-		//}
 	}		
 }
 

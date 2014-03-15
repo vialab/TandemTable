@@ -1,7 +1,6 @@
 package TandemTable.sections.activities.videos;
 
 
-import java.awt.Color;
 import java.util.ArrayList;
 
 import org.jdesktop.animation.timing.Animator;
@@ -278,7 +277,7 @@ public class VideoActivity {
 	public void createLeftWhiteRect(){
 		//Left side
 		coverRect = new RectZone(sketch.lineX-polyW, 0, polyW, sketch.getHeight());
-		coverRect.setColour(Color.WHITE);
+		coverRect.setColour(Colours.backgroundColour);
 		coverRect.setDrawBorder(false);
 		sketch.client.addZone(coverRect);
 
@@ -289,7 +288,7 @@ public class VideoActivity {
 		//Right side
 		int whiteWidth = sketch.getWidth()-sketch.lineX;
 		cBackground = new RectZone(sketch.lineX, 0, whiteWidth, sketch.getHeight());
-		cBackground.setColour(Color.WHITE);
+		cBackground.setColour(Colours.backgroundColour);
 		cBackground.setActive(false);
 		cBackground.setDrawBorder(false);
 

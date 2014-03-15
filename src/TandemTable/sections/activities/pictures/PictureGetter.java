@@ -33,7 +33,7 @@ public class PictureGetter extends Thread {
 		this.sketch = sketch;
 		this.picAct = picAct;
 		
-		final Gif ajaxGIF = new Gif(sketch, "ajaxGIF.gif");
+		final Gif ajaxGIF = new Gif(sketch, sketch.loadGIF);
 		final PApplet app = sketch;
 		ajaxGIF.loop();
 

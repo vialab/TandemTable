@@ -30,7 +30,6 @@ public class TwitterGetter extends Thread {
 	RectZone loading;
 	
 
-	String replaceRegex = "[^a-zA-Z_0-9_'_�_�_� _�_�_�_�_�_�_�_�_�_�_�_�_�_�_�_�_�_�_�_�_�_�_�_�_�_�_�_�_�_�_�_�_�_�_�_�_�_�_�_�_�_�_�_�_�_�_�_�_�_�_�]";
 	String regex = "[ \t\n\f\r]+";
 
 
@@ -43,7 +42,7 @@ public class TwitterGetter extends Thread {
 		this.twitterAct = twitterAct;
 		this.sketch = sketch;
 
-		final Gif ajaxGIF = new Gif(sketch, "ajaxGIF.gif");
+		final Gif ajaxGIF = new Gif(sketch, sketch.loadGIF);
 		final PApplet app = sketch;
 		ajaxGIF.loop();
 
@@ -223,7 +222,7 @@ public class TwitterGetter extends Thread {
 			String translatedText = "";
 			try {
 				if(!twitterAct.middleText.startsWith("http:") && !twitterAct.middleText.startsWith("https:")){
-					translatedText = twitterAct.middleText.replaceAll(replaceRegex, " ");
+					translatedText = twitterAct.middleText.replaceAll(sketch.replaceRegex, " ");
 				}
 				if(twitterAct.langTranslate1 == twitterAct.langTranslate2){
 					if(twitterAct.langTranslate1 == Language.ENGLISH){
