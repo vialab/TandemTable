@@ -95,533 +95,1275 @@
 	<religion>
 		<tag lang="english">clouds</tag>
 		<tag lang="french">nuages</tag>
+		<tag lang="portuguese">nuvens</tag>
+		<tag lang="spanish">nubes</tag>
+		
 		<tag lang="english">beads</tag>
 		<tag lang="french">perles</tag>
+		<tag lang="portuguese">miçanga</tag>
+		<tag lang="spanish">cuentas</tag>
+		
 		<tag lang="english">christianity</tag>
 		<tag lang="french">christianisme</tag>
+		<tag lang="portuguese">cristandade</tag>
+		<tag lang="spanish">cristianismo</tag>
+		
 		<tag lang="english">buddhism</tag>
 		<tag lang="french">bouddhisme</tag>
+		<tag lang="portuguese">budismo</tag>
+		<tag lang="spanish">budismo</tag>
+		
 		<tag lang="english">construction</tag>
 		<tag lang="french">construction</tag>
+		<tag lang="portuguese">construção</tag>
+		<tag lang="spanish">construcción</tag>
+		
 		<tag lang="english">culture</tag>
 		<tag lang="french">culture</tag>
+		<tag lang="portuguese">cultura</tag>
+		<tag lang="spanish">cultura</tag>
+		
 		<tag lang="english">candle</tag>
 		<tag lang="french">chandelle</tag>
+		<tag lang="portuguese">vela</tag>
+		<tag lang="spanish">vela</tag>
+		
 		<tag lang="english">cross</tag>
 		<tag lang="french">croix</tag>
+		<tag lang="portuguese">cruz</tag>
+		<tag lang="spanish">cruz</tag>
+		
 		<tag lang="english">mosque</tag>
 		<tag lang="french">mosquée</tag>
+		<tag lang="portuguese">mesquita</tag>
+		<tag lang="spanish">mezquita</tag>
+		
 		<tag lang="english">religion</tag>
 		<tag lang="french">religion</tag>
+		<tag lang="portuguese">religião</tag>
+		<tag lang="spanish">religión</tag>
+		
 		<tag lang="english">judaism</tag>
 		<tag lang="french">judaïsme</tag>
+		<tag lang="portuguese">judaísmo</tag>
+		<tag lang="spanish">judaísmo</tag>
+		
 		<tag lang="english">monk</tag>
 		<tag lang="french">moine</tag>
+		<tag lang="portuguese">monge</tag>
+		<tag lang="spanish">monje</tag>
+		
 		<tag lang="english">cathedral</tag>
 		<tag lang="french">cathédrale</tag>
+		<tag lang="portuguese">catedral</tag>
+		<tag lang="spanish">catedral</tag>
+		
 		<tag lang="english">hinduism</tag>
 		<tag lang="french">hindouisme</tag>
+		<tag lang="portuguese">hinduismo</tag>
+		<tag lang="spanish">hinduismo</tag>
+		
 		<tag lang="english">rosary</tag>
 		<tag lang="french">chapelet</tag>
+		<tag lang="portuguese">rosário</tag>
+		<tag lang="spanish">rosario</tag>
+		
 		<tag lang="english">art</tag>
 		<tag lang="french">art</tag>
+		<tag lang="portuguese">arte</tag>
+		<tag lang="spanish">arte</tag>
+		
 		<tag lang="english">islam</tag>
 		<tag lang="french">islam</tag>
+		<tag lang="portuguese">islão</tag>
+		<tag lang="spanish">islam</tag>
+		
 		<tag lang="english">church</tag>
 		<tag lang="french">église</tag>
+		<tag lang="portuguese">igreja</tag>
+		<tag lang="spanish">iglesia</tag>
 	</religion>
 	<dance>
 		<tag lang="english">ballet</tag>
 		<tag lang="french">ballet</tag>
+		<tag lang="portuguese">balé</tag>
+		<tag lang="spanish">ballet</tag>
+		
 		<tag lang="english">belly dancer</tag>
 		<tag lang="french">danseuse orientale</tag>
+		<tag lang="portuguese">dançarina do ventre</tag>
+		<tag lang="spanish">danza del vientre</tag>
+		
 		<tag lang="english">cheerleader</tag>
-		<tag lang="french">pom-pom girl</tag>
+		<tag lang="french">majorette</tag>
+		<tag lang="portuguese">chefe de torcida</tag>
+		<tag lang="spanish">animador</tag>
+		
 		<tag lang="english">dancer</tag>
 		<tag lang="french">danseur</tag>
+		<tag lang="portuguese">dançarina</tag>
+		<tag lang="spanish">danzante</tag>
+		
 		<tag lang="english">cartoon</tag>
 		<tag lang="french">dessin animé</tag>
+		<tag lang="portuguese">desenho animado</tag>
+		<tag lang="spanish">dibujos animados</tag>
+		
 		<tag lang="english">teenager</tag>
 		<tag lang="french">adolescent</tag>
+		<tag lang="portuguese">adolescente</tag>
+		<tag lang="spanish">adolescente</tag>
+		
 		<tag lang="english">disco</tag>
 		<tag lang="french">disco</tag>
+		<tag lang="portuguese">discoteca</tag>
+		<tag lang="spanish">discoteca</tag>
+		
 		<tag lang="english">elderly</tag>
 		<tag lang="french">personnes âgées</tag>
+		<tag lang="portuguese">idoso</tag>
+		<tag lang="spanish">anciano</tag>
+		
 		<tag lang="english">wedding</tag>
 		<tag lang="french">mariage</tag>
+		<tag lang="portuguese">casamento</tag>
+		<tag lang="spanish">boda</tag>
+		
 		<tag lang="english">golden</tag>
 		<tag lang="french">d'or</tag>
+		<tag lang="portuguese">dourado</tag>
+		<tag lang="spanish">dorado</tag>
+		
 		<tag lang="english">hip hop</tag>
-		<tag lang="french">hip-hop</tag>
+		<tag lang="french">hip hop</tag>
+		<tag lang="portuguese">hip hop</tag>
+		<tag lang="spanish">hip hop</tag>
+		
 		<tag lang="english">costume</tag>
 		<tag lang="french">costume</tag>
+		<tag lang="portuguese">traje</tag>
+		<tag lang="spanish">traje</tag>
+		
 		<tag lang="english">celebration</tag>
 		<tag lang="french">célébration</tag>
+		<tag lang="portuguese">celebração</tag>
+		<tag lang="spanish">celebración</tag>
+		
 		<tag lang="english">group</tag>
 		<tag lang="french">groupe</tag>
+		<tag lang="portuguese">grupo</tag>
+		<tag lang="spanish">grupo</tag>
+		
 		<tag lang="english">thai</tag>
 		<tag lang="french">thaï</tag>
+		<tag lang="portuguese">tailandês</tag>
+		<tag lang="spanish">tailandés</tag>
+		
 		<tag lang="english">party</tag>
 		<tag lang="french">partie</tag>
+		<tag lang="portuguese">festa</tag>
+		<tag lang="spanish">partido</tag>
+		
 		<tag lang="english">cool</tag>
 		<tag lang="french">cool</tag>
+		<tag lang="portuguese">legal</tag>
+		<tag lang="spanish">fresco</tag>
+		
 		<tag lang="english">woman</tag>
 		<tag lang="french">femme</tag>
+		<tag lang="portuguese">mulher</tag>
+		<tag lang="spanish">mujer</tag>
 	</dance>
 	<school>
 		<tag lang="english">student</tag>
 		<tag lang="french">étudiant</tag>
+		<tag lang="portuguese">estudante</tag>
+		<tag lang="spanish">estudiante</tag>
+		
 		<tag lang="english">chalk</tag>
 		<tag lang="french">craie</tag>
+		<tag lang="portuguese">giz</tag>
+		<tag lang="spanish">tiza</tag>
+		
 		<tag lang="english">brain</tag>
 		<tag lang="french">cerveau</tag>
+		<tag lang="portuguese">cérebro</tag>
+		<tag lang="spanish">cerebro</tag>
+		
 		<tag lang="english">presentation</tag>
 		<tag lang="french">présentation</tag>
+		<tag lang="portuguese">apresentação</tag>
+		<tag lang="spanish">presentación</tag>
+		
 		<tag lang="english">diploma</tag>
 		<tag lang="french">diplôme</tag>
+		<tag lang="portuguese">diploma</tag>
+		<tag lang="spanish">diploma</tag>
+		
 		<tag lang="english">globe</tag>
 		<tag lang="french">globe</tag>
+		<tag lang="portuguese">globo</tag>
+		<tag lang="spanish">globo</tag>
+		
 		<tag lang="english">hand</tag>
 		<tag lang="french">main</tag>
+		<tag lang="portuguese">mão</tag>
+		<tag lang="spanish">mano</tag>
+		
 		<tag lang="english">formulas</tag>
 		<tag lang="french">formules</tag>
+		<tag lang="portuguese">fórmulas</tag>
+		<tag lang="spanish">fórmulas</tag>
+		
 		<tag lang="english">backpack</tag>
 		<tag lang="french">sac à dos</tag>
+		<tag lang="portuguese">mochila</tag>
+		<tag lang="spanish">mochila</tag>
+		
 		<tag lang="english">classroom</tag>
 		<tag lang="french">classe</tag>
+		<tag lang="portuguese">sala de aula</tag>
+		<tag lang="spanish">aula</tag>
+		
 		<tag lang="english">fun</tag>
 		<tag lang="french">amusement</tag>
-		<tag lang="english">buses</tag>
-		<tag lang="french">bus</tag>
+		<tag lang="portuguese">diversão</tag>
+		<tag lang="spanish">diversión</tag>
+		
+		<tag lang="english">bus</tag>
+		<tag lang="french">autobus</tag>
+		<tag lang="portuguese">ônibus</tag>
+		<tag lang="spanish">autobús</tag>
+		
 		<tag lang="english">notebook</tag>
 		<tag lang="french">cahier</tag>
+		<tag lang="portuguese">caderno</tag>
+		<tag lang="spanish">cuaderno</tag>
+		
 		<tag lang="english">studying</tag>
 		<tag lang="french">étudier</tag>
+		<tag lang="portuguese">estudar</tag>
+		<tag lang="spanish">estudiar</tag>
+		
 		<tag lang="english">test</tag>
 		<tag lang="french">test</tag>
+		<tag lang="portuguese">teste</tag>
+		<tag lang="spanish">prueba</tag>
+		
 		<tag lang="english">computers</tag>
 		<tag lang="french">ordinateurs</tag>
+		<tag lang="portuguese">computadores</tag>
+		<tag lang="spanish">ordenadores</tag>
+		
 		<tag lang="english">homework</tag>
 		<tag lang="french">devoirs</tag>
+		<tag lang="portuguese">lição de casa</tag>
+		<tag lang="spanish">deberes</tag>
+		
 		<tag lang="english">writing</tag>
 		<tag lang="french">écriture</tag>
+		<tag lang="portuguese">escrita</tag>
+		<tag lang="spanish">escritura</tag>
 	</school>
 	<movies>
 		<tag lang="english">glasses</tag>
 		<tag lang="french">lunettes</tag>
+		<tag lang="portuguese">óculos</tag>
+		<tag lang="spanish">gafas</tag>
+		
 		<tag lang="english">cinema</tag>
 		<tag lang="french">cinéma</tag>
+		<tag lang="portuguese">cinema</tag>
+		<tag lang="spanish">cine</tag>
+		
 		<tag lang="english">clapboard</tag>
 		<tag lang="french">bardeau</tag>
+		<tag lang="portuguese">ripa de madeira</tag>
+		<tag lang="spanish">tablilla</tag>
+		
 		<tag lang="english">chair</tag>
 		<tag lang="french">chaise</tag>
-		<tag lang="english">dvd player</tag>
-		<tag lang="french">lecteur dvd</tag>
+		<tag lang="portuguese">cadeira</tag>
+		<tag lang="spanish">silla</tag>
+		
+		<tag lang="english">DVD player</tag>
+		<tag lang="french">lecteur DVD</tag>
+		<tag lang="portuguese">aparelho de DVD</tag>
+		<tag lang="spanish">reproductor de DVD</tag>
+		
 		<tag lang="english">film reel</tag>
 		<tag lang="french">bobine de film</tag>
+		<tag lang="portuguese">rolo de filme</tag>
+		<tag lang="spanish">rollo de película</tag>
+		
 		<tag lang="english">golden</tag>
 		<tag lang="french">d'or</tag>
+		<tag lang="portuguese">dourado</tag>
+		<tag lang="spanish">dorado</tag>
+		
 		<tag lang="english">award</tag>
 		<tag lang="french">prix</tag>
+		<tag lang="portuguese">prêmio</tag>
+		<tag lang="spanish">premio</tag>
+		
 		<tag lang="english">camcorder</tag>
 		<tag lang="french">caméscope</tag>
+		<tag lang="portuguese">filmadora</tag>
+		<tag lang="spanish">videocámara</tag>
+		
 		<tag lang="english">sign</tag>
 		<tag lang="french">signe</tag>
+		<tag lang="portuguese">sinal</tag>
+		<tag lang="spanish">signo</tag>
+		
 		<tag lang="english">lights</tag>
 		<tag lang="french">lumières</tag>
+		<tag lang="portuguese">luzes</tag>
+		<tag lang="spanish">luces</tag>
+		
 		<tag lang="english">winner</tag>
 		<tag lang="french">gagnant</tag>
+		<tag lang="portuguese">vencedor</tag>
+		<tag lang="spanish">ganador</tag>
+		
 		<tag lang="english">popcorn</tag>
 		<tag lang="french">pop-corn</tag>
+		<tag lang="portuguese">pipoca</tag>
+		<tag lang="spanish">palomitas de maíz</tag>
+		
 		<tag lang="english">carpet</tag>
 		<tag lang="french">tapis</tag>
+		<tag lang="portuguese">tapete</tag>
+		<tag lang="spanish">alfombra</tag>
+		
 		<tag lang="english">cameras</tag>
 		<tag lang="french">caméras</tag>
+		<tag lang="portuguese">câmeras</tag>
+		<tag lang="spanish">cámaras</tag>
+		
 		<tag lang="english">filming</tag>
 		<tag lang="french">tournage</tag>
+		<tag lang="portuguese">filmagens</tag>
+		<tag lang="spanish">rodaje</tag>
+		
 		<tag lang="english">recording</tag>
 		<tag lang="french">enregistrement</tag>
+		<tag lang="portuguese">gravação</tag>
+		<tag lang="spanish">grabación</tag>
+		
 		<tag lang="english">piracy</tag>
 		<tag lang="french">piratage</tag>
+		<tag lang="portuguese">pirataria</tag>
+		<tag lang="spanish">piratería</tag>
 	</movies>
 	<books>
 		<tag lang="english">school</tag>
 		<tag lang="french">école</tag>
-		<tag lang="english">bible</tag>
-		<tag lang="french">bible</tag>
+		<tag lang="portuguese">escola</tag>
+		<tag lang="spanish">escuela</tag>
+		
+		<tag lang="english">Bible</tag>
+		<tag lang="french">Bible</tag>
+		<tag lang="portuguese">Bíblia</tag>
+		<tag lang="spanish">Biblia</tag>
+		
 		<tag lang="english">signing</tag>
 		<tag lang="french">signature</tag>
+		<tag lang="portuguese">assinatura</tag>
+		<tag lang="spanish">firma</tag>
+		
 		<tag lang="english">bee</tag>
 		<tag lang="french">abeille</tag>
+		<tag lang="portuguese">abelha</tag>
+		<tag lang="spanish">abeja</tag>
+		
 		<tag lang="english">dictionary</tag>
 		<tag lang="french">dictionnaire</tag>
+		<tag lang="portuguese">dicionário</tag>
+		<tag lang="spanish">diccionario</tag>
+		
 		<tag lang="english">library</tag>
 		<tag lang="french">bibliothèque</tag>
+		<tag lang="portuguese">biblioteca</tag>
+		<tag lang="spanish">biblioteca</tag>
+		
 		<tag lang="english">book</tag>
 		<tag lang="french">livre</tag>
+		<tag lang="portuguese">livro</tag>
+		<tag lang="spanish">libro</tag>
+		
 		<tag lang="english">bookshelf</tag>
 		<tag lang="french">étagère</tag>
+		<tag lang="portuguese">prateleira de livros</tag>
+		<tag lang="spanish">estante para libros</tag>
+		
 		<tag lang="english">jewish</tag>
 		<tag lang="french">juif</tag>
+		<tag lang="portuguese">judaico</tag>
+		<tag lang="spanish">judío</tag>
+		
 		<tag lang="english">Koran</tag>
 		<tag lang="french">Coran</tag>
+		<tag lang="portuguese">Alcorão</tag>
+		<tag lang="spanish">Corán</tag>
+		
 		<tag lang="english">modern</tag>
 		<tag lang="french">moderne</tag>
+		<tag lang="portuguese">moderno</tag>
+		<tag lang="spanish">moderno</tag>
+		
 		<tag lang="english">music</tag>
 		<tag lang="french">musique</tag>
+		<tag lang="portuguese">música</tag>
+		<tag lang="spanish">música</tag>
+		
 		<tag lang="english">reading</tag>
 		<tag lang="french">lecture</tag>
+		<tag lang="portuguese">leitura</tag>
+		<tag lang="spanish">lectura</tag>
+		
 		<tag lang="english">heart</tag>
 		<tag lang="french">coeur</tag>
+		<tag lang="portuguese">coração</tag>
+		<tag lang="spanish">corazón</tag>
+		
 		<tag lang="english">sleeping</tag>
 		<tag lang="french">endormi</tag>
+		<tag lang="portuguese">adormecido</tag>
+		<tag lang="spanish">dormindo</tag>
+		
 		<tag lang="english">ladder</tag>
 		<tag lang="french">échelle</tag>
+		<tag lang="portuguese">escada</tag>
+		<tag lang="spanish">escalera</tag>
+		
 		<tag lang="english">tablet</tag>
 		<tag lang="french">tablette</tag>
+		<tag lang="portuguese">tablet</tag>
+		<tag lang="spanish">tablet</tag>
+		
 		<tag lang="english">sky</tag>
 		<tag lang="french">ciel</tag>
+		<tag lang="portuguese">céu</tag>
+		<tag lang="spanish">cielo</tag>
 	</books>
 	<music>
 		<tag lang="english">sheet music</tag>
 		<tag lang="french">partition</tag>
+		<tag lang="portuguese">partituras</tag>
+		<tag lang="spanish">partituras</tag>
+		
 		<tag lang="english">listening</tag>
 		<tag lang="french">écoute</tag>
+		<tag lang="portuguese">escuta</tag>
+		<tag lang="spanish">escucha</tag>
+		
 		<tag lang="english">drumstick</tag>
 		<tag lang="french">baguette de tambour</tag>
+		<tag lang="portuguese">baqueta</tag>
+		<tag lang="spanish">palillo de tambor</tag>
+		
 		<tag lang="english">cello</tag>
 		<tag lang="french">violoncelle</tag>
+		<tag lang="portuguese">violoncelo</tag>
+		<tag lang="spanish">violonchelo</tag>
+		
 		<tag lang="english">maracas</tag>
 		<tag lang="french">maracas</tag>
+		<tag lang="portuguese">maracás</tag>
+		<tag lang="spanish">maracas</tag>
+		
 		<tag lang="english">editing</tag>
 		<tag lang="french">édition</tag>
+		<tag lang="portuguese">edição</tag>
+		<tag lang="spanish">edición</tag>
+		
 		<tag lang="english">headphones</tag>
 		<tag lang="french">casque à écouteurs</tag>
+		<tag lang="portuguese">fones de ouvido</tag>
+		<tag lang="spanish">auriculares</tag>
+		
 		<tag lang="english">microphone</tag>
 		<tag lang="french">microphone</tag>
+		<tag lang="portuguese">microfone</tag>
+		<tag lang="spanish">micrófono</tag>
+		
 		<tag lang="english">musician</tag>
 		<tag lang="french">musicien</tag>
+		<tag lang="portuguese">músico</tag>
+		<tag lang="spanish">músico</tag>
+		
 		<tag lang="english">dancing</tag>
 		<tag lang="french">danse</tag>
+		<tag lang="portuguese">dança</tag>
+		<tag lang="spanish">baile</tag>
+		
 		<tag lang="english">cassette</tag>
 		<tag lang="french">cassette</tag>
+		<tag lang="portuguese">cassete</tag>
+		<tag lang="spanish">casete</tag>
+		
 		<tag lang="english">piano</tag>
 		<tag lang="french">piano</tag>
+		<tag lang="portuguese">piano</tag>
+		<tag lang="spanish">piano</tag>
+		
 		<tag lang="english">saxophone</tag>
 		<tag lang="french">saxophone</tag>
-		<tag lang="english">notes</tag>
-		<tag lang="french">notes</tag>
+		<tag lang="portuguese">saxofone</tag>
+		<tag lang="spanish">saxófono</tag>
+		
+		<tag lang="english">musical notes</tag>
+		<tag lang="french">notes de musique</tag>
+		<tag lang="portuguese">notas musicais</tag>
+		<tag lang="spanish">notas musicales</tag>
+		
 		<tag lang="english">woman</tag>
 		<tag lang="french">femme</tag>
+		<tag lang="portuguese">mulher</tag>
+		<tag lang="spanish">mujer</tag>
+		
 		<tag lang="english">speakers</tag>
 		<tag lang="french">haut-parleurs</tag>
+		<tag lang="portuguese">alto-falantes</tag>
+		<tag lang="spanish">altavoces</tag>
+		
 		<tag lang="english">trumpet</tag>
 		<tag lang="french">trompette</tag>
+		<tag lang="portuguese">trombeta</tag>
+		<tag lang="spanish">trompeta</tag>
+		
 		<tag lang="english">vinyl</tag>
 		<tag lang="french">vinyle</tag>
+		<tag lang="portuguese">vinil</tag>
+		<tag lang="spanish">vinilo</tag>
 	</music>
 	<food>
 		<tag lang="english">bananas</tag>
 		<tag lang="french">bananes</tag>
+		<tag lang="portuguese">bananas</tag>
+		<tag lang="spanish">plátanos</tag>
+		
 		<tag lang="english">blueberries</tag>
 		<tag lang="french">myrtilles</tag>
+		<tag lang="portuguese">mirtilos</tag>
+		<tag lang="spanish">arándanos</tag>
+		
 		<tag lang="english">bread</tag>
 		<tag lang="french">pain</tag>
+		<tag lang="portuguese">pão</tag>
+		<tag lang="spanish">pan</tag>
+		
 		<tag lang="english">cereal</tag>
 		<tag lang="french">céréale</tag>
+		<tag lang="portuguese">cereal</tag>
+		<tag lang="spanish">cereal</tag>
+		
 		<tag lang="english">cherries</tag>
 		<tag lang="french">cerises</tag>
+		<tag lang="portuguese">cerejas</tag>
+		<tag lang="spanish">cerezas</tag>
+		
 		<tag lang="english">marshmallow</tag>
 		<tag lang="french">guimauve</tag>
+		<tag lang="portuguese">malvaísco</tag>
+		<tag lang="spanish">malvavisco</tag>
+		
 		<tag lang="english">cookies</tag>
 		<tag lang="french">biscuits</tag>
+		<tag lang="portuguese">bolinhos</tag>
+		<tag lang="spanish">galletas</tag>
+		
 		<tag lang="english">croissants</tag>
 		<tag lang="french">croissants</tag>
+		<tag lang="portuguese">croissants</tag>
+		<tag lang="spanish">croissants</tag>
+		
 		<tag lang="english">egg</tag>
 		<tag lang="french">oeuf</tag>
+		<tag lang="portuguese">ovo</tag>
+		<tag lang="spanish">huevo</tag>
+		
 		<tag lang="english">apple</tag>
 		<tag lang="french">pomme</tag>
+		<tag lang="portuguese">maçã</tag>
+		<tag lang="spanish">manzana</tag>
+		
 		<tag lang="english">lettuce</tag>
 		<tag lang="french">laitue</tag>
+		<tag lang="portuguese">alface</tag>
+		<tag lang="spanish">lechuga</tag>
+		
 		<tag lang="english">pickles</tag>
 		<tag lang="french">cornichons</tag>
+		<tag lang="portuguese">picles</tag>
+		<tag lang="spanish">encurtidos</tag>
+		
 		<tag lang="english">sushi</tag>
 		<tag lang="french">sushi</tag>
+		<tag lang="portuguese">sushi</tag>
+		<tag lang="spanish">sushi</tag>
+		
 		<tag lang="english">squash</tag>
 		<tag lang="french">squash</tag>
+		<tag lang="portuguese">abóbora</tag>
+		<tag lang="spanish">calabacín</tag>
+		
 		<tag lang="english">shrimp</tag>
 		<tag lang="french">crevette</tag>
+		<tag lang="portuguese">camarão</tag>
+		<tag lang="spanish">camarón</tag>
+		
 		<tag lang="english">tomato</tag>
 		<tag lang="french">tomate</tag>
+		<tag lang="portuguese">tomate</tag>
+		<tag lang="spanish">tomate</tag>
+		
 		<tag lang="english">strawberry</tag>
 		<tag lang="french">fraise</tag>
+		<tag lang="portuguese">morango</tag>
+		<tag lang="spanish">fresa</tag>
+		
 		<tag lang="english">tea</tag>
 		<tag lang="french">thé</tag>
+		<tag lang="portuguese">chá</tag>
+		<tag lang="spanish">té</tag>
 	</food>
 	<science>
 		<tag lang="english">heart</tag>
 		<tag lang="french">coeur</tag>
+		<tag lang="portuguese">coração</tag>
+		<tag lang="spanish">corazón</tag>
+		
 		<tag lang="english">atom</tag>
 		<tag lang="french">atome</tag>
+		<tag lang="portuguese">átomo</tag>
+		<tag lang="spanish">átomo</tag>
+		
 		<tag lang="english">botanist</tag>
 		<tag lang="french">botaniste</tag>
+		<tag lang="portuguese">botânico</tag>
+		<tag lang="spanish">botánico</tag>
+		
 		<tag lang="english">nucleus</tag>
 		<tag lang="french">noyau</tag>
+		<tag lang="portuguese">núcleo</tag>
+		<tag lang="spanish">núcleo</tag>
+		
 		<tag lang="english">chemistry</tag>
 		<tag lang="french">chimie</tag>
+		<tag lang="portuguese">química</tag>
+		<tag lang="spanish">química</tag>
+		
 		<tag lang="english">keyboard</tag>
 		<tag lang="french">clavier</tag>
+		<tag lang="portuguese">teclado</tag>
+		<tag lang="spanish">teclado</tag>
+		
 		<tag lang="english">science</tag>
 		<tag lang="french">science</tag>
+		<tag lang="portuguese">ciência</tag>
+		<tag lang="spanish">ciencia</tag>
+		
 		<tag lang="english">anatomy</tag>
 		<tag lang="french">anatomie</tag>
+		<tag lang="portuguese">anatomia</tag>
+		<tag lang="spanish">anatomía</tag>
+		
 		<tag lang="english">mathematics</tag>
 		<tag lang="french">mathématiques</tag>
+		<tag lang="portuguese">matemática</tag>
+		<tag lang="spanish">matemáticas</tag>
+		
 		<tag lang="english">microscope</tag>
 		<tag lang="french">microscope</tag>
+		<tag lang="portuguese">microscópio</tag>
+		<tag lang="spanish">microscopio</tag>
+		
 		<tag lang="english">model</tag>
 		<tag lang="french">modèle</tag>
+		<tag lang="portuguese">modelo</tag>
+		<tag lang="spanish">modelo</tag>
+		
 		<tag lang="english">pipettes</tag>
 		<tag lang="french">pipettes</tag>
+		<tag lang="portuguese">pipetas</tag>
+		<tag lang="spanish">pipetas</tag>
+		
 		<tag lang="english">scanning</tag>
 		<tag lang="french">balayer</tag>
+		<tag lang="portuguese">exploração</tag>
+		<tag lang="spanish">escaneado</tag>
+		
 		<tag lang="english">eclipse</tag>
 		<tag lang="french">éclipse</tag>
+		<tag lang="portuguese">eclipse</tag>
+		<tag lang="spanish">eclipse</tag>
+		
 		<tag lang="english">solar power</tag>
 		<tag lang="french">énergie solaire</tag>
+		<tag lang="portuguese">energia solar</tag>
+		<tag lang="spanish">energía solar</tag>
+		
 		<tag lang="english">space</tag>
 		<tag lang="french">espace</tag>
+		<tag lang="portuguese">espaço</tag>
+		<tag lang="spanish">espacio</tag>
+		
 		<tag lang="english">cell</tag>
 		<tag lang="french">cellule</tag>
+		<tag lang="portuguese">célula</tag>
+		<tag lang="spanish">célula</tag>
+		
 		<tag lang="english">internet</tag>
 		<tag lang="french">internet</tag>
+		<tag lang="portuguese">internet</tag>
+		<tag lang="spanish">internet</tag>
 	</science>
 	<culture>
 		<tag lang="english">drummer</tag>
 		<tag lang="french">batteur</tag>
+		<tag lang="portuguese">tambor</tag>
+		<tag lang="spanish">tambor</tag>
+		
 		<tag lang="english">asian</tag>
 		<tag lang="french">asiatique</tag>
+		<tag lang="portuguese">asiático</tag>
+		<tag lang="spanish">asiático</tag>
+		
 		<tag lang="english">chief</tag>
 		<tag lang="french">chef</tag>
+		<tag lang="portuguese">chefe</tag>
+		<tag lang="spanish">jefe</tag>
+		
 		<tag lang="english">ship</tag>
-		<tag lang="french">bateau</tag>
+		<tag lang="french">navire</tag>
+		<tag lang="portuguese">navio</tag>
+		<tag lang="spanish">barco</tag>
+		
 		<tag lang="english">spring rolls</tag>
 		<tag lang="french">rouleau de printemps</tag>
+		<tag lang="portuguese">rolinhos primavera</tag>
+		<tag lang="spanish">rollitos de primavera</tag>
+		
 		<tag lang="english">headscarf</tag>
 		<tag lang="french">foulard</tag>
+		<tag lang="portuguese">véu</tag>
+		<tag lang="spanish">pañuelo en la cabeza</tag>
+		
 		<tag lang="english">guitarist</tag>
 		<tag lang="french">guitariste</tag>
+		<tag lang="portuguese">guitarrista</tag>
+		<tag lang="spanish">guitarrista</tag>
+		
 		<tag lang="english">inca</tag>
 		<tag lang="french">inca</tag>
+		<tag lang="portuguese">inca</tag>
+		<tag lang="spanish">inca</tag>
+		
 		<tag lang="english">islam</tag>
 		<tag lang="french">islam</tag>
-		<tag lang="english">tatoos</tag>
+		<tag lang="portuguese">islão</tag>
+		<tag lang="spanish">islam</tag>
+		
+		<tag lang="english">tattoos</tag>
 		<tag lang="french">tatouages</tag>
+		<tag lang="portuguese">tatuagens</tag>
+		<tag lang="spanish">tatuajes</tag>
+		
 		<tag lang="english">hand</tag>
 		<tag lang="french">main</tag>
+		<tag lang="portuguese">mão</tag>
+		<tag lang="spanish">mano</tag>
+		
 		<tag lang="english">dolls</tag>
 		<tag lang="french">poupées</tag>
+		<tag lang="portuguese">bonecas</tag>
+		<tag lang="spanish">muñecas</tag>
+		
 		<tag lang="english">shop</tag>
 		<tag lang="french">magasin</tag>
+		<tag lang="portuguese">loja</tag>
+		<tag lang="spanish">tienda</tag>
+		
 		<tag lang="english">elephants</tag>
 		<tag lang="french">éléphants</tag>
+		<tag lang="portuguese">elefantes</tag>
+		<tag lang="spanish">elefantes</tag>
+		
 		<tag lang="english">fireworks</tag>
 		<tag lang="french">feu d'artifice</tag>
+		<tag lang="portuguese">fogos de artifício</tag>
+		<tag lang="spanish">fuegos artificiales</tag>
+		
 		<tag lang="english">rice</tag>
 		<tag lang="french">riz</tag>
+		<tag lang="portuguese">arroz</tag>
+		<tag lang="spanish">arroz</tag>
+		
 		<tag lang="english">clogs</tag>
 		<tag lang="french">sabots</tag>
+		<tag lang="portuguese">tamancos</tag>
+		<tag lang="spanish">zuecos</tag>
+		
 		<tag lang="english">man</tag>
 		<tag lang="french">homme</tag>
+		<tag lang="portuguese">homem</tag>
+		<tag lang="spanish">hombre</tag>
 	</culture>
 	<art>
 		<tag lang="english">child</tag>
 		<tag lang="french">enfant</tag>
+		<tag lang="portuguese">criança</tag>
+		<tag lang="spanish">niño</tag>
+		
 		<tag lang="english">ancient</tag>
 		<tag lang="french">ancien</tag>
+		<tag lang="portuguese">antigo</tag>
+		<tag lang="spanish">antiguo</tag>
+		
 		<tag lang="english">artist</tag>
 		<tag lang="french">artiste</tag>
+		<tag lang="portuguese">artista</tag>
+		<tag lang="spanish">artista</tag>
+		
 		<tag lang="english">graffiti</tag>
 		<tag lang="french">graffiti</tag>
+		<tag lang="portuguese">grafite</tag>
+		<tag lang="spanish">grafiti</tag>
+		
 		<tag lang="english">glass</tag>
 		<tag lang="french">verre</tag>
+		<tag lang="portuguese">vidro</tag>
+		<tag lang="spanish">vidrio</tag>
+		
 		<tag lang="english">brushes</tag>
 		<tag lang="french">brosses</tag>
+		<tag lang="portuguese">escovas</tag>
+		<tag lang="spanish">cepillos</tag>
+		
 		<tag lang="english">wall</tag>
 		<tag lang="french">mur</tag>
+		<tag lang="portuguese">parede</tag>
+		<tag lang="spanish">pared</tag>
+		
 		<tag lang="english">handprint</tag>
 		<tag lang="french">empreinte de main</tag>
+		<tag lang="portuguese">marca da mão</tag>
+		<tag lang="spanish">huella de la mano</tag>
+		
 		<tag lang="english">drawing</tag>
 		<tag lang="french">dessin</tag>
+		<tag lang="portuguese">desenho</tag>
+		<tag lang="spanish">dibujo</tag>
+		
 		<tag lang="english">paint</tag>
 		<tag lang="french">peinture</tag>
+		<tag lang="portuguese">pintura</tag>
+		<tag lang="spanish">pintura</tag>
+		
 		<tag lang="english">origami</tag>
 		<tag lang="french">origami</tag>
+		<tag lang="portuguese">origami</tag>
+		<tag lang="spanish">origami</tag>
+		
 		<tag lang="english">painting</tag>
 		<tag lang="french">peinture</tag>
+		<tag lang="portuguese">pintando</tag>
+		<tag lang="spanish">pintando</tag>
+		
 		<tag lang="english">pencils</tag>
 		<tag lang="french">crayons</tag>
+		<tag lang="portuguese">lápis</tag>
+		<tag lang="spanish">lápices</tag>
+		
 		<tag lang="english">fungi</tag>
 		<tag lang="french">champignons</tag>
+		<tag lang="portuguese">fungos</tag>
+		<tag lang="spanish">hongos</tag>
+		
 		<tag lang="english">dance</tag>
 		<tag lang="french">danser</tag>
+		<tag lang="portuguese">dança</tag>
+		<tag lang="spanish">danza</tag>
+		
 		<tag lang="english">photography</tag>
 		<tag lang="french">photographie</tag>
+		<tag lang="portuguese">fotografia</tag>
+		<tag lang="spanish">fotografía</tag>
+		
 		<tag lang="english">tiger</tag>
 		<tag lang="french">tigre</tag>
+		<tag lang="portuguese">tigre</tag>
+		<tag lang="spanish">tigre</tag>
+		
 		<tag lang="english">totem</tag>
 		<tag lang="french">totem</tag>
+		<tag lang="portuguese">totem</tag>
+		<tag lang="spanish">tótem</tag>
 	</art>
 	<language>
 		<tag lang="english">portuguese</tag>
 		<tag lang="french">portugais</tag>
+		<tag lang="portuguese">português</tag>
+		<tag lang="spanish">portugués</tag>
+		
 		<tag lang="english">bulgarian</tag>
 		<tag lang="french">bulgare</tag>
+		<tag lang="portuguese">búlgaro</tag>
+		<tag lang="spanish">búlgaro</tag>
+		
 		<tag lang="english">english</tag>
 		<tag lang="french">anglais</tag>
+		<tag lang="portuguese">inglês</tag>
+		<tag lang="spanish">inglés</tag>
+		
 		<tag lang="english">french</tag>
 		<tag lang="french">français</tag>
+		<tag lang="portuguese">francês</tag>
+		<tag lang="spanish">francés</tag>
+		
 		<tag lang="english">mandarin</tag>
 		<tag lang="french">mandarin</tag>
+		<tag lang="portuguese">mandarim</tag>
+		<tag lang="spanish">mandarín</tag>
+		
 		<tag lang="english">german</tag>
 		<tag lang="french">allemand</tag>
+		<tag lang="portuguese">alemão</tag>
+		<tag lang="spanish">alemán</tag>
+		
 		<tag lang="english">programming</tag>
 		<tag lang="french">programmation</tag>
+		<tag lang="portuguese">programação</tag>
+		<tag lang="spanish">programación</tag>
+		
 		<tag lang="english">icelandic</tag>
 		<tag lang="french">islandais</tag>
+		<tag lang="portuguese">islandês</tag>
+		<tag lang="spanish">islandés</tag>
+		
 		<tag lang="english">hindi</tag>
 		<tag lang="french">hindi</tag>
+		<tag lang="portuguese">hindi</tag>
+		<tag lang="spanish">hindi</tag>
+		
 		<tag lang="english">indonesian</tag>
 		<tag lang="french">indonésien</tag>
+		<tag lang="portuguese">indonésio</tag>
+		<tag lang="spanish">indonesio</tag>
+		
 		<tag lang="english">norwegian</tag>
 		<tag lang="french">norvégien</tag>
+		<tag lang="portuguese">norueguês</tag>
+		<tag lang="spanish">noruego</tag>
+		
 		<tag lang="english">japanese</tag>
 		<tag lang="french">japonais</tag>
+		<tag lang="portuguese">japonês</tag>
+		<tag lang="spanish">japonés</tag>
+		
 		<tag lang="english">russian</tag>
 		<tag lang="french">russe</tag>
+		<tag lang="portuguese">russo</tag>
+		<tag lang="spanish">ruso</tag>
+		
 		<tag lang="english">scots</tag>
 		<tag lang="french">écossais</tag>
+		<tag lang="portuguese">escocês</tag>
+		<tag lang="spanish">escocés</tag>
+		
 		<tag lang="english">counting</tag>
 		<tag lang="french">compte</tag>
+		<tag lang="portuguese">contando</tag>
+		<tag lang="spanish">contando</tag>
+		
 		<tag lang="english">sign language</tag>
 		<tag lang="french">langue des signes</tag>
+		<tag lang="portuguese">linguagem de sinais</tag>
+		<tag lang="spanish">lenguaje por señas</tag>
+		
 		<tag lang="english">spanish</tag>
 		<tag lang="french">espagnol</tag>
+		<tag lang="portuguese">espanhol</tag>
+		<tag lang="spanish">español</tag>
+		
 		<tag lang="english">swedish</tag>
 		<tag lang="french">suédois</tag>
+		<tag lang="portuguese">sueco</tag>
+		<tag lang="spanish">sueco</tag>
 	</language>
 	<history>
 		<tag lang="english">ruins</tag>
 		<tag lang="french">ruines</tag>
+		<tag lang="portuguese">ruínas</tag>
+		<tag lang="spanish">ruinas</tag>
+		
 		<tag lang="english">column</tag>
 		<tag lang="french">colonne</tag>
+		<tag lang="portuguese">coluna</tag>
+		<tag lang="spanish">columna</tag>
+		
 		<tag lang="english">theater</tag>
 		<tag lang="french">théâtre</tag>
+		<tag lang="portuguese">teatro</tag>
+		<tag lang="spanish">teatro</tag>
+		
 		<tag lang="english">armour</tag>
 		<tag lang="french">armure</tag>
+		<tag lang="portuguese">armadura</tag>
+		<tag lang="spanish">armadura</tag>
+		
 		<tag lang="english">priory</tag>
 		<tag lang="french">prieuré</tag>
+		<tag lang="portuguese">prioridade</tag>
+		<tag lang="spanish">priorato</tag>
+		
 		<tag lang="english">car</tag>
 		<tag lang="french">voiture</tag>
+		<tag lang="portuguese">carro</tag>
+		<tag lang="spanish">coche</tag>
+		
 		<tag lang="english">castle</tag>
 		<tag lang="french">château</tag>
+		<tag lang="portuguese">castelo</tag>
+		<tag lang="spanish">castillo</tag>
+		
 		<tag lang="english">cathedral</tag>
 		<tag lang="french">cathédrale</tag>
+		<tag lang="portuguese">catedral</tag>
+		<tag lang="spanish">catedral</tag>
+		
 		<tag lang="english">tower</tag>
 		<tag lang="french">tour</tag>
+		<tag lang="portuguese">torre</tag>
+		<tag lang="spanish">torre</tag>
+		
 		<tag lang="english">building</tag>
 		<tag lang="french">bâtiment</tag>
+		<tag lang="portuguese">edifício</tag>
+		<tag lang="spanish">edificio</tag>
+		
 		<tag lang="english">parliament</tag>
 		<tag lang="french">parlement</tag>
+		<tag lang="portuguese">parlamento</tag>
+		<tag lang="spanish">parlamento</tag>
+		
 		<tag lang="english">church</tag>
 		<tag lang="french">église</tag>
+		<tag lang="portuguese">igreja</tag>
+		<tag lang="spanish">iglesia</tag>
+		
 		<tag lang="english">museum</tag>
 		<tag lang="french">musée</tag>
+		<tag lang="portuguese">museu</tag>
+		<tag lang="spanish">museo</tag>
+		
 		<tag lang="english">statue</tag>
 		<tag lang="french">statue</tag>
+		<tag lang="portuguese">estátua</tag>
+		<tag lang="spanish">estatua</tag>
+		
 		<tag lang="english">roman</tag>
 		<tag lang="french">romain</tag>
+		<tag lang="portuguese">romano</tag>
+		<tag lang="spanish">romano</tag>
+		
 		<tag lang="english">landmarks</tag>
 		<tag lang="french">repères</tag>
+		<tag lang="portuguese">ponto de referência</tag>
+		<tag lang="spanish">mojón</tag>
+		
 		<tag lang="english">temple</tag>
 		<tag lang="french">temple</tag>
+		<tag lang="portuguese">templo</tag>
+		<tag lang="spanish">templo</tag>
+		
 		<tag lang="english">ship</tag>
-		<tag lang="french">bateau</tag>
+		<tag lang="french">navire</tag>
+		<tag lang="portuguese">navio</tag>
+		<tag lang="spanish">barco</tag>
 	</history>
 	<names>
 		<tag lang="english">Britain</tag>
 		<tag lang="french">Grande-Bretagne</tag>
+		<tag lang="portuguese">Grã-Bretanha</tag>
+		<tag lang="spanish">Gran Bretaña</tag>
+		
 		<tag lang="english">login</tag>
-		<tag lang="french">login</tag>
+		<tag lang="french">ouverture de session</tag>
+		<tag lang="portuguese">identifique-se</tag>
+		<tag lang="spanish">iniciar sesión</tag>
+		
 		<tag lang="english">Brazil</tag>
 		<tag lang="french">Brésil</tag>
+		<tag lang="portuguese">Brasil</tag>
+		<tag lang="spanish">Brasil</tag>
+		
 		<tag lang="english">Bulgaria</tag>
 		<tag lang="french">Bulgarie</tag>
+		<tag lang="portuguese">Bulgária</tag>
+		<tag lang="spanish">Bulgaria</tag>
+		
 		<tag lang="english">Canada</tag>
 		<tag lang="french">Canada</tag>
+		<tag lang="portuguese">Canadá</tag>
+		<tag lang="spanish">Canadá</tag>
+		
 		<tag lang="english">China</tag>
 		<tag lang="french">Chine</tag>
+		<tag lang="portuguese">China</tag>
+		<tag lang="spanish">China</tag>
+		
 		<tag lang="english">Europe</tag>
 		<tag lang="french">Europe</tag>
+		<tag lang="portuguese">Europa</tag>
+		<tag lang="spanish">Europa</tag>
+		
 		<tag lang="english">Hawaii</tag>
 		<tag lang="french">Hawaii</tag>
+		<tag lang="portuguese">Hawaii</tag>
+		<tag lang="spanish">Hawai</tag>
+		
 		<tag lang="english">India</tag>
 		<tag lang="french">Inde</tag>
+		<tag lang="portuguese">Índia</tag>
+		<tag lang="spanish">India</tag>
+		
 		<tag lang="english">Indonesia</tag>
 		<tag lang="french">Indonésie</tag>
+		<tag lang="portuguese">Indonésia</tag>
+		<tag lang="spanish">Indonesia</tag>
+		
 		<tag lang="english">Norway</tag>
 		<tag lang="french">Norvège</tag>
+		<tag lang="portuguese">Noruega</tag>
+		<tag lang="spanish">Noruega</tag>
+		
 		<tag lang="english">bridge</tag>
 		<tag lang="french">pont</tag>
+		<tag lang="portuguese">ponte</tag>
+		<tag lang="spanish">puente</tag>
+		
 		<tag lang="english">Scotland</tag>
 		<tag lang="french">Écosse</tag>
+		<tag lang="portuguese">Escócia</tag>
+		<tag lang="spanish">Escocia</tag>
+		
 		<tag lang="english">Spain</tag>
 		<tag lang="french">Espagne</tag>
+		<tag lang="portuguese">Espanha</tag>
+		<tag lang="spanish">España</tag>
+		
 		<tag lang="english">Sweden</tag>
 		<tag lang="french">Suède</tag>
+		<tag lang="portuguese">Suécia</tag>
+		<tag lang="spanish">Suecia</tag>
+		
 		<tag lang="english">ship</tag>
-		<tag lang="french">bateau</tag>
+		<tag lang="french">navire</tag>
+		<tag lang="portuguese">navio</tag>
+		<tag lang="spanish">barco</tag>
+		
 		<tag lang="english">U.S.A.</tag>
 		<tag lang="french">É.U.A.</tag>
+		<tag lang="portuguese">E.U.A.</tag>
+		<tag lang="spanish">EE.UU.</tag>
+		
 		<tag lang="english">Australia</tag>
 		<tag lang="french">Australie</tag>
+		<tag lang="portuguese">Austrália</tag>
+		<tag lang="spanish">Australia</tag>
 	</names>
 	<holidays>
 		<tag lang="english">Christmas</tag>
 		<tag lang="french">Noël</tag>
+		<tag lang="portuguese">Natal</tag>
+		<tag lang="spanish">Navidad</tag>
+		
 		<tag lang="english">bunny</tag>
 		<tag lang="french">lapin</tag>
+		<tag lang="portuguese">coelho</tag>
+		<tag lang="spanish">conejito</tag>
+		
 		<tag lang="english">Easter</tag>
 		<tag lang="french">Pâques</tag>
+		<tag lang="portuguese">Páscoa</tag>
+		<tag lang="spanish">Pascua</tag>
+		
 		<tag lang="english">eggs</tag>
 		<tag lang="french">oeufs</tag>
+		<tag lang="portuguese">ovos</tag>
+		<tag lang="spanish">huevos</tag>
+		
 		<tag lang="english">fireworks</tag>
 		<tag lang="french">feu d'artifice</tag>
-		<tag lang="english">St. Patrick's Day</tag>
-		<tag lang="french">La Saint-Patrick</tag>
+		<tag lang="portuguese">fogos de artifício</tag>
+		<tag lang="spanish">fuegos artificiales</tag>
+		
+		<tag lang="english">Saint Patrick's Day</tag>
+		<tag lang="french">La Saint-Patrice</tag>
+		<tag lang="portuguese">Dia de São Patrício</tag>
+		<tag lang="spanish">Día de San Patricio</tag>
+		
 		<tag lang="english">Halloween</tag>
 		<tag lang="french">Halloween</tag>
+		<tag lang="portuguese">Dia das Bruxas</tag>
+		<tag lang="spanish">Dia de las Brujas</tag>
+		
 		<tag lang="english">moon</tag>
 		<tag lang="french">lune</tag>
+		<tag lang="portuguese">lua</tag>
+		<tag lang="spanish">luna</tag>
+		
 		<tag lang="english">ghost</tag>
 		<tag lang="french">fantôme</tag>
+		<tag lang="portuguese">fantasma</tag>
+		<tag lang="spanish">fantasma</tag>
+		
 		<tag lang="english">lips</tag>
 		<tag lang="french">lèvres</tag>
+		<tag lang="portuguese">lábios</tag>
+		<tag lang="spanish">labios</tag>
+		
 		<tag lang="english">Valentine's Day</tag>
 		<tag lang="french">Saint Valentin</tag>
+		<tag lang="portuguese">Dia dos Namorados</tag>
+		<tag lang="spanish">Día de San Valentín</tag>
+		
 		<tag lang="english">snow globe</tag>
 		<tag lang="french">globe de neige</tag>
+		<tag lang="portuguese">globo de neve</tag>
+		<tag lang="spanish">globo de la nieve</tag>
+		
 		<tag lang="english">Santa Claus</tag>
 		<tag lang="french">Père Noël</tag>
+		<tag lang="portuguese">Papai Noel</tag>
+		<tag lang="spanish">Papá Noel</tag>
+		
 		<tag lang="english">pumpkins</tag>
 		<tag lang="french">citrouilles</tag>
+		<tag lang="portuguese">abóboras</tag>
+		<tag lang="spanish">calabazas</tag>
+		
 		<tag lang="english">facial hair</tag>
 		<tag lang="french">poil du visage</tag>
+		<tag lang="portuguese">pêlos faciais</tag>
+		<tag lang="spanish">vello facial</tag>
+		
 		<tag lang="english">dog</tag>
 		<tag lang="french">chien</tag>
+		<tag lang="portuguese">cão</tag>
+		<tag lang="spanish">perro</tag>
+		
 		<tag lang="english">clover</tag>
 		<tag lang="french">trèfle</tag>
+		<tag lang="portuguese">trevo</tag>
+		<tag lang="spanish">trébol</tag>
+		
 		<tag lang="english">heart</tag>
 		<tag lang="french">coeur</tag>
+		<tag lang="portuguese">coração</tag>
+		<tag lang="spanish">corazón</tag>
 	</holidays>
 </tags>
