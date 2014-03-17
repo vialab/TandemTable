@@ -160,6 +160,8 @@ public class HeadlineGetter extends Thread {
 					translatedText = headAct.middleText.replaceAll(sketch.replaceRegex, " ");
 				}
 				
+				// TODO
+				// Allow user to choose what language they want the word translated to
 				if(headAct.langTranslate1 == headAct.langTranslate2){
 					if(headAct.langTranslate1 == Language.ENGLISH){
 						translatedText = Translate.execute(translatedText, headAct.langTranslate1, Language.FRENCH);

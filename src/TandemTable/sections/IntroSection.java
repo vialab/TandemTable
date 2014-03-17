@@ -44,7 +44,7 @@ public class IntroSection {
 	int animIndex1 = 0, animIndex2 = 0;
 
 	
-	final int TIME = 4000, FINAL_TIME = 1000;
+	final int TIME = 3000, FINAL_TIME = 1000;
 
 	public boolean next1 = false, next2 = false;
 	

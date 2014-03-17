@@ -121,32 +121,31 @@ public class HeadlinesActivity {
 			culture1 = "en_all";
 			langTranslate1 = Language.ENGLISH;
 
-			topicExpanded1 = "";
-			String[] scrambled = sketch.scrambleStrings(Languages.topicsExpandedE[topicIndex]);
-
-			for(String s: scrambled){
-				topicExpanded1 += s + "&";
-			}
-
-			topicExpanded1 = topicExpanded1.substring(0, topicExpanded1.length() - 1);
-			topicExpanded1 = topicExpanded1.replaceAll(" ", "");
+			setTopicsExpandedOrder(1, Languages.topicsExpandedE);
 		} else if(lang1.equalsIgnoreCase("French")){
 			back1 = Languages.back2HeadsF;
 			topic1 = Languages.topicsF[topicIndex];
 			culture1 = "fr";
 			langTranslate1 = Language.FRENCH;
 
-			topicExpanded1 = "";
-			/*String[] scrambled = sketch.scrambleTopic(sketch.topicsExpandedF[topicIndex]);
+			setTopicsExpandedOrder(1, Languages.topicsExpandedF);
+			//topicExpanded1 = topic1;
+		} else if(lang1.equalsIgnoreCase("Portuguese")){
+			back1 = Languages.back2HeadsP;
+			topic1 = Languages.topicsP[topicIndex];
+			culture1 = "pt";
+			langTranslate1 = Language.PORTUGUESE;
 
-			for(String s: scrambled){
-				topicExpanded1 += s + "&";
-			}
+			setTopicsExpandedOrder(1, Languages.topicsExpandedP);
+			//topicExpanded1 = topic1;
+		} else if(lang1.equalsIgnoreCase("Spanish")){
+			back1 = Languages.back2HeadsS;
+			topic1 = Languages.topicsS[topicIndex];
+			culture1 = "es";
+			langTranslate1 = Language.SPANISH;
 
-			topicExpanded1 = topicExpanded1.substring(0, topicExpanded1.length() - 1);
-			topicExpanded1 = topicExpanded1.replaceAll(" ", "");*/
-
-			topicExpanded1 = topic1;
+			setTopicsExpandedOrder(1, Languages.topicsExpandedS);
+			//topicExpanded1 = topic1;
 		}
 
 		if(lang2.equalsIgnoreCase("English")){
@@ -155,16 +154,8 @@ public class HeadlinesActivity {
 			culture2 = "en_all";
 			langTranslate2 = Language.ENGLISH;
 
-			topicExpanded2 = "";
+			setTopicsExpandedOrder(2, Languages.topicsExpandedE);
 
-			String[] scrambled = sketch.scrambleStrings(Languages.topicsExpandedE[topicIndex]);
-
-			for(String s: scrambled){
-				topicExpanded2 += s + "&";
-			}
-
-			topicExpanded2 = topicExpanded2.substring(0, topicExpanded2.length() - 1);
-			topicExpanded2 = topicExpanded2.replaceAll(" ", "");
 		} else if(lang2.equalsIgnoreCase("French")){
 			back2 = Languages.back2HeadsF;
 			topic2 = Languages.topicsF[topicIndex];
@@ -173,16 +164,24 @@ public class HeadlinesActivity {
 
 			topicExpanded2 = "";
 
-			/*String[] scrambled = sketch.scrambleTopic(sketch.topicsExpandedF[topicIndex]);
+			setTopicsExpandedOrder(2, Languages.topicsExpandedF);
+			//topicExpanded2 = topic2;			
+		} else if(lang2.equalsIgnoreCase("Portuguese")){
+			back2 = Languages.back2HeadsP;
+			topic2 = Languages.topicsP[topicIndex];
+			culture2 = "pt";
+			langTranslate2 = Language.PORTUGUESE;
 
-			for(String s: scrambled){
-				topicExpanded2 += s + "&";
-			}
+			setTopicsExpandedOrder(2, Languages.topicsExpandedP);
+			//topicExpanded2 = topic2;
+		} else if(lang2.equalsIgnoreCase("Spanish")){
+			back2 = Languages.back2HeadsS;
+			topic2 = Languages.topicsS[topicIndex];
+			culture2 = "es";
+			langTranslate2 = Language.SPANISH;
 
-			topicExpanded2 = topicExpanded2.substring(0, topicExpanded2.length() - 1);
-			topicExpanded2 = topicExpanded2.replaceAll(" ", "");*/
-
-			topicExpanded2 = topic2;			
+			setTopicsExpandedOrder(2, Languages.topicsExpandedS);
+			//topicExpanded2 = topic2;
 		}
 
 		createBackButtons();
@@ -191,6 +190,31 @@ public class HeadlinesActivity {
 		hg = new HeadlineGetter(sketch, this);
 		hg.setPriority(Thread.MAX_PRIORITY);
 		hg.start();
+	}
+	
+	public void setTopicsExpandedOrder(int user, String[][] strList) {
+		if(user == 1) {
+			topicExpanded1 = "";
+			String[] scrambled = sketch.scrambleStrings(strList[topicIndex]);
+
+			for(String s: scrambled){
+				topicExpanded1 += s + "&";
+			}
+
+			topicExpanded1 = topicExpanded1.substring(0, topicExpanded1.length() - 1);
+			topicExpanded1 = topicExpanded1.replaceAll(" ", "");
+		} else if(user == 2) {
+			topicExpanded2 = "";
+
+			String[] scrambled = sketch.scrambleStrings(strList[topicIndex]);
+
+			for(String s: scrambled){
+				topicExpanded2 += s + "&";
+			}
+
+			topicExpanded2 = topicExpanded2.substring(0, topicExpanded2.length() - 1);
+			topicExpanded2 = topicExpanded2.replaceAll(" ", "");
+		}
 	}
 
 	public void createBackground4Swipe(){

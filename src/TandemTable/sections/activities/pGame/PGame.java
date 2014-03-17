@@ -64,7 +64,6 @@ public class PGame {
 	
 	String[] tagArray1 = null;
 	String[] tagArray2 = null;
-	String[] tags;
 	
 	public PGame(Sketch sketch, int topicIndex, String lang1, String lang2){
 		this.sketch = sketch;
@@ -73,14 +72,6 @@ public class PGame {
 		this.lang2 = lang2;
 		
 		createBoxes();
-
-		String[] scrambled = null;
-		
-		if(lang1.equalsIgnoreCase("English") || lang2.equalsIgnoreCase("English")){	
-			scrambled = sketch.scrambleStrings(Languages.topicsExpandedE[topicIndex]);
-		} else if(lang1.equalsIgnoreCase("French") || lang2.equalsIgnoreCase("French")){
-			scrambled = sketch.scrambleStrings(Languages.topicsExpandedF[topicIndex]);
-		}
 		
 
 		if(lang1.equalsIgnoreCase("English")){	
@@ -89,7 +80,12 @@ public class PGame {
 		} else if(lang1.equalsIgnoreCase("French")){
 			tagArray1 = Languages.tagsF[topicIndex];
 			//play1 = sketch.playAgainF;
-
+		} else if(lang1.equalsIgnoreCase("Portuguese")){	
+			tagArray1 = Languages.tagsP[topicIndex];
+			//play1 = sketch.playAgainP;
+		} else if(lang1.equalsIgnoreCase("Spanish")){
+			tagArray1 = Languages.tagsS[topicIndex];
+			//play1 = sketch.playAgainS;
 		}
 		
 		if(lang2.equalsIgnoreCase("English")){	
@@ -98,17 +94,14 @@ public class PGame {
 		} else if(lang2.equalsIgnoreCase("French")){
 			tagArray2 = Languages.tagsF[topicIndex];
 			//play2 = sketch.playAgainF;
-
+		} else if(lang2.equalsIgnoreCase("Portuguese")){	
+			tagArray2 = Languages.tagsP[topicIndex];
+			//play2 = sketch.playAgainP;
+		} else if(lang2.equalsIgnoreCase("Spanish")){
+			tagArray2 = Languages.tagsS[topicIndex];
+			//play2 = sketch.playAgainS;
 		}
-		
-		
-
-		tags = new String[NUM_TAGS];
-		for(int i = 0; i < scrambled.length; i++){
-
-			tags[i] = scrambled[i];
-		}
-		
+				
 		
 		createLayout();
 		createMsgBox();

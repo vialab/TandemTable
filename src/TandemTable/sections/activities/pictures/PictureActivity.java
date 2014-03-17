@@ -67,7 +67,12 @@ public class PictureActivity {
 		} else if(lang1.equalsIgnoreCase("French") || lang2.equalsIgnoreCase("French")){
 			scrambled = sketch.scrambleStrings(Languages.topicsExpandedF[topicIndex]);
 			topic[0] = Languages.topicsF[topicIndex]; 
-
+		} else if(lang1.equalsIgnoreCase("Portuguese") || lang2.equalsIgnoreCase("Portuguese")){
+			scrambled = sketch.scrambleStrings(Languages.topicsExpandedP[topicIndex]);
+			topic[0] = Languages.topicsP[topicIndex]; 
+		} else if(lang1.equalsIgnoreCase("Spanish") || lang2.equalsIgnoreCase("Spanish")){
+			scrambled = sketch.scrambleStrings(Languages.topicsExpandedS[topicIndex]);
+			topic[0] = Languages.topicsS[topicIndex]; 
 		}
 
 		tags = new String[NUM_TAGS];

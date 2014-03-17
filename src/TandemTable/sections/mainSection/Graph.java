@@ -138,17 +138,8 @@ public class Graph {
 		int x = 0;
 		int y = 0;
 
-		//if(lang1.equalsIgnoreCase("English")){
-			topics1 = sketch.learner1.topics;//layoutManager.sketch.topicsE;
-		//} else if(lang1.equalsIgnoreCase("French")){
-		//	topics1 = layoutManager.sketch.topicsF;
-		//}
-
-		//if(lang2.equalsIgnoreCase("English")){
-			topics2 = sketch.learner2.topics;//layoutManager.sketch.topicsE;
-		//} else if(lang2.equalsIgnoreCase("French")){
-		//	topics2 = layoutManager.sketch.topicsF;
-		//}
+		topics1 = sketch.learner1.topics;
+		topics2 = sketch.learner2.topics;
 
 		for(int j = 0; j < rows; j++){
 			for(int h = 0; h < columns; h++){

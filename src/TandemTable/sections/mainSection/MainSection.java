@@ -205,15 +205,8 @@ public class MainSection {
 	 * Creates the switch target language buttons
 	 */
 	public void createSwitchLanguageButtons(){
-		//String s = "";
 
 		//New language Button for user 1
-		//if(lang1.equalsIgnoreCase("English")){
-		//	s = sketch.newLangE;
-		//} else if(lang1.equalsIgnoreCase("French")){
-		//	s = sketch.newLangF;
-		//}
-
 		newLang1 = new TextZone(buttonX, buttonYb, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner1.newLang, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
@@ -262,12 +255,6 @@ public class MainSection {
 		animNewLang[0].setRepeatCount(Animator.INFINITE);
 
 		//New language Button for user 2
-		//if(lang2.equalsIgnoreCase("English")){
-		//	s = sketch.newLangE;
-		//} else if(lang2.equalsIgnoreCase("French")){
-		//	s = sketch.newLangF;
-		//}
-
 		newLang2 = new TextZone(buttonX, buttonYt, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner2.newLang, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
@@ -336,7 +323,6 @@ public class MainSection {
 	 */
 	public void enableActivityButtons(int index, String topic, boolean randFlag, int randIndex){
 		selectedTopicIndex = index;
-		//selectedTopic = English.topics[index];
 		activityBFlag = true;
 
 		for(int i = 0; i < Sketch.NUM_ACTIVITIES; i++){
@@ -458,17 +444,8 @@ public class MainSection {
 			activityBars1[i] = Colours.fadedText;
 			activityBars2[i] = Colours.fadedText;
 		}
-
-
-		//String[] activityString = null;
-
-		/*if(lang1.equalsIgnoreCase("English")){
-			activityString = sketch.activitiesE;
-		} else if(lang1.equalsIgnoreCase("French")){
-			activityString = sketch.activitiesF;
-		}*/
-
 		
+		// User 1
 		int offset = 2;
 
 		int x;
@@ -552,12 +529,7 @@ public class MainSection {
 			animA1[index].setRepeatCount(Animator.INFINITE);
 		}
 
-		/*if(lang2.equalsIgnoreCase("English")){
-			activityString = sketch.activitiesE;
-		} else if(lang2.equalsIgnoreCase("French")){
-			activityString = sketch.activitiesF;
-		}*/
-
+		// User 2
 		y = sketch.getY() + offset;
 
 		for(int i = 0; i < Sketch.NUM_ACTIVITIES; i++){
@@ -664,14 +636,8 @@ public class MainSection {
 		edgesFlag = false;
 		leftCenterLineFlag = false;
 		graph.deactivateNodes();
-		//String s ="";
-
-		//New switch activity Button for user 1
-		/*if(lang1.equalsIgnoreCase("English")){
-			s = sketch.choAnoActE;
-		} else if(lang1.equalsIgnoreCase("French")){
-			s = sketch.choAnoActF;
-		}*/
+		
+		// User 1
 		switchAct1 = new TextZone(buttonX, buttonYb, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner1.choAnoAct, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
@@ -715,13 +681,8 @@ public class MainSection {
 		animSwitchAct[0].setRepeatBehavior(RepeatBehavior.REVERSE);
 		animSwitchAct[0].setRepeatCount(Animator.INFINITE);
 
-		//New switch activity Button for user 2
-		/*if(lang2.equalsIgnoreCase("English")){
-			s = sketch.choAnoActE;
-		} else if(lang2.equalsIgnoreCase("French")){
-			s = sketch.choAnoActF;
-		}*/
-
+		
+		// User 2
 		switchAct2  = new TextZone(buttonX, buttonYt, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner2.choAnoAct, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){

@@ -1,43 +1,96 @@
 <?xml version="1.0"?>
-<!--tags-->
+<!--tags for picture game-->
 <tags>
 	<sports>
 		<tag lang="english">american football</tag>
 		<tag lang="french">football américain</tag>
+		<tag lang="portuguese">futebol americano</tag>
+		<tag lang="spanish">fútbol americano</tag>
+		
 		<tag lang="english">baseball</tag>
 		<tag lang="french">base-ball</tag>
+		<tag lang="portuguese">beisebol</tag>
+		<tag lang="spanish">béisbol</tag>
+		
 		<tag lang="english">swimming</tag>
 		<tag lang="french">natation</tag>
+		<tag lang="portuguese">natação</tag>
+		<tag lang="spanish">natación</tag>
+		
 		<tag lang="english">polo</tag>
 		<tag lang="french">polo</tag>
+		<tag lang="portuguese">polo</tag>
+		<tag lang="spanish">polo</tag>
+		
 		<tag lang="english">fishing</tag>
 		<tag lang="french">pêche</tag>
+		<tag lang="portuguese">pescaria</tag>
+		<tag lang="spanish">pesca</tag>
+		
 		<tag lang="english">golfing</tag>
 		<tag lang="french">golf</tag>
+		<tag lang="portuguese">golfe</tag>
+		<tag lang="spanish">golf</tag>
+		
 		<tag lang="english">soccer</tag>
 		<tag lang="french">football</tag>
+		<tag lang="portuguese">futebol</tag>
+		<tag lang="spanish">fútbol</tag>
+		
 		<tag lang="english">jet ski</tag>
 		<tag lang="french">scooter des mers</tag>
+		<tag lang="portuguese">jet ski</tag>
+		<tag lang="spanish">jet ski</tag>
+		
 		<tag lang="english">kite surfing</tag>
 		<tag lang="french">kite surf</tag>
+		<tag lang="portuguese">pipa surfando</tag>
+		<tag lang="spanish">surf de cometa</tag>
+		
 		<tag lang="english">torch</tag>
 		<tag lang="french">torche</tag>
+		<tag lang="portuguese">tocha</tag>
+		<tag lang="spanish">antorcha</tag>
+		
 		<tag lang="english">paragliding</tag>
 		<tag lang="french">parapente</tag>
+		<tag lang="portuguese">parapente</tag>
+		<tag lang="spanish">parapente</tag>
+		
 		<tag lang="english">racing</tag>
 		<tag lang="french">course</tag>
+		<tag lang="portuguese">corrida</tag>
+		<tag lang="spanish">carreras</tag>
+		
 		<tag lang="english">skateboarding</tag>
 		<tag lang="french">planche à roulettes</tag>
+		<tag lang="portuguese">skate</tag>
+		<tag lang="spanish">skate</tag>
+		
 		<tag lang="english">skiing</tag>
 		<tag lang="french">ski</tag>
+		<tag lang="portuguese">esqui</tag>
+		<tag lang="spanish">esquí</tag>
+		
 		<tag lang="english">snowboarding</tag>
 		<tag lang="french">snowboard</tag>
+		<tag lang="portuguese">snowboard</tag>
+		<tag lang="spanish">snowboard</tag>
+		
 		<tag lang="english">tennis</tag>
 		<tag lang="french">tennis</tag>
+		<tag lang="portuguese">tênis</tag>
+		<tag lang="spanish">tenis</tag>
+		
 		<tag lang="english">surfing</tag>
 		<tag lang="french">surf</tag>
+		<tag lang="portuguese">surfe</tag>
+		<tag lang="spanish">surf</tag>
+		
 		<tag lang="english">windsurfing</tag>
 		<tag lang="french">planche à voile</tag>
+		<tag lang="portuguese">windsurf</tag>
+		<tag lang="spanish">tabla a vela</tag>
 	</sports>
 	<religion>
 		<tag lang="english">clouds</tag>

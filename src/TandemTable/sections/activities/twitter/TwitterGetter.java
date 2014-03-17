@@ -224,6 +224,9 @@ public class TwitterGetter extends Thread {
 				if(!twitterAct.middleText.startsWith("http:") && !twitterAct.middleText.startsWith("https:")){
 					translatedText = twitterAct.middleText.replaceAll(sketch.replaceRegex, " ");
 				}
+				
+				// TODO
+				// Allow user to choose what language they want the word translated to
 				if(twitterAct.langTranslate1 == twitterAct.langTranslate2){
 					if(twitterAct.langTranslate1 == Language.ENGLISH){
 						translatedText = Translate.execute(translatedText, twitterAct.langTranslate1, Language.FRENCH);

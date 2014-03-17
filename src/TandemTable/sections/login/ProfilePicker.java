@@ -605,6 +605,10 @@ public class ProfilePicker {
 					loginScreen.english1.tapEvent(new TapEvent(0,0, fakeCursors, 1));
 				} else if(lastLangUsed.equalsIgnoreCase("French")){
 					loginScreen.french1.tapEvent(new TapEvent(0,0, fakeCursors, 1));
+				} else if(lastLangUsed.equalsIgnoreCase("Portuguese")){
+					loginScreen.portuguese1.tapEvent(new TapEvent(0,0, fakeCursors, 1));
+				} else if(lastLangUsed.equalsIgnoreCase("Spanish")){
+					loginScreen.spanish1.tapEvent(new TapEvent(0,0, fakeCursors, 1));
 				} 
 			} else if (user == 2){
 				reader = new FileReader(".\\data\\users\\info\\" + chosenProfile2 + ".user");
@@ -615,6 +619,10 @@ public class ProfilePicker {
 					loginScreen.english2.tapEvent(new TapEvent(0,0, fakeCursors, 1));
 				} else if(lastLangUsed.equalsIgnoreCase("French")){
 					loginScreen.french2.tapEvent(new TapEvent(0,0, fakeCursors, 1));
+				} else if(lastLangUsed.equalsIgnoreCase("Portuguese")){
+					loginScreen.portuguese2.tapEvent(new TapEvent(0,0, fakeCursors, 1));
+				} else if(lastLangUsed.equalsIgnoreCase("Spanish")){
+					loginScreen.spanish2.tapEvent(new TapEvent(0,0, fakeCursors, 1));
 				}
 			}
 			bReader.close();

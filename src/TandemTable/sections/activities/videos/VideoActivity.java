@@ -46,7 +46,10 @@ public class VideoActivity {
 	Animator animMV1, animMV2, animPlay1, animPlay2, animPause1, animPause2, animStop1, animStop2, animCL1, animCL2;
 
 	String lang1, lang2;//, playStr1, playStr2, pauseStr1, pauseStr2, stopStr1, stopStr2;
-	String topicsScrambled, topic, currentL;
+	String topicsScrambled, topic;
+	
+	// Current user's country code being used
+	int userCountryCode = 1;
 	
 	boolean bothL = false;
 
@@ -56,7 +59,6 @@ public class VideoActivity {
 		this.polyW = (sketch.getWidth()-sketch.lineX)/8;
 		this.lang1 = lang1;
 		this.lang2 = lang2;
-		
 		
 		/*if(lang1.equalsIgnoreCase("English")){
 			playStr1 = sketch.playE;
@@ -78,28 +80,32 @@ public class VideoActivity {
 			stopStr2 = sketch.stopF;
 		}*/
 		
-		if((lang1.equalsIgnoreCase("English") && lang2.equalsIgnoreCase("French"))
-				|| (lang2.equalsIgnoreCase("English") && lang1.equalsIgnoreCase("French"))){
+		if(!lang1.equalsIgnoreCase(lang2)) {
 			bothL = true;	
-			currentL = "en";
 		} 
+		
 		String[] scrambled = null;
 		
 		if(lang1.equalsIgnoreCase("English") || lang2.equalsIgnoreCase("English")){
 			scrambled = sketch.scrambleStrings(Languages.topicsExpandedE[topicIndex]);
 			topic = Languages.topicsE[topicIndex];
+			
 		} else if(lang1.equalsIgnoreCase("French") || lang2.equalsIgnoreCase("French")){
 			scrambled = sketch.scrambleStrings(Languages.topicsExpandedF[topicIndex]);
 			topic = Languages.topicsF[topicIndex];
 
+		} else if(lang1.equalsIgnoreCase("Portuguese") || lang2.equalsIgnoreCase("Portuguese")){
+			scrambled = sketch.scrambleStrings(Languages.topicsExpandedP[topicIndex]);
+			topic = Languages.topicsP[topicIndex];
+
+		} else if(lang1.equalsIgnoreCase("Spanish") || lang2.equalsIgnoreCase("Spanish")){
+			scrambled = sketch.scrambleStrings(Languages.topicsExpandedS[topicIndex]);
+			topic = Languages.topicsS[topicIndex];
+
 		}
-		topicsScrambled = "";
 		
-		for(String s: scrambled){
-			topicsScrambled += s + " || ";
-		}
-	
-		topicsScrambled = topicsScrambled.substring(0, topicsScrambled.length() - 4);
+		setExpandedTopicOrder(scrambled);
+		
 		vAct = this;
 		
 		if(!sketch.youTubeInit){
@@ -119,6 +125,7 @@ public class VideoActivity {
 			createCurrent2();
 			createLeftWhiteRect();
 			createMoreVidoes();
+			
 			if(bothL){
 				createChangeLang();
 			}
@@ -142,6 +149,16 @@ public class VideoActivity {
 			//VideoPlayer.loadVLClibs();
 			//}
 		}
+	}
+	
+	public void setExpandedTopicOrder(String[] scrambled) {
+		topicsScrambled = "";
+		
+		for(String s: scrambled){
+			topicsScrambled += s + " || ";
+		}
+	
+		topicsScrambled = topicsScrambled.substring(0, topicsScrambled.length() - 4);
 	}
 	
 	public void createChangeLang(){
@@ -243,31 +260,36 @@ public class VideoActivity {
 	}
 	
 	public void changeLang(){
-		if(currentL.equalsIgnoreCase("fr")){
-			String[] scrambled = sketch.scrambleStrings(Languages.topicsExpandedE[topicIndex]);
+		String code = "";
+		
+		if(userCountryCode == 1) {
+			code = sketch.learner2.countryCode;
+			userCountryCode = 2;
+		} else if(userCountryCode == 2) {
+			code = sketch.learner1.countryCode;
+			userCountryCode = 1;
+		}
+		
+		String[] scrambled = null;
+		
+		if(code.equalsIgnoreCase("en")){
+			scrambled = sketch.scrambleStrings(Languages.topicsExpandedE[topicIndex]);
 			topic = Languages.topicsE[topicIndex];
 			
-			topicsScrambled = "";
-			
-			for(String s: scrambled){
-				topicsScrambled += s + " || ";
-			}
-		
-			topicsScrambled = topicsScrambled.substring(0, topicsScrambled.length() - 4);
-			currentL = "en";
-		} else if(currentL.equalsIgnoreCase("en")){
-			String[] scrambled = sketch.scrambleStrings(Languages.topicsExpandedF[topicIndex]);
+		} else if(code.equalsIgnoreCase("fr")){
+			scrambled = sketch.scrambleStrings(Languages.topicsExpandedF[topicIndex]);
 			topic = Languages.topicsF[topicIndex];
 			
-			topicsScrambled = "";
+		} else if(code.equalsIgnoreCase("pt")){
+			scrambled = sketch.scrambleStrings(Languages.topicsExpandedP[topicIndex]);
+			topic = Languages.topicsP[topicIndex];
 			
-			for(String s: scrambled){
-				topicsScrambled += s + " || ";
-			}
-		
-			topicsScrambled = topicsScrambled.substring(0, topicsScrambled.length() - 4);
-			currentL = "fr";
+		} else if(code.equalsIgnoreCase("es")){
+			scrambled = sketch.scrambleStrings(Languages.topicsExpandedS[topicIndex]);
+			topic = Languages.topicsS[topicIndex];
 		} 
+		
+		setExpandedTopicOrder(scrambled);
 		
 		vGetter.removeZones();
 		vGetter = new VideoGetter(sketch, vAct, sketch.lineX, videoWidth);
@@ -297,14 +319,7 @@ public class VideoActivity {
 	}
 
 	public void createMoreVidoes(){
-		//String s = "";
-		
-		/*if(lang1.equalsIgnoreCase("English")){
-			s = sketch.moreVideosE;
-		} else if(lang1.equalsIgnoreCase("French")){
-			s = sketch.moreVideosF;
-		}*/
-		
+		// User 1
 		moreVideos1 = new TextZone(sketch.mainSection.buttonX, sketch.mainSection.buttonYb2, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner1.moreVideos, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
@@ -351,12 +366,7 @@ public class VideoActivity {
 		animMV1.setRepeatBehavior(RepeatBehavior.REVERSE);
 		animMV1.setRepeatCount(Animator.INFINITE);
 
-		/*if(lang2.equalsIgnoreCase("English")){
-			s = sketch.moreVideosE;
-		} else if(lang2.equalsIgnoreCase("French")){
-			s = sketch.moreVideosF;
-		}*/
-		
+		// User 2
 		moreVideos2 = new TextZone(sketch.mainSection.buttonX, sketch.mainSection.buttonYt2, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner2.moreVideos, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){

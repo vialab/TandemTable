@@ -98,29 +98,28 @@ public class TwitterActivity {
 			topic1 = Languages.topicsE[topicIndex];
 			langTranslate1 = Language.ENGLISH;
 
-			topicExpanded1 = "";
-			String[] scrambled = sketch.scrambleStrings(Languages.topicsExpandedE[topicIndex]);
-
-			for(String s: scrambled){
-				topicExpanded1 += s + " OR ";
-			}
-
-			topicExpanded1 = topicExpanded1.substring(0, topicExpanded1.length() - 4);
+			setTExpandOrder(1, Languages.topicsExpandedE);
 		} else if(lang1.equalsIgnoreCase("French")){
 			langQuery1 = "fr";//" lang:fr";
 			tweetsS1 = Languages.tweetWordF;
 			topic1 = Languages.topicsF[topicIndex];
 			langTranslate1 = Language.FRENCH;
 
-			topicExpanded1 = "";
+			setTExpandOrder(1, Languages.topicsExpandedF);
+		} else if(lang1.equalsIgnoreCase("Portuguese")){
+			langQuery1 = "pt";//" lang:pt";
+			tweetsS1 = Languages.tweetWordP;
+			topic1 = Languages.topicsP[topicIndex];
+			langTranslate1 = Language.PORTUGUESE;
 
-			String[] scrambled = sketch.scrambleStrings(Languages.topicsExpandedF[topicIndex]);
+			setTExpandOrder(1, Languages.topicsExpandedP);
+		} else if(lang1.equalsIgnoreCase("Spanish")){
+			langQuery1 = "es";//" lang:es";
+			tweetsS1 = Languages.tweetWordS;
+			topic1 = Languages.topicsS[topicIndex];
+			langTranslate1 = Language.SPANISH;
 
-			for(String s: scrambled){
-				topicExpanded1 += s + " OR ";
-			}
-
-			topicExpanded1 = topicExpanded1.substring(0, topicExpanded1.length() - 4);
+			setTExpandOrder(1, Languages.topicsExpandedS);
 		}
 
 		if(lang2.equalsIgnoreCase("English")){
@@ -129,15 +128,7 @@ public class TwitterActivity {
 			topic2 = Languages.topicsE[topicIndex];
 			langTranslate2 = Language.ENGLISH;
 
-			topicExpanded2 = "";
-			String[] scrambled = sketch.scrambleStrings(Languages.topicsExpandedE[topicIndex]);
-
-			for(String s: scrambled){
-				topicExpanded2 += s + " OR ";
-			}
-
-
-			topicExpanded2 = topicExpanded2.substring(0, topicExpanded2.length() - 4);
+			setTExpandOrder(2, Languages.topicsExpandedE);
 
 		} else if(lang2.equalsIgnoreCase("French")){
 			langQuery2 = "fr";//" lang:fr";
@@ -145,17 +136,23 @@ public class TwitterActivity {
 			topic2 = Languages.topicsF[topicIndex];
 			langTranslate2 = Language.FRENCH;
 
-			topicExpanded2 = "";
+			setTExpandOrder(2, Languages.topicsExpandedF);
+		} else if(lang2.equalsIgnoreCase("Portuguese")){
+			langQuery2 = "pt";//" lang:pt";
+			tweetsS2 = Languages.tweetWordP;
+			topic2 = Languages.topicsP[topicIndex];
+			langTranslate2 = Language.PORTUGUESE;
 
-			String[] scrambled = sketch.scrambleStrings(Languages.topicsExpandedF[topicIndex]);
+			setTExpandOrder(2, Languages.topicsExpandedP);
+		} else if(lang2.equalsIgnoreCase("Spanish")){
+			langQuery2 = "es";//" lang:es";
+			tweetsS2 = Languages.tweetWordS;
+			topic2 = Languages.topicsS[topicIndex];
+			langTranslate2 = Language.SPANISH;
 
-			for(String s: scrambled){
-				topicExpanded2 += s + " OR ";
-			}
-
-
-			topicExpanded2 = topicExpanded2.substring(0, topicExpanded2.length() - 4);
+			setTExpandOrder(2, Languages.topicsExpandedS);
 		}
+		
 		tweetZones1 = new TextZone[NUM_TWEETS][];
 		tweetZones2 = new TextZone[NUM_TWEETS][];
 		background1 = new RectZone[NUM_TWEETS];
@@ -187,6 +184,28 @@ public class TwitterActivity {
 
 	}
 
+	public void setTExpandOrder(int user, String[][] strList) {
+		if(user == 1) {
+			topicExpanded1 = "";
+			String[] scrambled = sketch.scrambleStrings(strList[topicIndex]);
+
+			for(String s: scrambled){
+				topicExpanded1 += s + " OR ";
+			}
+
+			topicExpanded1 = topicExpanded1.substring(0, topicExpanded1.length() - 4);
+		} else if (user == 2) {
+			topicExpanded2 = "";
+			String[] scrambled = sketch.scrambleStrings(strList[topicIndex]);
+
+			for(String s: scrambled){
+				topicExpanded2 += s + " OR ";
+			}
+
+			topicExpanded2 = topicExpanded2.substring(0, topicExpanded2.length() - 4);
+		}
+	}
+	
 	public void createBackground4Swipe(){
 		float halfH = sketch.getHeight()/2 - sketch.strokeW;
 		float y1 = sketch.getHeight()/2 + sketch.strokeW; //int y1 = (int)(halfH + (halfH*0.1));

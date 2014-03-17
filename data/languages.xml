@@ -4,449 +4,1047 @@
 <questions>
 	<question lang="english">Introduce yourself.</question>
 	<question lang="french">Présentez-vous.</question>
+	<question lang="portuguese">Apresente-se.</question>
+	<question lang="spanish">Preséntate.</question>
+	
 	<question lang="english">Get to know your partner.  Ask them:</question>
 	<question lang="french">Te familiariser avec votre partenaire, demander-les:</question>
+	<question lang="portuguese">Conheça o seu parceiro. Pergunte-lhes:</question>
+	<question lang="spanish">Conozca a su pareja. Pregúnteles:</question>
+	
 	<question lang="english">Where are you from?</question>
 	<question lang="french">De quel pays venez vous?</question>
+	<question lang="portuguese">De onde você é?</question>
+	<question lang="spanish">¿De dónde eres?</question>
+	
 	<question lang="english">How old are you?</question>
-	<question lang="french">Quel âge avez-vous?</question>	
+	<question lang="french">Quel âge avez-vous?</question>
+	<question lang="portuguese">Quantos anos você tem?</question>
+	<question lang="spanish">¿Cuántos años tienes?</question>
+		
 	<question lang="english">Where do you live?</question> 
 	<question lang="french">Où habitez-vous?</question>
+	<question lang="portuguese">Onde você mora?</question>
+	<question lang="spanish">¿Dónde vives?</question>
+	
 	<question lang="english">What is your profession?</question>
 	<question lang="french">Quelle est votre profession?</question>
+	<question lang="portuguese">Qual é a sua profissão?</question>
+	<question lang="spanish">¿Cuál es su profesión?</question>
+	
 	<question lang="english">Where did you last attend school?</question>
 	<question lang="french">Où êtes-vous allé à l'école et pour quoi?</question>
+	<question lang="portuguese">Onde foi a última vez que vão à escola?</question>
+	<question lang="spanish">¿Dónde usted dura asistió la escuela?</question>
+	
 	<question lang="english">What program did you take?</question>
 	<question lang="french">Quel programme avez-vous pris?</question>
+	<question lang="portuguese">Que programa você tomou?</question>
+	<question lang="spanish">¿Qué programa tomaste?</question>
+	
 	<question lang="english">Discuss the following things:</question>
 	<question lang="french">Discuter les choses suivantes:</question>
+	<question lang="portuguese">Discuta as seguintes coisas:</question>
+	<question lang="spanish">Discuta las siguientes cosas:</question>
+	
 	<question lang="english">Your interests and hobbies.</question>
 	<question lang="french">Vos intérêts et passe-temps.</question>
-	<question lang="english">Why you are learning this language.</question>
-	<question lang="french">Pourquoi vous essayez d'apprendre cette langue.</question>
+	<question lang="portuguese">Seus interesses e hobbies.</question>
+	<question lang="spanish">Sus intereses y aficiones.</question>
+	
+	<question lang="english">Why you are learning this language?</question>
+	<question lang="french">Pourquoi vous essayez d'apprendre cette langue?</question>
+	<question lang="portuguese">Por que você está aprendendo esta língua?</question>
+	<question lang="spanish">¿Por qué usted está aprendiendo este idioma?</question>
+	
 	<question lang="english">What areas of the language you are good at</question>
 	<question lang="french">Quels parties de la langue vous êtes bon en</question>
-	<question lang="english">and what area you are trying to improve the most.</question>
-	<question lang="french">et quel parties vous essayez d'ameliorer le plus.</question>
+	<question lang="portuguese">Que áreas da língua que você é bom</question>
+	<question lang="spanish">¿Qué áreas de la lengua que está bien</question>
+	
+	<question lang="english">and what area you are trying to improve the most?</question>
+	<question lang="french">et quel parties vous essayez d'ameliorer le plus?</question>
+	<question lang="portuguese">e qual a área que você está tentando melhorar mais?</question>
+	<question lang="spanish">y qué el área usted trata de mejorarse el más?</question>
+	
 	<question lang="english">- Vocabulary</question> 
 	<question lang="french">- Vocabulaire</question>
+	<question lang="portuguese">- Vocabulário</question>
+	<question lang="spanish">- Vocabulario</question>
+	
 	<question lang="english">- Grammar</question> 
 	<question lang="french">- Grammaire</question>
+	<question lang="portuguese">- Gramática</question>
+	<question lang="spanish">- Gramática</question>
+	
 	<question lang="english">- Speaking</question> 
 	<question lang="french">- Parlant</question>
+	<question lang="portuguese">- Falante</question>
+	<question lang="spanish">- Hablando</question>
+	
 	<question lang="english">- Reading</question>
 	<question lang="french">- La lecture</question>
+	<question lang="portuguese">- Leitura</question>
+	<question lang="spanish">- Lectura</question>
+	
 	<question lang="english">Discuss how your partner can help you.</question>
 	<question lang="french">Discutez comment votre partenaire peut vous aider.</question>
+	<question lang="portuguese">Discuta como o seu parceiro pode ajudá-lo.</question>
+	<question lang="spanish">Hable como su compañero puede ayudarle.</question>
+	
 	<question lang="english">Discuss how you and your partner will correct each other's language use.</question>
 	<question lang="french">Discutez comment vous et votre partenaire corrigera l'usage de langue</question>
+	<question lang="portuguese">Discuta como você e seu parceiro vai corrigir o uso do outro idioma.</question>
+	<question lang="spanish">Hable como usted y su compañero corregirán el empleo de lengua de cada uno.</question>
 </questions>
 <buttons>
 	<next lang="english">Next</next>
 	<next lang="french">Prochaine</next>
+	<next lang="portuguese">Próximo</next>
+	<next lang="spanish">Próximo</next>
+	
 	<moreQ lang="english">More Questions</moreQ>
 	<moreQ lang="french">Plus de Questions</moreQ>
+	<moreQ lang="portuguese">Mais Perguntas</moreQ>
+	<moreQ lang="spanish">Más Preguntas</moreQ>
+	
 	<ranTopics lang="english">Randomize Topics</ranTopics>
 	<ranTopics lang="french">Randomisez les Sujets </ranTopics>
+	<ranTopics lang="portuguese">Randomize Tópicos</ranTopics>
+	<ranTopics lang="spanish">Randomize Asuntos</ranTopics>
+	
 	<choAnoTop lang="english">Choose Another Topic</choAnoTop>
 	<choAnoTop lang="french">Choisissez une Autre Sujet</choAnoTop>
+	<choAnoTop lang="portuguese">Escolha Outro Tópico</choAnoTop>
+	<choAnoTop lang="spanish">Escoja Otro Asunto</choAnoTop>
+	
 	<choAnoAct lang="english">Choose Another Activity</choAnoAct>
 	<choAnoAct lang="french">Choisissez une Autre Activité</choAnoAct>
+	<choAnoAct lang="portuguese">Escolha Outra Atividade</choAnoAct>
+	<choAnoAct lang="spanish">Elija Otra Actividad</choAnoAct>
+	
 	<newLang lang="english">Change Language</newLang>
 	<newLang lang="french">Changer Langue</newLang>
+	<newLang lang="portuguese">Alterar Idioma</newLang>
+	<newLang lang="spanish">Cambiar Idioma</newLang>
+	
 	<morePics lang="english">More Pictures</morePics>
 	<morePics lang="french">Plus de Photos</morePics>
+	<morePics lang="portuguese">Mais Fotos</morePics>
+	<morePics lang="spanish">Más Fotos</morePics>
+	
 	<tweetWord lang="english">Search Twitter for Selected Word</tweetWord>
 	<tweetWord lang="french">Recherche Twitter Pour le Mot Sélectionné</tweetWord>
+	<tweetWord lang="portuguese">Pesquisar Twitter Para Palavra Selecionada</tweetWord>
+	<tweetWord lang="spanish">Buscar en Twitter Por Palabra Seleccionada</tweetWord>
+	
 	<moreNews lang="english">More Headlines</moreNews>
 	<moreNews lang="french">Plus de Titres de l'Actualité</moreNews>
+	<moreNews lang="portuguese">Mais Manchetes</moreNews>
+	<moreNews lang="spanish">Más Titulares</moreNews>
+	
 	<back2Heads lang="english">Back To Headlines</back2Heads>
 	<back2Heads lang="french">Revenir à Titres de l'Actualité</back2Heads>
+	<back2Heads lang="portuguese">Voltar Para Manchetes</back2Heads>
+	<back2Heads lang="spanish">Detrás a Titulares</back2Heads>
+	
 	<moreVideos lang="english">More Videos</moreVideos>
 	<moreVideos lang="french">Plus de Vidéos</moreVideos>
+	<moreVideos lang="portuguese">Mais Vídeos</moreVideos>
+	<moreVideos lang="spanish">Más Vídeos</moreVideos>
+	
 	<playAgain lang="english">Touch To Play Again</playAgain>
 	<playAgain lang="french">Toucher Pour Jouer Encore</playAgain>
+	<playAgain lang="portuguese">Toque Para Jogar Novamente</playAgain>
+	<playAgain lang="spanish">Toque Para Volver a Jugar</playAgain>
+	
 	<play lang="english">Play</play>
 	<play lang="french">Lecture</play>
+	<play lang="portuguese">Reproduza</play>
+	<play lang="spanish">Juegue</play>
+	
 	<pause lang="english">Pause</pause>
 	<pause lang="french">Pause</pause>
+	<pause lang="portuguese">Pausa</pause>
+	<pause lang="spanish">Pausa</pause>
+	
 	<stop lang="english">Go Back</stop>
 	<stop lang="french">Retourner</stop>
-	<playVideo lang="english">Your Partner Selected A Video</playVideo>
-	<playVideo lang="french">Votre Partenaire A Sélectionné Une Vidéo</playVideo>
+	<stop lang="portuguese">Voltar</stop>
+	<stop lang="spanish">Volver</stop>
+	
+	<playVideo lang="english">Your Partner Selected a Video</playVideo>
+	<playVideo lang="french">Votre Partenaire A Sélectionné une Vidéo</playVideo>
+	<playVideo lang="portuguese">Seu Parceiro Seleccionado um Vídeo</playVideo>
+	<playVideo lang="spanish">Su Pareja Ha Seleccionado un Vídeo</playVideo>
+	
 </buttons>
 <activities>
 	<twitter lang="english">Twitter</twitter>
 	<twitter lang="french">Twitter</twitter>
+	<twitter lang="portuguese">Twitter</twitter>
+	<twitter lang="spanish">Twitter</twitter>
+	
 	<news lang="english">News Headlines </news>
 	<news lang="french">Titres de l'Actualité</news>
+	<twitter lang="portuguese">Notícias</twitter>
+	<twitter lang="spanish">Los Titulares de Noticias</twitter>
+	
 	<pictures lang="english">Pictures</pictures>
 	<pictures lang="french">Photos</pictures>
+	<pictures lang="portuguese">Fotos</pictures>
+	<pictures lang="spanish">Cuadros</pictures>
+	
 	<videos lang="english">Videos</videos>
 	<videos lang="french">Vidéos</videos>
+	<videos lang="portuguese">Vídeos</videos>
+	<videos lang="spanish">Vídeos</videos>
+	
 	<game lang="english">Picture Game</game>
 	<game lang="french">Jeu D'Images</game>
+	<game lang="portuguese">Jogo de Fotos</game>
+	<game lang="spanish">Juego de Fotos</game>
+	
 </activities>	
 <topics>
 	<sports lang="english">Sports</sports>
 	<sports lang="french">Sport</sports>
+	<sports lang="portuguese">Esportes</sports>
+	<sports lang="spanish">Deportes</sports>
+	
 	<religion lang="english">Religion</religion>
 	<religion lang="french">Religion</religion>
+	<religion lang="portuguese">Religião</religion>
+	<religion lang="spanish">Religión</religion>
+	
 	<dance lang="english">Dance</dance>
 	<dance lang="french">Danse</dance>
+	<dance lang="portuguese">Dança</dance>
+	<dance lang="spanish">Danza</dance>
+	
 	<school lang="english">School</school>
 	<school lang="french">École</school>
+	<school lang="portuguese">Escola</school>
+	<school lang="spanish">Escuela</school>
+	
 	<movies lang="english">Movies</movies>
 	<movies lang="french">Films</movies>
+	<movies lang="portuguese">Filmes</movies>
+	<movies lang="spanish">Cine</movies>
+	
 	<books lang="english">Books</books>
 	<books lang="french">Livres</books>
+	<books lang="portuguese">Livros</books>
+	<books lang="spanish">Libros</books>
+	
 	<music lang="english">Music</music>
 	<music lang="french">Musique</music>
+	<music lang="portuguese">Música</music>
+	<music lang="spanish">Música</music>
+	
 	<food lang="english">Food</food>
 	<food lang="french">Nourriture</food>
+	<food lang="portuguese">Comida</food>
+	<food lang="spanish">Comida</food>
+	
 	<science lang="english">Science</science>
 	<science lang="french">Science</science>
+	<science lang="portuguese">Ciência</science>
+	<science lang="spanish">Ciencia</science>
+	
 	<culture lang="english">Culture</culture>
 	<culture lang="french">Culture</culture>
+	<culture lang="portuguese">Cultura</culture>
+	<culture lang="spanish">Cultura</culture>
+	
 	<art lang="english">Art</art>
 	<art lang="french">Art</art>
+	<art lang="portuguese">Arte</art>
+	<art lang="spanish">Arte</art>
+	
 	<language lang="english">Language</language>
 	<language lang="french">Langage</language>
+	<language lang="portuguese">Língua</language>
+	<language lang="spanish">Idioma</language>
+	
 	<history lang="english">History</history>
 	<history lang="french">Histoire</history>
+	<history lang="portuguese">História</history>
+	<history lang="spanish">Historia</history>
+	
 	<names lang="english">Names</names>
 	<names lang="french">Noms</names>
+	<names lang="portuguese">Nomes</names>
+	<names lang="spanish">Nombres</names>
+	
 	<holidays lang="english">Holidays</holidays>
 	<holidays lang="french">Vacances</holidays>
+	<holidays lang="portuguese">Feriados</holidays>
+	<holidays lang="spanish">Vacaciones</holidays>
 </topics>
 <sportsExpansion>
 	<sports lang="english">sport</sports>
 	<sports lang="french">sport</sports>
+	<sports lang="portuguese">esporte</sports>
+	<sports lang="spanish">deporte</sports>
+	
 	<sports lang="english">athlete</sports>
 	<sports lang="french">athlète</sports>
+	<sports lang="portuguese">atleta</sports>
+	<sports lang="spanish">atleta</sports>
+	
 	<sports lang="english">baseball</sports>
 	<sports lang="french">base-ball</sports>
+	<sports lang="portuguese">beisebol</sports>
+	<sports lang="spanish">béisbol</sports>
+	
 	<sports lang="english">snowboarding</sports>
 	<sports lang="french">snowboard</sports>
+	<sports lang="portuguese">snowboard</sports>
+	<sports lang="spanish">snowboard</sports>
+	
 	<sports lang="english">skateboarding</sports>
 	<sports lang="french">planche à roulettes</sports>
+	<sports lang="portuguese">skate</sports>
+	<sports lang="spanish">skate</sports>
+	
 	<sports lang="english">wakeboarding</sports>
 	<sports lang="french">wakeboard</sports>
+	<sports lang="portuguese">wakeboard</sports>
+	<sports lang="spanish">wakeboard</sports>
+	
 	<sports lang="english">hockey</sports>
 	<sports lang="french">hockey</sports>
+	<sports lang="portuguese">hóquei</sports>
+	<sports lang="spanish">hockey</sports>
+	
 	<sports lang="english">basketball</sports>
 	<sports lang="french">basket-ball</sports>
+	<sports lang="portuguese">basquetebol</sports>
+	<sports lang="spanish">baloncesto</sports>
+	
 	<sports lang="english">lacrosse</sports>
 	<sports lang="french">lacrosse</sports>
+	<sports lang="portuguese">lacrosse</sports>
+	<sports lang="spanish">lacrosse</sports>
+	
 	<sports lang="english">racing</sports>
 	<sports lang="french">course</sports>
+	<sports lang="portuguese">corrida</sports>
+	<sports lang="spanish">carreras</sports>
 </sportsExpansion>	
 <religionExpansion>
 	<religion lang="english">religion</religion>
 	<religion lang="french">religion</religion>
+	<religion lang="portuguese">religião</religion>
+	<religion lang="spanish">religión</religion>
+	
 	<religion lang="english">hinduism</religion>
 	<religion lang="french">hindouisme</religion>
+	<religion lang="portuguese">hinduismo</religion>
+	<religion lang="spanish">hinduismo</religion>
+	
 	<religion lang="english">buddhism</religion>
 	<religion lang="french">bouddhisme</religion>
+	<religion lang="portuguese">budismo</religion>
+	<religion lang="spanish">budismo</religion>
+	
 	<religion lang="english">shinto</religion>
 	<religion lang="french">shinto</religion>
+	<religion lang="portuguese">xintoísmo</religion>
+	<religion lang="spanish">sintoísmo</religion>
+	
 	<religion lang="english">sikhism</religion>
 	<religion lang="french">sikhism</religion>
+	<religion lang="portuguese">sikhismo</religion>
+	<religion lang="spanish">sikhism</religion>
+	
 	<religion lang="english">baha'i faith</religion>
 	<religion lang="french">bahaïsme</religion>
+	<religion lang="portuguese">fé Baha'i</religion>
+	<religion lang="spanish">fe baha'i</religion>
+	
 	<religion lang="english">jainism</religion>
 	<religion lang="french">jainism</religion>
+	<religion lang="portuguese">jainismo</religion>
+	<religion lang="spanish">jainism</religion>
+	
 	<religion lang="english">islam</religion>
 	<religion lang="french">islam</religion>
+	<religion lang="portuguese">islão</religion>
+	<religion lang="spanish">islam</religion>
+	
 	<religion lang="english">christianity</religion>
 	<religion lang="french">christianisme</religion>
+	<religion lang="portuguese">cristandade</religion>
+	<religion lang="spanish">cristianismo</religion>
+	
 	<religion lang="english">judaism</religion>
 	<religion lang="french">judaïsme</religion>
+	<religion lang="portuguese">judaísmo</religion>
+	<religion lang="spanish">judaísmo</religion>
 </religionExpansion>
 <danceExpansion>
 	<dance lang="english">samba</dance>
 	<dance lang="french">samba</dance>
+	<dance lang="portuguese">samba</dance>
+	<dance lang="spanish">samba</dance>
+	
 	<dance lang="english">dance</dance>
 	<dance lang="french">danser</dance>
+	<dance lang="portuguese">dança</dance>
+	<dance lang="spanish">danza</dance>
+	
 	<dance lang="english">rumba</dance>
 	<dance lang="french">rumba</dance>
+	<dance lang="portuguese">rumba</dance>
+	<dance lang="spanish">rumba</dance>
+	
 	<dance lang="english">conga</dance>
 	<dance lang="french">conga</dance>
+	<dance lang="portuguese">conga</dance>
+	<dance lang="spanish">conga</dance>
+	
 	<dance lang="english">belly dance</dance>
 	<dance lang="french">danse du ventre</dance>
+	<dance lang="portuguese">dança do ventre</dance>
+	<dance lang="spanish">danza del vientre</dance>
+	
 	<dance lang="english">disco</dance>
 	<dance lang="french">disco</dance>
+	<dance lang="portuguese">discoteca</dance>
+	<dance lang="spanish">discoteca</dance>
+	
 	<dance lang="english">krump</dance>
 	<dance lang="french">krump</dance>
+	<dance lang="portuguese">krump</dance>
+	<dance lang="spanish">krump</dance>
+	
 	<dance lang="english">breakdancing</dance>
 	<dance lang="french">breakdance</dance>
-	<dance lang="english">b-boying</dance>
+	<dance lang="portuguese">breakdancing</dance>
+	<dance lang="spanish">breakdancing</dance>
+	
+	<dance lang="english">b-boy</dance>
 	<dance lang="french">b-boy</dance>
+	<dance lang="portuguese">b-boy</dance>
+	<dance lang="spanish">b-boy</dance>
+	
 	<dance lang="english">hip-hop dance</dance>
 	<dance lang="french">danse hip-hop</dance>
+	<dance lang="portuguese">dança hip-hop</dance>
+	<dance lang="spanish">danza hip-hop</dance>
 </danceExpansion>
 <schoolExpansion>
 	<school lang="english">school</school>
 	<school lang="french">école</school>
+	<school lang="portuguese">escola</school>
+	<school lang="spanish">escuela</school>
+	
 	<school lang="english">academy</school>
 	<school lang="french">académie</school>
+	<school lang="portuguese">academia</school>
+	<school lang="spanish">academia</school>
+	
 	<school lang="english">university</school>
 	<school lang="french">université</school>
+	<school lang="portuguese">universidade</school>
+	<school lang="spanish">universidad</school>
+	
 	<school lang="english">college</school>
 	<school lang="french">collège</school>
+	<school lang="portuguese">colégio</school>
+	<school lang="spanish">colegio</school>
+	
 	<school lang="english">education</school>
 	<school lang="french">éducation</school>
+	<school lang="portuguese">educação</school>
+	<school lang="spanish">educación</school>
+	
 	<school lang="english">high school</school>
 	<school lang="french">école secondaire</school>
+	<school lang="portuguese">escola secundária</school>
+	<school lang="spanish">escuela secundaria</school>
+	
 	<school lang="english">elementary school</school>
 	<school lang="french">école primaire</school>
+	<school lang="portuguese">escola primária</school>
+	<school lang="spanish">escuela primaria</school>
+	
 	<school lang="english">kindergarten</school>
 	<school lang="french">jardin d'enfants</school>
+	<school lang="portuguese">jardim de infância</school>
+	<school lang="spanish">kinder</school>
+	
 	<school lang="english">graduate school</school>
 	<school lang="french">diplôme d'études</school>
+	<school lang="portuguese">curso de doutorado</school>
+	<school lang="spanish">escuela de posgrado</school>
+	
 	<school lang="english">grade school</school>
 	<school lang="french">école élémentaire</school>
+	<school lang="portuguese">escola primária</school>
+	<school lang="spanish">escuela primaria</school>
 </schoolExpansion>
 <moviesExpansion>
 	<movies lang="english">movie</movies>
-	<movies lang="french">movie</movies>
+	<movies lang="french">film</movies>
+	<movies lang="portuguese">filme</movies>
+	<movies lang="spanish">película</movies>
+	
 	<movies lang="english">video</movies>
 	<movies lang="french">vidéo</movies>
+	<movies lang="portuguese">vídeo</movies>
+	<movies lang="spanish">vídeo</movies>
+	
 	<movies lang="english">cinema</movies>
 	<movies lang="french">cinéma</movies>
+	<movies lang="portuguese">cinema</movies>
+	<movies lang="spanish">cine</movies>
+	
 	<movies lang="english">film</movies>
 	<movies lang="french">film</movies>
-	<movies lang="english">motion-picture</movies>
+	<movies lang="portuguese">filme</movies>
+	<movies lang="spanish">film</movies>
+	
+	<movies lang="english">motion picture</movies>
 	<movies lang="french">cinématographique</movies>
+	<movies lang="portuguese">filme cinematográfico</movies>
+	<movies lang="spanish">cinematográfico</movies>
+	
 	<movies lang="english">action movie</movies>
 	<movies lang="french">film d'action</movies>
+	<movies lang="portuguese">filme de aventura</movies>
+	<movies lang="spanish">película de acción</movies>
+	
 	<movies lang="english">movie theatre</movies>
 	<movies lang="french">théâtre de film</movies>
+	<movies lang="portuguese">cinema</movies>
+	<movies lang="spanish">cine</movies>
+	
 	<movies lang="english">movie preview</movies>
 	<movies lang="french">prévisualisation du film</movies>
+	<movies lang="portuguese">preview do filme</movies>
+	<movies lang="spanish">Avance de la película</movies>
+	
 	<movies lang="english">movie trailer</movies>
 	<movies lang="french">bande annonce du film</movies>
+	<movies lang="portuguese">trailer do filme</movies>
+	<movies lang="spanish">trailer de la película</movies>
+	
 	<movies lang="english">film industry</movies>
 	<movies lang="french">industrie du film</movies>
+	<movies lang="portuguese">indústria cinematográfica</movies>
+	<movies lang="spanish">industria del cine</movies>
 </moviesExpansion>	
 <booksExpansion>
 	<books lang="english">books</books>
 	<books lang="french">livres</books>
+	<books lang="portuguese">livros</books>
+	<books lang="spanish">libros</books>
+	
 	<books lang="english">library</books>
 	<books lang="french">bibliothèque</books>
+	<books lang="portuguese">biblioteca</books>
+	<books lang="spanish">biblioteca</books>
+	
 	<books lang="english">bibliophile</books>
 	<books lang="french">bibliophile</books>
+	<books lang="portuguese">bibliófilo</books>
+	<books lang="spanish">bibliófilo</books>
+	
 	<books lang="english">bibliomania</books>
 	<books lang="french">bibliomanie</books>
+	<books lang="portuguese">bibliomania</books>
+	<books lang="spanish">bibliomanía</books>
+	
 	<books lang="english">book stall</books>
 	<books lang="french">décrochage livre</books>
+	<books lang="portuguese">livro tenda</books>
+	<books lang="spanish">puesto de libros</books>
+	
 	<books lang="english">bookshelf</books>
 	<books lang="french">étagère</books>
+	<books lang="portuguese">prateleira de livros</books>
+	<books lang="spanish">estante para libros</books>
+	
 	<books lang="english">bookstore</books>
 	<books lang="french">librairie</books>
+	<books lang="portuguese">livraria</books>
+	<books lang="spanish">librería</books>
+	
 	<books lang="english">librarian</books>
 	<books lang="french">bibliothécaire</books>
+	<books lang="portuguese">bibliotecário</books>
+	<books lang="spanish">bibliotecario</books>
+	
 	<books lang="english">reading</books>
 	<books lang="french">lecture</books>
+	<books lang="portuguese">leitura</books>
+	<books lang="spanish">lectura</books>
+	
 	<books lang="english">writing</books>
 	<books lang="french">écriture</books>
+	<books lang="portuguese">escrita</books>
+	<books lang="spanish">escritura</books>
 </booksExpansion>	
 <musicExpansion>
 	<music lang="english">music</music>
 	<music lang="french">musique</music>
+	<music lang="portuguese">música</music>
+	<music lang="spanish">música</music>
+	
 	<music lang="english">hip-hop</music>
 	<music lang="french">hip-hop</music>
-	<music lang="english">rap</music>
-	<music lang="french">rap</music>
+	<music lang="portuguese">hip-hop</music>
+	<music lang="spanish">hip-hop</music>
+	
+	<music lang="english">rap music</music>
+	<music lang="french">musique rap</music>
+	<music lang="portuguese">música rap</music>
+	<music lang="spanish">música rap</music>
+	
 	<music lang="english">disco</music>
 	<music lang="french">disco</music>
+	<music lang="portuguese">discoteca</music>
+	<music lang="spanish">discoteca</music>
+	
 	<music lang="english">pop music</music>
 	<music lang="french">la musique pop</music>
+	<music lang="portuguese">música pop</music>
+	<music lang="spanish">música pop</music>
+	
 	<music lang="english">rock music</music>
 	<music lang="french">la musique rock</music>
+	<music lang="portuguese">música rock</music>
+	<music lang="spanish">música rock</music>
+	
 	<music lang="english">song</music>
 	<music lang="french">chanson</music>
+	<music lang="portuguese">canção</music>
+	<music lang="spanish">canción</music>
+	
 	<music lang="english">reggae</music>
 	<music lang="french">reggae</music>
+	<music lang="portuguese">reggae</music>
+	<music lang="spanish">reggae</music>
+	
 	<music lang="english">dubstep</music>
 	<music lang="french">dubstep</music>
+	<music lang="portuguese">dubstep</music>
+	<music lang="spanish">dubstep</music>
+	
 	<music lang="english">soca music</music>
 	<music lang="french">soca</music>
+	<music lang="portuguese">música soca</music>
+	<music lang="spanish">música soca</music>
 </musicExpansion>	
 <foodExpansion>
 	<food lang="english">food</food>
 	<food lang="french">nourriture</food>
+	<food lang="portuguese">comida</food>
+	<food lang="spanish">comida</food>
+	
 	<food lang="english">vegetables</food>
 	<food lang="french">légumes</food>
+	<food lang="portuguese">legumes</food>
+	<food lang="spanish">verduras</food>
+	
 	<food lang="english">meat</food>
 	<food lang="french">viande</food>
+	<food lang="portuguese">carne</food>
+	<food lang="spanish">carne</food>
+	
 	<food lang="english">dairy</food>
 	<food lang="french">produits laitiers</food>
+	<food lang="portuguese">laticínio</food>
+	<food lang="spanish">lácteo</food>
+	
 	<food lang="english">bread</food>
 	<food lang="french">pain</food>
+	<food lang="portuguese">pão</food>
+	<food lang="spanish">pan</food>
+	
 	<food lang="english">fruits</food>
 	<food lang="french">fruits</food>
+	<food lang="portuguese">frutas</food>
+	<food lang="spanish">frutas</food>
+	
 	<food lang="english">cereals</food>
 	<food lang="french">céréales</food>
+	<food lang="portuguese">cereais</food>
+	<food lang="spanish">cereales</food>
+	
 	<food lang="english">fast food</food>
 	<food lang="french">fast-food</food>
+	<food lang="portuguese">fast-food</food>
+	<food lang="spanish">comida rápida</food>
+	
 	<food lang="english">candy</food>
 	<food lang="french">bonbons</food>
+	<food lang="portuguese">doce</food>
+	<food lang="spanish">caramelo</food>
+	
 	<food lang="english">organic food</food>
 	<food lang="french">produits biologiques</food>
+	<food lang="portuguese">alimentos orgânicos</food>
+	<food lang="spanish">alimentos orgánicos</food>
 </foodExpansion>
 <scienceExpansion>
 	<science lang="english">science</science>
 	<science lang="french">science</science>
+	<science lang="portuguese">ciência</science>
+	<science lang="spanish">ciencia</science>
+	
 	<science lang="english">knowledge</science>
 	<science lang="french">connaissance</science>
+	<science lang="portuguese">conhecimento</science>
+	<science lang="spanish">conocimiento</science>
+	
 	<science lang="english">technology</science>
 	<science lang="french">technologie</science>
+	<science lang="portuguese">tecnologia</science>
+	<science lang="spanish">tecnología</science>
+	
 	<science lang="english">biology</science>
 	<science lang="french">biologie</science>
+	<science lang="portuguese">biologia</science>
+	<science lang="spanish">biología</science>
+	
 	<science lang="english">chemistry</science>
 	<science lang="french">chimie</science>
+	<science lang="portuguese">química</science>
+	<science lang="spanish">química</science>
+	
 	<science lang="english">computer science</science>
 	<science lang="french">informatique</science>
+	<science lang="portuguese">ciência da computação</science>
+	<science lang="spanish">ciencias de la computación</science>
+	
 	<science lang="english">physics</science>
 	<science lang="french">physique</science>
+	<science lang="portuguese">física</science>
+	<science lang="spanish">física</science>
+	
 	<science lang="english">neurology</science>
 	<science lang="french">neurologie</science>
+	<science lang="portuguese">neurologia</science>
+	<science lang="spanish">neurología</science>
+	
 	<science lang="english">physical science</science>
 	<science lang="french">sciences physiques</science>
+	<science lang="portuguese">ciência física</science>
+	<science lang="spanish">ciencia física</science>
+	
 	<science lang="english">cognitive science</science>
-	<science lang="french">les sciences cognitives</science>
+	<science lang="french">sciences cognitives</science>
+	<science lang="portuguese">ciência cognitiva</science>
+	<science lang="spanish">ciencia cognitiva</science>
 </scienceExpansion>	
 <cultureExpansion>
 	<culture lang="english">culture</culture>
 	<culture lang="french">culture</culture>
+	<culture lang="portuguese">cultura</culture>
+	<culture lang="spanish">cultura</culture>
+	
 	<culture lang="english">subculture</culture>
 	<culture lang="french">sous-culture</culture>
+	<culture lang="portuguese">subcultura</culture>
+	<culture lang="spanish">subcultura</culture>
+	
 	<culture lang="english">underground movement</culture>
 	<culture lang="french">mouvement clandestin</culture>
+	<culture lang="portuguese">movimento subterrâneo</culture>
+	<culture lang="spanish">movimiento secreto</culture>
+	
 	<culture lang="english">western culture</culture>
-	<culture lang="french">la culture occidentale</culture>
+	<culture lang="french">culture occidentale</culture>
+	<culture lang="portuguese">cultura ocidental</culture>
+	<culture lang="spanish">cultura occidental</culture>
+	
 	<culture lang="english">asian culture</culture>
-	<culture lang="french">la culture asiatique</culture>
+	<culture lang="french">culture asiatique</culture>
+	<culture lang="portuguese">cultura asiática</culture>
+	<culture lang="spanish">cultura asiática</culture>
+	
 	<culture lang="english">russian culture</culture>
-	<culture lang="french">la culture russe</culture>
+	<culture lang="french">culture russe</culture>
+	<culture lang="portuguese">cultura russa</culture>
+	<culture lang="spanish">cultura ruso</culture>
+	
 	<culture lang="english">european culture</culture>
-	<culture lang="french">la culture européenne</culture>
+	<culture lang="french">culture européenne</culture>
+	<culture lang="portuguese">cultura européia</culture>
+	<culture lang="spanish">cultura europea</culture>
+	
 	<culture lang="english">african culture</culture>
-	<culture lang="french">la culture africaine</culture>
+	<culture lang="french">culture africaine</culture>
+	<culture lang="portuguese">cultura africano</culture>
+	<culture lang="spanish">cultura africana</culture>
+	
 	<culture lang="english">australian culture</culture>
-	<culture lang="french">la culture australienne</culture>
+	<culture lang="french">culture australienne</culture>
+	<culture lang="portuguese">cultura australiana</culture>
+	<culture lang="spanish">cultura australiana</culture>
+	
 	<culture lang="english">canadian culture</culture>
-	<culture lang="french">la culture canadienne</culture>
+	<culture lang="french">culture canadienne</culture>
+	<culture lang="portuguese">cultura canadense</culture>
+	<culture lang="spanish">cultura canadiense</culture>
 </cultureExpansion>	
 <artExpansion>
 	<art lang="english">art</art>
 	<art lang="french">art</art>
+	<art lang="portuguese">arte</art>
+	<art lang="spanish">arte</art>
+	
 	<art lang="english">artwork</art>
 	<art lang="french">oeuvres d'art</art>
-	<art lang="english">craft</art>
-	<art lang="french">artisanat</art>
+	<art lang="portuguese">obra de arte</art>
+	<art lang="spanish">obras de arte</art>
+	
+	<art lang="english">artist</art>
+	<art lang="french">artiste</art>
+	<art lang="portuguese">artista</art>
+	<art lang="spanish">artista</art>
+	
 	<art lang="english">artistry</art>
 	<art lang="french">talent artistique</art>
+	<art lang="portuguese">arte</art>
+	<art lang="spanish">arte</art>
+	
 	<art lang="english">artistic</art>
 	<art lang="french">artistique</art>
+	<art lang="portuguese">artístico</art>
+	<art lang="spanish">artístico</art>
+	
 	<art lang="english">painting</art>
 	<art lang="french">peinture</art>
+	<art lang="portuguese">pintura</art>
+	<art lang="spanish">pintura</art>
+	
 	<art lang="english">drawing</art>
 	<art lang="french">dessin</art>
+	<art lang="portuguese">desenho</art>
+	<art lang="spanish">dibujo</art>
+	
 	<art lang="english">sculpting</art>
 	<art lang="french">sculpture</art>
+	<art lang="portuguese">esculpir</art>
+	<art lang="spanish">escultura</art>
+	
 	<art lang="english">mosaic</art>
 	<art lang="french">mosaique</art>
+	<art lang="portuguese">mosaico</art>
+	<art lang="spanish">mosaico</art>
+	
 	<art lang="english">visual arts</art>
 	<art lang="french">arts visuels</art>
+	<art lang="portuguese">artes visuais</art>
+	<art lang="spanish">artes visuales</art>
 </artExpansion>	
 <languageExpansion>
 	<language lang="english">language</language>
 	<language lang="french">langue</language>
+	<language lang="portuguese">língua</language>
+	<language lang="spanish">idioma</language>
+	
 	<language lang="english">linguistics</language>
 	<language lang="french">linguistique</language>
+	<language lang="portuguese">linguística</language>
+	<language lang="spanish">lingüística</language>
+	
 	<language lang="english">communication</language>
 	<language lang="french">communication</language>
+	<language lang="portuguese">comunicação</language>
+	<language lang="spanish">comunicación</language>
+	
 	<language lang="english">sign language</language>
 	<language lang="french">la langue des signes</language>
+	<language lang="portuguese">linguagem de sinais</language>
+	<language lang="spanish">lenguaje por señas</language>
+	
 	<language lang="english">artificial language</language>
 	<language lang="french">langue artificielle</language>
+	<language lang="portuguese">linguagem artificial</language>
+	<language lang="spanish">lengua artificial</language>
+	
 	<language lang="english">animal communication</language>
-	<language lang="french">la communication animale</language>
+	<language lang="french">communication animale</language>
+	<language lang="portuguese">comunicação animal</language>
+	<language lang="spanish">comunicación animal</language>
+	
 	<language lang="english">dialect</language>
 	<language lang="french">dialecte</language>
+	<language lang="portuguese">dialeto</language>
+	<language lang="spanish">dialecto</language>
+	
 	<language lang="english">speech</language>
 	<language lang="french">discours</language>
+	<language lang="portuguese">discurso</language>
+	<language lang="spanish">discurso</language>
+	
 	<language lang="english">indo-european languages</language>
 	<language lang="french">langues indo-européennes</language>
+	<language lang="portuguese">línguas indo-européias</language>
+	<language lang="spanish">lenguas indoeuropeas</language>
+	
 	<language lang="english">sino-tibetan languages</language>
 	<language lang="french">langues sino-tibétaines</language>
+	<language lang="portuguese">línguas sino-tibetanas</language>
+	<language lang="spanish">lenguas sino-tibetanas</language>
 </languageExpansion>	
 <historyExpansion>
 	<history lang="english">history</history>
 	<history lang="french">histoire</history>
+	<history lang="portuguese">história</history>
+	<history lang="spanish">historia</history>
+	
 	<history lang="english">historic</history>
 	<history lang="french">historique</history>
+	<history lang="portuguese">histórico</history>
+	<history lang="spanish">histórico</history>
+	
 	<history lang="english">ancient history</history>
 	<history lang="french">histoire ancienne</history>
+	<history lang="portuguese">história antiga</history>
+	<history lang="spanish">historia antigua</history>
+	
 	<history lang="english">middle ages</history>
 	<history lang="french">moyen-Age</history>
+	<history lang="portuguese">idade média</history>
+	<history lang="spanish">edad media</history>
+	
 	<history lang="english">historiography</history>
 	<history lang="french">historiographie</history>
+	<history lang="portuguese">historiografia</history>
+	<history lang="spanish">historiografía</history>
+	
 	<history lang="english">historical literature</history>
 	<history lang="french">littérature historique</history>
+	<history lang="portuguese">literatura histórica</history>
+	<history lang="spanish">literatura histórica</history>
+	
 	<history lang="english">stone age</history>
-	<history lang="french">l'âge de pierre</history>
+	<history lang="french">âge de pierre</history>
+	<history lang="portuguese">idade da pedra</history>
+	<history lang="spanish">edad de piedra</history>
+	
 	<history lang="english">paleolithic age</history>
 	<history lang="french">âge paléolithique</history>
+	<history lang="portuguese">idade paleolítica</history>
+	<history lang="spanish">edad paleolítica</history>
+	
 	<history lang="english">mesolithic age</history>
-	<history lang="french">l'âge mésolithique</history>
+	<history lang="french">âge mésolithique</history>
+	<history lang="portuguese">idade mesolítico</history>
+	<history lang="spanish">mesolítico</history>
+	
 	<history lang="english">bronze age</history>
 	<history lang="french">âge du bronze</history>
+	<history lang="portuguese">idade do bronze</history>
+	<history lang="spanish">edad de bronce</history>
 </historyExpansion>	
 <namesExpansion>
 	<names lang="english">name</names>
 	<names lang="french">nom</names>
+	<names lang="portuguese">nome</names>
+	<names lang="spanish">nombre</names>
+	
 	<names lang="english">title</names>
 	<names lang="french">titre</names>
+	<names lang="portuguese">título</names>
+	<names lang="spanish">título</names>
+	
 	<names lang="english">nickname</names>
 	<names lang="french">surnom</names>
+	<names lang="portuguese">apelido</names>
+	<names lang="spanish">apodo</names>
+	
 	<names lang="english">label</names>
 	<names lang="french">marque</names>
+	<names lang="portuguese">etiqueta</names>
+	<names lang="spanish">etiqueta</names>
+	
 	<names lang="english">identification</names>
 	<names lang="french">identification</names>
+	<names lang="portuguese">identificação</names>
+	<names lang="spanish">identificación</names>
+	
 	<names lang="english">id</names>
 	<names lang="french">id</names>
+	<names lang="portuguese">id</names>
+	<names lang="spanish">id</names>
+	
 	<names lang="english">middle name</names>
 	<names lang="french">prénom</names>
+	<names lang="portuguese">nome do meio</names>
+	<names lang="spanish">segundo nombre</names>
+	
 	<names lang="english">alias</names>
 	<names lang="french">alias</names>
+	<names lang="portuguese">pseudônimo</names>
+	<names lang="spanish">alias</names>
+	
 	<names lang="english">brand</names>
 	<names lang="french">marque</names>
+	<names lang="portuguese">marca</names>
+	<names lang="spanish">marca</names>
+	
 	<names lang="english">stage name</names>
 	<names lang="french">nom de scène</names>
+	<names lang="portuguese">nome artístico</names>
+	<names lang="spanish">nombre artístico</names>
 </namesExpansion>	
 <holidaysExpansion>
 	<holidays lang="english">holiday</holidays>
 	<holidays lang="french">vacances</holidays>
+	<holidays lang="portuguese">férias</holidays>
+	<holidays lang="spanish">fiesta</holidays>
+	
 	<holidays lang="english">vacation</holidays>
 	<holidays lang="french">vacances</holidays>
+	<holidays lang="portuguese">férias</holidays>
+	<holidays lang="spanish">vacaciones</holidays>
+	
 	<holidays lang="english">winter holidays</holidays>
 	<holidays lang="french">vacances d'hiver</holidays>
+	<holidays lang="portuguese">férias de inverno</holidays>
+	<holidays lang="spanish">vacaciones de invierno</holidays>
+	
 	<holidays lang="english">summer holidays</holidays>
 	<holidays lang="french">grandes vacances</holidays>
+	<holidays lang="portuguese">férias de verão</holidays>
+	<holidays lang="spanish">vacaciones de verano</holidays>
+	
 	<holidays lang="english">Canada day</holidays>
 	<holidays lang="french">Fête du Canada</holidays>
-	<holidays lang="english">earth day</holidays>
+	<holidays lang="portuguese">dia de Canadá</holidays>
+	<holidays lang="spanish">día del Canadá</holidays>
+	
+	<holidays lang="english">Earth day</holidays>
 	<holidays lang="french">jour de la terre</holidays>
+	<holidays lang="portuguese">dia da Terra</holidays>
+	<holidays lang="spanish">día de la tierra</holidays>
+	
 	<holidays lang="english">mother's day</holidays>
 	<holidays lang="french">fête des mères</holidays>
+	<holidays lang="portuguese">dia das mães</holidays>
+	<holidays lang="spanish">día de la madre</holidays>
+	
 	<holidays lang="english">father's day</holidays>
 	<holidays lang="french">fête des pères</holidays>
-	<holidays lang="english">valentine's day</holidays>
-	<holidays lang="french">saint valentin</holidays>
+	<holidays lang="portuguese">dia dos pais</holidays>
+	<holidays lang="spanish">día del padre</holidays>
+	
+	<holidays lang="english">Valentine's day</holidays>
+	<holidays lang="french">Saint Valentin</holidays>
+	<holidays lang="portuguese">dia dos Namorados</holidays>
+	<holidays lang="spanish">día de San Valentín</holidays>
+	
 	<holidays lang="english">pi day</holidays>
-	<holidays lang="french">journée de pi</holidays>
+	<holidays lang="french">jour de pi</holidays>
+	<holidays lang="portuguese">dia do pi</holidays>
+	<holidays lang="spanish">día de pi</holidays>
 </holidaysExpansion>
 </languages>

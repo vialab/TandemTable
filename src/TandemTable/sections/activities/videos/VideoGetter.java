@@ -518,7 +518,12 @@ public class VideoGetter extends Thread {
 			query.setFullTextQuery(keywords);
 
 			query.setStartIndex(vAct.startIndex1);
-			query.setLanguageRestrict(vAct.currentL);
+			
+			if(vAct.userCountryCode == 1) {
+				query.setLanguageRestrict(sketch.learner1.countryCode);
+			} else if(vAct.userCountryCode == 2) {
+				query.setLanguageRestrict(sketch.learner2.countryCode);
+			}
 
 
 			vAct.videoFeed1 = sketch.myService.query(query, VideoFeed.class);

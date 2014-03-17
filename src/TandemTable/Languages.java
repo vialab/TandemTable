@@ -1,16 +1,34 @@
 package TandemTable;
 
 public class Languages {
+	// Variables for storing words extracted by XML parser
+	
+	// English
 	public static String[] introQuestionsEnglish = new String[Sketch.NUM_QUESTIONS];
 	public static String[] activitiesE = new String[Sketch.NUM_ACTIVITIES];
 	public static String[] topicsE = new String[Sketch.NUM_TOPICS];
 	public static String[][] topicsExpandedE = new String[Sketch.NUM_TOPICS][Sketch.NUM_SYN];
 	
+	// French
 	public static String[] introQuestionsFrench = new String[Sketch.NUM_QUESTIONS];
 	public static String[] activitiesF = new String[Sketch.NUM_ACTIVITIES];
 	public static String[] topicsF = new String[Sketch.NUM_TOPICS];
 	public static String[][] topicsExpandedF = new String[Sketch.NUM_TOPICS][Sketch.NUM_SYN];
 	
+	// Portuguese
+	public static String[] introQuestionsPortuguese = new String[Sketch.NUM_QUESTIONS];
+	public static String[] activitiesP = new String[Sketch.NUM_ACTIVITIES];
+	public static String[] topicsP = new String[Sketch.NUM_TOPICS];
+	public static String[][] topicsExpandedP = new String[Sketch.NUM_TOPICS][Sketch.NUM_SYN];
+	
+	// Spanish
+	public static String[] introQuestionsSpanish = new String[Sketch.NUM_QUESTIONS];
+	public static String[] activitiesS = new String[Sketch.NUM_ACTIVITIES];
+	public static String[] topicsS = new String[Sketch.NUM_TOPICS];
+	public static String[][] topicsExpandedS = new String[Sketch.NUM_TOPICS][Sketch.NUM_SYN];
+	
+	
+	// English
 	public static String[] sportsE = new String[Sketch.NUM_SYN];
 	public static String[] religionE = new String[Sketch.NUM_SYN];
 	public static String[] danceE = new String[Sketch.NUM_SYN];
@@ -27,6 +45,7 @@ public class Languages {
 	public static String[] namesE = new String[Sketch.NUM_SYN];
 	public static String[] holidaysE = new String[Sketch.NUM_SYN];
 	
+	// French
 	public static String[] sportsF = new String[Sketch.NUM_SYN];
 	public static String[] religionF = new String[Sketch.NUM_SYN];
 	public static String[] danceF = new String[Sketch.NUM_SYN];
@@ -42,15 +61,65 @@ public class Languages {
 	public static String[] historyF = new String[Sketch.NUM_SYN];
 	public static String[] namesF = new String[Sketch.NUM_SYN];
 	public static String[] holidaysF = new String[Sketch.NUM_SYN];
+	
+	// Portuguese
+	public static String[] sportsP = new String[Sketch.NUM_SYN];
+	public static String[] religionP = new String[Sketch.NUM_SYN];
+	public static String[] danceP = new String[Sketch.NUM_SYN];
+	public static String[] schoolP = new String[Sketch.NUM_SYN];
+	public static String[] moviesP = new String[Sketch.NUM_SYN];
+	public static String[] booksP = new String[Sketch.NUM_SYN];
+	public static String[] musicP = new String[Sketch.NUM_SYN];
+	public static String[] foodP = new String[Sketch.NUM_SYN];
+	public static String[] scienceP = new String[Sketch.NUM_SYN];
+	public static String[] cultureP = new String[Sketch.NUM_SYN];
+	public static String[] artP = new String[Sketch.NUM_SYN];
+	public static String[] languageP = new String[Sketch.NUM_SYN];
+	public static String[] historyP = new String[Sketch.NUM_SYN];
+	public static String[] namesP = new String[Sketch.NUM_SYN];
+	public static String[] holidaysP = new String[Sketch.NUM_SYN];
+	
+	// Spanish
+	public static String[] sportsS = new String[Sketch.NUM_SYN];
+	public static String[] religionS = new String[Sketch.NUM_SYN];
+	public static String[] danceS = new String[Sketch.NUM_SYN];
+	public static String[] schoolS = new String[Sketch.NUM_SYN];
+	public static String[] moviesS = new String[Sketch.NUM_SYN];
+	public static String[] booksS = new String[Sketch.NUM_SYN];
+	public static String[] musicS = new String[Sketch.NUM_SYN];
+	public static String[] foodS = new String[Sketch.NUM_SYN];
+	public static String[] scienceS = new String[Sketch.NUM_SYN];
+	public static String[] cultureS = new String[Sketch.NUM_SYN];
+	public static String[] artS = new String[Sketch.NUM_SYN];
+	public static String[] languageS = new String[Sketch.NUM_SYN];
+	public static String[] historyS = new String[Sketch.NUM_SYN];
+	public static String[] namesS = new String[Sketch.NUM_SYN];
+	public static String[] holidaysS = new String[Sketch.NUM_SYN];
 
+	// English
 	public static String nextE, moreQE, ranTopicsE, choAnoTopE, choAnoActE, newLangE, morePicsE, tweetWordE,
 	moreNewsE, back2HeadsE, moreVideosE, playAgainE, playE, pauseE, stopE, playVideoE;
 	
+	// French
 	public static String nextF, moreQF, ranTopicsF, choAnoTopF, choAnoActF, newLangF, morePicsF, tweetWordF,
 	moreNewsF, back2HeadsF, moreVideosF, playAgainF, playF, pauseF, stopF, playVideoF;
 	
+	// Portuguese
+	public static String nextP, moreQP, ranTopicsP, choAnoTopP, choAnoActP, newLangP, morePicsP, tweetWordP,
+	moreNewsP, back2HeadsP, moreVideosP, playAgainP, playP, pauseP, stopP, playVideoP;
+	
+	// Spanish
+	public static String nextS, moreQS, ranTopicsS, choAnoTopS, choAnoActS, newLangS, morePicsS, tweetWordS,
+	moreNewsS, back2HeadsS, moreVideosS, playAgainS, playS, pauseS, stopS, playVideoS;
+	
+	// English
 	public static String[][] tagsE = new String[15][18];
+	// French
 	public static String[][] tagsF = new String[15][18];
+	// Portuguese
+	public static String[][] tagsP = new String[15][18];
+	// Spanish
+	public static String[][] tagsS = new String[15][18];
 	
 	/////////////////////////////////////////////////
 	
@@ -79,7 +148,7 @@ public class Languages {
 	public String[] holidays = new String[Sketch.NUM_SYN];
 	
 	public String next, moreQ, ranTopics, choAnoTop, choAnoAct, newLang, morePics, tweetWord,
-	moreNews, back2Heads, moreVideos, playAgain, play, pause, stop, playVideo;
+	moreNews, back2Heads, moreVideos, playAgain, play, pause, stop, playVideo, countryCode;
 	
 	public String[][] tags = new String[15][18];
 	
@@ -90,6 +159,10 @@ public class Languages {
 			setEnglish();
 		} else if(lang.equalsIgnoreCase("French")){
 			setFrench();
+		} else if(lang.equalsIgnoreCase("Portuguese")){
+			setPortuguese();
+		} else if(lang.equalsIgnoreCase("Spanish")){
+			setSpanish();
 		}
 	}
 	
@@ -134,6 +207,8 @@ public class Languages {
 		playVideo = playVideoE;
 		
 		tags = tagsE;
+		
+		countryCode = "en";
 	}
 	
 	public void setFrench(){
@@ -177,5 +252,97 @@ public class Languages {
 		playVideo = playVideoF;
 		
 		tags = tagsF;
+		
+		countryCode = "fr";
+	}
+	
+	public void setPortuguese(){
+		introQuestions = introQuestionsPortuguese;
+		activities = activitiesP;
+		topics = topicsP;
+		topicsExpanded = topicsExpandedP;
+		
+		sports = sportsP;
+		religion = religionP;
+		dance = danceP;
+		school = schoolP;
+		movies = moviesP;
+		books = booksP;
+		music = musicP;
+		food = foodP;
+		science = scienceP;
+		culture = cultureP;
+		art = artP;
+		language = languageP;
+		history = historyP;
+		names = namesP;
+		holidays = holidaysP;
+		
+		next = nextP;
+		moreQ = moreQP;
+		ranTopics = ranTopicsP;
+		choAnoTop = choAnoTopP;
+		choAnoAct = choAnoActP;
+		newLang = newLangP;
+		morePics = morePicsP;
+		tweetWord = tweetWordP;
+		
+		moreNews = moreNewsP;
+		back2Heads = back2HeadsP;
+		moreVideos = moreVideosP;
+		playAgain = playAgainP;
+		play = playP;
+		pause = pauseP;
+		stop = stopP;
+		playVideo = playVideoP;
+		
+		tags = tagsP;
+		
+		countryCode = "pt";
+	}
+	
+	public void setSpanish(){
+		introQuestions = introQuestionsSpanish;
+		activities = activitiesS;
+		topics = topicsS;
+		topicsExpanded = topicsExpandedS;
+		
+		sports = sportsS;
+		religion = religionS;
+		dance = danceS;
+		school = schoolS;
+		movies = moviesS;
+		books = booksS;
+		music = musicS;
+		food = foodS;
+		science = scienceS;
+		culture = cultureS;
+		art = artS;
+		language = languageS;
+		history = historyS;
+		names = namesS;
+		holidays = holidaysS;
+		
+		next = nextS;
+		moreQ = moreQS;
+		ranTopics = ranTopicsS;
+		choAnoTop = choAnoTopS;
+		choAnoAct = choAnoActS;
+		newLang = newLangS;
+		morePics = morePicsS;
+		tweetWord = tweetWordS;
+		
+		moreNews = moreNewsS;
+		back2Heads = back2HeadsS;
+		moreVideos = moreVideosS;
+		playAgain = playAgainS;
+		play = playS;
+		pause = pauseS;
+		stop = stopS;
+		playVideo = playVideoS;
+		
+		tags = tagsS;
+		
+		countryCode = "es";
 	}
 }
