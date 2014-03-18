@@ -70,6 +70,7 @@ public class PictureGetter extends Thread {
 			}
 			SearchParameters sParams = new SearchParameters();
 			sParams.setTags(keywords);
+			sParams.setTagMode("any");
 			//sParams.setText(picAct.tagsStr);
 			sParams.setSafeSearch("2");
 			sParams.setSort(SearchParameters.RELEVANCE);

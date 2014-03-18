@@ -148,7 +148,10 @@ public class Languages {
 	public String[] holidays = new String[Sketch.NUM_SYN];
 	
 	public String next, moreQ, ranTopics, choAnoTop, choAnoAct, newLang, morePics, tweetWord,
-	moreNews, back2Heads, moreVideos, playAgain, play, pause, stop, playVideo, countryCode;
+	moreNews, back2Heads, moreVideos, playAgain, play, pause, stop, playVideo;
+	
+	// For filtering web service data based on language and culture
+	public String countryCode, cultureCode;
 	
 	public String[][] tags = new String[15][18];
 	
@@ -209,6 +212,7 @@ public class Languages {
 		tags = tagsE;
 		
 		countryCode = "en";
+		cultureCode = "en_all";
 	}
 	
 	public void setFrench(){
@@ -254,6 +258,7 @@ public class Languages {
 		tags = tagsF;
 		
 		countryCode = "fr";
+		cultureCode = "fr";
 	}
 	
 	public void setPortuguese(){
@@ -299,6 +304,9 @@ public class Languages {
 		tags = tagsP;
 		
 		countryCode = "pt";
+		
+		// Brazil
+		cultureCode = "pt-BR_br";
 	}
 	
 	public void setSpanish(){
@@ -344,5 +352,6 @@ public class Languages {
 		tags = tagsS;
 		
 		countryCode = "es";
+		cultureCode = "es";
 	}
 }

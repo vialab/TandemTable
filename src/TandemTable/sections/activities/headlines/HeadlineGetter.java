@@ -44,14 +44,15 @@ public class HeadlineGetter extends Thread {
 	public void run(){
 		loading.setActive(true);
 
-		getResults(this.headAct.topicExpanded1, 1, false);
-		getResults(this.headAct.topicExpanded2, 2, false);
-		if(!this.headAct.canceled){
-			this.headAct.createMiddleTweet();
-			this.headAct.createHeadlineZones1();
-			this.headAct.createHeadlineZones2();
-			this.headAct.setHeadlines(1);
-			this.headAct.setHeadlines(2);
+		getResults(headAct.topicExpanded1, 1, false);
+		getResults(headAct.topicExpanded2, 2, false);
+		
+		if(!headAct.canceled){
+			headAct.createMiddleZone();
+			headAct.activateHeadlines(1);
+			headAct.activateHeadlines(2);
+			headAct.setHeadlines(1);
+			headAct.setHeadlines(2);
 
 		}
 		//if(this.headAct.canceled){
@@ -61,50 +62,51 @@ public class HeadlineGetter extends Thread {
 	}
 
 	public void getResults(String query, int user, boolean failedOnce){
-		if(!this.headAct.canceled){
+		if(!headAct.canceled){
 			String request = requestURL;
 
 			if(user == 1){
-				request += "q=" + query + "&order=" + this.headAct.ORDER + "&culture_code=" + this.headAct.culture1 + "&count=" + this.headAct.MAX_HEADLINES;
+				request += "q=" + query + "&order=" + headAct.ORDER + "&culture_code=" + sketch.learner1.cultureCode + "&count=" + headAct.MAX_HEADLINES;
 			} else if (user == 2){
-				request += "q=" + query + "&order=" + this.headAct.ORDER + "&culture_code=" + this.headAct.culture2 + "&count=" + this.headAct.MAX_HEADLINES;
+				request += "q=" + query + "&order=" + headAct.ORDER + "&culture_code=" + sketch.learner2.cultureCode + "&count=" + headAct.MAX_HEADLINES;
 			}
 
-			this.headAct.response = sketch.loadStrings(request);
-
-			if (this.headAct.response != null){
+			headAct.response = sketch.loadStrings(request);
+			
+			if (headAct.response != null){
 
 				JSONObject feedzilla;
 				try {
-					feedzilla = new JSONObject(PApplet.join(this.headAct.response, ""));
+					feedzilla = new JSONObject(PApplet.join(headAct.response, ""));
 
 
 
 					if(user == 1){
-						this.headAct.results1 = feedzilla.getJSONArray("articles");
-						if(this.headAct.results1.length() <= 0 && !failedOnce ){
-							getResults(this.headAct.topic1, 1, true);
+						headAct.results1 = feedzilla.getJSONArray("articles");
+						
+						if(headAct.results1.length() <= 0 && !failedOnce ){
+							getResults(headAct.topic1, 1, true);
 							return;
 
-						} else if(this.headAct.results1.length() <= 0 && failedOnce){
-							this.headAct.errorFlag1 = true;
+						} else if(headAct.results1.length() <= 0 && failedOnce){
+							headAct.errorFlag1 = true;
 						}
 					} else if (user == 2){
-						this.headAct.results2 = feedzilla.getJSONArray("articles");
+						headAct.results2 = feedzilla.getJSONArray("articles");
 
-						if(this.headAct.results2.length() <= 0 && !failedOnce ){
-							getResults(this.headAct.topic2, 2, true);
+						if(headAct.results2.length() <= 0 && !failedOnce ){
+							getResults(headAct.topic2, 2, true);
 							return;
 
-						} else if(this.headAct.results2.length() <= 0 && failedOnce){
-							this.headAct.errorFlag2 = true;
+						} else if(headAct.results2.length() <= 0 && failedOnce){
+							headAct.errorFlag2 = true;
 						}
 					}
 				} catch (JSONException e) {
 					if(user == 1){
-						this.headAct.errorFlag1 = true;
+						headAct.errorFlag1 = true;
 					} else if (user == 2){
-						this.headAct.errorFlag2 = true;
+						headAct.errorFlag2 = true;
 					}
 					PApplet.println ("There was an error parsing the JSONObject.");
 					e.printStackTrace();
@@ -113,16 +115,16 @@ public class HeadlineGetter extends Thread {
 
 			} else {
 				if(user == 1){
-					this.headAct.errorFlag1 = true;
+					headAct.errorFlag1 = true;
 				} else if (user == 2){
-					this.headAct.errorFlag2 = true;
+					headAct.errorFlag2 = true;
 				}
 
 			}
 
-			if(user == 1 && this.headAct.errorFlag1){
+			if(user == 1 && headAct.errorFlag1){
 				failedSearch(1);
-			} else if(user == 2 && this.headAct.errorFlag2){
+			} else if(user == 2 && headAct.errorFlag2){
 				failedSearch(2);
 			}
 		}
@@ -131,22 +133,22 @@ public class HeadlineGetter extends Thread {
 	public void failedSearch(int user){
 		for(int i = 0; i < this.headAct.NUM_HEADLINES; i++){
 			if(user == 1){
-				this.headAct.headlines1[i].setText("Server Error. Try again later.");
-				this.headAct.headlines1[i].setGestureEnabled("Tap", false);
-				this.headAct.setWidthTitle("Server Error. Try again later.", this.headAct.headlines1[i], 1);
+				headAct.headlines1[i].setText("Server Error. Try again later.");
+				headAct.headlines1[i].setGestureEnabled("Tap", false);
+				headAct.setWidthTitle("Server Error. Try again later.", this.headAct.headlines1[i], 1);
 			} else if (user == 2){
-				this.headAct.headlines2[i].setText("Server Error. Try again later.");
-				this.headAct.headlines2[i].setGestureEnabled("Tap", false);
-				this.headAct.setWidthTitle("Server Error. Try again later.", this.headAct.headlines2[i], 2);
+				headAct.headlines2[i].setText("Server Error. Try again later.");
+				headAct.headlines2[i].setGestureEnabled("Tap", false);
+				headAct.setWidthTitle("Server Error. Try again later.", this.headAct.headlines2[i], 2);
 			}
 
 		}
 
-		if(user == 1){
+		/*if(user == 1){
 			headAct.moreNews1.setGestureEnabled("Tap", false);
 		} else if(user == 2){
 			headAct.moreNews2.setGestureEnabled("Tap", false);
-		}
+		}*/
 		//headAct.middleZone.setGestureEnabled("Tap", false);	
 	}
 	public void translateMiddleWord(){

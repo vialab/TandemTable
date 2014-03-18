@@ -54,17 +54,23 @@ public class Colours {
 	public static Color titleColor = new Color(185, 122, 87, 255);
 	
 	//From Main.login
+	public static Color languageFilter = new Color(189, 84, 79, 230);
+	public static Color languageText = new Color(100, 120, 150);
 	public static Color zoneText = new Color(255, 255, 255);
 	public static Color unselectedZone = new Color(79, 129, 189);
 	public static Color selectedZone = new Color(189, 84, 79);
 	public static Color fadedOutZone = new Color(191, 191, 191);//(185, 205, 229);//(166, 206, 227);//(220, 230, 242);
 	public static int zoneBorder = 103; //56. 93, 138
+	public static Color loginBColor = new Color(79, 129, 189);
 
 	// For News Headlines
 	public static Color newsTitleShadow = new Color(127,194,245);
 	public static Color highlightTextColour = new Color(233, 255, 31);
 	public static Color scrollTriColor = new Color(255, 0, 0);
 	public static int bodyTextBackground = 240;
+	public static Color scrollBar = new Color(229, 229, 229);
+	public static Color scrollTriFaded = new Color(210, 210, 210);
+	public static Color newsTextColor = new Color(90,157,208);
 	
 	//From LayoutManager.java
 	public static Color textColour = new Color(79, 129, 189);

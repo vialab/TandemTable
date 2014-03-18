@@ -1,6 +1,9 @@
 package TandemTable.sections.activities.pictures;
 
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import org.jdesktop.animation.timing.Animator;
 
 import TandemTable.Colours;
@@ -77,8 +80,13 @@ public class PictureActivity {
 
 		tags = new String[NUM_TAGS];
 		for(int i = 0; i < scrambled.length; i++){
-
-			tags[i] = scrambled[i];
+			
+			try {
+				tags[i] = URLEncoder.encode(scrambled[i], "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				System.out.println("Encoding query string failed.");
+				e.printStackTrace();
+			}
 		}
 		//createMorePicturesButtons();
 		createGBZone();

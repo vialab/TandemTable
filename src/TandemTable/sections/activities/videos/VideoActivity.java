@@ -1,6 +1,8 @@
 package TandemTable.sections.activities.videos;
 
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import org.jdesktop.animation.timing.Animator;
@@ -155,10 +157,17 @@ public class VideoActivity {
 		topicsScrambled = "";
 		
 		for(String s: scrambled){
-			topicsScrambled += s + " || ";
+			topicsScrambled += s + " | ";
 		}
 	
-		topicsScrambled = topicsScrambled.substring(0, topicsScrambled.length() - 4);
+		topicsScrambled = topicsScrambled.substring(0, topicsScrambled.length() - 3);
+		
+		try {
+			topicsScrambled = URLEncoder.encode(topicsScrambled, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			System.out.println("Encoding query string failed.");
+			e.printStackTrace();
+		}
 	}
 	
 	public void createChangeLang(){

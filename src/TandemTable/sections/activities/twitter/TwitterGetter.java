@@ -125,7 +125,7 @@ public class TwitterGetter extends Thread {
 					query = new Query(topic);
 					query.setCount(twitterAct.MAX_TWEETS);
 					//query.setResultType(Query.POPULAR);
-					query.setLang(twitterAct.langQuery1);
+					query.setLang(sketch.learner1.countryCode);
 					//****////query.setPage(twitterAct.pageOffset1);
 					result = sketch.twitter.search(query);
 	
@@ -145,7 +145,7 @@ public class TwitterGetter extends Thread {
 					query = new Query(topic);
 					query.setCount(twitterAct.MAX_TWEETS);
 					//query.setResultType(Query.POPULAR);
-					query.setLang(twitterAct.langQuery2);
+					query.setLang(sketch.learner2.countryCode);
 					//****////query.setPage(twitterAct.pageOffset2);
 					result = sketch.twitter.search(query);
 					tweets2 = result.getTweets();

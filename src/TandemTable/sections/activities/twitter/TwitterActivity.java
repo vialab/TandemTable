@@ -3,6 +3,8 @@ package TandemTable.sections.activities.twitter;
 
 
 import java.awt.Color;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.Animator.RepeatBehavior;
@@ -54,8 +56,6 @@ public class TwitterActivity {
 
 	String topic1 = "";
 	String topic2 = "";
-	String langQuery1 ="";
-	String langQuery2 ="";
 	String tweetsS1 = "";
 	String tweetsS2 = "";
 	String middleText = " ";
@@ -89,32 +89,28 @@ public class TwitterActivity {
 		this.topicIndex = topicIndex;
 		this.lang1 = lang1;
 		this.lang2 = lang2;
-
+		
 
 
 		if(lang1.equalsIgnoreCase("English")){
-			langQuery1 = "en";// lang:en";
 			tweetsS1 = Languages.tweetWordE;
 			topic1 = Languages.topicsE[topicIndex];
 			langTranslate1 = Language.ENGLISH;
 
 			setTExpandOrder(1, Languages.topicsExpandedE);
 		} else if(lang1.equalsIgnoreCase("French")){
-			langQuery1 = "fr";//" lang:fr";
 			tweetsS1 = Languages.tweetWordF;
 			topic1 = Languages.topicsF[topicIndex];
 			langTranslate1 = Language.FRENCH;
 
 			setTExpandOrder(1, Languages.topicsExpandedF);
 		} else if(lang1.equalsIgnoreCase("Portuguese")){
-			langQuery1 = "pt";//" lang:pt";
 			tweetsS1 = Languages.tweetWordP;
 			topic1 = Languages.topicsP[topicIndex];
 			langTranslate1 = Language.PORTUGUESE;
 
 			setTExpandOrder(1, Languages.topicsExpandedP);
 		} else if(lang1.equalsIgnoreCase("Spanish")){
-			langQuery1 = "es";//" lang:es";
 			tweetsS1 = Languages.tweetWordS;
 			topic1 = Languages.topicsS[topicIndex];
 			langTranslate1 = Language.SPANISH;
@@ -123,7 +119,6 @@ public class TwitterActivity {
 		}
 
 		if(lang2.equalsIgnoreCase("English")){
-			langQuery2 = "en";// lang:en";
 			tweetsS2 = Languages.tweetWordE;
 			topic2 = Languages.topicsE[topicIndex];
 			langTranslate2 = Language.ENGLISH;
@@ -131,21 +126,18 @@ public class TwitterActivity {
 			setTExpandOrder(2, Languages.topicsExpandedE);
 
 		} else if(lang2.equalsIgnoreCase("French")){
-			langQuery2 = "fr";//" lang:fr";
 			tweetsS2 = Languages.tweetWordF;
 			topic2 = Languages.topicsF[topicIndex];
 			langTranslate2 = Language.FRENCH;
 
 			setTExpandOrder(2, Languages.topicsExpandedF);
 		} else if(lang2.equalsIgnoreCase("Portuguese")){
-			langQuery2 = "pt";//" lang:pt";
 			tweetsS2 = Languages.tweetWordP;
 			topic2 = Languages.topicsP[topicIndex];
 			langTranslate2 = Language.PORTUGUESE;
 
 			setTExpandOrder(2, Languages.topicsExpandedP);
 		} else if(lang2.equalsIgnoreCase("Spanish")){
-			langQuery2 = "es";//" lang:es";
 			tweetsS2 = Languages.tweetWordS;
 			topic2 = Languages.topicsS[topicIndex];
 			langTranslate2 = Language.SPANISH;
@@ -194,6 +186,13 @@ public class TwitterActivity {
 			}
 
 			topicExpanded1 = topicExpanded1.substring(0, topicExpanded1.length() - 4);
+			
+			try {
+				topicExpanded1 = URLEncoder.encode(topicExpanded1, "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				System.out.println("Encoding query string failed.");
+				e.printStackTrace();
+			}
 		} else if (user == 2) {
 			topicExpanded2 = "";
 			String[] scrambled = sketch.scrambleStrings(strList[topicIndex]);
@@ -203,6 +202,13 @@ public class TwitterActivity {
 			}
 
 			topicExpanded2 = topicExpanded2.substring(0, topicExpanded2.length() - 4);
+			
+			try {
+				topicExpanded2 = URLEncoder.encode(topicExpanded2, "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				System.out.println("Encoding query string failed.");
+				e.printStackTrace();
+			}
 		}
 	}
 	
