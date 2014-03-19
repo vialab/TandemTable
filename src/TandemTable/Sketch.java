@@ -233,6 +233,49 @@ public class Sketch extends PApplet {
 		return scrambled;
 	}
 
-	
+	/////////////////////////////////////////////////////////////////////
+	//// Calculates the text height of the string
+	////
+	//// From user "steven" on processing.org
+	//// http://processing.org/discourse/beta/num_1195937999.html
+	////
+	///////////////////////////////////////////////////////////////////////
+	public int calculateTextHeight(String string, int specificWidth, int textSize, int xAlign, int yAlign) {
+		String[] wordsArray;
+		String tempString = "";
+		int numLines = 0;
+		int newLineChar = 0;
+		float textHeight;
+		float textLeading = textDescent() + textDescent() * 1.275f;
+
+
+		wordsArray = string.split(" ");
+		textFont(Colours.pFont, textSize);
+		textAlign(xAlign, yAlign);
+		
+		for (int i=0; i < wordsArray.length; i++) {
+			if (textWidth(tempString + wordsArray[i]) < specificWidth) {
+				tempString += wordsArray[i] + " ";
+			}
+			else {
+				tempString = wordsArray[i] + " ";
+				numLines++;
+			}
+		}
+		
+		for (int i = 0; i < string.length(); i++) {
+			if (string.charAt(i) == '\n') {
+				newLineChar++;
+			}
+		}
+		//System.out.println(newLineChar);
+
+		numLines++; //adds the last line
+		
+		numLines += newLineChar;
+
+		textHeight = numLines * textSize + numLines * textLeading;
+		return(PApplet.round(textHeight));
+	}
 
 }

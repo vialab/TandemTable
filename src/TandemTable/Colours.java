@@ -17,6 +17,7 @@ public class Colours {
 	public static Color videoIndicator = new Color(188, 1, 188);
 	public static Color imageIndicator = new Color(188, 188, 2);
 	public static Color textIndicator = new Color(3, 188, 188);
+	public static Color searchTweet = new Color(111,206,57);
 	// For diffbot
 	public static final String diffbotToken = "32c6d7dcc7e1f722f0ca7184cadf5b13";
 	public static final String diffbotEndpoint = "http://www.diffbot.com/api/article?";

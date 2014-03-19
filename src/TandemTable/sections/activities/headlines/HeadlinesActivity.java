@@ -17,6 +17,7 @@ import TandemTable.ColourEval;
 import TandemTable.Colours;
 import TandemTable.Languages;
 import TandemTable.Sketch;
+import TandemTable.sections.ArticleContainer;
 import TandemTable.sections.mainSection.MainSection;
 
 import com.memetix.mst.language.Language;
@@ -24,17 +25,15 @@ import com.memetix.mst.language.Language;
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PGraphics;
-import vialab.simpleMultiTouch.events.DragEvent;
 import vialab.simpleMultiTouch.events.TapEvent;
 import vialab.simpleMultiTouch.events.VSwipeEvent;
-import vialab.simpleMultiTouch.zones.PGraphicsZone;
 import vialab.simpleMultiTouch.zones.RectZone;
 import vialab.simpleMultiTouch.zones.TextZone;
 
 public class HeadlinesActivity {
 
 	Sketch sketch;
-	MainSection layoutManager;
+	MainSection mainSection;
 
 	int spaceX, topicIndex, index1 = 0, index2 = 0;
 	int textSize;
@@ -44,32 +43,34 @@ public class HeadlinesActivity {
 	int widthBody;
 	int textYSpacing;
 	int titleButtonW;
-	int red1 = 1;
-	int green1 = 1;
-	int blue1 = 1;
-	int red2 = 1;
-	int green2 = 1;
-	int blue2 = 1;
+	// Colour picking
+	public int red1 = 1, green1 = 1, blue1 = 1;
+	public int red2 = 1, green2 = 1, blue2 = 1;
 	int middleX;
 	int middleWidth;
 	int lastUser = 0;
 	int middleAnimTime = 800;
 	int colourPicker1;
 	int colourPicker2;
+	
+	// Margins for the news articles
+	int xMargin;
+	int yMargin;
+	
 	float tweetTextSize;
 
-	HashMap<Integer, String> wordMap1 = new HashMap<Integer, String>();
-	HashMap<Integer, Float[]> wordX1 = new HashMap<Integer, Float[]>();
+	public HashMap<Integer, String> wordMap1 = new HashMap<Integer, String>();
+	public HashMap<Integer, Float[]> wordX1 = new HashMap<Integer, Float[]>();
 
-	HashMap<Integer, String> wordMap2 = new HashMap<Integer, String>();
-	HashMap<Integer, Float[]> wordX2 = new HashMap<Integer, Float[]>();
+	public HashMap<Integer, String> wordMap2 = new HashMap<Integer, String>();
+	public HashMap<Integer, Float[]> wordX2 = new HashMap<Integer, Float[]>();
 
 	Language langTranslate1, langTranslate2;
 	Animator animMiddleZone;
 
 	String topic1, topic2, lang1, lang2, back1, back2, topicExpanded1, topicExpanded2;
 	String[] response;
-	String regex = "[ \t\n\f\r]+";
+	
 	String middleText = " ";
 
 	JSONArray results1, results2;
@@ -83,7 +84,7 @@ public class HeadlinesActivity {
 	boolean wordTapped1 = false;
 	boolean wordTapped2 = false;
 
-	PGraphicsZone body1, body2;
+	ArticleContainer body1, body2;
 	//ImageZone imgZone1, imgZone2;
 	RectZone middleZone, background1, background2, swipeBackground1, swipeBackground2;
 	TextZone backButton1, backButton2;
@@ -101,9 +102,9 @@ public class HeadlinesActivity {
 
 	HeadlineGetter hg;
 
-	public HeadlinesActivity(Sketch sketch, MainSection layoutManager, int topicIndex, String lang1, String lang2) {
+	public HeadlinesActivity(Sketch sketch, MainSection mainSection, int topicIndex, String lang1, String lang2) {
 		this.sketch = sketch;
-		this.layoutManager = layoutManager;
+		this.mainSection = mainSection;
 		spaceX = sketch.getWidth() - sketch.lineX;
 		this.topicIndex = topicIndex;
 		this.lang1 = lang1;
@@ -117,6 +118,8 @@ public class HeadlinesActivity {
 		textYSpacing = (int) (textSize*1.2);
 		titleButtonW = (int) (sketch.getHeight()/200);
 
+		xMargin = sketch.getWidth()/60;
+		yMargin = sketch.getWidth()/60;
 
 		if(lang1.equalsIgnoreCase("English")){
 			back1 = Languages.back2HeadsE;
@@ -406,7 +409,7 @@ public class HeadlinesActivity {
 	public void createBackButtons(){
 
 		// Back Button for user 1		
-		backButton1 = new TextZone(layoutManager.buttonX, layoutManager.buttonYb2, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, back1, sketch.textSize, "CENTER", "CENTER"){
+		backButton1 = new TextZone(mainSection.buttonX, mainSection.buttonYb2, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, back1, sketch.textSize, "CENTER", "CENTER"){
 			public void tapEvent(TapEvent e){
 				if (isTappable()){
 					sketch.client.removeZone(body1);
@@ -429,7 +432,7 @@ public class HeadlinesActivity {
 		sketch.client.addZone(backButton1);
 
 		// Back Button for user 2	
-		backButton2 = new TextZone(layoutManager.buttonX, layoutManager.buttonYt2, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, back2, sketch.textSize, "CENTER", "CENTER"){
+		backButton2 = new TextZone(mainSection.buttonX, mainSection.buttonYt2, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, back2, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
 				if (isTappable()){
@@ -465,7 +468,7 @@ public class HeadlinesActivity {
 		}
 
 		//More News Button for user 1		
-		moreNews1 = new TextZone(layoutManager.buttonX, layoutManager.buttonYb2, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, s, sketch.textSize, "CENTER", "CENTER"){
+		moreNews1 = new TextZone(mainSection.buttonX, mainSection.buttonYb2, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, s, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
 				if (tappable && !tapFlag1 && !errorFlag){
@@ -495,7 +498,7 @@ public class HeadlinesActivity {
 		}
 
 		//More News Button for user 2	
-		moreNews2 = new TextZone(layoutManager.buttonX, layoutManager.buttonYt2, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, s, sketch.textSize, "CENTER", "CENTER"){
+		moreNews2 = new TextZone(mainSection.buttonX, mainSection.buttonYt2, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, s, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
 				if (tappable && !tapFlag2 && !errorFlag){
@@ -535,33 +538,32 @@ public class HeadlinesActivity {
 
 						try {
 							JSONObject article = (JSONObject)results1.get(ii + index1);
-							final String bodyStr1 = new String((String) article.get("summary")).trim();
-							//final String url = (String) article.get("url");
+							
+							// Get body text content
+							String body = new String((String) article.get("summary")).trim();
+							final String bodyStr1 = body + "...";
+							
+							// Get author
 							String author1 = "";
 							if(article.has("author")){
 								author1 = (String) article.get("author");
 							}
 							final String author = author1.trim();
 
+							// Get date
 							String date = "";
 							if(article.has("publish_date")){
 								date = (String) article.get("publish_date");
-								//String day = date.substring(6, 8);
-								//String month = date.substring(4, 6);
-								//String year = date.substring(0, 4);
-								//date = day + "/" + month + "/" + year;
 							}
 							final String dateFinal = date.trim();
-							//final boolean imgFlag = article.has("small_image");
+							
+							
+							// Set article container measurements
 							final int bodyStartY = (int) (sketch.getHeight()/2 + 1.75*textYOffset);
 							final int bodyHeight = sketch.getHeight() - bodyStartY;
-							final int xMargin = sketch.getWidth()/60;
-							final int yMargin = sketch.getWidth()/60;
-							final int contentHeight = calculateTextHeight(bodyStr1, widthBody, (int) 226, textSize, PConstants.LEFT, PConstants.TOP); 
+							final int contentHeight = sketch.calculateTextHeight(bodyStr1, widthBody - xMargin*2, textSize, PConstants.LEFT, PConstants.TOP); 
 
-							/////////////
-							//System.out.println(body);
-							//System.out.println(contentHeight);
+							
 							int graphicsHeightTemp = yMargin + 6*textYSpacing + contentHeight; 
 							int temp= 0;
 
@@ -575,7 +577,8 @@ public class HeadlinesActivity {
 
 							PGraphics pg = sketch.createGraphics(widthBody, graphicsHeight, PConstants.P3D);
 							final PGraphics backBuffer = sketch.createGraphics(widthBody, graphicsHeight, PConstants.P3D);
-
+							
+							
 							background1 = new RectZone(sketch.lineX + sketch.strokeW, sketch.getHeight()/2 + sketch.strokeW, sketch.getWidth() - (sketch.lineX + sketch.strokeW), (sketch.getHeight()/2 - sketch.strokeW)){
 								public void tapEvent(TapEvent e){
 									sketch.client.removeZone(body1);
@@ -593,10 +596,12 @@ public class HeadlinesActivity {
 							sketch.client.addZone(background1);
 							sketch.client.pullToTop(middleZone);
 
-							body1 = new PGraphicsZone(sketch.lineX + widthOffset, bodyStartY, widthBody, bodyHeight, sketch.radius, pg){
+							// Create new article container for display article text
+							body1 = new ArticleContainer(sketch, sketch.lineX + widthOffset, bodyStartY, widthBody, bodyHeight, sketch.radius, pg, 
+									textYSpacing, textSize, xMargin, yMargin, graphicsHeight){
+								
 								public void setUpGraphicsContext(){
-									
-									
+
 									PGraphics pg = this.getPGraphics();
 									pg.beginDraw();
 									pg.background(Colours.bodyTextBackground);
@@ -608,26 +613,26 @@ public class HeadlinesActivity {
 									pg.fill(Colours.newsTextColor.getRed(), Colours.newsTextColor.getGreen(),Colours.newsTextColor.getBlue());
 									float tw = pg.textWidth(titles1[ii]);
 									float offset = 0;
-									if(tw >= widthBody){
-										pg.text(titles1[ii], 0, yMargin, widthBody, textSize*3);
+									if(tw >= widthBody - xMargin*2){
+										pg.text(titles1[ii], xMargin, yMargin, widthBody - xMargin*2, textSize*3);
 										offset = 2*textYSpacing;
 									} else {
-										pg.text(titles1[ii], 0, yMargin, widthBody, textSize);
+										pg.text(titles1[ii], xMargin, yMargin, widthBody - xMargin*2, textSize);
 									}
 									pg.text(author, 0, yMargin + textYSpacing + offset, widthBody, textSize);
 									pg.text(dateFinal, 0, yMargin + 2*textYSpacing + offset, widthBody, textSize);
 									pg.textAlign(PConstants.LEFT, PConstants.TOP);
-									setBody(pg, bodyStr1 + "...", xMargin, yMargin + 6*textYSpacing + offset, widthBody - xMargin, contentHeight*2);
+									setBody(pg, bodyStr1, xMargin, yMargin + 6*textYSpacing + offset, widthBody - xMargin, contentHeight*2);
 									pg.endDraw();
 
 									backBuffer.beginDraw();
 									backBuffer.background(0);
 									backBuffer.textFont(Colours.pFont, textSize); 
 									backBuffer.textAlign(PConstants.CENTER, PConstants.CENTER);
-									drawBackBuffer(backBuffer, titles1[ii], PConstants.CENTER, PConstants.CENTER, 0, 0, widthBody);
+									drawBackBuffer(backBuffer, titles1[ii], PConstants.CENTER, PConstants.CENTER, 0, xMargin, widthBody - xMargin);
 									drawBackBuffer(backBuffer, author, PConstants.CENTER, PConstants.CENTER, textYSpacing + offset, 0, widthBody - xMargin);
 									drawBackBuffer(backBuffer, dateFinal, PConstants.CENTER, PConstants.CENTER, 2*textYSpacing + offset, 0, widthBody - xMargin);
-									drawBackBuffer(backBuffer, bodyStr1 + "...", PConstants.LEFT, PConstants.TOP, 6*textYSpacing + offset, xMargin, widthBody - xMargin);
+									drawBackBuffer(backBuffer, bodyStr1, PConstants.LEFT, PConstants.TOP, 6*textYSpacing + offset, xMargin, widthBody - xMargin);
 									backBuffer.endDraw();
 									red1 = 1;
 									green1 = 1;
@@ -645,161 +650,6 @@ public class HeadlinesActivity {
 									}
 								}
 
-								public void drawBackBuffer(PGraphics backBuffer, String t, int xAlign, int yAlign, float y, float x, float width){
-									String[] str = t.split(regex);
-									int index = -1;
-									// Width of line of text
-									float xw = x;
-									//int wordIndex1 = 1;
-									String titleLine = "";
-
-									for(int k = 0; k < str.length; k++){
-										if(str[k].equalsIgnoreCase("\n") || (xw + backBuffer.textWidth(str[k]) + backBuffer.textWidth(' ')) > width){
-											index = k;
-											break;
-										}
-										titleLine += str[k] + " ";
-										xw += backBuffer.textWidth(str[k]) + backBuffer.textWidth(' ');
-									}
-
-									if(xAlign == PConstants.CENTER){
-										if(index != -1){
-											//x = 0;//x = widthBody/2 - findWidth(str, 0, index+1)/2 + backBuffer.textWidth(' ')/2 * (str.length - 2);
-											x = widthBody/2 - backBuffer.textWidth(titleLine)/2; 
-										} else {
-											x = widthBody/2 - backBuffer.textWidth(t)/2;
-										}
-									} /*else if (xAlign == PConstants.RIGHT){
-										if(index != -1){
-											//x = widthBody/2 + findWidth(str, 0, index+1)/2;
-										} else {
-											x = widthBody/2 + backBuffer.textWidth(t)/2;
-										}
-									}*/
-
-									if(yAlign == PConstants.CENTER && index != -1){
-										y += backBuffer.textAscent()/2;//textYSpacing;//textSize  + backBuffer.textAscent() / 2;
-									} else if(yAlign == PConstants.TOP){
-										y += 0;//;textSize  + backBuffer.textAscent();
-									}
-
-									for(int k = 0; k < str.length; k++){
-										if(str[k].equalsIgnoreCase("\n") || (x + backBuffer.textWidth(str[k]) + backBuffer.textWidth(' ')) > width){
-											if(yAlign == PConstants.CENTER){
-												y += textYSpacing;//textSize  + backBuffer.textAscent() / 2;
-											} else if(yAlign == PConstants.TOP){
-												y += textSize  + backBuffer.textAscent();
-											}
-
-
-											if(xAlign == PConstants.CENTER){
-												float tw = findWidth(str, k, str.length, backBuffer);
-												x = widthBody/2 - tw/2;
-											
-											/*} else if (xAlign == PConstants.RIGHT){
-												float tw = findWidth(str, k, str.length, backBuffer);
-												x = widthBody/2 + tw/2;*/
-											} else {
-												x = xMargin;
-											}
-										} 
-
-										backBuffer.fill(red1, green1, blue1);
-										backBuffer.rect(x, yMargin + y, backBuffer.textWidth(str[k]), textSize);
-										wordMap1.put(backBuffer.color(red1, green1, blue1), str[k]);
-										wordX1.put(backBuffer.color(red1, green1, blue1), new Float[]{x, yMargin + y, backBuffer.textWidth(str[k]), (float) textSize});
-
-										x += backBuffer.textWidth(str[k]) + backBuffer.textWidth(' ');
-
-										if(red1 < 255){
-											red1++;
-										} else if(green1 < 255){
-											green1++;
-										} else if(blue1 < 255){
-											blue1++;
-										}
-									}
-
-								}
-
-								public void setBody(PGraphics pg, String t, float x, float y, int w, int h){
-									String[] str = t.split(regex);
-									float xx = x;
-
-									for(int k = 0; k < str.length; k++){
-										if((xx + pg.textWidth(str[k])+pg.textWidth(' ') > w)){
-											y += textSize + pg.textAscent();
-											xx = x;
-										}
-										pg.text(str[k], xx, y);
-										xx += pg.textWidth(str[k])+pg.textWidth(' ');
-
-									}
-								}
-
-								public float findWidth(String[] str, int start, int end, PGraphics pg){
-									float tw = 0;
-									String wordNSpace = "";
-									for(int q = start; q < end; q++){
-										wordNSpace = str[q] + " ";
-										tw += pg.textWidth(wordNSpace);
-									}
-									return tw;
-								}
-
-								// Draw scrollbar and triangles
-								public void postDraw(){
-									if(graphicsHeight > bodyHeight) {
-										float triWidth = sketch.getWidth()/100;
-										float xw = this.getX()+ this.getWidth() - triWidth/2;
-	
-										///////////////////////////////////////////////////
-										//Draw bottom triangle
-										float h = this.getY()+ this.getHeight() - triWidth/2;
-										
-										if(getYOffset() + 10 <= graphicsHeight-bodyHeight){
-											sketch.fill(Colours.scrollTriColor.getRed(), Colours.scrollTriColor.getGreen(),Colours.scrollTriColor.getBlue());
-										} else {
-											sketch.fill(Colours.scrollTriFaded.getRed(), Colours.scrollTriFaded.getGreen(),Colours.scrollTriFaded.getBlue());
-										}
-										
-										sketch.triangle(xw-triWidth, h-triWidth, xw-triWidth/2, h, xw, h-triWidth);	
-										//////////////////////////////////////////////////
-										
-										/////////////////////////////////////////////////
-										// Draw bottom triangle
-										h = this.getY() + triWidth/2;
-										
-										if(getYOffset() - 10 >= 0){
-											sketch.fill(Colours.scrollTriColor.getRed(), Colours.scrollTriColor.getGreen(),Colours.scrollTriColor.getBlue());
-										} else {
-											sketch.fill(Colours.scrollTriFaded.getRed(), Colours.scrollTriFaded.getGreen(),Colours.scrollTriFaded.getBlue());
-										}
-										
-										sketch.triangle(xw-triWidth, h + triWidth, xw-triWidth/2, h, xw, h + triWidth);
-										////////////////////////////////////////////////////
-										
-										// Draw scroll bar
-										
-										sketch.fill(Colours.scrollBar.getRed(), Colours.scrollBar.getGreen(),Colours.scrollBar.getBlue());
-										sketch.rect(xw - triWidth, (float) (getY() + triWidth*1.5), triWidth, getHeight() - triWidth*3);
-									}
-								}
-								
-								// Scrolling the news article
-								public void dragEvent(DragEvent e){
-									if(isDraggable()){
-										// -1 for iPad scrolling
-										int direction = -1;
-										
-										int dist = (int) (direction * e.getYDistance()/10 + this.getYOffset());
-
-										if(dist <= graphicsHeight - bodyHeight && dist >= 0){
-											this.setYOffset(dist);
-										}
-										e.setHandled(true);
-									}
-								}
 
 								public void tapEvent(TapEvent e){
 									colourPicker1 = sketch.color(backBuffer.get((int)(e.getX()-getX()), (int)(e.getY()-getY() + getYOffset())));
@@ -809,14 +659,12 @@ public class HeadlinesActivity {
 										lastUser = 1;
 										started = true;
 										wordTapped1 = true;
-
-
 									}
 								}
-
 							};
 
 
+							body1.setHeadActivity(mainSection.headlinesAct, 1);
 							body1.setDrawBorder(false);
 							body1.setGestureEnabled("Drag", true);
 							body1.setGestureEnabled("Tap", true);
@@ -891,33 +739,32 @@ public class HeadlinesActivity {
 
 						try {
 							JSONObject article = (JSONObject)results2.get(ii + index2);
-							final String bodyStr2 = new String((String) article.get("summary")).trim();
-							//final String url = (String) article.get("url");
+							
+							// Get text body content
+							String textBody = new String((String) article.get("summary")).trim();
+							final String bodyStr2 = textBody + "...";
+							
+							// Get author
 							String author2 = "";
 							if(article.has("author")){
 								author2 = (String) article.get("author");
 							}
 							final String author = author2;
 
+							// Get date
 							String date = "";
 							if(article.has("publish_date")){
 								date = (String) article.get("publish_date");
-								//String day = date.substring(6, 8);
-								//String month = date.substring(4, 6);
-								//String year = date.substring(0, 4);
-								//date = day + "/" + month + "/" + year;
 							}
 							final String dateFinal = date.trim();
+							
 							//final boolean imgFlag = article.has("small_image");
 
+							// Set article container's measurements
 							final int bodyHeight = (int) (sketch.getHeight()/2 - 1.75*textYOffset);
-							final int xMargin = sketch.getWidth()/60;
-							final int yMargin = sketch.getWidth()/60;
-							final int contentHeight = calculateTextHeight(bodyStr2, widthBody, (int) 226, textSize, PConstants.LEFT, PConstants.TOP); 
+							final int contentHeight = sketch.calculateTextHeight(bodyStr2, widthBody - xMargin*2, textSize, PConstants.LEFT, PConstants.TOP); 
 
-							/////////////
-							//System.out.println(body);
-							//System.out.println(contentHeight);
+							
 							int graphicsHeightTemp = yMargin + 6*textYSpacing + contentHeight; 
 							int temp= 0;
 
@@ -950,7 +797,9 @@ public class HeadlinesActivity {
 							sketch.client.addZone(background2);
 							sketch.client.pullToTop(middleZone);
 
-							body2 = new PGraphicsZone(sketch.lineX + widthOffset, 0, widthBody, bodyHeight, sketch.radius, pg){
+							body2 = new ArticleContainer(sketch, sketch.lineX + widthOffset, 0, widthBody, bodyHeight, sketch.radius, pg, 
+									textYSpacing, textSize, xMargin, yMargin, graphicsHeight){
+								
 								public void setUpGraphicsContext(){
 									PGraphics pg = this.getPGraphics();
 									pg.beginDraw();
@@ -960,18 +809,22 @@ public class HeadlinesActivity {
 									drawHighlight(pg);
 									pg.textAlign(PConstants.CENTER, PConstants.CENTER);
 									pg.fill(Colours.newsTextColor.getRed(), Colours.newsTextColor.getGreen(),Colours.newsTextColor.getBlue());
+									
+									
 									float tw = pg.textWidth(titles2[ii]);
 									float offset = 0;
-									if(tw >= widthBody){
-										pg.text(titles2[ii], 0, yMargin, widthBody, textSize*3);
+									
+									if(tw >= widthBody - xMargin*2){
+										pg.text(titles2[ii], xMargin, yMargin, widthBody - xMargin*2, textSize*3);
 										offset = 2*textYSpacing;
 									} else {
-										pg.text(titles2[ii], 0, yMargin, widthBody, textSize);
+										pg.text(titles2[ii],  xMargin, yMargin, widthBody - xMargin*2, textSize);
 									}
+									
 									pg.text(author, 0, yMargin + textYSpacing+ offset, widthBody, textSize);
 									pg.text(dateFinal, 0, yMargin + 2*textYSpacing+ offset, widthBody, textSize);
 									pg.textAlign(PConstants.LEFT, PConstants.TOP);
-									setBody(pg, bodyStr2 + "...", xMargin, 0 + yMargin + 6*textYSpacing + offset, widthBody - xMargin, contentHeight*2);
+									setBody(pg, bodyStr2, xMargin, 0 + yMargin + 6*textYSpacing + offset, widthBody - xMargin, contentHeight*2);
 
 
 									pg.endDraw();
@@ -980,10 +833,10 @@ public class HeadlinesActivity {
 									backBuffer.background(0);
 									backBuffer.textFont(Colours.pFont, textSize); 
 									backBuffer.textAlign(PConstants.CENTER, PConstants.CENTER);
-									drawBackBuffer(backBuffer, titles2[ii], PConstants.CENTER, PConstants.CENTER, 0, 0, widthBody);
+									drawBackBuffer(backBuffer, titles2[ii], PConstants.CENTER, PConstants.CENTER, 0, xMargin, widthBody - xMargin);
 									drawBackBuffer(backBuffer, author, PConstants.CENTER, PConstants.CENTER, textYSpacing + offset, 0, widthBody - xMargin);
 									drawBackBuffer(backBuffer, dateFinal, PConstants.CENTER, PConstants.CENTER, 2*textYSpacing + offset, 0, widthBody - xMargin);
-									drawBackBuffer(backBuffer, bodyStr2 + "...", PConstants.LEFT, PConstants.TOP, 6*textYSpacing + offset, xMargin, widthBody - xMargin);
+									drawBackBuffer(backBuffer, bodyStr2, PConstants.LEFT, PConstants.TOP, 6*textYSpacing + offset, xMargin, widthBody - xMargin);
 									backBuffer.endDraw();
 									//setPGraphics(backBuffer);
 									red2 = 1;
@@ -998,139 +851,6 @@ public class HeadlinesActivity {
 											pg.fill(Colours.highlightTextColour.getRed(), Colours.highlightTextColour.getGreen(),Colours.highlightTextColour.getBlue());
 											pg.rect(wordX2.get(colourPicker2)[0], wordX2.get(colourPicker2)[1], wordX2.get(colourPicker2)[2], wordX2.get(colourPicker2)[3]);
 										}
-									}
-								}
-
-								public void drawBackBuffer(PGraphics backBuffer, String t, int xAlign, int yAlign, float y, float x, float width){
-									String[] str = t.split(regex);
-									int index = -1;
-									float xw = x;// + xMargin;
-									String titleLine = "";
-									
-									for(int k = 0; k < str.length; k++){
-										if(str[k].equalsIgnoreCase("\n") || (xw + sketch.textWidth(str[k]) +sketch.textWidth(' ')) > width){
-											index = k;
-											break;
-										}
-										titleLine += str[k] + " ";
-										xw += sketch.textWidth(str[k]) + sketch.textWidth(' ');
-									}
-
-									if(xAlign == PConstants.CENTER){
-										if(index != -1){
-											//x = 0;//x = widthBody/2 - findWidth(str, 0, index+1)/2 + sketch.textWidth(' ')/2 * (str.length - 2);
-											x = widthBody/2 - backBuffer.textWidth(titleLine)/2; 
-										} else {
-											x = widthBody/2 - sketch.textWidth(t)/2;
-										}
-									} /*else if (xAlign == PConstants.RIGHT){
-										if(index != -1){
-											//x = widthBody/2 + findWidth(str, 0, index+1)/2;
-										} else {
-											x = widthBody/2 + sketch.textWidth(t)/2;
-										}
-									}*/
-
-									if(yAlign == PConstants.CENTER && index != -1){
-										y += sketch.textAscent()/2;//textYSpacing;//textSize  + sketch.textAscent() / 2;
-									} else if(yAlign == PConstants.TOP){
-										y += 0;//;textSize  + sketch.textAscent();
-									}
-
-									for(int k = 0; k < str.length; k++){
-										if(str[k].equalsIgnoreCase("\n") || (x + sketch.textWidth(str[k]) +sketch.textWidth(' ')) > width){
-											if(yAlign == PConstants.CENTER){
-												y += textYSpacing;//textSize  + sketch.textAscent() / 2;
-											} else if(yAlign == PConstants.TOP){
-												y += textSize  + sketch.textAscent();
-											}
-
-
-											if(xAlign == PConstants.CENTER){
-												float tw = findWidth(str, k, str.length);
-												x = widthBody/2 - tw/2;
-											 
-											/*} else if (xAlign == PConstants.RIGHT){
-												float tw = findWidth(str, k, str.length);
-												x = widthBody/2 + tw/2;*/
-											} else {
-												x = xMargin;
-											}
-										} 
-
-										backBuffer.fill(red2, green2, blue2);
-										backBuffer.rect(x, yMargin + y, sketch.textWidth(str[k]), textSize);
-										wordMap2.put(sketch.color(red2, green2, blue2), str[k]);
-										wordX2.put(sketch.color(red2, green2, blue2), new Float[]{x, yMargin + y, sketch.textWidth(str[k]), (float) textSize});
-
-										x += sketch.textWidth(str[k]) + sketch.textWidth(' ');
-
-										if(red2 < 255){
-											red2++;
-										} else if(green2 < 255){
-											green2++;
-										} else if(blue2 < 255){
-											blue2++;
-										}
-									}
-
-								}
-
-								public void setBody(PGraphics pg, String t, float x, float y, int w, int h){
-									String[] str = t.split(regex);
-									float xx = x;
-
-									for(int k = 0; k < str.length; k++){
-										if((xx + sketch.textWidth(str[k])+sketch.textWidth(' ') > w)){
-											y += textSize + sketch.textAscent();
-											xx = x;
-										}
-										pg.text(str[k], xx, y);
-										xx += sketch.textWidth(str[k])+sketch.textWidth(' ');
-
-									}
-								}
-
-								public float findWidth(String[] str, int start, int end){
-									float tw = 0;
-									String wordNSpace = "";
-									
-									for(int q = start; q < end; q++){
-										wordNSpace = str[q] + " ";
-										tw += sketch.textWidth(wordNSpace);
-									}
-									return tw;
-								}
-
-								public void postDraw(){
-									if(getYOffset() + 10 <= graphicsHeight-bodyHeight){
-										float triWidth = sketch.getWidth()/100;
-										float height = this.getY()+ this.getHeight() - triWidth/2;
-										float width = this.getX()+ this.getWidth() - triWidth/2;
-										sketch.fill(Colours.scrollTriColor.getRed(), Colours.scrollTriColor.getGreen(),Colours.scrollTriColor.getBlue());
-										sketch.triangle(width-triWidth, height-triWidth, width-triWidth/2, height, width, height-triWidth);
-									}
-
-									if(getYOffset() - 10 >= 0){
-										float triWidth = sketch.getWidth()/100;
-										float height = this.getY() + triWidth/2;
-										float width = this.getX()+ this.getWidth() - triWidth/2;
-										sketch.fill(Colours.scrollTriColor.getRed(), Colours.scrollTriColor.getGreen(),Colours.scrollTriColor.getBlue());
-										sketch.triangle(width-triWidth, height + triWidth, width-triWidth/2, height, width, height + triWidth);
-									}
-								}
-
-								public void dragEvent(DragEvent e){
-									if(isDraggable()){
-										// -1 for iPad scrolling
-										int direction = -1;
-										
-										int dist = (int) (direction * e.getYDistance()/10 + this.getYOffset());
-
-										if(dist <= graphicsHeight - bodyHeight && dist >= 0){
-											this.setYOffset(dist);
-										}
-										e.setHandled(true);
 									}
 								}
 
@@ -1150,6 +870,7 @@ public class HeadlinesActivity {
 
 							};
 
+							body2.setHeadActivity(mainSection.headlinesAct, 2);
 							body2.rotate((float) Colours.PI);
 							body2.setDrawBorder(false);
 							body2.setGestureEnabled("Drag", true);
@@ -1335,44 +1056,4 @@ public class HeadlinesActivity {
 		sketch.client.removeZone(swipeBackground1);
 		sketch.client.removeZone(swipeBackground2);
 	}
-
-	/////////////////////////////////////////////////////////////////////
-	////
-	//// From user "steven" on processing.org
-	//// http://processing.org/discourse/beta/num_1195937999.html
-	////
-	///////////////////////////////////////////////////////////////////////
-	public int calculateTextHeight(String string, int specificWidth, int lineSpacing, int textSize, int xAlign, int yAlign) {
-		String[] wordsArray;
-		String tempString = "";
-		int numLines = 0;
-		float textHeight;
-
-		wordsArray = string.split(" ");
-		sketch.textFont(Colours.pFont, textSize);
-		sketch.textAlign(xAlign, yAlign);
-		for (int i=0; i < wordsArray.length; i++) {
-			if (sketch.textWidth(tempString + wordsArray[i]) < specificWidth) {
-				tempString += wordsArray[i] + " ";
-			}
-			else {
-				tempString = wordsArray[i] + " ";
-				numLines++;
-			}
-		}
-
-		for (int i = 0; i < string.length(); i++) {
-			if (string.charAt(i) == '\n') {
-				numLines++;
-			}
-		}
-
-		numLines++; //adds the last line
-		float textLeading = sketch.textDescent() + sketch.textDescent() * 1.275f;
-
-		textHeight = numLines * textSize + numLines * textLeading;//(sketch.textDescent() + sketch.textAscent() + lineSpacing);
-		return(PApplet.round(textHeight));
-	} 
-
-
 }

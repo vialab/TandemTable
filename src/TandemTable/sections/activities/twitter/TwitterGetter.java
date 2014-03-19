@@ -34,7 +34,7 @@ public class TwitterGetter extends Thread {
 
 
 	HashMap<Integer, ContentGetter>[] hmap1, hmap2;
-	ContentGetter currentGetter1 = null, currentGetter2 = null;
+	ContentGetter contGetter1 = null, contGetter2 = null;
 
 	@SuppressWarnings("unchecked")
 	public TwitterGetter(Sketch sketch, TwitterActivity twitterAct){
@@ -176,6 +176,7 @@ public class TwitterGetter extends Thread {
 			twitterAct.animTweet1.start();
 			twitterAct.pageOffset1 = 1;
 			getTweets(1, word, false, false);
+			
 			if (!twitterAct.errorFlag){
 				twitterAct.removeTweets(1);
 				/*if(twitterAct.tweetIndex1 >= twitterAct.MAX_TWEETS - twitterAct.NUM_TWEETS - (twitterAct.MAX_TWEETS % twitterAct.NUM_TWEETS)){
@@ -190,6 +191,7 @@ public class TwitterGetter extends Thread {
 			twitterAct.animTweet2.start();
 			twitterAct.pageOffset2 = 1;
 			getTweets(2, word, false, false);
+			
 			if (!twitterAct.errorFlag){
 				twitterAct.removeTweets(2);
 				/*if(twitterAct.tweetIndex2 >= twitterAct.MAX_TWEETS - twitterAct.NUM_TWEETS - (twitterAct.MAX_TWEETS % twitterAct.NUM_TWEETS)){
@@ -204,10 +206,12 @@ public class TwitterGetter extends Thread {
 
 		if(user == 1){
 			twitterAct.animTweet1.stop();
-			twitterAct.tweetWord1.setColour(Colours.unselectedZone);
+			//twitterAct.tweetWord1.setColour(Colours.unselectedZone);
+			twitterAct.fadeTweetWordButton(1);
 		} else if (user == 2){
 			twitterAct.animTweet2.stop();
-			twitterAct.tweetWord2.setColour(Colours.unselectedZone);
+			//twitterAct.tweetWord2.setColour(Colours.unselectedZone);
+			twitterAct.fadeTweetWordButton(2);
 
 		}
 
@@ -340,26 +344,32 @@ public class TwitterGetter extends Thread {
 							twitterAct.tweetZones1[i][j] = new TextZone(twitterAct.tweetZones1[i][j].getX(), twitterAct.tweetZones1[i][j].getY(), twitterAct.tweetZones1[i][j].getWidth(), twitterAct.tweetZones1[i][j].getHeight(), Colours.pFont, twitterAct.tweetZones1[i][j].getText(), (float)twitterAct.tweetTextSize, "LEFT", "BOTTOM"){
 								public void tapEvent(TapEvent e){
 									if(isTappable()){
-										currentGetter1 = hmap1[ii].get(jj);
+										
+										if(twitterAct.lastHighlightZone != null) {
+											twitterAct.lastHighlightZone.setHighlightText(false);
+										}
+										
+										contGetter1 = hmap1[ii].get(jj);
 										hmap1[ii].get(jj).activated = true;
 										sketch.client.pullToTop(twitterAct.middleTweet);
 										hmap1[ii].get(jj).background.setActive(true);
-										if(currentGetter1.videoFlag && !(sketch.deactivateVideo || sketch.removeVideoAct)){
+										
+										if(contGetter1.videoFlag && !(sketch.deactivateVideo || sketch.removeVideoAct)){
 											twitterAct.videoController.hashMap[0] = ii;
 											twitterAct.videoController.hashMap[1] = jj;
 											twitterAct.videoController.setAgreeButtonVisible(2);
 										} else {
-											if(hmap1[ii].get(jj).img1 != null){
-												if(hmap1[ii].get(jj).img1.getImageIndex() >= hmap1[ii].get(jj).img1.getImageArray().length-1){
-													hmap1[ii].get(jj).img1.setImageIndex(0);
+											if(hmap1[ii].get(jj).articleImg != null){
+												if(hmap1[ii].get(jj).articleImg.getImageIndex() >= hmap1[ii].get(jj).articleImg.getImageArray().length-1){
+													hmap1[ii].get(jj).articleImg.setImageIndex(0);
 
 												}
-												hmap1[ii].get(jj).img1.setActive(true);
-												hmap1[ii].get(jj).img1.pullToTop();
+												hmap1[ii].get(jj).articleImg.setActive(true);
+												hmap1[ii].get(jj).articleImg.pullToTop();
 												hmap1[ii].get(jj).imgFlag = true;
 											}
-											if(hmap1[ii].get(jj).tZone1 != null){
-												hmap1[ii].get(jj).tZone1.setActive(true);
+											if(hmap1[ii].get(jj).article != null){
+												hmap1[ii].get(jj).article.setActive(true);
 												hmap1[ii].get(jj).textFlag = true;
 											}
 										}
@@ -401,9 +411,9 @@ public class TwitterGetter extends Thread {
 									twitterAct.tweetWord1.setGestureEnabled("Tap", true);
 									twitterAct.tweetWord1.setColour(Colours.unselectedZone);
 									twitterAct.tweetWord1.setTextColour(Colours.zoneText);
-									twitterAct.tweetWord2.setGestureEnabled("Tap", false);
-									twitterAct.tweetWord2.setColour(Colours.fadedOutZone);
-									twitterAct.tweetWord2.setTextColour(Colours.fadedText);
+									
+									twitterAct.fadeTweetWordButton(2);
+									
 									twitterAct.selectedWord = ss2;
 									if(twitterAct.started && twitterAct.lastHighlightZone != null){
 										twitterAct.lastHighlightZone.setHighlightText(false);
@@ -478,27 +488,33 @@ public class TwitterGetter extends Thread {
 							twitterAct.tweetZones2[i][j] = new TextZone(twitterAct.tweetZones2[i][j].getX(), twitterAct.tweetZones2[i][j].getY(), twitterAct.tweetZones2[i][j].getWidth(), twitterAct.tweetZones2[i][j].getHeight(), Colours.pFont, twitterAct.tweetZones2[i][j].getText(), (float)twitterAct.tweetTextSize, "LEFT", "BOTTOM"){
 								public void tapEvent(TapEvent e){
 									if(isTappable()){
-										currentGetter2 = hmap2[ii].get(jj);
+
+										if(twitterAct.lastHighlightZone != null) {
+											twitterAct.lastHighlightZone.setHighlightText(false);
+										}
+										
+										contGetter2 = hmap2[ii].get(jj);
 										hmap2[ii].get(jj).activated = true;
 										sketch.client.pullToTop(twitterAct.middleTweet);
 										hmap2[ii].get(jj).background.setActive(true);
-										if(currentGetter2.videoFlag && !(sketch.deactivateVideo || sketch.removeVideoAct)){
+										
+										if(contGetter2.videoFlag && !(sketch.deactivateVideo || sketch.removeVideoAct)){
 											twitterAct.videoController.hashMap[0] = ii;
 											twitterAct.videoController.hashMap[1] = jj;
 											twitterAct.videoController.setAgreeButtonVisible(1);
 
 										} else {
-											if(hmap2[ii].get(jj).img1 != null){
-												if(hmap2[ii].get(jj).img1.getImageIndex() >= hmap2[ii].get(jj).img1.getImageArray().length-1){
-													hmap2[ii].get(jj).img1.setImageIndex(0);
+											if(hmap2[ii].get(jj).articleImg != null){
+												if(hmap2[ii].get(jj).articleImg.getImageIndex() >= hmap2[ii].get(jj).articleImg.getImageArray().length-1){
+													hmap2[ii].get(jj).articleImg.setImageIndex(0);
 
 												}
-												hmap2[ii].get(jj).img1.setActive(true);
-												hmap2[ii].get(jj).img1.pullToTop();
+												hmap2[ii].get(jj).articleImg.setActive(true);
+												hmap2[ii].get(jj).articleImg.pullToTop();
 												hmap2[ii].get(jj).imgFlag = true;
 											}
-											if(hmap2[ii].get(jj).tZone1 != null){
-												hmap2[ii].get(jj).tZone1.setActive(true);
+											if(hmap2[ii].get(jj).article != null){
+												hmap2[ii].get(jj).article.setActive(true);
 												hmap2[ii].get(jj).textFlag = true;
 											}
 										}
@@ -539,9 +555,9 @@ public class TwitterGetter extends Thread {
 									twitterAct.tweetWord2.setGestureEnabled("Tap", true);
 									twitterAct.tweetWord2.setColour(Colours.unselectedZone);
 									twitterAct.tweetWord2.setTextColour(Colours.zoneText);
-									twitterAct.tweetWord1.setGestureEnabled("Tap", false);
-									twitterAct.tweetWord1.setColour(Colours.fadedOutZone);
-									twitterAct.tweetWord1.setTextColour(Colours.fadedText);
+									
+									twitterAct.fadeTweetWordButton(1);
+									
 									twitterAct.selectedWord = ss2;
 									if(twitterAct.started && twitterAct.lastHighlightZone != null){
 										twitterAct.lastHighlightZone.setHighlightText(false);
@@ -579,23 +595,23 @@ public class TwitterGetter extends Thread {
 
 		}
 
-		if(currentGetter1 != null){
-			if(currentGetter1.imgFlag){
-				sketch.client.pullToTop(currentGetter1.img1);
+		if(contGetter1 != null){
+			if(contGetter1.imgFlag){
+				sketch.client.pullToTop(contGetter1.articleImg);
 			}
 
-			if(currentGetter1.textFlag){
-				sketch.client.pullToTop(currentGetter1.tZone1);
+			if(contGetter1.textFlag){
+				sketch.client.pullToTop(contGetter1.article);
 			}
 		}
 
-		if(currentGetter2 != null){
-			if(currentGetter2.imgFlag){
-				sketch.client.pullToTop(currentGetter2.img1);
+		if(contGetter2 != null){
+			if(contGetter2.imgFlag){
+				sketch.client.pullToTop(contGetter2.articleImg);
 			}
 
-			if(currentGetter2.textFlag){
-				sketch.client.pullToTop(currentGetter2.tZone1);
+			if(contGetter2.textFlag){
+				sketch.client.pullToTop(contGetter2.article);
 			}
 		}
 	}

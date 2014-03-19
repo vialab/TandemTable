@@ -31,8 +31,8 @@ public class MainSection {
 	Sketch sketch;
 	
 	public Graph graph;
-	TwitterActivity twitterAct;
-	HeadlinesActivity headlinesAct;
+	public TwitterActivity twitterAct;
+	public HeadlinesActivity headlinesAct;
 	PictureActivity pictureAct;
 	VideoActivity videoAct;
 	PGame pGameAct;

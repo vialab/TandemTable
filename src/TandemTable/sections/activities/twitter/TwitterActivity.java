@@ -221,9 +221,12 @@ public class TwitterActivity {
 		swipeBackground1 = new RectZone(sketch.lineX + sketch.strokeW, y1, width, halfH, sketch.radius){
 			public void vSwipeEvent(VSwipeEvent e){
 				if (!errorFlag){
-					tg.currentGetter1 = null;
+					tg.contGetter1 = null;
 
 					removeTweets(1);
+					
+					fadeTweetWordButton(1);
+					
 					if(tweetIndex1 >= tg.tweets1.size() - NUM_TWEETS - (tg.tweets1.size() % NUM_TWEETS)){//MAX_TWEETS - NUM_TWEETS - (MAX_TWEETS % NUM_TWEETS)){
 						if(e.getSwipeType() == 1){
 							if(pageOffset1 < sketch.NUM_PAGES){
@@ -272,9 +275,12 @@ public class TwitterActivity {
 		swipeBackground2 = new RectZone(sketch.lineX + sketch.strokeW, 0, width, halfH, sketch.radius){
 			public void vSwipeEvent(VSwipeEvent e){
 				if (!errorFlag){
-					tg.currentGetter2 = null;
+					tg.contGetter2 = null;
 
 					removeTweets(2);
+					
+					fadeTweetWordButton(2);
+					
 					if(tweetIndex2 >= tg.tweets2.size() - NUM_TWEETS - (tg.tweets2.size() % NUM_TWEETS)){
 						if(e.getSwipeType() == -1){
 							if(pageOffset2 < sketch.NUM_PAGES){
@@ -433,9 +439,9 @@ public class TwitterActivity {
 					tg.queryWord(selectedWord, 1);
 					removeTweets(1);
 					tg.createTweetZones(1);
-					this.setGestureEnabled("Tap", false);
-					this.setColour(Colours.fadedOutZone);
-					this.setTextColour(Colours.fadedText);
+
+					fadeTweetWordButton(1);
+					
 					e.setHandled(tappableHandled);
 
 				}
@@ -448,7 +454,7 @@ public class TwitterActivity {
 		client.addZone(tweetWord1);
 
 		animTweet1 = PropertySetter.createAnimator(500, tweetWord1, 
-				"Colour", new ColourEval(), Colours.unselectedZone, Color.ORANGE);
+				"Colour", new ColourEval(), Colours.unselectedZone, Colours.searchTweet);
 
 
 		animTweet1.setRepeatBehavior(RepeatBehavior.REVERSE);
@@ -462,9 +468,8 @@ public class TwitterActivity {
 					tg.queryWord(selectedWord, 2);
 					removeTweets(2);
 					tg.createTweetZones(2);
-					this.setGestureEnabled("Tap", false);
-					this.setColour(Colours.fadedOutZone);
-					this.setTextColour(Colours.fadedText);
+
+					fadeTweetWordButton(2);
 					e.setHandled(tappableHandled);
 				}
 			}
@@ -477,37 +482,38 @@ public class TwitterActivity {
 		client.addZone(tweetWord2);
 
 		animTweet2 = PropertySetter.createAnimator(500, tweetWord2, 
-				"Colour", new ColourEval(), Colours.unselectedZone, Color.ORANGE);
+				"Colour", new ColourEval(), Colours.unselectedZone, Colours.searchTweet);
 
 
 		animTweet2.setRepeatBehavior(RepeatBehavior.REVERSE);
 		animTweet2.setRepeatCount(Animator.INFINITE);
 
 	}
+	
+	public void fadeTweetWordButton(int user) {
+		if(user == 1) {
+			tweetWord1.setGestureEnabled("Tap", false);
+			tweetWord1.setColour(Colours.fadedOutZone);
+			tweetWord1.setTextColour(Colours.fadedText);
+		} else if(user ==2) {
+			tweetWord2.setGestureEnabled("Tap", false);
+			tweetWord2.setColour(Colours.fadedOutZone);
+			tweetWord2.setTextColour(Colours.fadedText);
+		}
+	}
 
 	public void removeTweets(int user){
 		for(int i = 0; i < NUM_TWEETS; i++){
-			//String text = "";
 
 			if(user == 1){
-				/*if(!errorFlag){
-					text = "@" + tweets1.get(i+tweetIndex1).getFromUser() + ":" + "\n" + tweets1.get(i+tweetIndex1).getText();
-				} else {
-					text = "Twitter Server Error. Try again later.";
-				}
-				String[] s = text.split("[ \t\n\f\r]+");*/
+
 				if(tweetZones1[i] != null){
 					for(int j = 0; j < tweetZones1[i].length; j++){
 						client.removeZone(tweetZones1[i][j]);
 					}
 				}
 			} else if (user == 2){
-				/*if(!errorFlag){
-					text = "@" + tweets2.get(i+tweetIndex2).getFromUser() + ":"  + "\n" + tweets2.get(i+tweetIndex2).getText();
-				} else {
-					text = "Twitter Server Error. Try again later.";
-				}
-				String[] s = text.split("[ \t\n\f\r]+");*/
+
 				if(tweetZones2[i] != null){
 					for(int j = 0; j < tweetZones2[i].length; j++){
 						client.removeZone(tweetZones2[i][j]);
