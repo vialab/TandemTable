@@ -35,8 +35,8 @@ public class Sketch extends PApplet {
 	public REST rest;
 	public RequestContext requestContext;
 	public Twitter twitter;
-	
-	public UserLogger logger;
+	public Audio audio;
+	//public UserLogger logger;
 	
 	public boolean youTubeInit = false;
 	public boolean flickrInit = false;
@@ -108,6 +108,8 @@ public class Sketch extends PApplet {
 		// Needs to be set for each machine
 		NativeLibrary.addSearchPath("libvlc", "C:\\Program Files\\VideoLAN\\VLC");
 		
+		audio = new Audio(this);
+		
 		startScreen = new LoginScreen();
 		startScreen.initialize(client, this);
 
@@ -116,7 +118,6 @@ public class Sketch extends PApplet {
 
 	public void draw(){
 		background(Colours.backgroundColour.getRed(), Colours.backgroundColour.getGreen(), Colours.backgroundColour.getBlue());
-
 
 		if(drawMainLayout){
 			mainSection.drawLayout();
@@ -277,5 +278,6 @@ public class Sketch extends PApplet {
 		textHeight = numLines * textSize + numLines * textLeading;
 		return(PApplet.round(textHeight));
 	}
+	
 
 }
