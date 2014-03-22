@@ -8,7 +8,6 @@ import org.jdesktop.animation.timing.interpolation.PropertySetter;
 import vialab.simpleMultiTouch.events.TapEvent;
 import vialab.simpleMultiTouch.zones.TextZone;
 import vialab.simpleMultiTouch.zones.Zone;
-import TandemTable.ColourEval;
 import TandemTable.Colours;
 import TandemTable.Languages;
 import TandemTable.Sketch;
@@ -17,6 +16,7 @@ import TandemTable.sections.activities.pGame.PGame;
 import TandemTable.sections.activities.pictures.PictureActivity;
 import TandemTable.sections.activities.twitter.TwitterActivity;
 import TandemTable.sections.activities.videos.VideoActivity;
+import TandemTable.util.ColourEval;
 
 import com.memetix.mst.translate.Translate;
 
@@ -54,7 +54,7 @@ public class MainSection {
 	Zone newLang1, newLang2;
 	public Zone switchAct1, switchAct2;
 
-	public boolean leftCenterLineFlag = true;
+	//public boolean leftCenterLineFlag = true;
 	public boolean centerLineFlag = false;
 	boolean verticalLineFlag = true;
 	boolean edgesFlag = false;
@@ -90,7 +90,9 @@ public class MainSection {
 	int actBHeight;
 	int actBWidth;
 	//int questionIndex1 = 0;
-
+	
+	// Size of the graph nodes
+	float sizeNode;
 
 	String chosenActivity = null;
 	boolean[] activityFlags1;
@@ -121,6 +123,7 @@ public class MainSection {
 		this.lang2 = lang2;
 		textOffsetY = sketch.getHeight()/20;
 		textOffsetX = sketch.getWidth()/30;
+		sizeNode = sketch.getWidth()/10;
 
 		animA1 = new Animator[Sketch.NUM_ACTIVITIES];
 		animA2 = new Animator[Sketch.NUM_ACTIVITIES];
@@ -161,7 +164,6 @@ public class MainSection {
 			actBWidth = (int)((sketch.getWidth()-sketch.lineX)/4.1);
 		}
 		
-		leftCenterLineFlag = true;
 	}
 	
 	/**
@@ -174,11 +176,11 @@ public class MainSection {
 			sketch.line(sketch.lineX, sketch.getY(), sketch.lineX, sketch.getHeight());
 		}
 
-		if(leftCenterLineFlag){
+		/*if(leftCenterLineFlag){
 			sketch.strokeWeight(sketch.strokeW);
 			sketch.stroke(Colours.lineColour.getRed(), Colours.lineColour.getGreen(), Colours.lineColour.getBlue());
 			sketch.line(sketch.getX(), sketch.getHeight()/2, sketch.lineX, sketch.getHeight()/2);
-		}
+		}*/
 
 		//Half Screen separator
 		if(centerLineFlag){
@@ -191,6 +193,63 @@ public class MainSection {
 			sketch.strokeWeight(sketch.strokeW);
 			sketch.stroke(Colours.lineColour.getRed(), Colours.lineColour.getGreen(), Colours.lineColour.getBlue());
 			graph.displayEdges();
+		}
+		
+		if(sketch.recordAudio) {
+
+			//int widthBar = (int) (sizeNode*1.25);
+			float centreBar = (sketch.lineX - buttonX - sizeNode)/2;
+			float widthBar = (float) (centreBar*0.98);
+			float borderDif = 4;
+			
+			sketch.rectMode(Sketch.CENTER);
+			sketch.strokeWeight(sketch.strokeW);
+			sketch.noFill();
+			sketch.stroke(Colours.lineColour.getRed(), Colours.lineColour.getGreen(), Colours.lineColour.getBlue());
+			//sketch.rect(buttonX + (int) (sizeNode*1.1), sketch.getHeight()/2 - sizeNode/2, sketch.lineX - buttonX - widthBar, sizeNode);
+			sketch.rect(sketch.lineX - centreBar, sketch.getHeight()/2, widthBar + borderDif, sizeNode + borderDif);
+			
+			//Above node
+			float yDifference = (float) (sizeNode/1.5);
+			sketch.rect(sketch.lineX/2, sketch.getHeight()/2 + yDifference, sizeNode + borderDif, widthBar/2 + borderDif);
+			//Below node
+			sketch.rect(sketch.lineX/2, sketch.getHeight()/2 - yDifference, sizeNode + borderDif, widthBar/2 + borderDif);
+			
+			// Amount of talking for each learner
+			int talkAmount1 = sketch.audioIn[0].talkingAmount;
+			int talkAmount2 = sketch.audioIn[1].talkingAmount;
+			float barHeight1 = 0, barHeight2 = 0;
+			
+			if(talkAmount1 > talkAmount2) {
+				barHeight1 = sizeNode;
+				barHeight2 = ((float) (talkAmount2)/talkAmount1)*sizeNode;
+			} else if(talkAmount1 < talkAmount2){
+				barHeight2 = sizeNode;
+				barHeight1 = ((float) (talkAmount1)/talkAmount2)*sizeNode;
+			} else {
+				barHeight1 = barHeight2 = sizeNode;
+			}
+			
+			//System.out.println("Learner 1: " + talkAmount1 + " : " + barHeight1);
+			//System.out.println("Learner 2: " + talkAmount2 + " : " + barHeight2);
+			
+			sketch.noStroke();
+			// Learner 1's bar
+			sketch.fill(Colours.learner1TalkBar.getRed(), Colours.learner1TalkBar.getGreen(), Colours.learner1TalkBar.getBlue());
+			sketch.rect(sketch.lineX - centreBar - widthBar/4, sketch.getHeight()/2, widthBar/2, barHeight1);
+			
+			//Above topic node
+			sketch.rect(sketch.lineX/2, sketch.getHeight()/2 + yDifference, barHeight1, widthBar/2);
+			
+			// Learner 2's bar
+			sketch.fill(Colours.learner2TalkBar.getRed(), Colours.learner2TalkBar.getGreen(), Colours.learner2TalkBar.getBlue());
+			sketch.rect(sketch.lineX - centreBar + widthBar/4, sketch.getHeight()/2, widthBar/2, barHeight2);
+			
+			//Below topic node
+			sketch.rect(sketch.lineX/2, sketch.getHeight()/2 - yDifference, barHeight2, widthBar/2);
+			
+			
+			sketch.rectMode(Sketch.CORNER);
 		}
 	}	
 	
@@ -307,7 +366,7 @@ public class MainSection {
 	 * Create the node-link diagram used to encapsulate the topic suggestions
 	 */
 	public void createGraph(){
-		graph = new Graph(sketch, this, sketch.lineX, lang1, lang2);
+		graph = new Graph(sketch, this, sketch.lineX, sizeNode);
 		centerLineFlag = false;
 		edgesFlag = true;
 
@@ -393,7 +452,7 @@ public class MainSection {
 
 		newLang1.setActive(true);
 		newLang2.setActive(true);
-		leftCenterLineFlag = true;
+		//leftCenterLineFlag = true;
 		verticalLineFlag = true;
 
 		//Twitter
@@ -413,7 +472,6 @@ public class MainSection {
 			//Videos
 		} else if (activity.equalsIgnoreCase(Languages.activitiesE[3])){
 			youtubeFlag = false;
-			leftCenterLineFlag = true;
 			videoAct.removeZones();
 
 			//Web Search
@@ -618,7 +676,8 @@ public class MainSection {
 
 		lastNodeX = graph.nodes[graph.lastSelectedNode].getX();
 		lastNodeY = graph.nodes[graph.lastSelectedNode].getY();
-		graph.nodes[graph.lastSelectedNode].setXY(sketch.lineX/2 - graph.nodes[graph.lastSelectedNode].getWidth()/2, sketch.getHeight()/2 - graph.nodes[graph.lastSelectedNode].getHeight()/2);
+		//graph.nodes[graph.lastSelectedNode].setXY(sketch.lineX/2 - graph.nodes[graph.lastSelectedNode].getWidth()/2, sketch.getHeight()/2 - graph.nodes[graph.lastSelectedNode].getHeight()/2);
+		graph.nodes[graph.lastSelectedNode].setXY(buttonX, sketch.getHeight()/2 - graph.nodes[graph.lastSelectedNode].getHeight()/2);
 
 		for(int i = 0; i < Sketch.NUM_ACTIVITIES; i++){
 			activityFlags1[i] = false;
@@ -634,7 +693,7 @@ public class MainSection {
 		chosenActivity = activity;
 
 		edgesFlag = false;
-		leftCenterLineFlag = false;
+		//leftCenterLineFlag = false;
 		graph.deactivateNodes();
 		
 		// User 1
@@ -744,7 +803,7 @@ public class MainSection {
 
 			//Videos
 		} else if (activity.equalsIgnoreCase(Languages.activitiesE[3])){
-			leftCenterLineFlag = false;
+			//leftCenterLineFlag = false;
 			verticalLineFlag = false;
 			youtubeFlag = true;
 			videoAct = new VideoActivity(sketch, selectedTopicIndex, lang1, lang2);

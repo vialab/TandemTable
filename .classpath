@@ -24,6 +24,7 @@
 	<classpathentry kind="lib" path="libs/libTUIO.jar"/>
 	<classpathentry kind="lib" path="libs/twitter4j-core-3.0.5.jar"/>
 	<classpathentry kind="lib" path="libs/mouseToTUIO.jar"/>
+	<classpathentry kind="lib" path="libs/TarsosDSP.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/SMT-v1"/>
 	<classpathentry kind="lib" path="libs/vlcj-3.0.1.jar"/>
 	<classpathentry kind="lib" path="libs/jna-3.5.2.jar"/>

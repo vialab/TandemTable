@@ -1,4 +1,4 @@
-package TandemTable.sections;
+package TandemTable.util;
 
 import TandemTable.Colours;
 import TandemTable.Sketch;

@@ -16,11 +16,11 @@ import vialab.simpleMultiTouch.events.TapEvent;
 import vialab.simpleMultiTouch.events.VSwipeEvent;
 import vialab.simpleMultiTouch.zones.RectZone;
 import vialab.simpleMultiTouch.zones.TextZone;
-import TandemTable.ColourEval;
 import TandemTable.Colours;
 import TandemTable.Languages;
 import TandemTable.Sketch;
 import TandemTable.sections.mainSection.MainSection;
+import TandemTable.util.ColourEval;
 
 import com.memetix.mst.language.Language;
 

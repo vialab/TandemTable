@@ -1,4 +1,4 @@
-package TandemTable.sections;
+package TandemTable;
 
 import java.awt.Color;
 
@@ -8,10 +8,8 @@ import org.jdesktop.animation.timing.interpolation.PropertySetter;
 import org.jdesktop.animation.timing.triggers.TimingTrigger;
 import org.jdesktop.animation.timing.triggers.TimingTriggerEvent;
 
-import TandemTable.ColourEval;
-import TandemTable.Colours;
-import TandemTable.Sketch;
 import TandemTable.sections.mainSection.MainSection;
+import TandemTable.util.ColourEval;
 import processing.core.PConstants;
 import vialab.simpleMultiTouch.events.HSwipeEvent;
 import vialab.simpleMultiTouch.events.TapEvent;

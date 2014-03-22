@@ -13,12 +13,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import TandemTable.ColourEval;
 import TandemTable.Colours;
 import TandemTable.Languages;
 import TandemTable.Sketch;
-import TandemTable.sections.ArticleContainer;
 import TandemTable.sections.mainSection.MainSection;
+import TandemTable.util.ArticleContainer;
+import TandemTable.util.ColourEval;
 
 import com.memetix.mst.language.Language;
 

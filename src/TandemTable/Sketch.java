@@ -3,9 +3,14 @@ import java.awt.Color;
 import java.util.Random;
 import java.util.Vector;
 
-import TandemTable.sections.IntroSection;
+import javax.sound.sampled.Mixer;
+
 import TandemTable.sections.login.LoginScreen;
 import TandemTable.sections.mainSection.MainSection;
+import TandemTable.util.AudioMixers;
+import TandemTable.util.AudioIn;
+import TandemTable.util.AudioOut;
+import TandemTable.util.XMLParser;
 
 import com.aetrion.flickr.Flickr;
 import com.aetrion.flickr.REST;
@@ -35,8 +40,12 @@ public class Sketch extends PApplet {
 	public REST rest;
 	public RequestContext requestContext;
 	public Twitter twitter;
-	public Audio audio;
 	//public UserLogger logger;
+	
+	// Audio capture from microphones
+	public AudioIn[] audioIn;
+	// Number of microphones
+	final int NUM_MICS = 2;
 	
 	public boolean youTubeInit = false;
 	public boolean flickrInit = false;
@@ -48,6 +57,11 @@ public class Sketch extends PApplet {
 	// If the learners have already 
 	//gone through the intro phase
 	public boolean doneIntro = false;
+	
+	// Recording of audio with mics
+	public boolean recordAudio = true;
+	// Audio Prompts
+	public AudioOut languagePrompt, talkingPrompt;
 		
 	///////////////////////////////////////
 	// For study
@@ -74,7 +88,7 @@ public class Sketch extends PApplet {
 	// Stroke weight of lines
 	public int strokeW = 5;
 	// Name of the loading GIF picture
-	public String loadGIF = "ajaxGIF-blue.gif";
+	final public String loadGIF = "ajaxGIF-blue.gif";
 	// Regex for replacement
 	public String replaceRegex ="[^a-zA-Z_0-9_'_Á_á_À _Â_à_Â_â_Ä_ä_Ã_ã_Å_å_Ç_ç_É_é_È_è_Ê_ê_Ë_ë_Í_í_Ì_ì_Î_î_Ï_ï_Ñ_ñ_Ó_ó_Ò_ò_Ô_ô_Ö_ö_Õ_õ_Ú_ú_Ù_ù_Û_û_Ü_ü_Ý_ý_ÿ]";
 	
@@ -108,16 +122,20 @@ public class Sketch extends PApplet {
 		// Needs to be set for each machine
 		NativeLibrary.addSearchPath("libvlc", "C:\\Program Files\\VideoLAN\\VLC");
 		
-		audio = new Audio(this);
+		setupAudioOut();
 		
-		startScreen = new LoginScreen();
-		startScreen.initialize(client, this);
+		if(recordAudio) {
+			initializeAudioRecording();
+		}
+		
+		//startScreen = new LoginScreen();
+		//startScreen.initialize(client, this);
 
 
 	}
 
 	public void draw(){
-		background(Colours.backgroundColour.getRed(), Colours.backgroundColour.getGreen(), Colours.backgroundColour.getBlue());
+		/*background(Colours.backgroundColour.getRed(), Colours.backgroundColour.getGreen(), Colours.backgroundColour.getBlue());
 
 		if(drawMainLayout){
 			mainSection.drawLayout();
@@ -132,14 +150,31 @@ public class Sketch extends PApplet {
 			textAlign(PConstants.LEFT, PConstants.BOTTOM);
 			fill(0);
 			text("FPS:\n" + Integer.toString((int)frameRate), 0, 2*getHeight()/3);
+		}*/
+		
+		if(audioIn != null && audioIn[0] != null) {
+			audioIn[0].draw();
+			//audioIn[1].draw();
 		}
-
-
-
 	}
 
 	public static void main(String[] args) {
 		PApplet.main(new String[]{"--present", "TandemTable.Sketch"});
+	}
+	
+	public void setupAudioOut() {
+		languagePrompt = new AudioOut("Language Prompt.wav");
+		talkingPrompt = new AudioOut("Talking Prompt.wav");
+	}
+	
+	public void initializeAudioRecording() {
+		AudioMixers audio = new AudioMixers(2);
+		Mixer[] mixers = audio.getMixers();
+		audioIn = new AudioIn[NUM_MICS];
+		audioIn[0] = new AudioIn(mixers[0], 1, this);
+		//audioIn[1] = new AudioIn(mixers[1], 2, this);
+		audioIn[0].startSoundCapture();
+		//audioIn[1].startSoundCapture();
 	}
 
 	

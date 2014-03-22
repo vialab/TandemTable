@@ -14,7 +14,7 @@ import org.json.JSONObject;
 
 import TandemTable.Colours;
 import TandemTable.Sketch;
-import TandemTable.sections.ArticleContainer;
+import TandemTable.util.ArticleContainer;
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PGraphics;

@@ -929,7 +929,7 @@ public class LoginScreen {
 		//english1.pullToTop();
 		
 
-		sketch.mainSection.leftCenterLineFlag = true;
+		//sketch.mainSection.leftCenterLineFlag = true;
 		sketch.mainSection.centerLineFlag = true;
 		
 		langSelect1 = false;

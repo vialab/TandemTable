@@ -7,9 +7,9 @@ import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.Animator.RepeatBehavior;
 import org.jdesktop.animation.timing.interpolation.PropertySetter;
 
-import TandemTable.ColourEval;
 import TandemTable.Colours;
 import TandemTable.Sketch;
+import TandemTable.util.ColourEval;
 import processing.core.PConstants;
 import vialab.simpleMultiTouch.Touch;
 import vialab.simpleMultiTouch.TouchClient;
@@ -31,12 +31,11 @@ public class Graph {
 	Random randGen;
 
 	String[] topics1, topics2;
-	String lang1, lang2;
 
 	int startX, spaceX;
 	int rows = 3;
 	int columns = 5;
-	int sizeNode;
+	float sizeNode;
 	public int lastSelectedNode = -1;
 
 	// For randomly picking nodes and deactivating certain activities for those nodes
@@ -44,15 +43,14 @@ public class Graph {
 	int[][] randActs;
 
 
-	public Graph(Sketch sketch, MainSection layoutManager, int lineX, String lang1, String lang2) {
+	public Graph(Sketch sketch, MainSection layoutManager, int lineX, float sizeNode2) {
 		this.client = sketch.client;
 		this.sketch = sketch;
 		this.layoutManager = layoutManager;
-		this.lang1 = lang1;
-		this.lang2 = lang2;
+		
 		startX = lineX;
 		spaceX = sketch.getWidth() - lineX;
-		sizeNode = sketch.getWidth()/10;
+		this.sizeNode = sizeNode2;
 		randGen = new Random(System.currentTimeMillis());
 
 		if(!sketch.activateAllAct) {

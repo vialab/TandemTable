@@ -1,7 +1,9 @@
-package TandemTable;
+package TandemTable.util;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+
+import TandemTable.Languages;
 
 import nu.xom.Builder;
 import nu.xom.Document;

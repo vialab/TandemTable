@@ -14,10 +14,10 @@ import vialab.simpleMultiTouch.zones.CurrentZone;
 import vialab.simpleMultiTouch.zones.RectZone;
 import vialab.simpleMultiTouch.zones.TextZone;
 import vialab.simpleMultiTouch.zones.Zone;
-import TandemTable.ColourEval;
 import TandemTable.Colours;
 import TandemTable.Languages;
 import TandemTable.Sketch;
+import TandemTable.util.ColourEval;
 
 import com.google.gdata.client.youtube.YouTubeService;
 import com.google.gdata.data.youtube.VideoFeed;

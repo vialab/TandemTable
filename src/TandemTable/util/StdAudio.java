@@ -1,4 +1,4 @@
-package TandemTable;
+package TandemTable.util;
 
 /*************************************************************************
  *  Compilation:  javac StdAudio.java

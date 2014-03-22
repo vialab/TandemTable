@@ -13,10 +13,10 @@ import com.google.gdata.client.youtube.YouTubeService;
 import vialab.simpleMultiTouch.events.TapEvent;
 import vialab.simpleMultiTouch.zones.RectZone;
 import vialab.simpleMultiTouch.zones.TextZone;
-import TandemTable.ColourEval;
 import TandemTable.Colours;
 import TandemTable.Sketch;
 import TandemTable.sections.activities.videos.VideoPlayer;
+import TandemTable.util.ColourEval;
 
 public class VideoController {
 	Sketch sketch;

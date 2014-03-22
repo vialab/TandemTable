@@ -1,4 +1,4 @@
-package TandemTable;
+package TandemTable.util;
 import java.awt.Color;
 
 import org.jdesktop.animation.timing.interpolation.Evaluator;

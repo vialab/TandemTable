@@ -45,6 +45,8 @@ public class Colours {
 
 	//From MainSketch.java
 	public static Color backgroundColour = new Color(250, 253, 255);
+	public static Color learner1TalkBar = new Color(230,204,255);
+	public static Color learner2TalkBar = new Color(205,204,255);
 
 	//Disabled ImageZone colour in profile picker
 	public static Color disabledZone = new Color(200, 200, 200, 255);
