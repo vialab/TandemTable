@@ -38,9 +38,13 @@ public class AudioIn implements AudioProcessor {
 	// For filtering out noise
 	//float noiseLevel = 0;
 	//int noiseLevelIndex = 0;
-	int delayNoise = 3000;
-	long startTime = 0;
 	
+	// Amount of time for capturing noise
+	int delayNoise = 3000;
+	// Start of noise capture in milliseconds
+	long startTime = 0;
+	// Utterance start threshold factor
+	float noiseMult = 2.0f;
 	// Maximum positive noise level detected 
 	float maxNoiseLvlPos = 0;
 	// Maximum negative noise level detected 
@@ -54,12 +58,14 @@ public class AudioIn implements AudioProcessor {
 	// Pseudo time threshold for combining two groups of sound
 	// Some words have more than one group of sound
 	int combineUtterTheshold = 200;
+	int combineUtterThesholdPaper = 100;
 	// Pseudo time for utterances
 	int utterTime = 0;
 	// If the two groups of sound should be combined
 	boolean combineSounds = false;
 	// Pseudo time length of utterance threshold
 	int utterLengthThresh = 400;
+	int utterLengthThreshPaper = 500;
 	// If last sound was added to the utterArray
 	boolean utterAdded = false;
 
@@ -166,6 +172,13 @@ public class AudioIn implements AudioProcessor {
 		heightY = sketch.height/2 + maxNoiseLvlNeg*mult;
 		sketch.line(0, heightY, sketch.getWidth(), heightY);
 		
+		sketch.stroke(0, 255, 0);
+		heightY = sketch.height/2 + maxNoiseLvlPos*mult*noiseMult;
+		sketch.line(0, heightY, sketch.getWidth(), heightY);
+		
+		heightY = sketch.height/2 + maxNoiseLvlNeg*mult*noiseMult;
+		sketch.line(0, heightY, sketch.getWidth(), heightY);
+		
 		
 		// Draw captured utterances
 		ArrayList<Utterance> tempUtter = new ArrayList<Utterance>(utterArray);
@@ -241,70 +254,109 @@ public class AudioIn implements AudioProcessor {
 			
 			for(int i = overlap; i < pcmAudio.length; i++) {
 				float value = pcmAudio[i];					
-					
-					if(value < maxNoiseLvlNeg || value > maxNoiseLvlPos) {
-						
-						if(!startedUtter) {
-							startedUtter = true;
-							//long timeNow = System.currentTimeMillis();
-							
-							if(curUtter == null || utterTime - curUtter.getEndTime() >= combineUtterTheshold) {
-								curUtter = new Utterance(utterTime);
-								utterAdded = false;
-								//System.out.println("Utterance number " + utterArray.size() + " started at " + utterTime);
-							} else {
-								//System.out.println(utterTime - curUtter.getEndTime() + " " + combineUtterTheshold);
-								combineSounds = true;
-							}
-						}
-						
-						if(combineSounds && utterAdded) {
-							//System.out.println("Adding float to last element in utter array. Size of utterance: " + utterArray.get(utterArray.size() - 1).getPCM().size());
-							utterArray.get(utterArray.size() - 1).addFloat(value);
-						} else {
-							curUtter.addFloat(value);
-						}
-						
-						pcmData.add(value);
-					} else {
-						
-						if(startedUtter) {							
-							if(combineSounds && utterAdded) {
-								utterArray.get(utterArray.size() - 1).setEndTime(utterTime);
-								//System.out.println("Combined sounds - Utterance number " + utterArray.size() + " ended at " + utterTime + ". Size of utterance: " + utterArray.get(utterArray.size() - 1).getPCM().size()); //System.currentTimeMillis());
-								
-							
-							} else {
-								curUtter.setEndTime(utterTime);
-								
-								if(curUtter.getEndTime() - curUtter.getStartTime() > utterLengthThresh) {
-									utterArray.add(curUtter);
-									utterAdded = true;
-									System.out.println("Utterance number " + utterArray.size() + " added and ended at " + utterTime); //System.currentTimeMillis());
-								} else {
-									utterAdded = false;
-								}
-							}
-						}
-						
-						startedUtter = false;
-						combineSounds = false;
-						pcmData.add(value);//0f);
-					}
-					
-					utterTime += 1;				
+				
+				//detectUtterance(value);
+				detectUtterancePaper(value);
+				
+				
 			}
 			
-			//detectUtterance(overlap);
 		}
 		
 		//handleSoundDetection();
 		return true;
 	}
 	
-	public void detectUtterance(int overlap) {
-		//long curTime = System.currentTimeMillis();
-		//utterArray.add(new SlidingWindow(curTime, ));
+	// Algorithm from 
+	// 2012. Ogawa et al. Table talk enhancer: a tabletop system for enhancing and balancing mealtime conversations using utterance rates. 
+	// http://doi.acm.org/10.1145/2390776.2390783
+	public void detectUtterancePaper(float value) {
+		if(!startedUtter && (value < maxNoiseLvlNeg*noiseMult || value > maxNoiseLvlPos*noiseMult)) {
+			startedUtter = true;
+			curUtter = new Utterance(utterTime);
+			curUtter.addFloat(value);
+		
+		} else if(startedUtter && (value < maxNoiseLvlNeg || value > maxNoiseLvlPos)) {
+			curUtter.addFloat(value);
+			curUtter.resetCounter();
+			curUtter.setEndTime(-1);
+		} else if(startedUtter && (value >= maxNoiseLvlNeg || value <= maxNoiseLvlPos)) {			
+			curUtter.addCounter(1);
+			curUtter.addFloat(value);
+			
+			if(curUtter.getEndTime() == -1) {
+				curUtter.setEndTime(utterTime);
+			}
+		}
+		
+		if(startedUtter && curUtter.getCounter() >= combineUtterThesholdPaper) {
+			startedUtter = false;
+			
+			if(curUtter.getEndTime() - curUtter.getStartTime() > utterLengthThreshPaper) {
+				utterArray.add(curUtter);
+				System.out.println("Utterance number " + utterArray.size() + " added and ended at " + utterTime);
+			}
+		}
+		
+		
+		
+		
+		pcmData.add(value);
+		utterTime += 1;					
+	}
+	
+	public void detectUtterance(float value) {
+		if(value < maxNoiseLvlNeg || value > maxNoiseLvlPos) {
+			
+			if(!startedUtter) {
+				startedUtter = true;
+				//long timeNow = System.currentTimeMillis();
+				
+				if(curUtter == null || utterTime - curUtter.getEndTime() >= combineUtterTheshold) {
+					curUtter = new Utterance(utterTime);
+					utterAdded = false;
+					//System.out.println("Utterance number " + utterArray.size() + " started at " + utterTime);
+				} else {
+					//System.out.println(utterTime - curUtter.getEndTime() + " " + combineUtterTheshold);
+					combineSounds = true;
+				}
+			}
+			
+			if(combineSounds && utterAdded) {
+				//System.out.println("Adding float to last element in utter array. Size of utterance: " + utterArray.get(utterArray.size() - 1).getPCM().size());
+				utterArray.get(utterArray.size() - 1).addFloat(value);
+			} else {
+				curUtter.addFloat(value);
+			}
+			
+			pcmData.add(value);
+		} else {
+			
+			if(startedUtter) {							
+				if(combineSounds && utterAdded) {
+					utterArray.get(utterArray.size() - 1).setEndTime(utterTime);
+					//System.out.println("Combined sounds - Utterance number " + utterArray.size() + " ended at " + utterTime + ". Size of utterance: " + utterArray.get(utterArray.size() - 1).getPCM().size()); //System.currentTimeMillis());
+					
+				
+				} else {
+					curUtter.setEndTime(utterTime);
+					
+					if(curUtter.getEndTime() - curUtter.getStartTime() > utterLengthThresh) {
+						utterArray.add(curUtter);
+						utterAdded = true;
+						System.out.println("Utterance number " + utterArray.size() + " added and ended at " + utterTime); //System.currentTimeMillis());
+					} else {
+						utterAdded = false;
+					}
+				}
+			}
+			
+			startedUtter = false;
+			combineSounds = false;
+			pcmData.add(value);//0f);
+		}
+		
+		utterTime += 1;				
 	}
 	
 	public void handleSoundDetection() {
@@ -331,16 +383,16 @@ public class AudioIn implements AudioProcessor {
 			
 			
 			if(windowValues/windowArray.size() > threshold) {
-				detectedUtterance();
+				utteranceDetected();
 			}
 		
 		} else if(silenceDetector.currentSPL() > threshold){
-			detectedUtterance();
+			utteranceDetected();
 		}
 		
 	}
 	
-	public void detectedUtterance() {
+	public void utteranceDetected() {
 		talkingAmount++;
 		timeOfLastUtter = System.currentTimeMillis();
 		System.out.println("Sound detected for " + user + ": " + (int)(silenceDetector.currentSPL()) + "dB SPL, Talking Amount: " + talkingAmount);
@@ -371,6 +423,7 @@ public class AudioIn implements AudioProcessor {
 		int endTime = -1;
 		ArrayList<Float> pcmData;
 		int r, g, b;
+		int belowThreshCounter = 0;
 		
 		public Utterance(int startTime) {
 			this.startTime = startTime;
@@ -399,6 +452,18 @@ public class AudioIn implements AudioProcessor {
 		
 		public int getStartTime() {
 			return startTime;
+		}
+		
+		public void addCounter(int add) {
+			belowThreshCounter += add;
+		}
+		
+		public int getCounter() {
+			return belowThreshCounter;
+		}
+		
+		public void resetCounter() {
+			belowThreshCounter = 0;
 		}
 	}
 	
