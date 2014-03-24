@@ -36,13 +36,15 @@ public class AudioIn implements AudioProcessor {
 	ArrayList<Float> pcmData = null;
 	
 	// For filtering out noise
-	float noiseLevel = 0;
-	int noiseLevelIndex = 0;
+	//float noiseLevel = 0;
+	//int noiseLevelIndex = 0;
 	int delayNoise = 3000;
 	long startTime = 0;
 	
-	// Maximum noise level detected
-	float maxNoiseLvl = 0;
+	// Maximum positive noise level detected 
+	float maxNoiseLvlPos = 0;
+	// Maximum negative noise level detected 
+	float maxNoiseLvlNeg = 0;
 	// List of successful utterances
 	ArrayList<Utterance> utterArray;
 	// Current utterance
@@ -51,13 +53,13 @@ public class AudioIn implements AudioProcessor {
 	boolean startedUtter = false;
 	// Pseudo time threshold for combining two groups of sound
 	// Some words have more than one group of sound
-	int combineUtterTheshold = 80;
+	int combineUtterTheshold = 200;
 	// Pseudo time for utterances
 	int utterTime = 0;
 	// If the two groups of sound should be combined
 	boolean combineSounds = false;
 	// Pseudo time length of utterance threshold
-	int utterLengthThresh = 200;
+	int utterLengthThresh = 400;
 	// If last sound was added to the utterArray
 	boolean utterAdded = false;
 
@@ -119,7 +121,7 @@ public class AudioIn implements AudioProcessor {
 		
 		float yHeight = sketch.height/2;
 		float lastX = 0, lastY = yHeight;
-		float mult = 1000;
+		float mult = 2000;
 		float index = 0;
 		float indexAdd = (float) 0.01;
 		
@@ -144,7 +146,7 @@ public class AudioIn implements AudioProcessor {
 		// Draw thresholds
 		sketch.stroke(255, 0, 0);
 		sketch.fill(255, 0, 0);
-		float heightY = (float) ((sketch.height/2)*0.8);
+		float heightY = (float) ((sketch.height/2)*0.9);
 		float x = 100;
 		float length = x + utterLengthThresh*indexAdd;
 		sketch.line(x, heightY, length, heightY);
@@ -152,13 +154,16 @@ public class AudioIn implements AudioProcessor {
 		
 		sketch.stroke(255, 255, 255);
 		sketch.fill(255, 255, 255);
-		heightY = (float) ((sketch.height/2)*0.85);
+		heightY = (float) ((sketch.height/2)*0.95);
 		length = x + combineUtterTheshold*indexAdd;
 		sketch.line(x, heightY, length, heightY);
 		sketch.text("Combined Utter Length", length, (float) (heightY*0.99));
 		
 		sketch.stroke(0, 0, 255);
-		heightY = sketch.height/2 + maxNoiseLvl*mult;
+		heightY = sketch.height/2 + maxNoiseLvlPos*mult;
+		sketch.line(0, heightY, sketch.getWidth(), heightY);
+		
+		heightY = sketch.height/2 + maxNoiseLvlNeg*mult;
 		sketch.line(0, heightY, sketch.getWidth(), heightY);
 		
 		
@@ -216,12 +221,18 @@ public class AudioIn implements AudioProcessor {
 		
 		} else if(System.currentTimeMillis() - startTime < delayNoise) {
 			for(int i = overlap; i < pcmAudio.length; i++) {
-				if(pcmAudio[i] < 0) { 
-					noiseLevel += pcmAudio[i];
-					noiseLevelIndex++;
+				float value = pcmAudio[i];
+				
+				if(value < 0) { 
+					//noiseLevel += pcmAudio[i];
+					//noiseLevelIndex++;
 					
-					if(pcmAudio[i] < maxNoiseLvl) {
-						maxNoiseLvl = pcmAudio[i];
+					if(value < maxNoiseLvlNeg) {
+						maxNoiseLvlNeg = value;
+					}
+				} else if(value > 0) {
+					if(value > maxNoiseLvlPos) {
+						maxNoiseLvlPos = value;
 					}
 				}
 			}
@@ -229,21 +240,18 @@ public class AudioIn implements AudioProcessor {
 			//maxNoiseLvl = noiseLevel/noiseLevelIndex;
 			
 			for(int i = overlap; i < pcmAudio.length; i++) {
-				float value = pcmAudio[i];
-				
-				if(value < 0 ) {
+				float value = pcmAudio[i];					
 					
-					
-					if(value < maxNoiseLvl) {
+					if(value < maxNoiseLvlNeg || value > maxNoiseLvlPos) {
 						
 						if(!startedUtter) {
 							startedUtter = true;
 							//long timeNow = System.currentTimeMillis();
 							
-							if(curUtter == null || utterArray.size() == 0 || utterTime - curUtter.getEndTime() >= combineUtterTheshold) {
+							if(curUtter == null || utterTime - curUtter.getEndTime() >= combineUtterTheshold) {
 								curUtter = new Utterance(utterTime);
 								utterAdded = false;
-								System.out.println("Utterance number " + utterArray.size() + " started at " + utterTime);
+								//System.out.println("Utterance number " + utterArray.size() + " started at " + utterTime);
 							} else {
 								//System.out.println(utterTime - curUtter.getEndTime() + " " + combineUtterTheshold);
 								combineSounds = true;
@@ -257,13 +265,13 @@ public class AudioIn implements AudioProcessor {
 							curUtter.addFloat(value);
 						}
 						
-						//pcmData.add(value);
+						pcmData.add(value);
 					} else {
 						
 						if(startedUtter) {							
 							if(combineSounds && utterAdded) {
 								utterArray.get(utterArray.size() - 1).setEndTime(utterTime);
-								System.out.println("Combined sounds - Utterance number " + utterArray.size() + " ended at " + utterTime + ". Size of utterance: " + utterArray.get(utterArray.size() - 1).getPCM().size()); //System.currentTimeMillis());
+								//System.out.println("Combined sounds - Utterance number " + utterArray.size() + " ended at " + utterTime + ". Size of utterance: " + utterArray.get(utterArray.size() - 1).getPCM().size()); //System.currentTimeMillis());
 								
 							
 							} else {
@@ -272,7 +280,7 @@ public class AudioIn implements AudioProcessor {
 								if(curUtter.getEndTime() - curUtter.getStartTime() > utterLengthThresh) {
 									utterArray.add(curUtter);
 									utterAdded = true;
-									System.out.println("Utterance number " + utterArray.size() + " ended at " + utterTime); //System.currentTimeMillis());
+									System.out.println("Utterance number " + utterArray.size() + " added and ended at " + utterTime); //System.currentTimeMillis());
 								} else {
 									utterAdded = false;
 								}
@@ -281,15 +289,10 @@ public class AudioIn implements AudioProcessor {
 						
 						startedUtter = false;
 						combineSounds = false;
-						//pcmData.add(0f);
+						pcmData.add(value);//0f);
 					}
 					
-					utterTime += 1;
-				} 
-				
-				pcmData.add(value);
-				
-				
+					utterTime += 1;				
 			}
 			
 			//detectUtterance(overlap);
