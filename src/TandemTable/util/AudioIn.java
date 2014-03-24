@@ -51,13 +51,13 @@ public class AudioIn implements AudioProcessor {
 	boolean startedUtter = false;
 	// Pseudo time threshold for combining two groups of sound
 	// Some words have more than one group of sound
-	int combineUtterTheshold = 10;
+	int combineUtterTheshold = 80;
 	// Pseudo time for utterances
 	int utterTime = 0;
 	// If the two groups of sound should be combined
 	boolean combineSounds = false;
 	// Pseudo time length of utterance threshold
-	int utterLengthThresh = 100;
+	int utterLengthThresh = 200;
 	// If last sound was added to the utterArray
 	boolean utterAdded = false;
 
@@ -112,39 +112,85 @@ public class AudioIn implements AudioProcessor {
 	}
 	
 	public void draw() {
-		//sketch.background(0);
+		sketch.background(0);
 		sketch.stroke(255);
 		sketch.strokeWeight(1);
 		ArrayList<Float> tempData = new ArrayList<Float>(pcmData);
-		float lastX = 0, lastY = sketch.height/2;
-		float mult = 2000;
+		
+		float yHeight = sketch.height/2;
+		float lastX = 0, lastY = yHeight;
+		float mult = 1000;
 		float index = 0;
+		float indexAdd = (float) 0.01;
 		
 		for(int i = 0; i < tempData.size(); i++) {
 			float sample = tempData.get(i);
 			
 			//System.out.println(sample + " " + index);
-			sketch.line(lastX, lastY, index, sketch.height/2 + sample*mult);
+			sketch.line(lastX, lastY, index, yHeight + sample*mult);
 			lastX = index;
-			lastY = sketch.height/2 + sample*mult;
+			lastY = yHeight + sample*mult;
 			//sketch.ellipse(index, sketch.height/2 + sample*mult, 0.1f, 0.1f);
-			index += 0.01;
+			index += indexAdd;
+			
+			/*if(index > sketch.getWidth()) {
+				yHeight = lastY = (float) (yHeight*1.5);
+				index = lastX = 0;
+			}*/
 		}
+		
+		sketch.textSize(22);
+		
+		// Draw thresholds
+		sketch.stroke(255, 0, 0);
+		sketch.fill(255, 0, 0);
+		float heightY = (float) ((sketch.height/2)*0.8);
+		float x = 100;
+		float length = x + utterLengthThresh*indexAdd;
+		sketch.line(x, heightY, length, heightY);
+		sketch.text("Min Utterance Length", length, (float) (heightY*0.99));
+		
+		sketch.stroke(255, 255, 255);
+		sketch.fill(255, 255, 255);
+		heightY = (float) ((sketch.height/2)*0.85);
+		length = x + combineUtterTheshold*indexAdd;
+		sketch.line(x, heightY, length, heightY);
+		sketch.text("Combined Utter Length", length, (float) (heightY*0.99));
+		
+		sketch.stroke(0, 0, 255);
+		heightY = sketch.height/2 + maxNoiseLvl*mult;
+		sketch.line(0, heightY, sketch.getWidth(), heightY);
+		
 		
 		// Draw captured utterances
 		ArrayList<Utterance> tempUtter = new ArrayList<Utterance>(utterArray);
 		float y = (float) ((sketch.height/2)*0.75);
-		mult = 2000;
-		int colour = 140;
-		boolean switchFlag = false;
 		
 		for(int i = 0; i < tempUtter.size(); i++) {
 			Utterance utterance = tempUtter.get(i);
 			
 			sketch.stroke(utterance.r, utterance.g, utterance.b);
 			
-			sketch.line(utterance.startTime/100, y, utterance.endTime/100, y);
+			sketch.line(utterance.startTime*indexAdd, y, utterance.endTime*indexAdd, y);
+			
+			
+			lastX = utterance.getStartTime()*indexAdd;
+			index = lastX;
+			float mainY = (float) (sketch.height/1.5);
+			lastY = mainY;
+			
+			ArrayList<Float> tempPCM = new ArrayList<Float>(utterance.getPCM());
+			
+			for(Float f: tempPCM) {
+				sketch.line(lastX, lastY, index, mainY + f.floatValue()*mult);
+				lastX = index;
+				lastY = mainY + f.floatValue()*mult;
+				index += indexAdd;
+				
+			}
 		}
+		
+		
 		
 	}
 	
@@ -180,12 +226,13 @@ public class AudioIn implements AudioProcessor {
 				}
 			}
 		} else {
+			//maxNoiseLvl = noiseLevel/noiseLevelIndex;
 			
 			for(int i = overlap; i < pcmAudio.length; i++) {
 				float value = pcmAudio[i];
 				
 				if(value < 0 ) {
-					utterTime++;
+					
 					
 					if(value < maxNoiseLvl) {
 						
@@ -196,25 +243,28 @@ public class AudioIn implements AudioProcessor {
 							if(curUtter == null || utterArray.size() == 0 || utterTime - curUtter.getEndTime() >= combineUtterTheshold) {
 								curUtter = new Utterance(utterTime);
 								utterAdded = false;
+								System.out.println("Utterance number " + utterArray.size() + " started at " + utterTime);
 							} else {
-								System.out.println(utterTime - curUtter.getEndTime() + " " + combineUtterTheshold);
+								//System.out.println(utterTime - curUtter.getEndTime() + " " + combineUtterTheshold);
 								combineSounds = true;
 							}
 						}
 						
 						if(combineSounds && utterAdded) {
+							//System.out.println("Adding float to last element in utter array. Size of utterance: " + utterArray.get(utterArray.size() - 1).getPCM().size());
 							utterArray.get(utterArray.size() - 1).addFloat(value);
 						} else {
 							curUtter.addFloat(value);
 						}
 						
-						pcmData.add(value);
+						//pcmData.add(value);
 					} else {
 						
 						if(startedUtter) {							
-							if(combineSounds) {
+							if(combineSounds && utterAdded) {
 								utterArray.get(utterArray.size() - 1).setEndTime(utterTime);
-								System.out.println("Combined sounds - Utterance number " + utterArray.size() + " ended at " + utterTime); //System.currentTimeMillis());
+								System.out.println("Combined sounds - Utterance number " + utterArray.size() + " ended at " + utterTime + ". Size of utterance: " + utterArray.get(utterArray.size() - 1).getPCM().size()); //System.currentTimeMillis());
+								
 							
 							} else {
 								curUtter.setEndTime(utterTime);
@@ -231,9 +281,14 @@ public class AudioIn implements AudioProcessor {
 						
 						startedUtter = false;
 						combineSounds = false;
-						pcmData.add(0f);
+						//pcmData.add(0f);
 					}
-				}
+					
+					utterTime += 1;
+				} 
+				
+				pcmData.add(value);
+				
 				
 			}
 			
@@ -317,10 +372,14 @@ public class AudioIn implements AudioProcessor {
 		public Utterance(int startTime) {
 			this.startTime = startTime;
 			pcmData = new ArrayList<Float>();
-			r = (int) sketch.random(0, 256);
-			g = (int) sketch.random(0, 256);
-			b = (int) sketch.random(0, 256);
+			r = (int) sketch.random(10, 256);
+			g = (int) sketch.random(10, 256);
+			b = (int) sketch.random(10, 256);
 			
+		}
+		
+		public ArrayList<Float> getPCM() {
+			return pcmData;
 		}
 		
 		public void addFloat(float value) {
