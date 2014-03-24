@@ -62,7 +62,7 @@ public class Sketch extends PApplet {
 	public boolean recordAudio = true;
 	// Audio Prompts
 	public AudioOut languagePrompt, talkingPrompt;
-		
+			
 	///////////////////////////////////////
 	// For study
 	//////////////////////////////////////
@@ -127,6 +127,7 @@ public class Sketch extends PApplet {
 		if(recordAudio) {
 			initializeAudioRecording();
 		}
+		
 		
 		//startScreen = new LoginScreen();
 		//startScreen.initialize(client, this);
