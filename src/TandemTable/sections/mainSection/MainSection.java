@@ -48,13 +48,22 @@ public class MainSection {
 
 
 	public int animationTime = 1400;
+	
+	// Activity zones
 	TextZone[] activityB1;
 	TextZone[] activityB2;
+	
+	// Speaking amount text
+	public TextZone[] utterVisText;
+	// Height of UtterVis
+	float heightBar;
+	// Border offset for UtterVis
+	float borderDif;
 
 	Zone newLang1, newLang2;
 	public Zone switchAct1, switchAct2;
 
-	//public boolean leftCenterLineFlag = true;
+	public boolean leftCenterLineFlag = true;
 	public boolean centerLineFlag = false;
 	boolean verticalLineFlag = true;
 	boolean edgesFlag = false;
@@ -134,8 +143,6 @@ public class MainSection {
 		activityBars1 = new Color[Sketch.NUM_TOPICS];
 		activityBars2 = new Color[Sketch.NUM_TOPICS];
 
-
-
 		// Set up translator
 		Translate.setClientId(Colours.clientId);
 		Translate.setClientSecret(Colours.clientSecret);
@@ -143,6 +150,23 @@ public class MainSection {
 		//Set Up Languages
 		sketch.learner1 = new Languages(lang1);
 		sketch.learner2 = new Languages(lang2);
+		
+		heightBar = sizeNode/5;
+		borderDif = 4;
+		
+		// Setup
+		utterVisText = new TextZone[2];
+		float utterTextSize = sketch.textSize/2;
+		utterVisText[0] = new TextZone(0, sketch.getHeight()/2 + (float) (sizeNode/1.5) + utterTextSize, sketch.lineX, sizeNode/5, Colours.pFont, sketch.learner1.utterVis, utterTextSize, "CENTER", "CENTER");
+		utterVisText[0].setTextColour(Colours.unselectedZone);
+		utterVisText[0].setDrawBorder(false);
+		sketch.client.addZone(utterVisText[0]);
+		
+		utterVisText[1] = new TextZone(0, sketch.getHeight()/2 - (float) (sizeNode/1.5) - utterTextSize - heightBar, sketch.lineX, sizeNode/5, Colours.pFont, sketch.learner2.utterVis, utterTextSize, "CENTER", "CENTER");
+		utterVisText[1].rotate((float) (Colours.PI));
+		utterVisText[1].setTextColour(Colours.unselectedZone);
+		utterVisText[1].setDrawBorder(false);
+		sketch.client.addZone(utterVisText[1]);
 
 
 		buttonX = sketch.getX()+1;
@@ -176,11 +200,11 @@ public class MainSection {
 			sketch.line(sketch.lineX, sketch.getY(), sketch.lineX, sketch.getHeight());
 		}
 
-		/*if(leftCenterLineFlag){
+		if(leftCenterLineFlag){
 			sketch.strokeWeight(sketch.strokeW);
 			sketch.stroke(Colours.lineColour.getRed(), Colours.lineColour.getGreen(), Colours.lineColour.getBlue());
 			sketch.line(sketch.getX(), sketch.getHeight()/2, sketch.lineX, sketch.getHeight()/2);
-		}*/
+		}
 
 		//Half Screen separator
 		if(centerLineFlag){
@@ -195,25 +219,32 @@ public class MainSection {
 			graph.displayEdges();
 		}
 		
+		
+		///////////////////////////////////////
+		// Drawing speaking amount
+		///////////////////////////////////////
 		if(sketch.recordAudio) {
 
-			//int widthBar = (int) (sizeNode*1.25);
-			float centreBar = (sketch.lineX - buttonX - sizeNode)/2;
-			float widthBar = (float) (centreBar*0.98);
-			float borderDif = 4;
+			//float centreBar = (sketch.lineX - buttonX - sizeNode)/2;
+			//float widthBar = (float) (centreBar*0.98);
+			//float borderDif = 4;
 			
 			sketch.rectMode(Sketch.CENTER);
+			
+			// Containing rectangle
 			sketch.strokeWeight(sketch.strokeW);
 			sketch.noFill();
 			sketch.stroke(Colours.lineColour.getRed(), Colours.lineColour.getGreen(), Colours.lineColour.getBlue());
 			//sketch.rect(buttonX + (int) (sizeNode*1.1), sketch.getHeight()/2 - sizeNode/2, sketch.lineX - buttonX - widthBar, sizeNode);
-			sketch.rect(sketch.lineX - centreBar, sketch.getHeight()/2, widthBar + borderDif, sizeNode + borderDif);
+			//sketch.rect(sketch.lineX - centreBar, sketch.getHeight()/2, widthBar + borderDif, sizeNode + borderDif);
 			
-			//Above node
+			
 			float yDifference = (float) (sizeNode/1.5);
-			sketch.rect(sketch.lineX/2, sketch.getHeight()/2 + yDifference, sizeNode + borderDif, widthBar/2 + borderDif);
+			//Above node
+			sketch.rect(sketch.lineX/2, sketch.getHeight()/2 + yDifference, sizeNode + borderDif, heightBar/2 + borderDif);
 			//Below node
-			sketch.rect(sketch.lineX/2, sketch.getHeight()/2 - yDifference, sizeNode + borderDif, widthBar/2 + borderDif);
+			sketch.rect(sketch.lineX/2, sketch.getHeight()/2 - yDifference, sizeNode + borderDif, heightBar/2 + borderDif);
+			
 			
 			// Amount of talking for each learner
 			int talkAmount1 = sketch.audioIn[0].getTalkingAmount();
@@ -236,17 +267,17 @@ public class MainSection {
 			sketch.noStroke();
 			// Learner 1's bar
 			sketch.fill(Colours.learner1TalkBar.getRed(), Colours.learner1TalkBar.getGreen(), Colours.learner1TalkBar.getBlue());
-			sketch.rect(sketch.lineX - centreBar - widthBar/4, sketch.getHeight()/2, widthBar/2, barHeight1);
+			//sketch.rect(sketch.lineX - centreBar - widthBar/4, sketch.getHeight()/2, widthBar/2, barHeight1);
 			
 			//Above topic node
-			sketch.rect(sketch.lineX/2, sketch.getHeight()/2 + yDifference, barHeight1, widthBar/2);
+			sketch.rect(sketch.lineX/2, sketch.getHeight()/2 + yDifference, barHeight1, heightBar/2);
 			
 			// Learner 2's bar
 			sketch.fill(Colours.learner2TalkBar.getRed(), Colours.learner2TalkBar.getGreen(), Colours.learner2TalkBar.getBlue());
-			sketch.rect(sketch.lineX - centreBar + widthBar/4, sketch.getHeight()/2, widthBar/2, barHeight2);
+			//sketch.rect(sketch.lineX - centreBar + widthBar/4, sketch.getHeight()/2, widthBar/2, barHeight2);
 			
 			//Below topic node
-			sketch.rect(sketch.lineX/2, sketch.getHeight()/2 - yDifference, barHeight2, widthBar/2);
+			sketch.rect(sketch.lineX/2, sketch.getHeight()/2 - yDifference, barHeight2, heightBar/2);
 			
 			
 			sketch.rectMode(Sketch.CORNER);
@@ -439,13 +470,6 @@ public class MainSection {
 	 * @param activity
 	 */
 	public void switchActivity(String activity){
-		for(int i = 0; i < Sketch.NUM_ACTIVITIES; i++){
-			if(sketch.removeVideoAct && i == 3) {
-				continue;
-			}
-			activityB1[i].setActive(true);
-			activityB2[i].setActive(true);
-		}
 
 		graph.nodes[graph.lastSelectedNode].setX(lastNodeX);
 		graph.nodes[graph.lastSelectedNode].setY(lastNodeY);
@@ -479,6 +503,14 @@ public class MainSection {
 			pGameAct.removeZones();
 		}
 
+		for(int i = 0; i < Sketch.NUM_ACTIVITIES; i++){
+			if(sketch.removeVideoAct && i == 3) {
+				continue;
+			}
+			activityB1[i].setActive(true);
+			activityB2[i].setActive(true);
+		}
+		
 		edgesFlag = true;
 		centerLineFlag = false;
 		graph.activateNodes();
@@ -676,8 +708,8 @@ public class MainSection {
 
 		lastNodeX = graph.nodes[graph.lastSelectedNode].getX();
 		lastNodeY = graph.nodes[graph.lastSelectedNode].getY();
-		//graph.nodes[graph.lastSelectedNode].setXY(sketch.lineX/2 - graph.nodes[graph.lastSelectedNode].getWidth()/2, sketch.getHeight()/2 - graph.nodes[graph.lastSelectedNode].getHeight()/2);
-		graph.nodes[graph.lastSelectedNode].setXY(buttonX, sketch.getHeight()/2 - graph.nodes[graph.lastSelectedNode].getHeight()/2);
+		graph.nodes[graph.lastSelectedNode].setXY(sketch.lineX/2 - graph.nodes[graph.lastSelectedNode].getWidth()/2, sketch.getHeight()/2 - graph.nodes[graph.lastSelectedNode].getHeight()/2);
+		//graph.nodes[graph.lastSelectedNode].setXY(buttonX, sketch.getHeight()/2 - graph.nodes[graph.lastSelectedNode].getHeight()/2);
 
 		for(int i = 0; i < Sketch.NUM_ACTIVITIES; i++){
 			activityFlags1[i] = false;

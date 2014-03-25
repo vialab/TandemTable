@@ -690,6 +690,16 @@ public class XMLParser {
 								} else if(attribute.equalsIgnoreCase("Spanish")){
 									Languages.playVideoS = element.getValue();
 								}
+							} else if(element.getLocalName().equalsIgnoreCase("utterVis")){
+								if(attribute.equalsIgnoreCase("English")){
+									Languages.utterVisE = element.getValue();
+								} else if(attribute.equalsIgnoreCase("French")){
+									Languages.utterVisF = element.getValue();
+								} else if(attribute.equalsIgnoreCase("Portuguese")){
+									Languages.utterVisP = element.getValue();
+								} else if(attribute.equalsIgnoreCase("Spanish")){
+									Languages.utterVisS = element.getValue();
+								}
 							}
 						} 
 

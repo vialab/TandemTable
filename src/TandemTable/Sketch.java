@@ -27,7 +27,7 @@ import vialab.simpleMultiTouch.TouchClient;
 
 /**
  * Main Class of TandemTable
- * @author Erik Paluka - Copyright 2012-2013
+ * @author Erik Paluka - Copyright 2012-2014
  *
  */
 @SuppressWarnings("serial")
@@ -209,11 +209,17 @@ public class Sketch extends PApplet {
 		//LOGGING
 		//logger = new UserLogger();
 		//logger.logInfo(, "User" + "" + " " + lang1);
-		mainSection = new MainSection(this, lang1, lang2);
+		
 		
 		if(doneIntro) {
+			// Remove utterVis text
+			client.removeZone(mainSection.utterVisText[0]);
+			client.removeZone(mainSection.utterVisText[1]);
+			
+			mainSection = new MainSection(this, lang1, lang2);
 			mainSection.createMainScreen();
 		} else {
+			mainSection = new MainSection(this, lang1, lang2);
 			mainSection.centerLineFlag = true;
 			intro = new IntroSection(this, mainSection);
 		}

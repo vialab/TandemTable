@@ -338,7 +338,7 @@ public class AudioIn implements AudioProcessor {
 				utterArray.add(curUtter);
 				talkingAmount++;
 				timeOfLastUtter = System.currentTimeMillis();
-				System.out.println("Utterance number " + utterArray.size() + " added and ended at " + utterTime);
+				System.out.println("User: " + user + ". Utterance number " + utterArray.size() + " added and ended at " + utterTime);
 			}
 		}
 		

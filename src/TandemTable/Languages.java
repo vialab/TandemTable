@@ -98,19 +98,19 @@ public class Languages {
 
 	// English
 	public static String nextE, moreQE, ranTopicsE, choAnoTopE, choAnoActE, newLangE, morePicsE, tweetWordE,
-	moreNewsE, back2HeadsE, moreVideosE, playAgainE, playE, pauseE, stopE, playVideoE;
+	moreNewsE, back2HeadsE, moreVideosE, playAgainE, playE, pauseE, stopE, playVideoE, utterVisE;
 	
 	// French
 	public static String nextF, moreQF, ranTopicsF, choAnoTopF, choAnoActF, newLangF, morePicsF, tweetWordF,
-	moreNewsF, back2HeadsF, moreVideosF, playAgainF, playF, pauseF, stopF, playVideoF;
+	moreNewsF, back2HeadsF, moreVideosF, playAgainF, playF, pauseF, stopF, playVideoF, utterVisF;
 	
 	// Portuguese
 	public static String nextP, moreQP, ranTopicsP, choAnoTopP, choAnoActP, newLangP, morePicsP, tweetWordP,
-	moreNewsP, back2HeadsP, moreVideosP, playAgainP, playP, pauseP, stopP, playVideoP;
+	moreNewsP, back2HeadsP, moreVideosP, playAgainP, playP, pauseP, stopP, playVideoP, utterVisP;
 	
 	// Spanish
 	public static String nextS, moreQS, ranTopicsS, choAnoTopS, choAnoActS, newLangS, morePicsS, tweetWordS,
-	moreNewsS, back2HeadsS, moreVideosS, playAgainS, playS, pauseS, stopS, playVideoS;
+	moreNewsS, back2HeadsS, moreVideosS, playAgainS, playS, pauseS, stopS, playVideoS, utterVisS;
 	
 	// English
 	public static String[][] tagsE = new String[15][18];
@@ -148,7 +148,7 @@ public class Languages {
 	public String[] holidays = new String[Sketch.NUM_SYN];
 	
 	public String next, moreQ, ranTopics, choAnoTop, choAnoAct, newLang, morePics, tweetWord,
-	moreNews, back2Heads, moreVideos, playAgain, play, pause, stop, playVideo;
+	moreNews, back2Heads, moreVideos, playAgain, play, pause, stop, playVideo, utterVis;
 	
 	// For filtering web service data based on language and culture
 	public String countryCode, cultureCode;
@@ -208,6 +208,7 @@ public class Languages {
 		pause = pauseE;
 		stop = stopE;
 		playVideo = playVideoE;
+		utterVis = utterVisE;
 		
 		tags = tagsE;
 		
@@ -254,6 +255,7 @@ public class Languages {
 		pause = pauseF;
 		stop = stopF;
 		playVideo = playVideoF;
+		utterVis = utterVisF;
 		
 		tags = tagsF;
 		
@@ -300,6 +302,7 @@ public class Languages {
 		pause = pauseP;
 		stop = stopP;
 		playVideo = playVideoP;
+		utterVis = utterVisP;
 		
 		tags = tagsP;
 		
@@ -348,6 +351,7 @@ public class Languages {
 		pause = pauseS;
 		stop = stopS;
 		playVideo = playVideoS;
+		utterVis = utterVisS;
 		
 		tags = tagsS;
 		

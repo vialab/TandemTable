@@ -178,6 +178,11 @@
 	<playVideo lang="portuguese">Seu Parceiro Seleccionado um Vídeo</playVideo>
 	<playVideo lang="spanish">Su Pareja Ha Seleccionado un Vídeo</playVideo>
 	
+	<utterVis lang="english">Speaking Amount</utterVis>
+	<utterVis lang="french">Quantité de Discours</utterVis>
+	<utterVis lang="portuguese">Quantidade de Falar</utterVis>
+	<utterVis lang="spanish">Cantidad de Hablando</utterVis>
+	
 </buttons>
 <activities>
 	<twitter lang="english">Twitter</twitter>
