@@ -216,8 +216,8 @@ public class MainSection {
 			sketch.rect(sketch.lineX/2, sketch.getHeight()/2 - yDifference, sizeNode + borderDif, widthBar/2 + borderDif);
 			
 			// Amount of talking for each learner
-			int talkAmount1 = sketch.audioIn[0].talkingAmount;
-			int talkAmount2 = sketch.audioIn[1].talkingAmount;
+			int talkAmount1 = sketch.audioIn[0].getTalkingAmount();
+			int talkAmount2 = sketch.audioIn[1].getTalkingAmount();
 			float barHeight1 = 0, barHeight2 = 0;
 			
 			if(talkAmount1 > talkAmount2) {
@@ -289,7 +289,7 @@ public class MainSection {
 						newLangSelect1 = false;
 						removeAllItems();
 
-						sketch.startScreen.chooseNewLang();
+						sketch.login.chooseNewLang();
 					}
 
 					e.setHandled(tappableHandled);
@@ -336,7 +336,7 @@ public class MainSection {
 						newLangSelect2 = false;
 						newLangSelect1 = false;
 						removeAllItems();
-						sketch.startScreen.chooseNewLang();
+						sketch.login.chooseNewLang();
 					}
 
 					e.setHandled(tappableHandled);

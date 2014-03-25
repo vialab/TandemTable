@@ -27,6 +27,7 @@ public class AudioOut  {
 			}
 		}
 		
+		clip.setMicrosecondPosition(0);
 		clip.start();
 		
 	}

@@ -7,9 +7,11 @@ import javax.sound.sampled.Mixer;
 
 import TandemTable.sections.login.LoginScreen;
 import TandemTable.sections.mainSection.MainSection;
+import TandemTable.util.AudioFrame;
 import TandemTable.util.AudioMixers;
 import TandemTable.util.AudioIn;
 import TandemTable.util.AudioOut;
+import TandemTable.util.KeyboardInput;
 import TandemTable.util.XMLParser;
 
 import com.aetrion.flickr.Flickr;
@@ -34,7 +36,7 @@ public class Sketch extends PApplet {
 	public MainSection mainSection;
 	public Languages learner1, learner2;
 	public IntroSection intro;
-	public LoginScreen startScreen;
+	public LoginScreen login;
 	public YouTubeService myService;
 	public Flickr f;
 	public REST rest;
@@ -60,8 +62,14 @@ public class Sketch extends PApplet {
 	
 	// Recording of audio with mics
 	public boolean recordAudio = true;
+	// Testing of mic inputs by drawing PCM data
+	boolean testAudioIn = false;
 	// Audio Prompts
 	public AudioOut languagePrompt, talkingPrompt;
+	// Handles keyboard input
+	KeyboardInput keyboard;
+	// JFrame and JPanel for drawing audio input
+	public AudioFrame audioFrame;
 			
 	///////////////////////////////////////
 	// For study
@@ -126,17 +134,18 @@ public class Sketch extends PApplet {
 		
 		if(recordAudio) {
 			initializeAudioRecording();
+			audioFrame = new AudioFrame(this);
 		}
 		
+		keyboard = new KeyboardInput(this);
+		addKeyListener(keyboard);
 		
-		//startScreen = new LoginScreen();
-		//startScreen.initialize(client, this);
-
-
+		login = new LoginScreen();
+		login.initialize(client, this);
 	}
 
 	public void draw(){
-		/*background(Colours.backgroundColour.getRed(), Colours.backgroundColour.getGreen(), Colours.backgroundColour.getBlue());
+		background(Colours.backgroundColour.getRed(), Colours.backgroundColour.getGreen(), Colours.backgroundColour.getBlue());
 
 		if(drawMainLayout){
 			mainSection.drawLayout();
@@ -151,11 +160,27 @@ public class Sketch extends PApplet {
 			textAlign(PConstants.LEFT, PConstants.BOTTOM);
 			fill(0);
 			text("FPS:\n" + Integer.toString((int)frameRate), 0, 2*getHeight()/3);
+		}
+		
+		/*if(testAudioIn && audioIn != null && audioIn[0] != null) {
+			background(0, 0, 0);
+			audioIn[0].draw();
+			audioIn[1].draw();
 		}*/
 		
-		if(audioIn != null && audioIn[0] != null) {
-			audioIn[0].draw();
-			//audioIn[1].draw();
+		
+		///////////////////////////
+		// Play conversation prompt
+		///////////////////////////
+		long timeNow = System.currentTimeMillis();
+		
+		if(login.loggedIn && audioIn[0].getTimeLastUtter() != 0 && audioIn[1].getTimeLastUtter() != 0
+				&& timeNow - audioIn[0].getTimeLastUtter() > AudioIn.UTTER_PROMPT_THRESH
+				&& timeNow - audioIn[1].getTimeLastUtter() > AudioIn.UTTER_PROMPT_THRESH) {
+		
+			talkingPrompt.play();
+			audioIn[0].setTimeLastUtter(timeNow);
+			audioIn[0].setTimeLastUtter(timeNow);				
 		}
 	}
 
@@ -164,8 +189,8 @@ public class Sketch extends PApplet {
 	}
 	
 	public void setupAudioOut() {
-		languagePrompt = new AudioOut("Language Prompt.wav");
-		talkingPrompt = new AudioOut("Talking Prompt.wav");
+		languagePrompt = new AudioOut("data/Language Prompt.wav");
+		talkingPrompt = new AudioOut("data/Talking Prompt.wav");
 	}
 	
 	public void initializeAudioRecording() {
@@ -173,9 +198,9 @@ public class Sketch extends PApplet {
 		Mixer[] mixers = audio.getMixers();
 		audioIn = new AudioIn[NUM_MICS];
 		audioIn[0] = new AudioIn(mixers[0], 1, this);
-		//audioIn[1] = new AudioIn(mixers[1], 2, this);
+		audioIn[1] = new AudioIn(mixers[1], 2, this);
 		audioIn[0].startSoundCapture();
-		//audioIn[1].startSoundCapture();
+		audioIn[1].startSoundCapture();
 	}
 
 	
