@@ -182,6 +182,10 @@ public class HeadlinesActivity {
 			//topicExpanded2 = topic2;
 		}
 
+		
+		mainSection.contentPrompt1.setText(sketch.learner1.newsPrompts[0]);
+		mainSection.contentPrompt2.setText(sketch.learner2.newsPrompts[0]);
+		
 		createBackButtons();
 		createBackground4Swipe();
 		createHeadlineZones1();

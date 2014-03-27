@@ -108,6 +108,9 @@ public class VideoActivity {
 		
 		setExpandedTopicOrder(scrambled);
 		
+		sketch.mainSection.contentPrompt1.setText(sketch.learner1.videoPrompts[0]);
+		sketch.mainSection.contentPrompt2.setText(sketch.learner2.videoPrompts[0]);
+		
 		vAct = this;
 		
 		if(!sketch.youTubeInit){

@@ -103,6 +103,9 @@ public class PGame {
 		}
 				
 		
+		sketch.mainSection.contentPrompt1.setText(sketch.learner1.pGamePrompts[0]);
+		sketch.mainSection.contentPrompt2.setText(sketch.learner2.pGamePrompts[0]);
+		
 		createLayout();
 		createMsgBox();
 		loadImages(0);

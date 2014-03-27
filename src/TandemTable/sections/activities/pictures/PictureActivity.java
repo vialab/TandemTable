@@ -88,6 +88,10 @@ public class PictureActivity {
 				e.printStackTrace();
 			}
 		}
+		
+		sketch.mainSection.contentPrompt1.setText(sketch.learner1.photosPrompts[0]);
+		sketch.mainSection.contentPrompt2.setText(sketch.learner2.photosPrompts[0]);
+		
 		//createMorePicturesButtons();
 		createGBZone();
 		createImgZones();

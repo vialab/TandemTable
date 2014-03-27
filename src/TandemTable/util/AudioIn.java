@@ -18,11 +18,15 @@ import be.hogent.tarsos.dsp.SilenceDetector;
 
 public class AudioIn implements AudioProcessor {
 
-	// Play prompt if there has been no talking
-	// for longer than this value
-	public static final long UTTER_PROMPT_THRESH = 20000;
-	
-	
+	// Number of milliseconds for calculating
+	// long utterance rate
+	public static final int utterRateTimeLong = 20000;
+	// Number of milliseconds for calculating
+	// short utterance rate
+	public static final int utterRateTimeShort = 5000;
+	// Ratio of utter rate times
+	public static final int utterRateTimeRatio = 4;
+		
 	Sketch sketch;
 	AudioDispatcher dispatcher;
 	Mixer mixer;
@@ -30,7 +34,7 @@ public class AudioIn implements AudioProcessor {
 	int threshold;
 	int talkingAmount = 1;
 	int user;
-	long timeOfLastUtter = 0;
+	
 	ArrayList<SlidingWindow> windowArray;
 	
 	// Size of sliding window in milliseconds
@@ -44,6 +48,12 @@ public class AudioIn implements AudioProcessor {
 	//float noiseLevel = 0;
 	//int noiseLevelIndex = 0;
 	
+	// If noise profile creation is complete
+	boolean noiseProfileComplete = false;
+	// Time of last utterance
+	long timeOfLastUtter = 0;
+	// Time of last utterance for content Prompt
+	long timeUtterContent = 0;
 	// Last index value of drawn PCM data
 	// For scrolling the drawing
 	int indexScrollPCM = 0;
@@ -62,6 +72,12 @@ public class AudioIn implements AudioProcessor {
 	float maxNoiseLvlNeg = 0;
 	// List of successful utterances
 	ArrayList<Utterance> utterArray;
+	// Utterance rate for number of milliseconds
+	// in utterRateTimeLong
+	int utterRateLong = 0;
+	// Utterance rate for number of milliseconds
+	// in utterRateTimeLong
+	int utterRateShort = 0;
 	// Current utterance
 	Utterance curUtter = null;
 	// If the utterance has started
@@ -104,8 +120,24 @@ public class AudioIn implements AudioProcessor {
 		timeOfLastUtter = time;
 	}
 	
+	public long getTimeLastContent() {
+		return timeUtterContent;
+	}
+	
+	public void setTimeLastContent(long time) {
+		timeUtterContent = time;
+	}
+	
 	public ArrayList<Float> getPCMData() {
 		return pcmData;
+	}
+	
+	public int getUtterRateLong() {
+		return utterRateLong;
+	}
+	
+	public int getUtterRateShort() {
+		return utterRateShort;
 	}
 	
 	
@@ -214,19 +246,19 @@ public class AudioIn implements AudioProcessor {
 		for(int i = indexScrollUtter; i < tempUtter.size(); i++) {
 			Utterance utterance = tempUtter.get(i);
 			
-			if(utterance.getEndTime()*indexAdd - sliderCounter*sketch.getWidth()  > sketch.getWidth()) {
+			if(utterance.getEndIndex()*indexAdd - sliderCounter*sketch.getWidth()  > sketch.getWidth()) {
 				sliderCounter++;
 				indexScrollUtter = i;
 			}
 			
 			sketch.stroke(utterance.r, utterance.g, utterance.b);
 			
-			sketch.line(utterance.getStartTime()*indexAdd - sliderCounter*sketch.getWidth(), y, utterance.getEndTime()*indexAdd - sliderCounter*sketch.getWidth(), y);
+			sketch.line(utterance.getStartIndex()*indexAdd - sliderCounter*sketch.getWidth(), y, utterance.getEndIndex()*indexAdd - sliderCounter*sketch.getWidth(), y);
 			
 			
 			
 			
-			lastX = utterance.getStartTime()*indexAdd - sliderCounter*sketch.getWidth();
+			lastX = utterance.getStartIndex()*indexAdd - sliderCounter*sketch.getWidth();
 			index = lastX;
 			float mainY = (float) (sketch.height/1.5);
 			lastY = mainY;
@@ -288,6 +320,7 @@ public class AudioIn implements AudioProcessor {
 		} else if(sketch.login.loggedIn){
 			if(timeOfLastUtter == 0) {
 				timeOfLastUtter = System.currentTimeMillis();
+				timeUtterContent = timeOfLastUtter;
 			}
 			
 			//maxNoiseLvl = noiseLevel/noiseLevelIndex;
@@ -301,12 +334,42 @@ public class AudioIn implements AudioProcessor {
 				
 			}
 			
+			determineUtterRate();
+			
 			sketch.audioFrame.repaint();
 			
+		} else if(!noiseProfileComplete) {
+			System.out.println("Noise profile is complete");
+			noiseProfileComplete = true;
 		}
 		
 		//handleSoundDetection();
 		return true;
+	}
+	
+	public void determineUtterRate() {
+		long timeNow = System.currentTimeMillis();
+		long timePast = timeNow - utterRateTimeLong;
+		int numUtters = 0;
+		
+		for(int i = utterArray.size() - 1; i >= 0; i--) {
+			if(utterArray.get(i).getEndTime() != -1 && utterArray.get(i).getEndTime() > timePast) {
+				numUtters++;
+			}
+		}
+		
+		utterRateLong = numUtters;
+		
+		timePast = timeNow - utterRateTimeShort;
+		numUtters = 0;
+		
+		for(int i = utterArray.size() - 1; i >= 0; i--) {
+			if(utterArray.get(i).getEndTime() != -1 && utterArray.get(i).getEndTime() > timePast) {
+				numUtters++;
+			}
+		}
+		
+		utterRateShort = numUtters;
 	}
 	
 	// Algorithm from 
@@ -321,23 +384,26 @@ public class AudioIn implements AudioProcessor {
 		} else if(startedUtter && (value < maxNoiseLvlNeg || value > maxNoiseLvlPos)) {
 			curUtter.addFloat(value);
 			curUtter.resetCounter();
+			curUtter.setEndIndex(-1);
 			curUtter.setEndTime(-1);
 		} else if(startedUtter && (value >= maxNoiseLvlNeg || value <= maxNoiseLvlPos)) {			
 			curUtter.addCounter(1);
 			curUtter.addFloat(value);
 			
-			if(curUtter.getEndTime() == -1) {
-				curUtter.setEndTime(utterTime);
+			if(curUtter.getEndIndex() == -1) {
+				curUtter.setEndIndex(utterTime);
+				curUtter.setEndTime(System.currentTimeMillis());
 			}
 		}
 		
 		if(startedUtter && curUtter.getCounter() >= combineUtterThesholdPaper) {
 			startedUtter = false;
 			
-			if(curUtter.getEndTime() - curUtter.getStartTime() > utterLengthThreshPaper) {
+			if(curUtter.getEndIndex() - curUtter.getStartIndex() > utterLengthThreshPaper) {
 				utterArray.add(curUtter);
 				talkingAmount++;
 				timeOfLastUtter = System.currentTimeMillis();
+				timeUtterContent = timeOfLastUtter;
 				System.out.println("User: " + user + ". Utterance number " + utterArray.size() + " added and ended at " + utterTime);
 			}
 		}
@@ -356,7 +422,7 @@ public class AudioIn implements AudioProcessor {
 				startedUtter = true;
 				//long timeNow = System.currentTimeMillis();
 				
-				if(curUtter == null || utterTime - curUtter.getEndTime() >= combineUtterTheshold) {
+				if(curUtter == null || utterTime - curUtter.getEndIndex() >= combineUtterTheshold) {
 					curUtter = new Utterance(utterTime);
 					utterAdded = false;
 					//System.out.println("Utterance number " + utterArray.size() + " started at " + utterTime);
@@ -378,18 +444,22 @@ public class AudioIn implements AudioProcessor {
 			
 			if(startedUtter) {							
 				if(combineSounds && utterAdded) {
-					utterArray.get(utterArray.size() - 1).setEndTime(utterTime);
+					utterArray.get(utterArray.size() - 1).setEndIndex(utterTime);
+					utterArray.get(utterArray.size() - 1).setEndTime(System.currentTimeMillis());
 					timeOfLastUtter = System.currentTimeMillis();
+					timeUtterContent = timeOfLastUtter;
 					//System.out.println("Combined sounds - Utterance number " + utterArray.size() + " ended at " + utterTime + ". Size of utterance: " + utterArray.get(utterArray.size() - 1).getPCM().size()); //System.currentTimeMillis());
 					
 				
 				} else {
-					curUtter.setEndTime(utterTime);
+					curUtter.setEndIndex(utterTime);
+					curUtter.setEndTime(System.currentTimeMillis());
 					
-					if(curUtter.getEndTime() - curUtter.getStartTime() > utterLengthThresh) {
+					if(curUtter.getEndIndex() - curUtter.getStartIndex() > utterLengthThresh) {
 						utterArray.add(curUtter);
 						talkingAmount++;
 						timeOfLastUtter = System.currentTimeMillis();
+						timeUtterContent = timeOfLastUtter;
 						utterAdded = true;
 						System.out.println("Utterance number " + utterArray.size() + " added and ended at " + utterTime); //System.currentTimeMillis());
 					} else {
@@ -441,6 +511,7 @@ public class AudioIn implements AudioProcessor {
 	public void utteranceDetected() {
 		talkingAmount++;
 		timeOfLastUtter = System.currentTimeMillis();
+		timeUtterContent = timeOfLastUtter;
 		System.out.println("Sound detected for " + user + ": " + (int)(silenceDetector.currentSPL()) + "dB SPL, Talking Amount: " + talkingAmount);
 	}
 	
@@ -465,14 +536,15 @@ public class AudioIn implements AudioProcessor {
 	}
 	
 	class Utterance {
-		int startTime = -1;
-		int endTime = -1;
+		int startIndex = -1;
+		int endIndex = -1;
+		long endTime = -1;
 		ArrayList<Float> pcmData;
 		int r, g, b;
 		int belowThreshCounter = 0;
 		
-		public Utterance(int startTime) {
-			this.startTime = startTime;
+		public Utterance(int startIndex) {
+			this.startIndex = startIndex;
 			pcmData = new ArrayList<Float>();
 			r = (int) sketch.random(10, 256);
 			g = (int) sketch.random(10, 256);
@@ -488,16 +560,24 @@ public class AudioIn implements AudioProcessor {
 			pcmData.add(value);
 		}
 		
-		public void setEndTime(int endTime) {
-			this.endTime = endTime;
+		public void setEndIndex(int endIndex) {
+			this.endIndex = endIndex;
 		}
 		
-		public int getEndTime() {
+		public int getEndIndex() {
+			return endIndex;
+		}
+		
+		public void setEndTime(long time) {
+			this.endTime = time;
+		}
+		
+		public long getEndTime() {
 			return endTime;
 		}
 		
-		public int getStartTime() {
-			return startTime;
+		public int getStartIndex() {
+			return startIndex;
 		}
 		
 		public void addCounter(int add) {

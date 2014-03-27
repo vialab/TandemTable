@@ -182,8 +182,68 @@
 	<utterVis lang="french">Quantité de Discours</utterVis>
 	<utterVis lang="portuguese">Quantidade de Falar</utterVis>
 	<utterVis lang="spanish">Cantidad de Hablando</utterVis>
-	
 </buttons>
+<contentPrompts>
+	<tweetPrompt1 lang="english">Tell your partner what these Tweets are about</tweetPrompt1>
+	<tweetPrompt1 lang="french">Discutez avec votre partenaire ce que ces Tweets parle de</tweetPrompt1>
+	<tweetPrompt1 lang="portuguese">Discuta com seu parceiro o que esses Tweets são sobre</tweetPrompt1>
+	<tweetPrompt1 lang="spanish">Hable con su pareja lo que estos Tweets están a punto</tweetPrompt1>
+	
+	<tweetPrompt2 lang="english">Ask your partner to talk about what they are reading</tweetPrompt2>
+	<tweetPrompt2 lang="french">Demandez à votre partenaire de parler de ce qu'ils lisent</tweetPrompt2>
+	<tweetPrompt2 lang="portuguese">Peça ao seu parceiro para falar sobre o que estão lendo</tweetPrompt2>
+	<tweetPrompt2 lang="spanish">Pregúntele a su pareja para hablar de lo que están leyendo</tweetPrompt2>
+	
+	<newsPrompt1 lang="english">Tell your partner what this article is about</newsPrompt1>
+	<newsPrompt1 lang="french">Discutez avec votre partenaire ce que ce article parle de</newsPrompt1>
+	<newsPrompt1 lang="portuguese">Diga ao seu parceiro o que este artigo é sobre</newsPrompt1>
+	<newsPrompt1 lang="spanish">Dígale a su pareja lo que este artículo se trata de</newsPrompt1>
+	
+	<newsPrompt2 lang="english">Ask your partner to talk about what they are reading</newsPrompt2>
+	<newsPrompt2 lang="french">Demandez à votre partenaire de parler de ce qu'ils lisent</newsPrompt2>
+	<newsPrompt2 lang="portuguese">Peça ao seu parceiro para falar sobre o que estão lendo</newsPrompt2>
+	<newsPrompt2 lang="spanish">Pregúntele a su pareja para hablar de lo que están leyendo</newsPrompt2>
+	
+	<photosPrompt1 lang="english">Talk about what you like about these photos</photosPrompt1>
+	<photosPrompt1 lang="french">Parlez de ce que vous aimez à propos de ces photos</photosPrompt1>
+	<photosPrompt1 lang="portuguese">Fale sobre o que você gosta sobre essas fotos</photosPrompt1>
+	<photosPrompt1 lang="spanish">Hable sobre lo que le gusta de estas fotos</photosPrompt1>
+	
+	<photosPrompt2 lang="english">Talk about what these photos mean to you</photosPrompt2>
+	<photosPrompt2 lang="french">Parlez de ce que ces photos signifient pour vous</photosPrompt2>
+	<photosPrompt2 lang="portuguese">Fale sobre o que essas fotos significa para você</photosPrompt2>
+	<photosPrompt2 lang="spanish">Hable de lo que estas fotos significan para ti</photosPrompt2>
+	
+	<pGamePrompt1 lang="english">Talk about what you like about these photos</pGamePrompt1>
+	<pGamePrompt1 lang="french">Parlez de ce que vous aimez à propos de ces photos</pGamePrompt1>
+	<pGamePrompt1 lang="portuguese">Fale sobre o que você gosta sobre essas fotos</pGamePrompt1>
+	<pGamePrompt1 lang="spanish">Hable sobre lo que le gusta de estas fotos</pGamePrompt1>
+	
+	<pGamePrompt2 lang="english">Ask your partner to talk about what the pictures mean</pGamePrompt2>
+	<pGamePrompt2 lang="french">Demandez à votre partenaire pour parler de ce que les images signifient</pGamePrompt2>
+	<pGamePrompt2 lang="portuguese">Peça ao seu parceiro para falar sobre o que as imagens significam</pGamePrompt2>
+	<pGamePrompt2 lang="spanish">Pregúntele a su pareja para hablar de lo que significan las fotos</pGamePrompt2>
+	
+	<videoPrompt1 lang="english">Talk about what you find interesting about the video</videoPrompt1>
+	<videoPrompt1 lang="french">Parlez de ce que vous trouvez intéressants avec la vidéo</videoPrompt1>
+	<videoPrompt1 lang="portuguese">Fale sobre o que você achar interessante com o vídeo</videoPrompt1>
+	<videoPrompt1 lang="spanish">Hable sobre lo que le parezca interesante con el vídeo</videoPrompt1>
+	
+	<videoPrompt2 lang="english">Ask your partner to describe the video to you</videoPrompt2>
+	<videoPrompt2 lang="french">Demandez à votre partenaire pour décrire la vidéo pour vous</videoPrompt2>
+	<videoPrompt2 lang="portuguese">Peça ao seu parceiro para descrever o vídeo para você</videoPrompt2>
+	<videoPrompt2 lang="spanish">Pregúntele a su pareja para describir el video para usted</videoPrompt2>
+	
+	<topicPrompt1 lang="english">Discuss the topics that interest you</topicPrompt1>
+	<topicPrompt1 lang="french">Discuter les sujets qui vous intéressent</topicPrompt1>
+	<topicPrompt1 lang="portuguese">Discutir os temas que lhe interessam</topicPrompt1>
+	<topicPrompt1 lang="spanish">Discutir los temas que te interesan</topicPrompt1>
+	
+	<topicPrompt2 lang="english">Ask your partner what topic they would like to talk about</topicPrompt2>
+	<topicPrompt2 lang="french">Demandez à votre partenaire ce sujet qu'ils aimeraient parler</topicPrompt2>
+	<topicPrompt2 lang="portuguese">Peça ao seu parceiro que eles gostariam de falar</topicPrompt2>
+	<topicPrompt2 lang="spanish">Pregúntele a su pareja lo que les gustaría hablar</topicPrompt2>
+</contentPrompts>
 <activities>
 	<twitter lang="english">Twitter</twitter>
 	<twitter lang="french">Twitter</twitter>

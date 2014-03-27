@@ -27,7 +27,7 @@ import com.memetix.mst.language.Language;
 public class TwitterActivity {
 	TouchClient client;
 	Sketch sketch;
-	MainSection layoutManager;
+	MainSection mainSection;
 	VideoController videoController;
 
 	boolean errorFlag = false;
@@ -81,10 +81,10 @@ public class TwitterActivity {
 	
 	String lang1, lang2;
 
-	public TwitterActivity(Sketch sketch, MainSection layoutManager, int topicIndex, String lang1, String lang2){
+	public TwitterActivity(Sketch sketch, MainSection mainSection, int topicIndex, String lang1, String lang2){
 		this.client = sketch.client;
 		this.sketch = sketch;
-		this.layoutManager = layoutManager;
+		this.mainSection = mainSection;
 		spaceX = sketch.getWidth() - sketch.lineX;
 		this.topicIndex = topicIndex;
 		this.lang1 = lang1;
@@ -152,6 +152,8 @@ public class TwitterActivity {
 		contentVisual1 = new Color[NUM_TWEETS][];
 		contentVisual2 = new Color[NUM_TWEETS][];
 
+		mainSection.contentPrompt1.setText(sketch.learner1.tweetPrompts[0]);
+		mainSection.contentPrompt2.setText(sketch.learner2.tweetPrompts[0]);
 
 		tweetTextSize = sketch.getHeight()/40;
 		widthOffset = (int) (0.20*(sketch.getWidth()-sketch.lineX));
@@ -432,7 +434,7 @@ public class TwitterActivity {
 
 	public void createTweetWordButtons(){
 
-		tweetWord1 = new TextZone(layoutManager.buttonX, layoutManager.buttonYb2, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, tweetsS1, sketch.textSize, "CENTER", "CENTER"){
+		tweetWord1 = new TextZone(mainSection.buttonX, mainSection.buttonYb2, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, tweetsS1, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
 				if (isTappable() && !errorFlag){
@@ -461,7 +463,7 @@ public class TwitterActivity {
 		animTweet1.setRepeatCount(Animator.INFINITE);
 
 
-		tweetWord2 = new TextZone(layoutManager.buttonX, layoutManager.buttonYt2, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, tweetsS2, sketch.textSize, "CENTER", "CENTER"){
+		tweetWord2 = new TextZone(mainSection.buttonX, mainSection.buttonYt2, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, tweetsS2, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
 				if (isTappable() && !errorFlag){

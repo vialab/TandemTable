@@ -45,8 +45,12 @@ public class Colours {
 
 	//From MainSketch.java
 	public static Color backgroundColour = new Color(250, 253, 255);
+	public static Color backgroundColour0Alpha = new Color(250, 253, 255, 0);
 	public static Color learner1TalkBar = new Color(230,204,255);
 	public static Color learner2TalkBar = new Color(205,204,255);
+	public static Color textColour = new Color(79, 129, 189);
+	public static Color lineColour = new Color(149, 179, 215);
+	public static Color fadedText = new Color(171, 171, 171);
 
 	//Disabled ImageZone colour in profile picker
 	public static Color disabledZone = new Color(200, 200, 200, 255);
@@ -55,6 +59,8 @@ public class Colours {
 	public static Color[] circTitle = {new Color(130, 210, 90, 255), new Color(142, 214, 105, 255)};
 	//Colour of "TandemTable" title
 	public static Color titleColor = new Color(185, 122, 87, 255);
+	// Colour of activity content prompts
+	public static Color contentPromptC = new Color(204, 85, 0);
 	
 	//From Main.login
 	public static Color languageFilter = new Color(189, 84, 79, 230);
@@ -73,12 +79,7 @@ public class Colours {
 	public static int bodyTextBackground = 240;
 	public static Color scrollBar = new Color(229, 229, 229);
 	public static Color scrollTriFaded = new Color(210, 210, 210);
-	public static Color newsTextColor = new Color(90,157,208);
-	
-	//From LayoutManager.java
-	public static Color textColour = new Color(79, 129, 189);
-	public static Color lineColour = new Color(149, 179, 215);
-	public static Color fadedText = new Color(171, 171, 171);
+	public static Color newsTextColor = new Color(90,157,208);	
 
 	//From VideoActivity.java
 	public static Color currentColour = new Color(240,248,255);

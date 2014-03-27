@@ -24,6 +24,9 @@ public class KeyboardInput extends KeyAdapter {
 		
 		if(input == 't') {
 			sketch.talkingPrompt.play();
+			long timeNow = System.currentTimeMillis();
+			sketch.audioIn[0].timeOfLastUtter = timeNow;
+			sketch.audioIn[1].timeOfLastUtter = timeNow;
 		}
 	}
 }

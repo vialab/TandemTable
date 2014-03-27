@@ -117,19 +117,19 @@ public class AudioFrame extends JFrame {
 			for(int i = indexScrollUtter; i < tempUtter.size(); i++) {
 				Utterance utterance = tempUtter.get(i);
 				
-				if(utterance.getEndTime()*indexAdd - sliderCounter*getWidth()  > getWidth()) {
+				if(utterance.getEndIndex()*indexAdd - sliderCounter*getWidth()  > getWidth()) {
 					sliderCounter++;
 					indexScrollUtter = i;
 				}
 				
 				g.setColor(new Color(utterance.r, utterance.g, utterance.b));
 				
-				g.drawLine((int) (utterance.getStartTime()*indexAdd - sliderCounter*getWidth()), (int) y, (int) (utterance.getEndTime()*indexAdd - sliderCounter*getWidth()), (int) y);
+				g.drawLine((int) (utterance.getStartIndex()*indexAdd - sliderCounter*getWidth()), (int) y, (int) (utterance.getEndIndex()*indexAdd - sliderCounter*getWidth()), (int) y);
 				
 				
 				
 				
-				lastX = utterance.getStartTime()*indexAdd - sliderCounter*getWidth();
+				lastX = utterance.getStartIndex()*indexAdd - sliderCounter*getWidth();
 				index = lastX;
 				float mainY = (float) (getHeight()/1.5);
 				lastY = mainY;

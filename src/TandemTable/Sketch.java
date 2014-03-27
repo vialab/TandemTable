@@ -24,6 +24,7 @@ import processing.core.PApplet;
 import processing.core.PConstants;
 import twitter4j.Twitter;
 import vialab.simpleMultiTouch.TouchClient;
+import vialab.simpleMultiTouch.zones.TextZone;
 
 /**
  * Main Class of TandemTable
@@ -63,7 +64,7 @@ public class Sketch extends PApplet {
 	// Recording of audio with mics
 	public boolean recordAudio = true;
 	// Testing of mic inputs by drawing PCM data
-	boolean testAudioIn = false;
+	//boolean testAudioIn = false;
 	// Audio Prompts
 	public AudioOut languagePrompt, talkingPrompt;
 	// Handles keyboard input
@@ -82,16 +83,24 @@ public class Sketch extends PApplet {
 	// Activate all activities for all topics
 	public boolean activateAllAct = true;
 	///////////////////////////////////////
+	
+	// If content prompts are active
+	boolean conPromptActive = false;
 
 	public int buttonWidth, buttonHeight, radius, yOffset, textSize, shadowOffset, 	lineX,
 		qSwipeThreshold, tSwipeThreshold;
 
+	public final static int NUM_CONTENT_PROMPTS = 2;
 	public final static int NUM_QUESTIONS = 19;
 	public final static int NUM_ACTIVITIES = 5;
 	public final static int NUM_TOPICS = 15;
 	public final static int NUM_SYN = 10;
 	public final int NUM_PAGES = 200;
 	public final int TIMEOUT = 10000;
+	// Play prompt if there has been no talking
+	// for longer than this value
+	public static final long UTTER_PROMPT_THRESH = 50000;
+	public static final long CONTENT_PROMPT_THRESH = 20000;
 	
 	// Stroke weight of lines
 	public int strokeW = 5;
@@ -174,13 +183,35 @@ public class Sketch extends PApplet {
 		///////////////////////////
 		long timeNow = System.currentTimeMillis();
 		
-		if(login.loggedIn && audioIn[0].getTimeLastUtter() != 0 && audioIn[1].getTimeLastUtter() != 0
-				&& timeNow - audioIn[0].getTimeLastUtter() > AudioIn.UTTER_PROMPT_THRESH
-				&& timeNow - audioIn[1].getTimeLastUtter() > AudioIn.UTTER_PROMPT_THRESH) {
+		if(recordAudio && login.loggedIn && audioIn[0].getTimeLastUtter() != 0 && audioIn[1].getTimeLastUtter() != 0) {
+			
+			if(timeNow - audioIn[0].getTimeLastUtter() > UTTER_PROMPT_THRESH
+				&& timeNow - audioIn[1].getTimeLastUtter() > UTTER_PROMPT_THRESH) {
 		
-			talkingPrompt.play();
-			audioIn[0].setTimeLastUtter(timeNow);
-			audioIn[0].setTimeLastUtter(timeNow);				
+				talkingPrompt.play();
+				audioIn[0].setTimeLastUtter(timeNow);
+				audioIn[0].setTimeLastUtter(timeNow);
+			}
+			
+			if(mainSection != null && mainSection.contentPrompt1 != null && mainSection.contentPrompt2 != null
+					&& timeNow - audioIn[0].getTimeLastContent() > CONTENT_PROMPT_THRESH
+					&& timeNow - audioIn[1].getTimeLastContent() > CONTENT_PROMPT_THRESH) {
+								
+				// If utterance rate in time period is above threshold, fade out prompt
+				//if(conPromptActive) {
+				//	mainSection.animContentPrompt[0].setDirection(Animator.Direction.BACKWARD);
+				//}
+				mainSection.animContentPrompt[0].start();
+				mainSection.animContentPrompt[1].start();
+				
+				changeContentPrompts(mainSection.contentPrompt1, learner1);
+				changeContentPrompts(mainSection.contentPrompt2, learner2);
+				
+				audioIn[0].setTimeLastContent(timeNow);
+				audioIn[1].setTimeLastContent(timeNow);
+				conPromptActive = true;
+				
+			}
 		}
 	}
 
@@ -225,6 +256,35 @@ public class Sketch extends PApplet {
 		}
 		
 		drawMainLayout = true;
+	}
+	
+	public void changeContentPrompts(TextZone zone, Languages learner) {
+
+		if(zone.getText().equalsIgnoreCase(learner.topicPrompts[0])) {
+			zone.setText(learner.topicPrompts[1]);
+		} else if(zone.getText().equalsIgnoreCase(learner.topicPrompts[1])) {
+			zone.setText(learner.topicPrompts[0]);
+		} else if(zone.getText().equalsIgnoreCase(learner.tweetPrompts[0])) {
+			zone.setText(learner.tweetPrompts[1]);
+		} else if(zone.getText().equalsIgnoreCase(learner.tweetPrompts[1])) {
+			zone.setText(learner.tweetPrompts[0]);
+		} else if(zone.getText().equalsIgnoreCase(learner.newsPrompts[0])) {
+			zone.setText(learner.newsPrompts[1]);
+		} else if(zone.getText().equalsIgnoreCase(learner.newsPrompts[1])) {
+			zone.setText(learner.newsPrompts[0]);
+		} else if(zone.getText().equalsIgnoreCase(learner.photosPrompts[0])) {
+			zone.setText(learner.photosPrompts[1]);
+		} else if(zone.getText().equalsIgnoreCase(learner.photosPrompts[1])) {
+			zone.setText(learner.photosPrompts[0]);
+		} else if(zone.getText().equalsIgnoreCase(learner.videoPrompts[0])) {
+			zone.setText(learner.videoPrompts[1]);
+		} else if(zone.getText().equalsIgnoreCase(learner.videoPrompts[1])) {
+			zone.setText(learner.videoPrompts[0]);
+		} else if(zone.getText().equalsIgnoreCase(learner.pGamePrompts[0])) {
+			zone.setText(learner.pGamePrompts[1]);
+		} else if(zone.getText().equalsIgnoreCase(learner.pGamePrompts[1])) {
+			zone.setText(learner.pGamePrompts[0]);
+		}
 	}
 
 	// Returns a predefine colour value

@@ -27,6 +27,37 @@ public class Languages {
 	public static String[] topicsS = new String[Sketch.NUM_TOPICS];
 	public static String[][] topicsExpandedS = new String[Sketch.NUM_TOPICS][Sketch.NUM_SYN];
 	
+	// English
+	public static String[] tweetPromptsE = new String[Sketch.NUM_CONTENT_PROMPTS];
+	public static String[] newsPromptsE = new String[Sketch.NUM_CONTENT_PROMPTS];
+	public static String[] photosPromptsE = new String[Sketch.NUM_CONTENT_PROMPTS];
+	public static String[] pGamePromptsE = new String[Sketch.NUM_CONTENT_PROMPTS];
+	public static String[] videoPromptsE = new String[Sketch.NUM_CONTENT_PROMPTS];
+	public static String[] topicPromptsE = new String[Sketch.NUM_CONTENT_PROMPTS];
+	
+	// French
+	public static String[] tweetPromptsF = new String[Sketch.NUM_CONTENT_PROMPTS];
+	public static String[] newsPromptsF = new String[Sketch.NUM_CONTENT_PROMPTS];
+	public static String[] photosPromptsF = new String[Sketch.NUM_CONTENT_PROMPTS];
+	public static String[] pGamePromptsF = new String[Sketch.NUM_CONTENT_PROMPTS];
+	public static String[] videoPromptsF = new String[Sketch.NUM_CONTENT_PROMPTS];
+	public static String[] topicPromptsF = new String[Sketch.NUM_CONTENT_PROMPTS];
+	
+	// Portuguese
+	public static String[] tweetPromptsP = new String[Sketch.NUM_CONTENT_PROMPTS];
+	public static String[] newsPromptsP = new String[Sketch.NUM_CONTENT_PROMPTS];
+	public static String[] photosPromptsP = new String[Sketch.NUM_CONTENT_PROMPTS];
+	public static String[] pGamePromptsP = new String[Sketch.NUM_CONTENT_PROMPTS];
+	public static String[] videoPromptsP = new String[Sketch.NUM_CONTENT_PROMPTS];
+	public static String[] topicPromptsP = new String[Sketch.NUM_CONTENT_PROMPTS];
+	
+	// Spanish
+	public static String[] tweetPromptsS = new String[Sketch.NUM_CONTENT_PROMPTS];
+	public static String[] newsPromptsS = new String[Sketch.NUM_CONTENT_PROMPTS];
+	public static String[] photosPromptsS = new String[Sketch.NUM_CONTENT_PROMPTS];
+	public static String[] pGamePromptsS = new String[Sketch.NUM_CONTENT_PROMPTS];
+	public static String[] videoPromptsS = new String[Sketch.NUM_CONTENT_PROMPTS];
+	public static String[] topicPromptsS = new String[Sketch.NUM_CONTENT_PROMPTS];
 	
 	// English
 	public static String[] sportsE = new String[Sketch.NUM_SYN];
@@ -130,6 +161,13 @@ public class Languages {
 	public String[] topics = new String[Sketch.NUM_TOPICS];
 	public String[][] topicsExpanded = new String[Sketch.NUM_TOPICS][Sketch.NUM_SYN];
 	
+	public String[] tweetPrompts = new String[Sketch.NUM_CONTENT_PROMPTS];
+	public String[] newsPrompts = new String[Sketch.NUM_CONTENT_PROMPTS];
+	public String[] photosPrompts = new String[Sketch.NUM_CONTENT_PROMPTS];
+	public String[] pGamePrompts = new String[Sketch.NUM_CONTENT_PROMPTS];
+	public String[] videoPrompts = new String[Sketch.NUM_CONTENT_PROMPTS];
+	public String[] topicPrompts = new String[Sketch.NUM_CONTENT_PROMPTS];
+	
 	
 	public String[] sports = new String[Sketch.NUM_SYN];
 	public String[] religion = new String[Sketch.NUM_SYN];
@@ -210,6 +248,13 @@ public class Languages {
 		playVideo = playVideoE;
 		utterVis = utterVisE;
 		
+		tweetPrompts = tweetPromptsE;
+		newsPrompts = newsPromptsE;
+		photosPrompts = photosPromptsE;
+		pGamePrompts = pGamePromptsE;
+		videoPrompts = videoPromptsE;
+		topicPrompts = topicPromptsE;
+		
 		tags = tagsE;
 		
 		countryCode = "en";
@@ -257,6 +302,13 @@ public class Languages {
 		playVideo = playVideoF;
 		utterVis = utterVisF;
 		
+		tweetPrompts = tweetPromptsF;
+		newsPrompts = newsPromptsF;
+		photosPrompts = photosPromptsF;
+		pGamePrompts = pGamePromptsF;
+		videoPrompts = videoPromptsF;
+		topicPrompts = topicPromptsF;
+		
 		tags = tagsF;
 		
 		countryCode = "fr";
@@ -303,6 +355,13 @@ public class Languages {
 		stop = stopP;
 		playVideo = playVideoP;
 		utterVis = utterVisP;
+		
+		tweetPrompts = tweetPromptsP;
+		newsPrompts = newsPromptsP;
+		photosPrompts = photosPromptsP;
+		pGamePrompts = pGamePromptsP;
+		videoPrompts = videoPromptsP;
+		topicPrompts = topicPromptsP;
 		
 		tags = tagsP;
 		
@@ -352,6 +411,13 @@ public class Languages {
 		stop = stopS;
 		playVideo = playVideoS;
 		utterVis = utterVisS;
+		
+		tweetPrompts = tweetPromptsS;
+		newsPrompts = newsPromptsS;
+		photosPrompts = photosPromptsS;
+		pGamePrompts = pGamePromptsS;
+		videoPrompts = videoPromptsS;
+		topicPrompts = topicPromptsS;
 		
 		tags = tagsS;
 		

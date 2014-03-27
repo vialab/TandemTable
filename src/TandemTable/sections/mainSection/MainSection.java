@@ -6,6 +6,7 @@ import org.jdesktop.animation.timing.Animator.RepeatBehavior;
 import org.jdesktop.animation.timing.interpolation.PropertySetter;
 
 import vialab.simpleMultiTouch.events.TapEvent;
+import vialab.simpleMultiTouch.zones.RectZone;
 import vialab.simpleMultiTouch.zones.TextZone;
 import vialab.simpleMultiTouch.zones.Zone;
 import TandemTable.Colours;
@@ -16,6 +17,7 @@ import TandemTable.sections.activities.pGame.PGame;
 import TandemTable.sections.activities.pictures.PictureActivity;
 import TandemTable.sections.activities.twitter.TwitterActivity;
 import TandemTable.sections.activities.videos.VideoActivity;
+import TandemTable.util.AudioIn;
 import TandemTable.util.ColourEval;
 
 import com.memetix.mst.translate.Translate;
@@ -39,19 +41,20 @@ public class MainSection {
 	
 
 	Animator[] animA1, animA2;
-	
-	//Animator[] animNextTopic = new Animator[2];
 	Animator[] animSwitchTopic = new Animator[2];
 	Animator[] animSwitchAct = new Animator[2];
 	Animator[] animNewLang = new Animator[2];
-	
-
+	public Animator[] animContentPrompt = new Animator[2];
 
 	public int animationTime = 1400;
 	
 	// Activity zones
 	TextZone[] activityB1;
 	TextZone[] activityB2;
+	
+	// Content Prompts
+	public TextZone contentPrompt1, contentPrompt2;
+	RectZone cPromptOverlay1, cPromptOverlay2;
 	
 	// Speaking amount text
 	public TextZone[] utterVisText;
@@ -154,7 +157,9 @@ public class MainSection {
 		heightBar = sizeNode/5;
 		borderDif = 4;
 		
-		// Setup
+		/////////////////////////////////
+		// Set up talking amount text
+		////////////////////////////////
 		utterVisText = new TextZone[2];
 		float utterTextSize = sketch.textSize/2;
 		utterVisText[0] = new TextZone(0, sketch.getHeight()/2 + (float) (sizeNode/1.5) + utterTextSize, sketch.lineX, sizeNode/5, Colours.pFont, sketch.learner1.utterVis, utterTextSize, "CENTER", "CENTER");
@@ -168,6 +173,11 @@ public class MainSection {
 		utterVisText[1].setDrawBorder(false);
 		sketch.client.addZone(utterVisText[1]);
 
+		if(!sketch.recordAudio) {
+			//utterVisText[0].setActive(false);
+			//utterVisText[1].setActive(false);			
+		}
+		
 
 		buttonX = sketch.getX()+1;
 		buttonYb = sketch.screenHeight - sketch.buttonHeight-1;
@@ -225,18 +235,12 @@ public class MainSection {
 		///////////////////////////////////////
 		if(sketch.recordAudio) {
 
-			//float centreBar = (sketch.lineX - buttonX - sizeNode)/2;
-			//float widthBar = (float) (centreBar*0.98);
-			//float borderDif = 4;
-			
 			sketch.rectMode(Sketch.CENTER);
 			
 			// Containing rectangle
 			sketch.strokeWeight(sketch.strokeW);
 			sketch.noFill();
 			sketch.stroke(Colours.lineColour.getRed(), Colours.lineColour.getGreen(), Colours.lineColour.getBlue());
-			//sketch.rect(buttonX + (int) (sizeNode*1.1), sketch.getHeight()/2 - sizeNode/2, sketch.lineX - buttonX - widthBar, sizeNode);
-			//sketch.rect(sketch.lineX - centreBar, sketch.getHeight()/2, widthBar + borderDif, sizeNode + borderDif);
 			
 			
 			float yDifference = (float) (sizeNode/1.5);
@@ -246,10 +250,42 @@ public class MainSection {
 			sketch.rect(sketch.lineX/2, sketch.getHeight()/2 - yDifference, sizeNode + borderDif, heightBar/2 + borderDif);
 			
 			
-			// Amount of talking for each learner
-			int talkAmount1 = sketch.audioIn[0].getTalkingAmount();
-			int talkAmount2 = sketch.audioIn[1].getTalkingAmount();
 			float barHeight1 = 0, barHeight2 = 0;
+			// Amount of talking for each learner
+			float utterRateShort1 = sketch.audioIn[0].getUtterRateShort();
+			float utterRateLong1 = sketch.audioIn[0].getUtterRateLong();
+			
+			if(utterRateShort1 > utterRateLong1/AudioIn.utterRateTimeRatio) {
+				utterRateLong1 = utterRateShort1*AudioIn.utterRateTimeRatio;
+			}
+			
+			float utterRateShort2 = sketch.audioIn[1].getUtterRateShort();
+			float utterRateLong2 = sketch.audioIn[1].getUtterRateLong();
+			
+			if(utterRateShort2 > utterRateLong2/AudioIn.utterRateTimeRatio) {
+				utterRateLong2 = utterRateShort2*AudioIn.utterRateTimeRatio;
+			}
+			
+			float lrgUtterRateLong;
+			if(utterRateLong1 >= utterRateLong2) {
+				lrgUtterRateLong = utterRateLong1;
+			} else {
+				lrgUtterRateLong = utterRateLong2;
+			}
+			
+			lrgUtterRateLong = lrgUtterRateLong/AudioIn.utterRateTimeRatio;
+					
+			if(lrgUtterRateLong < 1) {
+				lrgUtterRateLong = 1;
+			}
+			
+			//System.out.println(utterRateShort1 + " " + utterRateLong1 + " " + utterRateShort2 + " " + utterRateLong2 + " " + lrgUtterRateLong);
+			barHeight1 = (utterRateShort1/lrgUtterRateLong)*sizeNode;
+			barHeight2 = (utterRateShort2/lrgUtterRateLong)*sizeNode;
+			
+			
+			/*int talkAmount1 = sketch.audioIn[0].getTalkingAmount();
+			int talkAmount2 = sketch.audioIn[1].getTalkingAmount();
 			
 			if(talkAmount1 > talkAmount2) {
 				barHeight1 = sizeNode;
@@ -259,27 +295,20 @@ public class MainSection {
 				barHeight1 = ((float) (talkAmount1)/talkAmount2)*sizeNode;
 			} else {
 				barHeight1 = barHeight2 = sizeNode;
-			}
+			}*/
 			
-			//System.out.println("Learner 1: " + talkAmount1 + " : " + barHeight1);
-			//System.out.println("Learner 2: " + talkAmount2 + " : " + barHeight2);
 			
 			sketch.noStroke();
 			// Learner 1's bar
 			sketch.fill(Colours.learner1TalkBar.getRed(), Colours.learner1TalkBar.getGreen(), Colours.learner1TalkBar.getBlue());
-			//sketch.rect(sketch.lineX - centreBar - widthBar/4, sketch.getHeight()/2, widthBar/2, barHeight1);
-			
 			//Above topic node
 			sketch.rect(sketch.lineX/2, sketch.getHeight()/2 + yDifference, barHeight1, heightBar/2);
 			
 			// Learner 2's bar
 			sketch.fill(Colours.learner2TalkBar.getRed(), Colours.learner2TalkBar.getGreen(), Colours.learner2TalkBar.getBlue());
-			//sketch.rect(sketch.lineX - centreBar + widthBar/4, sketch.getHeight()/2, widthBar/2, barHeight2);
-			
 			//Below topic node
 			sketch.rect(sketch.lineX/2, sketch.getHeight()/2 - yDifference, barHeight2, heightBar/2);
-			
-			
+
 			sketch.rectMode(Sketch.CORNER);
 		}
 	}	
@@ -289,6 +318,60 @@ public class MainSection {
 		createSwitchLanguageButtons();
 		createGraph();
 		createActivityButtons();
+		
+		long timeNow = System.currentTimeMillis();
+		sketch.audioIn[0].setTimeLastContent(timeNow);
+		sketch.audioIn[1].setTimeLastContent(timeNow);
+		
+		createContentPrompts();
+	}
+	
+	public void createContentPrompts() {
+		float dif = (float) (sketch.buttonWidth*0.05);
+		float width = sketch.buttonWidth - dif*2;
+		int animTime = animationTime*2;
+		
+		contentPrompt1 = new TextZone(buttonX + dif, buttonYb3 + sketch.buttonHeight/2, width, sketch.buttonHeight/2, Colours.pFont, sketch.learner1.topicPrompts[0], sketch.textSize/2, "CENTER", "CENTER");
+		
+		contentPrompt1.setTextColour(Colours.contentPromptC);
+		contentPrompt1.setDrawBorder(false);
+		contentPrompt1.setActive(true);
+		sketch.client.addZone(contentPrompt1);
+		
+		cPromptOverlay1 = new RectZone(buttonX + dif, buttonYb3 + sketch.buttonHeight/2, width, sketch.buttonHeight/2);
+		
+		cPromptOverlay1.setColour(Colours.backgroundColour);
+		cPromptOverlay1.setDrawBorder(false);
+		cPromptOverlay1.setActive(true);
+		sketch.client.addZone(cPromptOverlay1);
+		
+		animContentPrompt[0] = PropertySetter.createAnimator(animTime, cPromptOverlay1, 
+				"colour", new ColourEval(), Colours.backgroundColour, Colours.backgroundColour0Alpha);
+
+		animContentPrompt[0].setRepeatBehavior(RepeatBehavior.REVERSE);
+		animContentPrompt[0].setRepeatCount(1);
+		
+		contentPrompt2 = new TextZone(buttonX + dif, buttonYt3, width, sketch.buttonHeight/2, Colours.pFont, sketch.learner2.topicPrompts[0], sketch.textSize/2, "CENTER", "CENTER");
+		
+		contentPrompt2.rotate((float) (Colours.PI));
+		contentPrompt2.setTextColour(Colours.contentPromptC);
+		contentPrompt2.setDrawBorder(false);
+		contentPrompt2.setActive(true);
+		sketch.client.addZone(contentPrompt2);
+		
+		cPromptOverlay2 = new RectZone(buttonX + dif, buttonYt3, width, sketch.buttonHeight/2);
+		
+		cPromptOverlay2.setColour(Colours.backgroundColour);
+		cPromptOverlay2.rotate((float) (Colours.PI));
+		cPromptOverlay2.setDrawBorder(false);
+		cPromptOverlay2.setActive(true);
+		sketch.client.addZone(cPromptOverlay2);
+		
+		animContentPrompt[1] = PropertySetter.createAnimator(animTime, cPromptOverlay2, 
+				"colour", new ColourEval(), Colours.backgroundColour, Colours.backgroundColour0Alpha);
+
+		animContentPrompt[1].setRepeatBehavior(RepeatBehavior.REVERSE);
+		animContentPrompt[1].setRepeatCount(1);
 	}
 
 	/**
@@ -474,6 +557,10 @@ public class MainSection {
 		graph.nodes[graph.lastSelectedNode].setX(lastNodeX);
 		graph.nodes[graph.lastSelectedNode].setY(lastNodeY);
 
+		contentPrompt1.setText(sketch.learner1.topicPrompts[0]);
+		contentPrompt2.setText(sketch.learner2.topicPrompts[0]);
+		
+		
 		newLang1.setActive(true);
 		newLang2.setActive(true);
 		//leftCenterLineFlag = true;
@@ -954,6 +1041,10 @@ public class MainSection {
 		sketch.client.removeZone(switchAct2);
 		sketch.client.removeZone(newLang1);
 		sketch.client.removeZone(newLang2);
+		sketch.client.removeZone(contentPrompt1);
+		sketch.client.removeZone(contentPrompt2);
+		sketch.client.removeZone(cPromptOverlay1);
+		sketch.client.removeZone(cPromptOverlay2);
 
 		graph.removeNodes();
 	}

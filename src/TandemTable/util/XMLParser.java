@@ -524,6 +524,135 @@ public class XMLParser {
 						}
 
 					}
+				} else if (name.equalsIgnoreCase("contentPrompts")){
+					for(int j = 0; j < node.getChildCount(); j++){
+						if (node.getChild(j) instanceof Element) {
+							Element element = (Element) node.getChild(j);
+							String attribute = element.getAttribute(0).getValue();
+
+							if(element.getLocalName().equalsIgnoreCase("tweetPrompt1")){
+								if(attribute.equalsIgnoreCase("English")){
+									Languages.tweetPromptsE[0] = element.getValue();
+								} else if(attribute.equalsIgnoreCase("French")){
+									Languages.tweetPromptsF[0] = element.getValue();
+								} else if(attribute.equalsIgnoreCase("Portuguese")){
+									Languages.tweetPromptsP[0] = element.getValue();
+								} else if(attribute.equalsIgnoreCase("Spanish")){
+									Languages.tweetPromptsS[0] = element.getValue();
+								}
+							} else if(element.getLocalName().equalsIgnoreCase("tweetPrompt2")){
+								if(attribute.equalsIgnoreCase("English")){
+									Languages.tweetPromptsE[1] = element.getValue();
+								} else if(attribute.equalsIgnoreCase("French")){
+									Languages.tweetPromptsF[1] = element.getValue();
+								} else if(attribute.equalsIgnoreCase("Portuguese")){
+									Languages.tweetPromptsP[1] = element.getValue();
+								} else if(attribute.equalsIgnoreCase("Spanish")){
+									Languages.tweetPromptsS[1] = element.getValue();
+								}
+							} else if(element.getLocalName().equalsIgnoreCase("newsPrompt1")){
+								if(attribute.equalsIgnoreCase("English")){
+									Languages.newsPromptsE[0] = element.getValue();
+								} else if(attribute.equalsIgnoreCase("French")){
+									Languages.newsPromptsF[0] = element.getValue();
+								} else if(attribute.equalsIgnoreCase("Portuguese")){
+									Languages.newsPromptsP[0] = element.getValue();
+								} else if(attribute.equalsIgnoreCase("Spanish")){
+									Languages.newsPromptsS[0] = element.getValue();
+								}
+							} else if(element.getLocalName().equalsIgnoreCase("newsPrompt2")){
+								if(attribute.equalsIgnoreCase("English")){
+									Languages.newsPromptsE[1] = element.getValue();
+								} else if(attribute.equalsIgnoreCase("French")){
+									Languages.newsPromptsF[1] = element.getValue();
+								} else if(attribute.equalsIgnoreCase("Portuguese")){
+									Languages.newsPromptsP[1] = element.getValue();
+								} else if(attribute.equalsIgnoreCase("Spanish")){
+									Languages.newsPromptsS[1] = element.getValue();
+								}
+							} else if(element.getLocalName().equalsIgnoreCase("photosPrompt1")){
+								if(attribute.equalsIgnoreCase("English")){
+									Languages.photosPromptsE[0] = element.getValue();
+								} else if(attribute.equalsIgnoreCase("French")){
+									Languages.photosPromptsF[0] = element.getValue();
+								} else if(attribute.equalsIgnoreCase("Portuguese")){
+									Languages.photosPromptsP[0] = element.getValue();
+								} else if(attribute.equalsIgnoreCase("Spanish")){
+									Languages.photosPromptsS[0] = element.getValue();
+								}
+							} else if(element.getLocalName().equalsIgnoreCase("photosPrompt2")){
+								if(attribute.equalsIgnoreCase("English")){
+									Languages.photosPromptsE[1] = element.getValue();
+								} else if(attribute.equalsIgnoreCase("French")){
+									Languages.photosPromptsF[1] = element.getValue();
+								} else if(attribute.equalsIgnoreCase("Portuguese")){
+									Languages.photosPromptsP[1] = element.getValue();
+								} else if(attribute.equalsIgnoreCase("Spanish")){
+									Languages.photosPromptsS[1] = element.getValue();
+								}
+							} else if(element.getLocalName().equalsIgnoreCase("pGamePrompt1")){
+								if(attribute.equalsIgnoreCase("English")){
+									Languages.pGamePromptsE[0] = element.getValue();
+								} else if(attribute.equalsIgnoreCase("French")){
+									Languages.pGamePromptsF[0] = element.getValue();
+								} else if(attribute.equalsIgnoreCase("Portuguese")){
+									Languages.pGamePromptsP[0] = element.getValue();
+								} else if(attribute.equalsIgnoreCase("Spanish")){
+									Languages.pGamePromptsS[0] = element.getValue();
+								}
+							} else if(element.getLocalName().equalsIgnoreCase("pGamePrompt2")){
+								if(attribute.equalsIgnoreCase("English")){
+									Languages.pGamePromptsE[1] = element.getValue();
+								} else if(attribute.equalsIgnoreCase("French")){
+									Languages.pGamePromptsF[1] = element.getValue();
+								} else if(attribute.equalsIgnoreCase("Portuguese")){
+									Languages.pGamePromptsP[1] = element.getValue();
+								} else if(attribute.equalsIgnoreCase("Spanish")){
+									Languages.pGamePromptsS[1] = element.getValue();
+								}
+							} else if(element.getLocalName().equalsIgnoreCase("videoPrompt1")){
+								if(attribute.equalsIgnoreCase("English")){
+									Languages.videoPromptsE[0] = element.getValue();
+								} else if(attribute.equalsIgnoreCase("French")){
+									Languages.videoPromptsF[0] = element.getValue();
+								} else if(attribute.equalsIgnoreCase("Portuguese")){
+									Languages.videoPromptsP[0] = element.getValue();
+								} else if(attribute.equalsIgnoreCase("Spanish")){
+									Languages.videoPromptsS[0] = element.getValue();
+								}
+							} else if(element.getLocalName().equalsIgnoreCase("videoPrompt2")){
+								if(attribute.equalsIgnoreCase("English")){
+									Languages.videoPromptsE[1] = element.getValue();
+								} else if(attribute.equalsIgnoreCase("French")){
+									Languages.videoPromptsF[1] = element.getValue();
+								} else if(attribute.equalsIgnoreCase("Portuguese")){
+									Languages.videoPromptsP[1] = element.getValue();
+								} else if(attribute.equalsIgnoreCase("Spanish")){
+									Languages.videoPromptsS[1] = element.getValue();
+								}
+							} else if(element.getLocalName().equalsIgnoreCase("topicPrompt1")){
+								if(attribute.equalsIgnoreCase("English")){
+									Languages.topicPromptsE[0] = element.getValue();
+								} else if(attribute.equalsIgnoreCase("French")){
+									Languages.topicPromptsF[0] = element.getValue();
+								} else if(attribute.equalsIgnoreCase("Portuguese")){
+									Languages.topicPromptsP[0] = element.getValue();
+								} else if(attribute.equalsIgnoreCase("Spanish")){
+									Languages.topicPromptsS[0] = element.getValue();
+								}
+							} else if(element.getLocalName().equalsIgnoreCase("topicPrompt2")){
+								if(attribute.equalsIgnoreCase("English")){
+									Languages.topicPromptsE[1] = element.getValue();
+								} else if(attribute.equalsIgnoreCase("French")){
+									Languages.topicPromptsF[1] = element.getValue();
+								} else if(attribute.equalsIgnoreCase("Portuguese")){
+									Languages.topicPromptsP[1] = element.getValue();
+								} else if(attribute.equalsIgnoreCase("Spanish")){
+									Languages.topicPromptsS[1] = element.getValue();
+								}
+							}
+						}
+					}
 				} else if (name.equalsIgnoreCase("buttons")){
 					for(int j = 0; j < node.getChildCount(); j++){
 						if (node.getChild(j) instanceof Element) {
