@@ -20,8 +20,11 @@ public class ProfileCreation {
 	Sketch sketch;
 	ProfilePicker profilePicker;
 	LoginScreen loginScreen;
-	RotatableDrawZone drawUser1, drawUser2;
+	public RotatableDrawZone drawUser1, drawUser2;
 	ImageZone profileImg1, profileImg2;
+	// If the user has created a new avatar
+	public boolean saveImg1 = false;
+	public boolean saveImg2 = false;
 
 	/**
 	 * Initializes the profile creation object
@@ -62,6 +65,7 @@ public class ProfileCreation {
 						drawUser1.setActive(false);
 						loadProfileImage(1, drawUser1.getImage());
 						loginScreen.activateLanguageButtons(1);
+						saveImg1 = true;
 					}
 					return false;
 
@@ -82,6 +86,7 @@ public class ProfileCreation {
 						drawUser2.setActive(false);
 						loadProfileImage(2, drawUser2.getImage());
 						loginScreen.activateLanguageButtons(2);
+						saveImg2 = true;
 					}
 					return false;
 				}

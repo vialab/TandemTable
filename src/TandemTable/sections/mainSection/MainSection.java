@@ -54,7 +54,7 @@ public class MainSection {
 	
 	// Content Prompts
 	public TextZone contentPrompt1, contentPrompt2;
-	RectZone cPromptOverlay1, cPromptOverlay2;
+	public RectZone cPromptOverlay1, cPromptOverlay2;
 	
 	// Speaking amount text
 	public TextZone[] utterVisText;
@@ -330,15 +330,17 @@ public class MainSection {
 		float dif = (float) (sketch.buttonWidth*0.05);
 		float width = sketch.buttonWidth - dif*2;
 		int animTime = animationTime*2;
+		float buttonHeight = (float) (sketch.buttonHeight/1.5);
+		float y1 = buttonYb3 + (sketch.buttonHeight - buttonHeight);
 		
-		contentPrompt1 = new TextZone(buttonX + dif, buttonYb3 + sketch.buttonHeight/2, width, sketch.buttonHeight/2, Colours.pFont, sketch.learner1.topicPrompts[0], sketch.textSize/2, "CENTER", "CENTER");
+		contentPrompt1 = new TextZone(buttonX + dif, y1, width, buttonHeight, Colours.pFont, sketch.learner1.topicPrompts[0], sketch.textSize/2, "CENTER", "CENTER");
 		
 		contentPrompt1.setTextColour(Colours.contentPromptC);
 		contentPrompt1.setDrawBorder(false);
 		contentPrompt1.setActive(true);
 		sketch.client.addZone(contentPrompt1);
 		
-		cPromptOverlay1 = new RectZone(buttonX + dif, buttonYb3 + sketch.buttonHeight/2, width, sketch.buttonHeight/2);
+		cPromptOverlay1 = new RectZone(buttonX + dif, y1, width, buttonHeight);
 		
 		cPromptOverlay1.setColour(Colours.backgroundColour);
 		cPromptOverlay1.setDrawBorder(false);
@@ -351,7 +353,7 @@ public class MainSection {
 		animContentPrompt[0].setRepeatBehavior(RepeatBehavior.REVERSE);
 		animContentPrompt[0].setRepeatCount(1);
 		
-		contentPrompt2 = new TextZone(buttonX + dif, buttonYt3, width, sketch.buttonHeight/2, Colours.pFont, sketch.learner2.topicPrompts[0], sketch.textSize/2, "CENTER", "CENTER");
+		contentPrompt2 = new TextZone(buttonX + dif, buttonYt3, width, buttonHeight, Colours.pFont, sketch.learner2.topicPrompts[0], sketch.textSize/2, "CENTER", "CENTER");
 		
 		contentPrompt2.rotate((float) (Colours.PI));
 		contentPrompt2.setTextColour(Colours.contentPromptC);
@@ -359,7 +361,7 @@ public class MainSection {
 		contentPrompt2.setActive(true);
 		sketch.client.addZone(contentPrompt2);
 		
-		cPromptOverlay2 = new RectZone(buttonX + dif, buttonYt3, width, sketch.buttonHeight/2);
+		cPromptOverlay2 = new RectZone(buttonX + dif, buttonYt3, width, buttonHeight);
 		
 		cPromptOverlay2.setColour(Colours.backgroundColour);
 		cPromptOverlay2.rotate((float) (Colours.PI));
@@ -793,6 +795,8 @@ public class MainSection {
 	 */
 	public void initializeActivityScreen(String activity){
 
+		sketch.mainLogger.log(activity);
+		
 		lastNodeX = graph.nodes[graph.lastSelectedNode].getX();
 		lastNodeY = graph.nodes[graph.lastSelectedNode].getY();
 		graph.nodes[graph.lastSelectedNode].setXY(sketch.lineX/2 - graph.nodes[graph.lastSelectedNode].getWidth()/2, sketch.getHeight()/2 - graph.nodes[graph.lastSelectedNode].getHeight()/2);

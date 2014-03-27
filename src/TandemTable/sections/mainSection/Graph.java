@@ -221,6 +221,8 @@ public class Graph {
 							visitedNodes[k] = true;
 							
 							layoutManager.enableActivityButtons(k, topics1[k], randFlag, index);
+							
+							sketch.mainLogger.log("Chosen Topic: " + topics1[k]);
 						} 
 						else if(k == lastSelectedNode){
 							

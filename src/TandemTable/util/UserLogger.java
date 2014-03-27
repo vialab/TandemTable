@@ -1,6 +1,5 @@
 package TandemTable.util;
 
-import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -11,31 +10,43 @@ import java.io.IOException;
 public class UserLogger {
 
 	FileWriter writer;
-	BufferedWriter bWriter;
+	int user;
+	String path;
 	
+	
+	public UserLogger(String path, int user) {
+		this.user = user;
+		this.path = path;
+		
+		try {
+			writer = new FileWriter(path);
+		} catch (IOException e) {
+			System.out.println("User: " + user + ". Problem creating file writer at path: " + path);
+			e.printStackTrace();
+		}
+	}
 	/**
 	 * Writes the info to the log file [user].user
 	 * @param user
 	 * @param info
 	 */
-	public void logInfo(int user, String info){
+	public void log(String info){
 		try {
-			
-			///////////////////////////////////////////////////////////////////////////
-			// Instead of user, I could use rotatableDrawZone.getfilesCount to 
-			//determine what file number the image was saved as for when they create
-			//a new avatar
-			/////////////////////////////////////////////////////////////////////////
-			writer = new FileWriter(".\\data\\users\\info\\" + user + ".user");
-			bWriter = new BufferedWriter(writer);
-	
-			bWriter.write(info);
-			bWriter.flush();
-			
-			bWriter.close();
-			writer.close();
+			writer.write(info + "\n");
+			writer.flush();
 		} catch (IOException e) {
+			System.out.println("User: " + user + ". Problem writing to file at path: " + path);
 			e.printStackTrace();
 		}
 	}
+	
+	/*public void close() {
+		try {
+			writer.close();
+		} catch (IOException e) {
+			System.out.println("User: " + user + ". Problem closing writers");
+			e.printStackTrace();
+		}
+		
+	}*/
 }

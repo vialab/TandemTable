@@ -22,7 +22,7 @@ public class LoginScreen {
 	TouchClient client;
 	Sketch sketch;
 	ProfilePicker profilePicker;
-	ProfileCreation profileCreation;
+	public ProfileCreation profileCreation;
 
 	boolean langSelect1 = false, langSelect2 = false;
 
@@ -156,7 +156,10 @@ public class LoginScreen {
 			public void tapEvent(TapEvent e){
 				if (isTappable()){
 
-					if(profileCreation.drawUser1 != null){profileCreation.drawUser1.setActive(false);}
+					if(profileCreation.drawUser1 != null){ 
+						sketch.client.removeZone(profileCreation.drawUser1);
+						profileCreation.saveImg1 = false;
+					}
 
 					cancel1.setActive(false);
 					newLang1.setActive(false);
@@ -195,7 +198,10 @@ public class LoginScreen {
 
 			public void tapEvent(TapEvent e){
 				if (isTappable()){
-					if(profileCreation.drawUser2 != null){profileCreation.drawUser2.setActive(false);}
+					if(profileCreation.drawUser2 != null){ 
+						sketch.client.removeZone(profileCreation.drawUser2);
+						profileCreation.saveImg2 = false;
+					}
 
 					cancel2.setActive(false);
 					newLang2.setActive(false);
@@ -938,5 +944,7 @@ public class LoginScreen {
 		
 		langSelect1 = false;
 		langSelect2 = false;
+		
+		sketch.mainLogger.log("New Language");
 	}
 }

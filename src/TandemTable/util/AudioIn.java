@@ -31,8 +31,11 @@ public class AudioIn implements AudioProcessor {
 	AudioDispatcher dispatcher;
 	Mixer mixer;
 	SilenceDetector silenceDetector;
+	AudioFormat audioFormat;
+	
+	// Threshold for dB sound pressure level
 	int threshold;
-	int talkingAmount = 1;
+	//int talkingAmount = 1;
 	int user;
 	
 	ArrayList<SlidingWindow> windowArray;
@@ -48,6 +51,8 @@ public class AudioIn implements AudioProcessor {
 	//float noiseLevel = 0;
 	//int noiseLevelIndex = 0;
 	
+	// Total amount of time of utterances
+	long totalTimeUtterances = 0;
 	// If noise profile creation is complete
 	boolean noiseProfileComplete = false;
 	// Time of last utterance
@@ -65,7 +70,7 @@ public class AudioIn implements AudioProcessor {
 	// Start of noise capture in milliseconds
 	long startTime = 0;
 	// Utterance start threshold factor
-	float noiseMult = 2.0f;
+	float noiseMult = 1.1f;
 	// Maximum positive noise level detected 
 	float maxNoiseLvlPos = 0;
 	// Maximum negative noise level detected 
@@ -108,9 +113,13 @@ public class AudioIn implements AudioProcessor {
 		utterArray = new ArrayList<Utterance>();
 	}
 	
-	public int getTalkingAmount() {
-		return talkingAmount;
-	}
+	//public long getTimeAboveNoiseThresh() {
+	//	return timeAboveNoiseThresh;
+	//}
+	
+	//public int getTalkingAmount() {
+	//	return talkingAmount;
+	//}
 	
 	public long getTimeLastUtter() {
 		return timeOfLastUtter;
@@ -153,14 +162,14 @@ public class AudioIn implements AudioProcessor {
 		int overlap = 0;
 		
 		
-		final AudioFormat format = new AudioFormat(sampleRate, 16, 1, true,
+		audioFormat = new AudioFormat(sampleRate, 16, 1, true,
 				true);
 		final DataLine.Info dataLineInfo = new DataLine.Info(
-				TargetDataLine.class, format);
+				TargetDataLine.class, audioFormat);
 		TargetDataLine line;
 		line = (TargetDataLine) mixer.getLine(dataLineInfo);
 		final int numberOfSamples = bufferSize;
-		line.open(format, numberOfSamples);
+		line.open(audioFormat, numberOfSamples);
 		line.start();
 		final AudioInputStream stream = new AudioInputStream(line);
 		
@@ -294,12 +303,13 @@ public class AudioIn implements AudioProcessor {
 	public boolean process(AudioEvent audioEvent) {
 		float[] pcmAudio = audioEvent.getFloatBuffer();
 		int overlap = audioEvent.getOverlap();
+		long timeNow = System.currentTimeMillis();
 		
 		// Detect noise levels
 		if(startTime == 0) {
-			startTime = System.currentTimeMillis();
+			startTime = timeNow;
 		
-		} else if(System.currentTimeMillis() - startTime < delayNoise) {
+		} else if(timeNow - startTime < delayNoise) {
 			for(int i = overlap; i < pcmAudio.length; i++) {
 				float value = pcmAudio[i];
 				
@@ -319,7 +329,7 @@ public class AudioIn implements AudioProcessor {
 		// Processing input
 		} else if(sketch.login.loggedIn){
 			if(timeOfLastUtter == 0) {
-				timeOfLastUtter = System.currentTimeMillis();
+				timeOfLastUtter = timeNow;
 				timeUtterContent = timeOfLastUtter;
 			}
 			
@@ -328,10 +338,8 @@ public class AudioIn implements AudioProcessor {
 			for(int i = overlap; i < pcmAudio.length; i++) {
 				float value = pcmAudio[i];					
 				
-				//detectUtterance(value);
-				detectUtterancePaper(value);
-				
-				
+				//detectUtterance(value, timeNow);
+				detectUtterancePaper(value, timeNow);	
 			}
 			
 			determineUtterRate();
@@ -375,10 +383,10 @@ public class AudioIn implements AudioProcessor {
 	// Algorithm from 
 	// 2012. Ogawa et al. Table talk enhancer: a tabletop system for enhancing and balancing mealtime conversations using utterance rates. 
 	// http://doi.acm.org/10.1145/2390776.2390783
-	public void detectUtterancePaper(float value) {
+	public void detectUtterancePaper(float value, long timeNow) {
 		if(!startedUtter && (value < maxNoiseLvlNeg*noiseMult || value > maxNoiseLvlPos*noiseMult)) {
 			startedUtter = true;
-			curUtter = new Utterance(utterTime);
+			curUtter = new Utterance(utterTime, timeNow);
 			curUtter.addFloat(value);
 		
 		} else if(startedUtter && (value < maxNoiseLvlNeg || value > maxNoiseLvlPos)) {
@@ -392,7 +400,7 @@ public class AudioIn implements AudioProcessor {
 			
 			if(curUtter.getEndIndex() == -1) {
 				curUtter.setEndIndex(utterTime);
-				curUtter.setEndTime(System.currentTimeMillis());
+				curUtter.setEndTime(timeNow);
 			}
 		}
 		
@@ -401,10 +409,19 @@ public class AudioIn implements AudioProcessor {
 			
 			if(curUtter.getEndIndex() - curUtter.getStartIndex() > utterLengthThreshPaper) {
 				utterArray.add(curUtter);
-				talkingAmount++;
-				timeOfLastUtter = System.currentTimeMillis();
+				totalTimeUtterances += curUtter.getEndTime() - curUtter.getStartTime();
+				timeOfLastUtter = timeNow;
 				timeUtterContent = timeOfLastUtter;
-				System.out.println("User: " + user + ". Utterance number " + utterArray.size() + " added and ended at " + utterTime);
+				
+				if(user == 1) {
+					sketch.logger1.log("Utterance number " + utterArray.size());
+					sketch.logger1.log("Total Time of Utterances: " + totalTimeUtterances);
+				} else if(user == 2) {
+					sketch.logger2.log("Utterance number " + utterArray.size());
+					sketch.logger2.log("Total Time of Utterances: " + totalTimeUtterances);
+				}
+				
+				System.out.println("User: " + user + ". Utterance number " + utterArray.size() + " added and ended at " + utterTime + ". Total Time of Utterances: " + totalTimeUtterances);
 			}
 		}
 		
@@ -415,7 +432,7 @@ public class AudioIn implements AudioProcessor {
 		utterTime += 1;					
 	}
 	
-	public void detectUtterance(float value) {
+	/*public void detectUtterance(float value, long timeNow) {
 		if(value < maxNoiseLvlNeg || value > maxNoiseLvlPos) {
 			
 			if(!startedUtter) {
@@ -423,7 +440,7 @@ public class AudioIn implements AudioProcessor {
 				//long timeNow = System.currentTimeMillis();
 				
 				if(curUtter == null || utterTime - curUtter.getEndIndex() >= combineUtterTheshold) {
-					curUtter = new Utterance(utterTime);
+					curUtter = new Utterance(utterTime, timeNow);
 					utterAdded = false;
 					//System.out.println("Utterance number " + utterArray.size() + " started at " + utterTime);
 				} else {
@@ -445,20 +462,19 @@ public class AudioIn implements AudioProcessor {
 			if(startedUtter) {							
 				if(combineSounds && utterAdded) {
 					utterArray.get(utterArray.size() - 1).setEndIndex(utterTime);
-					utterArray.get(utterArray.size() - 1).setEndTime(System.currentTimeMillis());
-					timeOfLastUtter = System.currentTimeMillis();
+					utterArray.get(utterArray.size() - 1).setEndTime(timeNow);
+					timeOfLastUtter = timeNow;
 					timeUtterContent = timeOfLastUtter;
 					//System.out.println("Combined sounds - Utterance number " + utterArray.size() + " ended at " + utterTime + ". Size of utterance: " + utterArray.get(utterArray.size() - 1).getPCM().size()); //System.currentTimeMillis());
 					
 				
 				} else {
 					curUtter.setEndIndex(utterTime);
-					curUtter.setEndTime(System.currentTimeMillis());
+					curUtter.setEndTime(timeNow);
 					
 					if(curUtter.getEndIndex() - curUtter.getStartIndex() > utterLengthThresh) {
 						utterArray.add(curUtter);
-						talkingAmount++;
-						timeOfLastUtter = System.currentTimeMillis();
+						timeOfLastUtter = timeNow;
 						timeUtterContent = timeOfLastUtter;
 						utterAdded = true;
 						System.out.println("Utterance number " + utterArray.size() + " added and ended at " + utterTime); //System.currentTimeMillis());
@@ -474,9 +490,9 @@ public class AudioIn implements AudioProcessor {
 		}
 		
 		utterTime += 1;				
-	}
+	}*/
 	
-	public void handleSoundDetection() {
+	/*public void handleSoundDetection() {
 		if(slidingWindowFlag) {
 			long curTime = System.currentTimeMillis();
 			windowArray.add(new SlidingWindow(curTime, silenceDetector.currentSPL()));
@@ -513,11 +529,10 @@ public class AudioIn implements AudioProcessor {
 		timeOfLastUtter = System.currentTimeMillis();
 		timeUtterContent = timeOfLastUtter;
 		System.out.println("Sound detected for " + user + ": " + (int)(silenceDetector.currentSPL()) + "dB SPL, Talking Amount: " + talkingAmount);
-	}
+	}*/
 	
 	@Override
 	public void processingFinished() {
-		// TODO Auto-generated method stub
 		
 	}
 	
@@ -538,13 +553,15 @@ public class AudioIn implements AudioProcessor {
 	class Utterance {
 		int startIndex = -1;
 		int endIndex = -1;
+		long startTime = -1;
 		long endTime = -1;
 		ArrayList<Float> pcmData;
 		int r, g, b;
 		int belowThreshCounter = 0;
 		
-		public Utterance(int startIndex) {
+		public Utterance(int startIndex, long time) {
 			this.startIndex = startIndex;
+			this.startTime = time;
 			pcmData = new ArrayList<Float>();
 			r = (int) sketch.random(10, 256);
 			g = (int) sketch.random(10, 256);
@@ -574,6 +591,14 @@ public class AudioIn implements AudioProcessor {
 		
 		public long getEndTime() {
 			return endTime;
+		}
+		
+		public void setStartTime(long time) {
+			this.startTime = time;
+		}
+		
+		public long getStartTime() {
+			return startTime;
 		}
 		
 		public int getStartIndex() {

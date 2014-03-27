@@ -1,17 +1,28 @@
 package TandemTable;
 import java.awt.Color;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Random;
 import java.util.Vector;
 
 import javax.sound.sampled.Mixer;
 
+import org.jdesktop.animation.timing.Animator.Direction;
+
+import processing.core.PApplet;
+import processing.core.PConstants;
+import twitter4j.Twitter;
+import vialab.simpleMultiTouch.TouchClient;
+import vialab.simpleMultiTouch.zones.TextZone;
 import TandemTable.sections.login.LoginScreen;
 import TandemTable.sections.mainSection.MainSection;
 import TandemTable.util.AudioFrame;
-import TandemTable.util.AudioMixers;
 import TandemTable.util.AudioIn;
+import TandemTable.util.AudioMixers;
 import TandemTable.util.AudioOut;
 import TandemTable.util.KeyboardInput;
+import TandemTable.util.UserLogger;
 import TandemTable.util.XMLParser;
 
 import com.aetrion.flickr.Flickr;
@@ -19,12 +30,6 @@ import com.aetrion.flickr.REST;
 import com.aetrion.flickr.RequestContext;
 import com.google.gdata.client.youtube.YouTubeService;
 import com.sun.jna.NativeLibrary;
-
-import processing.core.PApplet;
-import processing.core.PConstants;
-import twitter4j.Twitter;
-import vialab.simpleMultiTouch.TouchClient;
-import vialab.simpleMultiTouch.zones.TextZone;
 
 /**
  * Main Class of TandemTable
@@ -43,7 +48,7 @@ public class Sketch extends PApplet {
 	public REST rest;
 	public RequestContext requestContext;
 	public Twitter twitter;
-	//public UserLogger logger;
+	public UserLogger mainLogger, logger1, logger2;
 	
 	// Audio capture from microphones
 	public AudioIn[] audioIn;
@@ -100,7 +105,11 @@ public class Sketch extends PApplet {
 	// Play prompt if there has been no talking
 	// for longer than this value
 	public static final long UTTER_PROMPT_THRESH = 50000;
-	public static final long CONTENT_PROMPT_THRESH = 20000;
+	public static final long CONTENT_PROMPT_THRESH = 15000;
+	// Time between switching content prompts
+	final long SWITCH_PROMPT_TIME = 10000;
+	// Start time of content prompt
+	long promptStartTime = 0;
 	
 	// Stroke weight of lines
 	public int strokeW = 5;
@@ -138,6 +147,13 @@ public class Sketch extends PApplet {
 
 		// Needs to be set for each machine
 		NativeLibrary.addSearchPath("libvlc", "C:\\Program Files\\VideoLAN\\VLC");
+		
+		String name1 = "temp1";
+		String name2 = "temp2";
+		String mainName = "main";
+		logger1 = new UserLogger(".\\data\\logs\\" + name1 + ".txt", 1);
+		logger2 = new UserLogger(".\\data\\logs\\" + name2 + ".txt", 2);
+		mainLogger = new UserLogger(".\\data\\logs\\" + mainName + ".txt", -1);
 		
 		setupAudioOut();
 		
@@ -193,24 +209,67 @@ public class Sketch extends PApplet {
 				audioIn[0].setTimeLastUtter(timeNow);
 			}
 			
-			if(mainSection != null && mainSection.contentPrompt1 != null && mainSection.contentPrompt2 != null
-					&& timeNow - audioIn[0].getTimeLastContent() > CONTENT_PROMPT_THRESH
-					&& timeNow - audioIn[1].getTimeLastContent() > CONTENT_PROMPT_THRESH) {
-								
-				// If utterance rate in time period is above threshold, fade out prompt
-				//if(conPromptActive) {
-				//	mainSection.animContentPrompt[0].setDirection(Animator.Direction.BACKWARD);
-				//}
-				mainSection.animContentPrompt[0].start();
-				mainSection.animContentPrompt[1].start();
+			////////////////////////////////
+			// Content prompts
+			///////////////////////////////
+			if(mainSection != null && mainSection.contentPrompt1 != null && mainSection.contentPrompt2 != null) {
 				
-				changeContentPrompts(mainSection.contentPrompt1, learner1);
-				changeContentPrompts(mainSection.contentPrompt2, learner2);
+				// Fade out prompts
+				if((timeNow - audioIn[0].getTimeLastContent() <= CONTENT_PROMPT_THRESH
+					|| timeNow - audioIn[1].getTimeLastContent() <= CONTENT_PROMPT_THRESH)
+					&& conPromptActive) {
+					
+					
+					if(mainSection.animContentPrompt[0].isRunning()) {
+						mainSection.animContentPrompt[0].pause();
+					}
+					
+					if(mainSection.animContentPrompt[1].isRunning()) {
+						mainSection.animContentPrompt[1].pause();
+					}
+					
+					mainSection.animContentPrompt[0].setInitialFraction(1);
+					mainSection.animContentPrompt[1].setInitialFraction(1);
+					mainSection.animContentPrompt[0].setDirection(Direction.BACKWARD);
+					mainSection.animContentPrompt[1].setDirection(Direction.BACKWARD);
+					mainSection.animContentPrompt[0].start();
+					mainSection.animContentPrompt[1].start();
+					conPromptActive = false;
+					System.out.println("Fade out content prompts");
 				
-				audioIn[0].setTimeLastContent(timeNow);
-				audioIn[1].setTimeLastContent(timeNow);
-				conPromptActive = true;
-				
+				// Fade in prompts
+				} else if((timeNow - audioIn[0].getTimeLastContent() > CONTENT_PROMPT_THRESH
+						&& timeNow - audioIn[1].getTimeLastContent() > CONTENT_PROMPT_THRESH
+						&& !conPromptActive)
+						|| (conPromptActive && timeNow - promptStartTime > SWITCH_PROMPT_TIME)) {
+					
+					mainSection.cPromptOverlay1.setColour(Colours.backgroundColour);
+					mainSection.cPromptOverlay1.setColour(Colours.backgroundColour);
+					
+					if(mainSection.animContentPrompt[0].isRunning()) {
+						mainSection.animContentPrompt[0].stop();
+					}
+					
+					if(mainSection.animContentPrompt[1].isRunning()) {
+						mainSection.animContentPrompt[1].stop();
+					}
+					
+					mainSection.animContentPrompt[0].setInitialFraction(0);
+					mainSection.animContentPrompt[1].setInitialFraction(0);
+					mainSection.animContentPrompt[0].setDirection(Direction.FORWARD);
+					mainSection.animContentPrompt[1].setDirection(Direction.FORWARD);
+					mainSection.animContentPrompt[0].start();
+					mainSection.animContentPrompt[1].start();
+					
+					changeContentPrompts(mainSection.contentPrompt1, learner1);
+					changeContentPrompts(mainSection.contentPrompt2, learner2);
+					
+					//audioIn[0].setTimeLastContent(timeNow);
+					//audioIn[1].setTimeLastContent(timeNow);\
+					promptStartTime = timeNow;
+					conPromptActive = true;
+					System.out.println("Fade in content prompts");
+				}
 			}
 		}
 	}
@@ -236,11 +295,9 @@ public class Sketch extends PApplet {
 
 	
 	public void initializeMainScreen(String lang1, String lang2){
-		//TODO
-		//LOGGING
-		//logger = new UserLogger();
-		//logger.logInfo(, "User" + "" + " " + lang1);
 		
+		mainLogger.log("User 1: " + lang1);
+		mainLogger.log("User 2: " + lang2);
 		
 		if(doneIntro) {
 			// Remove utterVis text
@@ -250,12 +307,53 @@ public class Sketch extends PApplet {
 			mainSection = new MainSection(this, lang1, lang2);
 			mainSection.createMainScreen();
 		} else {
+			
+			// Save profile image and user file
+			if(login.profileCreation.saveImg1) {
+				login.profileCreation.drawUser1.save();
+				int fileCounts = login.profileCreation.drawUser1.getFilesCount();
+				saveInfo(fileCounts, lang1);
+			}
+			// Save profile image and user file
+			if(login.profileCreation.saveImg2) {
+				login.profileCreation.drawUser2.save();
+				int fileCounts = login.profileCreation.drawUser2.getFilesCount();
+				saveInfo(fileCounts, lang2);
+			}
+			
+			
+			
+			
+			
 			mainSection = new MainSection(this, lang1, lang2);
 			mainSection.centerLineFlag = true;
 			intro = new IntroSection(this, mainSection);
 		}
 		
 		drawMainLayout = true;
+	}
+	
+	/**
+	 * Writes the info to the log file [fileNum].user
+	 * @param user
+	 * @param info
+	 */
+	public void saveInfo(int fileNum, String info){
+		try {
+			String path = ".\\data\\users\\info\\" + fileNum + ".user";
+			File file = new File(path);
+			
+			// if file doesnt exists, then create it
+			if (!file.exists()) {
+				file.createNewFile();
+			}
+			
+			FileWriter writer = new FileWriter(file.getAbsoluteFile());
+			writer.write(info);
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void changeContentPrompts(TextZone zone, Languages learner) {
