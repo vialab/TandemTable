@@ -243,402 +243,63 @@ public class Languages {
 			}
 			
 			for(int i = 0; i < Sketch.NUM_QUESTIONS; i ++) {
-				bw.write(introQuestionsEnglish[i]);
-				bw.write("\n");
-				
-				if(fr) {
-					bw.write(introQuestionsFrench[i]);
-				} else if(pt) {
-					bw.write(introQuestionsPortuguese[i]);
-				} else if(es) {
-					bw.write(introQuestionsSpanish[i]);
-				}
-				
-				bw.write("\n");
-				bw.write("\n");
+				writeBlock(introQuestionsEnglish[i], introQuestionsFrench[i], introQuestionsPortuguese[i], introQuestionsSpanish[i]);
 			}
 			
 			for(int i = 0; i < Sketch.NUM_ACTIVITIES; i ++) {
-				bw.write(activitiesE[i]);
-				bw.write("\n");
-				
-				if(fr) {
-					bw.write(activitiesF[i]);
-				} else if(pt) {
-					bw.write(activitiesP[i]);
-				} else if(es) {
-					bw.write(activitiesS[i]);
-				}
-				
-				bw.write("\n");
-				bw.write("\n");
+				writeBlock(activitiesE[i], activitiesF[i], activitiesP[i], activitiesS[i]);
 			}
 			
 			for(int i = 0; i < Sketch.NUM_TOPICS; i ++) {
-				bw.write(topicsE[i]);
-				bw.write("\n");
-				
-				if(fr) {
-					bw.write(topicsF[i]);
-				} else if(pt) {
-					bw.write(topicsP[i]);
-				} else if(es) {
-					bw.write(topicsS[i]);
-				}
-				
-				bw.write("\n");
-				bw.write("\n");
+				writeBlock(topicsE[i], topicsF[i], topicsP[i], topicsS[i]);
 				
 				for(int j = 0; j < Sketch.NUM_SYN; j ++) {
-					bw.write(topicsExpandedE[i][j]);
-					bw.write("\n");
-					
-					if(fr) {
-						bw.write(topicsExpandedF[i][j]);
-					} else if(pt) {
-						bw.write(topicsExpandedP[i][j]);
-					} else if(es) {
-						bw.write(topicsExpandedS[i][j]);
-					}
-					
-					bw.write("\n");
-					bw.write("\n");
+					writeBlock(topicsExpandedE[i][j], topicsExpandedF[i][j], topicsExpandedP[i][j], topicsExpandedS[i][j]);
 				}
 			}
 			
 			for(int i = 0; i < Sketch.NUM_CONTENT_PROMPTS; i ++) {
-				bw.write(newsPromptsE[i]);
-				bw.write("\n");
-				
-				if(fr) {
-					bw.write(newsPromptsF[i]);
-				} else if(pt) {
-					bw.write(newsPromptsP[i]);
-				} else if(es) {
-					bw.write(newsPromptsS[i]);
-				}
-				
-				bw.write("\n");
-				bw.write("\n");
+				writeBlock(newsPromptsE[i], newsPromptsF[i], newsPromptsP[i], newsPromptsS[i]);	
 			}
 			
 			for(int i = 0; i < Sketch.NUM_CONTENT_PROMPTS; i ++) {
-				bw.write(photosPromptsE[i]);
-				bw.write("\n");
-				
-				if(fr) {
-					bw.write(photosPromptsF[i]);
-				} else if(pt) {
-					bw.write(photosPromptsP[i]);
-				} else if(es) {
-					bw.write(photosPromptsS[i]);
-				}
-				
-				bw.write("\n");
-				bw.write("\n");
+				writeBlock(photosPromptsE[i], photosPromptsF[i], photosPromptsP[i], photosPromptsS[i]);	
 			}
 			
 			for(int i = 0; i < Sketch.NUM_CONTENT_PROMPTS; i ++) {
-				bw.write(pGamePromptsE[i]);
-				bw.write("\n");
-				
-				if(fr) {
-					bw.write(pGamePromptsF[i]);
-				} else if(pt) {
-					bw.write(pGamePromptsP[i]);
-				} else if(es) {
-					bw.write(pGamePromptsS[i]);
-				}
-				
-				bw.write("\n");
-				bw.write("\n");
+				writeBlock(pGamePromptsE[i], pGamePromptsF[i], pGamePromptsP[i], pGamePromptsS[i]);	
 			}
 			
 			for(int i = 0; i < Sketch.NUM_CONTENT_PROMPTS; i ++) {
-				bw.write(videoPromptsE[i]);
-				bw.write("\n");
-				
-				if(fr) {
-					bw.write(videoPromptsF[i]);
-				} else if(pt) {
-					bw.write(videoPromptsP[i]);
-				} else if(es) {
-					bw.write(videoPromptsS[i]);
-				}
-				
-				bw.write("\n");
-				bw.write("\n");
+				writeBlock(videoPromptsE[i], videoPromptsF[i], videoPromptsP[i], videoPromptsS[i]);
 			}
 			
 			for(int i = 0; i < Sketch.NUM_CONTENT_PROMPTS; i ++) {
-				bw.write(topicPromptsE[i]);
-				bw.write("\n");
-				
-				if(fr) {
-					bw.write(topicPromptsF[i]);
-				} else if(pt) {
-					bw.write(topicPromptsP[i]);
-				} else if(es) {
-					bw.write(topicPromptsS[i]);
-				}
-				
-				bw.write("\n");
-				bw.write("\n");
+				writeBlock(topicPromptsE[i], topicPromptsF[i], topicPromptsP[i], topicPromptsS[i]);
 			}
 			
 			for(int i = 0; i < Sketch.NUM_CONTENT_PROMPTS; i ++) {
-				bw.write(tweetPromptsE[i]);
-				bw.write("\n");
-				
-				if(fr) {
-					bw.write(tweetPromptsF[i]);
-				} else if(pt) {
-					bw.write(tweetPromptsP[i]);
-				} else if(es) {
-					bw.write(tweetPromptsS[i]);
-				}
-				
-				bw.write("\n");
-				bw.write("\n");
+				writeBlock(tweetPromptsE[i], tweetPromptsF[i], tweetPromptsP[i], tweetPromptsS[i]);
 			}
 			
-			bw.write(nextE);
-			bw.write("\n");
+			writeBlock(nextE, nextF, nextP, nextS);
+			writeBlock(moreQE, moreQF, moreQP, moreQS);
+			writeBlock(ranTopicsE, ranTopicsF, ranTopicsP, ranTopicsS);
+			writeBlock(choAnoTopE, choAnoTopF, choAnoTopP, choAnoTopS);
+			writeBlock(choAnoActE, choAnoActF, choAnoActP, choAnoActS);
+			writeBlock(newLangE, newLangF, newLangP, newLangS);
+			writeBlock(morePicsE, morePicsF, morePicsP, morePicsS);
+			writeBlock(tweetWordE, tweetWordF, tweetWordP, tweetWordS);
+			writeBlock(moreNewsE, moreNewsF, moreNewsP, moreNewsS);
+			writeBlock(back2HeadsE, back2HeadsF, back2HeadsP, back2HeadsS);
+			writeBlock(moreVideosE, moreVideosF, moreVideosP, moreVideosS);
+			writeBlock(playAgainE, playAgainF, playAgainP, playAgainS);
+			writeBlock(playE, playF, playP, playS);
+			writeBlock(pauseE, pauseF, pauseP, pauseS);
+			writeBlock(stopE, stopF, stopP, stopS);
+			writeBlock(playVideoE, playVideoF, playVideoP, playVideoS);
+			writeBlock(utterVisE, utterVisF, utterVisP, utterVisS);
 			
-			if(fr) {
-				bw.write(nextF);
-			} else if(pt) {
-				bw.write(nextP);
-			} else if(es) {
-				bw.write(nextS);
-			}
-			
-			bw.write("\n");
-			bw.write("\n");
-			
-			bw.write(moreQE);
-			bw.write("\n");
-			
-			if(fr) {
-				bw.write(moreQF);
-			} else if(pt) {
-				bw.write(moreQP);
-			} else if(es) {
-				bw.write(moreQS);
-			}
-			
-			bw.write("\n");
-			bw.write("\n");
-			
-			bw.write(ranTopicsE);
-			bw.write("\n");
-			
-			if(fr) {
-				bw.write(ranTopicsF);
-			} else if(pt) {
-				bw.write(ranTopicsP);
-			} else if(es) {
-				bw.write(ranTopicsS);
-			}
-			
-			bw.write("\n");
-			bw.write("\n");
-			
-			bw.write(choAnoTopE);
-			bw.write("\n");
-			
-			if(fr) {
-				bw.write(choAnoTopF);
-			} else if(pt) {
-				bw.write(choAnoTopP);
-			} else if(es) {
-				bw.write(choAnoTopS);
-			}
-			
-			bw.write("\n");
-			bw.write("\n");
-			
-			bw.write(choAnoActE);
-			bw.write("\n");
-			
-			if(fr) {
-				bw.write(choAnoActF);
-			} else if(pt) {
-				bw.write(choAnoActP);
-			} else if(es) {
-				bw.write(choAnoActS);
-			}
-			
-			bw.write("\n");
-			bw.write("\n");
-			
-			bw.write(newLangE);
-			bw.write("\n");
-			
-			if(fr) {
-				bw.write(newLangF);
-			} else if(pt) {
-				bw.write(newLangP);
-			} else if(es) {
-				bw.write(newLangS);
-			}
-			
-			bw.write("\n");
-			bw.write("\n");
-			
-			bw.write(morePicsE);
-			bw.write("\n");
-			
-			if(fr) {
-				bw.write(morePicsF);
-			} else if(pt) {
-				bw.write(morePicsP);
-			} else if(es) {
-				bw.write(morePicsS);
-			}
-			
-			bw.write("\n");
-			bw.write("\n");
-			
-			bw.write(tweetWordE);
-			bw.write("\n");
-			
-			if(fr) {
-				bw.write(tweetWordF);
-			} else if(pt) {
-				bw.write(tweetWordP);
-			} else if(es) {
-				bw.write(tweetWordS);
-			}
-			
-			bw.write("\n");
-			bw.write("\n");
-			
-			bw.write(moreNewsE);
-			bw.write("\n");
-			
-			if(fr) {
-				bw.write(moreNewsF);
-			} else if(pt) {
-				bw.write(moreNewsP);
-			} else if(es) {
-				bw.write(moreNewsS);
-			}
-			
-			bw.write("\n");
-			bw.write("\n");
-			
-			bw.write(back2HeadsE);
-			bw.write("\n");
-			
-			if(fr) {
-				bw.write(back2HeadsF);
-			} else if(pt) {
-				bw.write(back2HeadsP);
-			} else if(es) {
-				bw.write(back2HeadsS);
-			}
-			
-			bw.write("\n");
-			bw.write("\n");
-			
-			bw.write(moreVideosE);
-			bw.write("\n");
-			
-			if(fr) {
-				bw.write(moreVideosF);
-			} else if(pt) {
-				bw.write(moreVideosP);
-			} else if(es) {
-				bw.write(moreVideosS);
-			}
-			
-			bw.write("\n");
-			bw.write("\n");
-			
-			bw.write(playAgainE);
-			bw.write("\n");
-			
-			if(fr) {
-				bw.write(playAgainF);
-			} else if(pt) {
-				bw.write(playAgainP);
-			} else if(es) {
-				bw.write(playAgainS);
-			}
-			
-			bw.write("\n");
-			bw.write("\n");
-			
-			bw.write(playE);
-			bw.write("\n");
-			
-			if(fr) {
-				bw.write(playF);
-			} else if(pt) {
-				bw.write(playP);
-			} else if(es) {
-				bw.write(playS);
-			}
-			
-			bw.write("\n");
-			bw.write("\n");
-			
-			bw.write(pauseE);
-			bw.write("\n");
-			
-			if(fr) {
-				bw.write(pauseF);
-			} else if(pt) {
-				bw.write(pauseP);
-			} else if(es) {
-				bw.write(pauseS);
-			}
-			
-			bw.write("\n");
-			bw.write("\n");
-			
-			bw.write(stopE);
-			bw.write("\n");
-			
-			if(fr) {
-				bw.write(stopF);
-			} else if(pt) {
-				bw.write(stopP);
-			} else if(es) {
-				bw.write(stopS);
-			}
-			
-			bw.write("\n");
-			bw.write("\n");
-			
-			bw.write(playVideoE);
-			bw.write("\n");
-			
-			if(fr) {
-				bw.write(playVideoF);
-			} else if(pt) {
-				bw.write(playVideoP);
-			} else if(es) {
-				bw.write(playVideoS);
-			}
-			
-			bw.write("\n");
-			bw.write("\n");
-			
-			bw.write(utterVisE);
-			bw.write("\n");
-			
-			if(fr) {
-				bw.write(utterVisF);
-			} else if(pt) {
-				bw.write(utterVisP);
-			} else if(es) {
-				bw.write(utterVisS);
-			}
-			
-			bw.write("\n");
-			bw.write("\n");	
 			
 			bw.close();
 			fw.close();
@@ -673,7 +334,7 @@ public class Languages {
 		}
 	}
 	
-	public void setEnglish(){
+	private void setEnglish(){
 		introQuestions = introQuestionsEnglish;
 		activities = activitiesE;
 		topics = topicsE;
@@ -727,7 +388,7 @@ public class Languages {
 		cultureCode = "en_all";
 	}
 	
-	public void setFrench(){
+	private void setFrench(){
 		introQuestions = introQuestionsFrench;
 		activities = activitiesF;
 		topics = topicsF;
@@ -781,7 +442,7 @@ public class Languages {
 		cultureCode = "fr";
 	}
 	
-	public void setPortuguese(){
+	private void setPortuguese(){
 		introQuestions = introQuestionsPortuguese;
 		activities = activitiesP;
 		topics = topicsP;
@@ -837,7 +498,7 @@ public class Languages {
 		cultureCode = "pt-BR_br";
 	}
 	
-	public void setSpanish(){
+	private void setSpanish(){
 		introQuestions = introQuestionsSpanish;
 		activities = activitiesS;
 		topics = topicsS;
