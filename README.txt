@@ -5,5 +5,5 @@ Designed for a multi-touch tabletop, TandemTable is meant to inspire conversatio
 by suggesting topics of discussion and presenting learners with shared digital media artifacts that are 
 downloaded from the web in real-time.
 
-Erik Paluka. Copyright 2012-2013.
+Erik Paluka. Copyright 2012-2014.
 vialab research group

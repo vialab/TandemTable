@@ -1,12 +1,13 @@
-User 1: French
+User 1: English
 User 2: French
-Chosen Topic: Livres
+Chosen Topic: Books
 Twitter
-Twitter
-News Headlines 
 New Language
-User 1: French
+User 1: Spanish
 User 2: English
-Chosen Topic: Livres
+New Language
+User 1: Spanish
+User 2: Spanish
+Chosen Topic: Arte
 Twitter
 News Headlines 

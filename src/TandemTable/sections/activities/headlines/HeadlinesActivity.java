@@ -927,7 +927,12 @@ public class HeadlinesActivity {
 	}
 
 	public void createMiddleZone(){
-		middleZone = new MiddleWord(sketch, hg);
+		boolean sameLang = false;
+		
+		if(langTranslate1 == langTranslate2) {
+			sameLang = true;
+		}
+		middleZone = new MiddleWord(sketch, hg, sameLang);
 	}
 
 	

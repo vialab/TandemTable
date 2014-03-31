@@ -1,2 +1,6 @@
 Utterance number 1
-Total Time of Utterances: 71
+Total Time of Utterances: 0
+Utterance number 2
+Total Time of Utterances: 0
+Utterance number 3
+Total Time of Utterances: 0

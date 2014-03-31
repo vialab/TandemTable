@@ -41,15 +41,19 @@ public class MiddleWord {
 	Animator[] animT1, animT2;
 	public RectZone fadedBack;
 	
-	public MiddleWord(final Sketch sketch, TwitterGetter tg) {
+	boolean sameLang;
+	
+	public MiddleWord(final Sketch sketch, TwitterGetter tg, boolean sameLang) {
 		this.sketch = sketch;
 		this.tg = tg;
+		this.sameLang = sameLang;
 		createMiddleWord();
 	}
 	
-	public MiddleWord(final Sketch sketch, HeadlineGetter hg) {
+	public MiddleWord(final Sketch sketch, HeadlineGetter hg, boolean sameLang) {
 		this.sketch = sketch;
 		this.hg = hg;
+		this.sameLang = sameLang;
 		createMiddleWord();
 	}
 	
@@ -111,7 +115,11 @@ public class MiddleWord {
 		middleZone.setShadowW(2*sketch.shadowOffset);
 		middleZone.setShadowH(2*sketch.shadowOffset);
 		middleZone.setGestureEnabled("Tap", true);
-		middleZone.setGestureEnabled("TapAndHold", true);
+		
+		if(sameLang) {
+			middleZone.setGestureEnabled("TapAndHold", true);
+		}
+		
 		middleZone.setHoldDurationMilli(1000);
 		setMiddleText(" ");
 		sketch.client.addZone(middleZone);

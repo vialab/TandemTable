@@ -325,7 +325,13 @@ public class TwitterActivity {
 		sketch.client.addZone(swipeBackground2);
 	}
 	public void createMiddleTweet(){
-		middleZone = new MiddleWord(sketch, tg);
+		boolean sameLang = false;
+		
+		if(langTranslate1 == langTranslate2) {
+			sameLang = true;
+		}
+		
+		middleZone = new MiddleWord(sketch, tg, sameLang);
 	}
 
 	public void createTweetBackgrounds(){
