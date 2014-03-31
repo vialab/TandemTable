@@ -937,7 +937,7 @@ public class MainSection {
 		} else if (activity.equalsIgnoreCase(Languages.activitiesE[4])){
 			centerLineFlag = false;
 
-			pGameAct = new PGame(sketch, selectedTopicIndex, lang1, lang2);
+			pGameAct = new PGame(sketch, selectedTopicIndex);
 
 		}
 	}

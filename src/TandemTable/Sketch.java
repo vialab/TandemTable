@@ -99,6 +99,7 @@ public class Sketch extends PApplet {
 	public final static int NUM_QUESTIONS = 19;
 	public final static int NUM_ACTIVITIES = 5;
 	public final static int NUM_TOPICS = 15;
+	public final static int NUM_TAGS = 18;
 	public final static int NUM_SYN = 10;
 	public final int NUM_PAGES = 200;
 	public final int TIMEOUT = 10000;
@@ -131,6 +132,11 @@ public class Sketch extends PApplet {
 		XMLParser parser = new XMLParser();
 		parser.parseLanguages();
 		parser.parseTags();
+		
+		//Languages.writeOut("French");
+		//Languages.writeOut("Portuguese");
+		//Languages.writeOut("Spanish");
+		
 		
 		yOffset = screenHeight/100;
 		textSize = screenWidth/50;

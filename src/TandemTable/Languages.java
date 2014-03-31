@@ -1,5 +1,9 @@
 package TandemTable;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Languages {
 	// Variables for storing words extracted by XML parser
 	
@@ -191,7 +195,14 @@ public class Languages {
 	// For filtering web service data based on language and culture
 	public String countryCode, cultureCode;
 	
-	public String[][] tags = new String[15][18];
+	public String[][] tags = new String[Sketch.NUM_TOPICS][Sketch.NUM_TAGS];
+	
+	// For writing languages to file
+	static FileWriter fw;
+	static BufferedWriter bw;
+	static boolean fr = false;
+	static boolean pt = false;
+	static boolean es = false;
 	
 	public Languages(String lang){
 		this.lang = lang;
@@ -204,6 +215,461 @@ public class Languages {
 			setPortuguese();
 		} else if(lang.equalsIgnoreCase("Spanish")){
 			setSpanish();
+		}
+	}
+	
+	public static void writeOut(String language) {				
+		try {
+			fw = new FileWriter("toTranslate" + language + ".txt");
+		
+		
+			bw = new BufferedWriter(fw);
+			
+			if(language.equalsIgnoreCase("French")){
+				fr = true;
+				pt = false;
+				es = false;
+			} else if(language.equalsIgnoreCase("Portuguese")){
+				fr = false;
+				pt = true;
+				es = false;
+			} else if(language.equalsIgnoreCase("Spanish")){
+				fr = false;
+				pt = false;
+				es = true;
+			} else {
+				System.out.println("Incorrect language submitted for language write out.");
+				throw new RuntimeException("Incorrect language submitted for language write out.");
+			}
+			
+			for(int i = 0; i < Sketch.NUM_QUESTIONS; i ++) {
+				bw.write(introQuestionsEnglish[i]);
+				bw.write("\n");
+				
+				if(fr) {
+					bw.write(introQuestionsFrench[i]);
+				} else if(pt) {
+					bw.write(introQuestionsPortuguese[i]);
+				} else if(es) {
+					bw.write(introQuestionsSpanish[i]);
+				}
+				
+				bw.write("\n");
+				bw.write("\n");
+			}
+			
+			for(int i = 0; i < Sketch.NUM_ACTIVITIES; i ++) {
+				bw.write(activitiesE[i]);
+				bw.write("\n");
+				
+				if(fr) {
+					bw.write(activitiesF[i]);
+				} else if(pt) {
+					bw.write(activitiesP[i]);
+				} else if(es) {
+					bw.write(activitiesS[i]);
+				}
+				
+				bw.write("\n");
+				bw.write("\n");
+			}
+			
+			for(int i = 0; i < Sketch.NUM_TOPICS; i ++) {
+				bw.write(topicsE[i]);
+				bw.write("\n");
+				
+				if(fr) {
+					bw.write(topicsF[i]);
+				} else if(pt) {
+					bw.write(topicsP[i]);
+				} else if(es) {
+					bw.write(topicsS[i]);
+				}
+				
+				bw.write("\n");
+				bw.write("\n");
+				
+				for(int j = 0; j < Sketch.NUM_SYN; j ++) {
+					bw.write(topicsExpandedE[i][j]);
+					bw.write("\n");
+					
+					if(fr) {
+						bw.write(topicsExpandedF[i][j]);
+					} else if(pt) {
+						bw.write(topicsExpandedP[i][j]);
+					} else if(es) {
+						bw.write(topicsExpandedS[i][j]);
+					}
+					
+					bw.write("\n");
+					bw.write("\n");
+				}
+			}
+			
+			for(int i = 0; i < Sketch.NUM_CONTENT_PROMPTS; i ++) {
+				bw.write(newsPromptsE[i]);
+				bw.write("\n");
+				
+				if(fr) {
+					bw.write(newsPromptsF[i]);
+				} else if(pt) {
+					bw.write(newsPromptsP[i]);
+				} else if(es) {
+					bw.write(newsPromptsS[i]);
+				}
+				
+				bw.write("\n");
+				bw.write("\n");
+			}
+			
+			for(int i = 0; i < Sketch.NUM_CONTENT_PROMPTS; i ++) {
+				bw.write(photosPromptsE[i]);
+				bw.write("\n");
+				
+				if(fr) {
+					bw.write(photosPromptsF[i]);
+				} else if(pt) {
+					bw.write(photosPromptsP[i]);
+				} else if(es) {
+					bw.write(photosPromptsS[i]);
+				}
+				
+				bw.write("\n");
+				bw.write("\n");
+			}
+			
+			for(int i = 0; i < Sketch.NUM_CONTENT_PROMPTS; i ++) {
+				bw.write(pGamePromptsE[i]);
+				bw.write("\n");
+				
+				if(fr) {
+					bw.write(pGamePromptsF[i]);
+				} else if(pt) {
+					bw.write(pGamePromptsP[i]);
+				} else if(es) {
+					bw.write(pGamePromptsS[i]);
+				}
+				
+				bw.write("\n");
+				bw.write("\n");
+			}
+			
+			for(int i = 0; i < Sketch.NUM_CONTENT_PROMPTS; i ++) {
+				bw.write(videoPromptsE[i]);
+				bw.write("\n");
+				
+				if(fr) {
+					bw.write(videoPromptsF[i]);
+				} else if(pt) {
+					bw.write(videoPromptsP[i]);
+				} else if(es) {
+					bw.write(videoPromptsS[i]);
+				}
+				
+				bw.write("\n");
+				bw.write("\n");
+			}
+			
+			for(int i = 0; i < Sketch.NUM_CONTENT_PROMPTS; i ++) {
+				bw.write(topicPromptsE[i]);
+				bw.write("\n");
+				
+				if(fr) {
+					bw.write(topicPromptsF[i]);
+				} else if(pt) {
+					bw.write(topicPromptsP[i]);
+				} else if(es) {
+					bw.write(topicPromptsS[i]);
+				}
+				
+				bw.write("\n");
+				bw.write("\n");
+			}
+			
+			for(int i = 0; i < Sketch.NUM_CONTENT_PROMPTS; i ++) {
+				bw.write(tweetPromptsE[i]);
+				bw.write("\n");
+				
+				if(fr) {
+					bw.write(tweetPromptsF[i]);
+				} else if(pt) {
+					bw.write(tweetPromptsP[i]);
+				} else if(es) {
+					bw.write(tweetPromptsS[i]);
+				}
+				
+				bw.write("\n");
+				bw.write("\n");
+			}
+			
+			bw.write(nextE);
+			bw.write("\n");
+			
+			if(fr) {
+				bw.write(nextF);
+			} else if(pt) {
+				bw.write(nextP);
+			} else if(es) {
+				bw.write(nextS);
+			}
+			
+			bw.write("\n");
+			bw.write("\n");
+			
+			bw.write(moreQE);
+			bw.write("\n");
+			
+			if(fr) {
+				bw.write(moreQF);
+			} else if(pt) {
+				bw.write(moreQP);
+			} else if(es) {
+				bw.write(moreQS);
+			}
+			
+			bw.write("\n");
+			bw.write("\n");
+			
+			bw.write(ranTopicsE);
+			bw.write("\n");
+			
+			if(fr) {
+				bw.write(ranTopicsF);
+			} else if(pt) {
+				bw.write(ranTopicsP);
+			} else if(es) {
+				bw.write(ranTopicsS);
+			}
+			
+			bw.write("\n");
+			bw.write("\n");
+			
+			bw.write(choAnoTopE);
+			bw.write("\n");
+			
+			if(fr) {
+				bw.write(choAnoTopF);
+			} else if(pt) {
+				bw.write(choAnoTopP);
+			} else if(es) {
+				bw.write(choAnoTopS);
+			}
+			
+			bw.write("\n");
+			bw.write("\n");
+			
+			bw.write(choAnoActE);
+			bw.write("\n");
+			
+			if(fr) {
+				bw.write(choAnoActF);
+			} else if(pt) {
+				bw.write(choAnoActP);
+			} else if(es) {
+				bw.write(choAnoActS);
+			}
+			
+			bw.write("\n");
+			bw.write("\n");
+			
+			bw.write(newLangE);
+			bw.write("\n");
+			
+			if(fr) {
+				bw.write(newLangF);
+			} else if(pt) {
+				bw.write(newLangP);
+			} else if(es) {
+				bw.write(newLangS);
+			}
+			
+			bw.write("\n");
+			bw.write("\n");
+			
+			bw.write(morePicsE);
+			bw.write("\n");
+			
+			if(fr) {
+				bw.write(morePicsF);
+			} else if(pt) {
+				bw.write(morePicsP);
+			} else if(es) {
+				bw.write(morePicsS);
+			}
+			
+			bw.write("\n");
+			bw.write("\n");
+			
+			bw.write(tweetWordE);
+			bw.write("\n");
+			
+			if(fr) {
+				bw.write(tweetWordF);
+			} else if(pt) {
+				bw.write(tweetWordP);
+			} else if(es) {
+				bw.write(tweetWordS);
+			}
+			
+			bw.write("\n");
+			bw.write("\n");
+			
+			bw.write(moreNewsE);
+			bw.write("\n");
+			
+			if(fr) {
+				bw.write(moreNewsF);
+			} else if(pt) {
+				bw.write(moreNewsP);
+			} else if(es) {
+				bw.write(moreNewsS);
+			}
+			
+			bw.write("\n");
+			bw.write("\n");
+			
+			bw.write(back2HeadsE);
+			bw.write("\n");
+			
+			if(fr) {
+				bw.write(back2HeadsF);
+			} else if(pt) {
+				bw.write(back2HeadsP);
+			} else if(es) {
+				bw.write(back2HeadsS);
+			}
+			
+			bw.write("\n");
+			bw.write("\n");
+			
+			bw.write(moreVideosE);
+			bw.write("\n");
+			
+			if(fr) {
+				bw.write(moreVideosF);
+			} else if(pt) {
+				bw.write(moreVideosP);
+			} else if(es) {
+				bw.write(moreVideosS);
+			}
+			
+			bw.write("\n");
+			bw.write("\n");
+			
+			bw.write(playAgainE);
+			bw.write("\n");
+			
+			if(fr) {
+				bw.write(playAgainF);
+			} else if(pt) {
+				bw.write(playAgainP);
+			} else if(es) {
+				bw.write(playAgainS);
+			}
+			
+			bw.write("\n");
+			bw.write("\n");
+			
+			bw.write(playE);
+			bw.write("\n");
+			
+			if(fr) {
+				bw.write(playF);
+			} else if(pt) {
+				bw.write(playP);
+			} else if(es) {
+				bw.write(playS);
+			}
+			
+			bw.write("\n");
+			bw.write("\n");
+			
+			bw.write(pauseE);
+			bw.write("\n");
+			
+			if(fr) {
+				bw.write(pauseF);
+			} else if(pt) {
+				bw.write(pauseP);
+			} else if(es) {
+				bw.write(pauseS);
+			}
+			
+			bw.write("\n");
+			bw.write("\n");
+			
+			bw.write(stopE);
+			bw.write("\n");
+			
+			if(fr) {
+				bw.write(stopF);
+			} else if(pt) {
+				bw.write(stopP);
+			} else if(es) {
+				bw.write(stopS);
+			}
+			
+			bw.write("\n");
+			bw.write("\n");
+			
+			bw.write(playVideoE);
+			bw.write("\n");
+			
+			if(fr) {
+				bw.write(playVideoF);
+			} else if(pt) {
+				bw.write(playVideoP);
+			} else if(es) {
+				bw.write(playVideoS);
+			}
+			
+			bw.write("\n");
+			bw.write("\n");
+			
+			bw.write(utterVisE);
+			bw.write("\n");
+			
+			if(fr) {
+				bw.write(utterVisF);
+			} else if(pt) {
+				bw.write(utterVisP);
+			} else if(es) {
+				bw.write(utterVisS);
+			}
+			
+			bw.write("\n");
+			bw.write("\n");	
+			
+			bw.close();
+			fw.close();
+			System.out.println("Finished writing language out to file.");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+
+		
+	}
+	
+	private static void writeBlock(String enS, String frS, String ptS, String esS) {
+		try {
+			bw.write(enS);
+			bw.write("\n");
+			
+			if(fr) {
+				bw.write(frS);
+			} else if(pt) {
+				bw.write(ptS);
+			} else if(es) {
+				bw.write(esS);
+			}
+			
+			bw.write("\n");
+			bw.write("\n");	
+			
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 	

@@ -60,21 +60,20 @@ public class PGame {
 	Color halfCompletedC = new Color(248, 144, 32);
 	Color completedC = new Color(71, 178, 0);
 	
-	String lang1, lang2;//, play1, play2;
+	//String play1, play2;
 	
 	String[] tagArray1 = null;
 	String[] tagArray2 = null;
 	
-	public PGame(Sketch sketch, int topicIndex, String lang1, String lang2){
+	public PGame(Sketch sketch, int topicIndex){
 		this.sketch = sketch;
 		this.topicIndex = topicIndex;
-		this.lang1 = lang1;
-		this.lang2 = lang2;
 		
 		createBoxes();
-		
+		tagArray1 = sketch.learner1.tags[topicIndex];
+		tagArray2 = sketch.learner2.tags[topicIndex];
 
-		if(lang1.equalsIgnoreCase("English")){	
+		/*if(lang1.equalsIgnoreCase("English")){	
 			tagArray1 = Languages.tagsE[topicIndex];
 			//play1 = sketch.playAgainE;
 		} else if(lang1.equalsIgnoreCase("French")){
@@ -100,7 +99,7 @@ public class PGame {
 		} else if(lang2.equalsIgnoreCase("Spanish")){
 			tagArray2 = Languages.tagsS[topicIndex];
 			//play2 = sketch.playAgainS;
-		}
+		}*/
 				
 		
 		sketch.mainSection.contentPrompt1.setText(sketch.learner1.pGamePrompts[0]);
@@ -137,7 +136,6 @@ public class PGame {
 		flag1 = new boolean[NUM_IMAGES];
 		flag2 = new boolean[NUM_IMAGES];
 		
-		float xOff = 0;
 		String[] numbers = {"0", "2", "4", "5", "1", "3"};
 		numbers = sketch.scrambleStrings(numbers);
 		
@@ -145,8 +143,8 @@ public class PGame {
 		sketch.textAlign(PConstants.LEFT, PConstants.BOTTOM);
 		float spaceWidth = sketch.textWidth(" ");
 		float dist = (sketch.getWidth()-sketch.lineX)/12;
-		float x = sketch.lineX +dist/2;
-		float y = sketch.getHeight()-boxHeight/2;
+		float x = sketch.lineX + dist/2;
+		float y = 0, xOff = 0;
 		float threshXY = sketch.getHeight()/40;
 
 		for(int j = 0; j < numbers.length; j++){
@@ -155,6 +153,11 @@ public class PGame {
 			float textWidth = sketch.textWidth(c);
 			float zoneWidth = (textWidth + spaceWidth);
 
+			if(j % 2 == 0) {
+				y = sketch.getHeight() - boxHeight/2;
+			} else {
+				y = sketch.getHeight() - boxHeight/3;
+			}
 
 			tagZones1[tag] = new TextZone(x + xOff, y, zoneWidth, textSize, Colours.pFont, c, textSize, "LEFT", "BOTTOM");
 			tagZones1[tag].setDrawBorder(false);
@@ -164,8 +167,8 @@ public class PGame {
 			xOff += dist*2;
 		}
 		
-		x = sketch.getWidth()- dist - dist/2;
-		y = boxHeight/2 - textSize;
+		x = sketch.getWidth() - dist - dist/2;
+		//y = boxHeight/2 - textSize;
 		xOff = 0;
 		
 		for(int j = 0; j < numbers.length; j++){
@@ -174,6 +177,13 @@ public class PGame {
 			float textWidth = sketch.textWidth(c);
 			float zoneWidth = (textWidth + spaceWidth);
 
+			if(j % 2 == 0) {
+				
+				y = textSize;
+			} else {
+				y = boxHeight/2 - textSize;
+			}
+			
 			tagZones2[tag] = new TextZone(x + xOff, y, zoneWidth, textSize, Colours.pFont, c, textSize, "LEFT", "BOTTOM");
 			tagZones2[tag].setDrawBorder(false);
 			tagZones2[tag].rotate((float) Colours.PI);
