@@ -178,7 +178,7 @@ public class VideoController {
 			sketch.client.pullToTop(accept2);
 			accept2.setActive(true);
 		}
-		sketch.client.pullToTop(tAct.middleTweet);
+		sketch.client.pullToTop(tAct.middleZone.middleZone);
 	}
 	
 	public void startVideo(int user){

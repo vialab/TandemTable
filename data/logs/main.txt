@@ -1,4 +1,12 @@
-User 1: English
+User 1: French
 User 2: French
-Chosen Topic: Language
-Picture Game
+Chosen Topic: Livres
+Twitter
+Twitter
+News Headlines 
+New Language
+User 1: French
+User 2: English
+Chosen Topic: Livres
+Twitter
+News Headlines 

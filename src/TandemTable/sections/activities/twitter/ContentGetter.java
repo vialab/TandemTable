@@ -860,10 +860,10 @@ public class ContentGetter extends Thread{
 
 				if(wordMap1.containsKey(sketch.color(backBuffer.get((int)(e.getX()-getX()), (int)(e.getY()-getY() + getYOffset()))))){
 					String ss = wordMap1.get(sketch.color(backBuffer.get((int)(e.getX()-getX()), (int)(e.getY()-getY() + getYOffset()))));
-					tg.twitterAct.setMiddleTweet(ss);
+					tg.twitterAct.middleZone.setMiddleText(ss);
 					tg.twitterAct.selectedWord = ss;
-					if(!tg.twitterAct.started){
-						tg.twitterAct.started = true;
+					if(!tg.twitterAct.middleZone.started){
+						tg.twitterAct.middleZone.started = true;
 					}
 					tg.twitterAct.lastUser = 1;
 					
@@ -988,10 +988,10 @@ public class ContentGetter extends Thread{
 
 				if(wordMap1.containsKey(colourPicker1)){
 					String ss = wordMap1.get(colourPicker1);
-					tg.twitterAct.setMiddleTweet(ss);
+					tg.twitterAct.middleZone.setMiddleText(ss);
 					tg.twitterAct.selectedWord = ss;
-					if(!tg.twitterAct.started){
-						tg.twitterAct.started = true;
+					if(!tg.twitterAct.middleZone.started){
+						tg.twitterAct.middleZone.started = true;
 					}
 					tg.twitterAct.lastUser = 2;
 

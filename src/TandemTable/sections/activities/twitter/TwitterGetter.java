@@ -19,7 +19,6 @@ import vialab.simpleMultiTouch.zones.TextZone;
 import TandemTable.Colours;
 import TandemTable.Sketch;
 
-import com.memetix.mst.language.Language;
 import com.memetix.mst.translate.Translate;
 
 public class TwitterGetter extends Thread {
@@ -220,36 +219,36 @@ public class TwitterGetter extends Thread {
 
 	public void translateMiddleWord(){
 
-		if(twitterAct.middleText.length() > 0 && !twitterAct.middleText.equalsIgnoreCase(" ")){
-			twitterAct.animMiddleTweet.start();
-			twitterAct.middleText = twitterAct.middleText.trim();
+		if(twitterAct.middleZone.middleText.length() > 0 && !twitterAct.middleZone.middleText.equalsIgnoreCase(" ")){
+			twitterAct.middleZone.animMiddleZone.start();
+			twitterAct.middleZone.middleText = twitterAct.middleZone.middleText.trim();
 			String translatedText = "";
 			try {
-				if(!twitterAct.middleText.startsWith("http:") && !twitterAct.middleText.startsWith("https:")){
-					translatedText = twitterAct.middleText.replaceAll(sketch.replaceRegex, " ");
+				if(!twitterAct.middleZone.middleText.startsWith("http:") && !twitterAct.middleZone.middleText.startsWith("https:")){
+					translatedText = twitterAct.middleZone.middleText.replaceAll(sketch.replaceRegex, " ");
 				}
 				
-				// TODO
-				// Allow user to choose what language they want the word translated to
 				if(twitterAct.langTranslate1 == twitterAct.langTranslate2){
-					if(twitterAct.langTranslate1 == Language.ENGLISH){
+					/*if(twitterAct.langTranslate1 == Language.ENGLISH){
 						translatedText = Translate.execute(translatedText, twitterAct.langTranslate1, Language.FRENCH);
 					} else {
 						translatedText = Translate.execute(translatedText, twitterAct.langTranslate1, Language.ENGLISH);
-					}
+					}*/
+					
+					translatedText = Translate.execute(translatedText, twitterAct.langTranslate1, sketch.transLanguage);
 				} else if(twitterAct.lastUser == 1){
 					translatedText = Translate.execute(translatedText, twitterAct.langTranslate1, twitterAct.langTranslate2);
 				} else {
 					translatedText = Translate.execute(translatedText, twitterAct.langTranslate2, twitterAct.langTranslate1);
 				}
 
-				twitterAct.setMiddleTweet(translatedText);
+				twitterAct.middleZone.setMiddleText(translatedText);
 
 			} catch (Exception e) {
 				System.out.println("Problem translating \"" + translatedText + "\". Languages: " + twitterAct.langTranslate1 + " and " + twitterAct.langTranslate2 + ".");
 			}
-			twitterAct.animMiddleTweet.stop();
-			twitterAct.middleTweet.setColour(Colours.boundingBox);
+			twitterAct.middleZone.animMiddleZone.stop();
+			twitterAct.middleZone.middleZone.setColour(Colours.boundingBox);
 		}
 	}
 
@@ -316,7 +315,7 @@ public class TwitterGetter extends Thread {
 							public void tapEvent(TapEvent e){
 								if(isTappable()){
 
-									twitterAct.started = true;
+									twitterAct.middleZone.started = true;
 									queryWord(ss2, 1);
 									e.setHandled(true);
 								}
@@ -351,7 +350,7 @@ public class TwitterGetter extends Thread {
 										
 										contGetter1 = hmap1[ii].get(jj);
 										hmap1[ii].get(jj).activated = true;
-										sketch.client.pullToTop(twitterAct.middleTweet);
+										sketch.client.pullToTop(twitterAct.middleZone.middleZone);
 										hmap1[ii].get(jj).background.setActive(true);
 										
 										if(contGetter1.videoFlag && !(sketch.deactivateVideo || sketch.removeVideoAct)){
@@ -415,14 +414,14 @@ public class TwitterGetter extends Thread {
 									twitterAct.fadeTweetWordButton(2);
 									
 									twitterAct.selectedWord = ss2;
-									if(twitterAct.started && twitterAct.lastHighlightZone != null){
+									if(twitterAct.middleZone.started && twitterAct.lastHighlightZone != null){
 										twitterAct.lastHighlightZone.setHighlightText(false);
 									} else {
-										twitterAct.started = true;
+										twitterAct.middleZone.started = true;
 									}
 									twitterAct.lastHighlightZone = this;
 									this.setHighlightText(true);
-									twitterAct.setMiddleTweet(ss2);
+									twitterAct.middleZone.setMiddleText(ss2);
 									e.setHandled(true);
 								}
 							}
@@ -460,7 +459,7 @@ public class TwitterGetter extends Thread {
 							public void tapEvent(TapEvent e){
 								if(isTappable()){
 
-									twitterAct.started = true;
+									twitterAct.middleZone.started = true;
 									queryWord(ss2, 2);
 									e.setHandled(true);
 								}
@@ -495,7 +494,7 @@ public class TwitterGetter extends Thread {
 										
 										contGetter2 = hmap2[ii].get(jj);
 										hmap2[ii].get(jj).activated = true;
-										sketch.client.pullToTop(twitterAct.middleTweet);
+										sketch.client.pullToTop(twitterAct.middleZone.middleZone);
 										hmap2[ii].get(jj).background.setActive(true);
 										
 										if(contGetter2.videoFlag && !(sketch.deactivateVideo || sketch.removeVideoAct)){
@@ -559,14 +558,14 @@ public class TwitterGetter extends Thread {
 									twitterAct.fadeTweetWordButton(1);
 									
 									twitterAct.selectedWord = ss2;
-									if(twitterAct.started && twitterAct.lastHighlightZone != null){
+									if(twitterAct.middleZone.started && twitterAct.lastHighlightZone != null){
 										twitterAct.lastHighlightZone.setHighlightText(false);
 									} else {
-										twitterAct.started = true;
+										twitterAct.middleZone.started = true;
 									}
 									twitterAct.lastHighlightZone = this;
 									this.setHighlightText(true);
-									twitterAct.setMiddleTweet(ss2);
+									twitterAct.middleZone.setMiddleText(ss2);
 									e.setHandled(true);
 								}
 							}

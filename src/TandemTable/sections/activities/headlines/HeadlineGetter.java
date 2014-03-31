@@ -8,7 +8,6 @@ import org.json.JSONObject;
 import TandemTable.Colours;
 import TandemTable.Sketch;
 
-import com.memetix.mst.language.Language;
 import com.memetix.mst.translate.Translate;
 
 import processing.core.PApplet;
@@ -153,36 +152,37 @@ public class HeadlineGetter extends Thread {
 	}
 	public void translateMiddleWord(){
 
-		if(headAct.middleText.length() > 0 && !headAct.middleText.equalsIgnoreCase(" ")){
-			headAct.animMiddleZone.start();
-			headAct.middleText = headAct.middleText.trim();
+		if(headAct.middleZone.middleText.length() > 0 && !headAct.middleZone.middleText.equalsIgnoreCase(" ")){
+			headAct.middleZone.animMiddleZone.start();
+			headAct.middleZone.middleText = headAct.middleZone.middleText.trim();
 			String translatedText = "";
 			try {
-				if(!headAct.middleText.startsWith("http:")){
-					translatedText = headAct.middleText.replaceAll(sketch.replaceRegex, " ");
+				if(!headAct.middleZone.middleText.startsWith("http:")){
+					translatedText = headAct.middleZone.middleText.replaceAll(sketch.replaceRegex, " ");
 				}
 				
-				// TODO
-				// Allow user to choose what language they want the word translated to
+			
 				if(headAct.langTranslate1 == headAct.langTranslate2){
-					if(headAct.langTranslate1 == Language.ENGLISH){
+					/*if(headAct.langTranslate1 == Language.ENGLISH){
 						translatedText = Translate.execute(translatedText, headAct.langTranslate1, Language.FRENCH);
 					} else {
 						translatedText = Translate.execute(translatedText, headAct.langTranslate1, Language.ENGLISH);
-					}
+					}*/
+					
+					translatedText = Translate.execute(translatedText, headAct.langTranslate1, sketch.transLanguage);
 				} else if(headAct.lastUser == 1){
 					translatedText = Translate.execute(translatedText, headAct.langTranslate1, headAct.langTranslate2);
 				} else {
 					translatedText = Translate.execute(translatedText, headAct.langTranslate2, headAct.langTranslate1);
 				}
 
-				headAct.setMiddleText(translatedText);
+				headAct.middleZone.setMiddleText(translatedText);
 
 			} catch (Exception e) {
 				System.out.println("Problem translating \"" + translatedText + "\". Languages: " + headAct.langTranslate1 + " and " + headAct.langTranslate2 + ".");
 			}
-			headAct.animMiddleZone.stop();
-			headAct.middleZone.setColour(Colours.boundingBox);
+			headAct.middleZone.animMiddleZone.stop();
+			headAct.middleZone.middleZone.setColour(Colours.boundingBox);
 		}
 	}
 }

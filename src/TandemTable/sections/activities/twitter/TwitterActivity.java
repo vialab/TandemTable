@@ -10,7 +10,6 @@ import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.Animator.RepeatBehavior;
 import org.jdesktop.animation.timing.interpolation.PropertySetter;
 
-import processing.core.PConstants;
 import vialab.simpleMultiTouch.TouchClient;
 import vialab.simpleMultiTouch.events.TapEvent;
 import vialab.simpleMultiTouch.events.VSwipeEvent;
@@ -21,6 +20,7 @@ import TandemTable.Languages;
 import TandemTable.Sketch;
 import TandemTable.sections.mainSection.MainSection;
 import TandemTable.util.ColourEval;
+import TandemTable.util.MiddleWord;
 
 import com.memetix.mst.language.Language;
 
@@ -31,7 +31,6 @@ public class TwitterActivity {
 	VideoController videoController;
 
 	boolean errorFlag = false;
-	boolean started = false;
 	boolean canceled = false;
 
 	int spaceX;
@@ -58,7 +57,6 @@ public class TwitterActivity {
 	String topic2 = "";
 	String tweetsS1 = "";
 	String tweetsS2 = "";
-	String middleText = " ";
 	String selectedWord, topicExpanded1, topicExpanded2;
 
 
@@ -67,19 +65,18 @@ public class TwitterActivity {
 	TextZone lastHighlightZone;
 	// Tweet containers
 	RectZone[] background1, background2;
-	RectZone middleTweet, swipeBackground1, swipeBackground2;
+	RectZone swipeBackground1, swipeBackground2;
 
+	MiddleWord middleZone;
 	TwitterGetter tg;
 	Language langTranslate1, langTranslate2;
 
 	final int NUM_TWEETS = 2;
 	final int MAX_TWEETS = 100;
 
-	Animator animMiddleTweet;
 	Animator animTweet1;
 	Animator animTweet2;
 	
-	String lang1, lang2;
 
 	public TwitterActivity(Sketch sketch, MainSection mainSection, int topicIndex, String lang1, String lang2){
 		this.client = sketch.client;
@@ -87,8 +84,7 @@ public class TwitterActivity {
 		this.mainSection = mainSection;
 		spaceX = sketch.getWidth() - sketch.lineX;
 		this.topicIndex = topicIndex;
-		this.lang1 = lang1;
-		this.lang2 = lang2;
+		
 		
 
 
@@ -329,57 +325,7 @@ public class TwitterActivity {
 		sketch.client.addZone(swipeBackground2);
 	}
 	public void createMiddleTweet(){
-
-
-
-		middleTweet = new RectZone(x, sketch.getHeight()/2-height/2, width/2, height, sketch.radius){
-			public void drawZone(){
-				super.drawZone();
-				this.setX(middleX);
-				this.setWidth(middleWidth);
-				sketch.fill(0);
-				sketch.textFont(Colours.pFont, tweetTextSize*2);
-				sketch.textAlign(PConstants.LEFT, PConstants.BOTTOM);
-				sketch.text(middleText, this.getX() + (this.getWidth() - sketch.textWidth(middleText))/2, this.getY() + 7*this.getHeight()/8);
-
-				sketch.pushMatrix();
-				sketch.translate(this.getX() + (this.getWidth() + sketch.textWidth(middleText))/2, this.getY() + this.getHeight()/8);
-				sketch.rotate((float) Colours.PI);
-				sketch.text(middleText, 0, 0);
-				sketch.popMatrix();
-			}
-
-			public void tapEvent(TapEvent e){
-				if(started){
-					tg.translateMiddleWord();
-				} else {
-					setMiddleTweet("Tap A Word!");
-				}
-				e.setHandled(true);
-			}
-		};
-
-		middleTweet.setColour(Colours.boundingBox.getRed(), Colours.boundingBox.getGreen(), Colours.boundingBox.getBlue());
-		middleTweet.setShadow(true);
-		middleTweet.setShadowColour(Colours.shadow.getRed(), Colours.shadow.getGreen(), Colours.shadow.getBlue());
-		middleTweet.setStroke(false);
-		middleTweet.setDrawBorder(false);
-		middleTweet.setShadowX(-sketch.shadowOffset);
-		middleTweet.setShadowY(-sketch.shadowOffset);
-		middleTweet.setShadowW(2*sketch.shadowOffset);
-		middleTweet.setShadowH(2*sketch.shadowOffset);
-		middleTweet.setGestureEnabled("Tap", true);
-		setMiddleTweet("");
-		client.addZone(middleTweet);
-
-		animMiddleTweet = PropertySetter.createAnimator(500, middleTweet, 
-				"Colour", new ColourEval(), Colours.boundingBox, Color.ORANGE);
-
-
-		animMiddleTweet.setRepeatBehavior(RepeatBehavior.REVERSE);
-		animMiddleTweet.setRepeatCount(Animator.INFINITE);
-
-
+		middleZone = new MiddleWord(sketch, tg);
 	}
 
 	public void createTweetBackgrounds(){
@@ -419,17 +365,6 @@ public class TwitterActivity {
 
 
 	}
-
-
-	public void setMiddleTweet(String str){
-		middleText = str;
-		int middleSpace = sketch.getWidth()/20;
-		sketch.textFont(Colours.pFont, tweetTextSize*2);
-		middleX = (int) (sketch.lineX + (sketch.getWidth()-sketch.lineX)/2 - sketch.textWidth(str)/2 - middleSpace);
-		middleWidth = (int) (sketch.textWidth(str) + middleSpace*2);
-	}
-
-
 
 
 	public void createTweetWordButtons(){
@@ -527,9 +462,14 @@ public class TwitterActivity {
 
 	public void removeZones(){
 		canceled = true;
+		
+		if(middleZone.fadedBack != null) {
+			middleZone.removeTransButtons();
+		}
+		
 		client.removeZone(tweetWord1);
 		client.removeZone(tweetWord2);
-		client.removeZone(middleTweet);
+		client.removeZone(middleZone.middleZone);
 		client.removeZone(tg.loading);
 		client.removeZone(swipeBackground1);
 		client.removeZone(swipeBackground2);

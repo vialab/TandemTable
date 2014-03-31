@@ -29,6 +29,7 @@ import com.aetrion.flickr.Flickr;
 import com.aetrion.flickr.REST;
 import com.aetrion.flickr.RequestContext;
 import com.google.gdata.client.youtube.YouTubeService;
+import com.memetix.mst.language.Language;
 import com.sun.jna.NativeLibrary;
 
 /**
@@ -76,7 +77,9 @@ public class Sketch extends PApplet {
 	KeyboardInput keyboard;
 	// JFrame and JPanel for drawing audio input
 	public AudioFrame audioFrame;
-			
+	// Language to translate to when both languages are the same
+	public Language transLanguage = Language.ENGLISH;
+	
 	///////////////////////////////////////
 	// For study
 	//////////////////////////////////////
@@ -103,6 +106,7 @@ public class Sketch extends PApplet {
 	public final static int NUM_SYN = 10;
 	public final int NUM_PAGES = 200;
 	public final int TIMEOUT = 10000;
+	public final static int NUM_LANGS = 4;
 	// Play prompt if there has been no talking
 	// for longer than this value
 	public static final long UTTER_PROMPT_THRESH = 50000;

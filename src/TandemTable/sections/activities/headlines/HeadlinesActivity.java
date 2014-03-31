@@ -1,26 +1,13 @@
 package TandemTable.sections.activities.headlines;
 
-import java.awt.Color;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.regex.Pattern;
 
-import org.jdesktop.animation.timing.Animator;
-import org.jdesktop.animation.timing.Animator.RepeatBehavior;
-import org.jdesktop.animation.timing.interpolation.PropertySetter;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import TandemTable.Colours;
-import TandemTable.Languages;
-import TandemTable.Sketch;
-import TandemTable.sections.mainSection.MainSection;
-import TandemTable.util.ArticleContainer;
-import TandemTable.util.ColourEval;
-
-import com.memetix.mst.language.Language;
 
 import processing.core.PApplet;
 import processing.core.PConstants;
@@ -29,6 +16,14 @@ import vialab.simpleMultiTouch.events.TapEvent;
 import vialab.simpleMultiTouch.events.VSwipeEvent;
 import vialab.simpleMultiTouch.zones.RectZone;
 import vialab.simpleMultiTouch.zones.TextZone;
+import TandemTable.Colours;
+import TandemTable.Languages;
+import TandemTable.Sketch;
+import TandemTable.sections.mainSection.MainSection;
+import TandemTable.util.ArticleContainer;
+import TandemTable.util.MiddleWord;
+
+import com.memetix.mst.language.Language;
 
 public class HeadlinesActivity {
 
@@ -46,10 +41,8 @@ public class HeadlinesActivity {
 	// Colour picking
 	public int red1 = 1, green1 = 1, blue1 = 1;
 	public int red2 = 1, green2 = 1, blue2 = 1;
-	int middleX;
-	int middleWidth;
+	
 	int lastUser = 0;
-	int middleAnimTime = 800;
 	int colourPicker1;
 	int colourPicker2;
 	
@@ -66,12 +59,10 @@ public class HeadlinesActivity {
 	public HashMap<Integer, Float[]> wordX2 = new HashMap<Integer, Float[]>();
 
 	Language langTranslate1, langTranslate2;
-	Animator animMiddleZone;
 
 	String topic1, topic2, lang1, lang2, back1, back2, topicExpanded1, topicExpanded2;
 	String[] response;
 	
-	String middleText = " ";
 
 	JSONArray results1, results2;
 
@@ -80,15 +71,17 @@ public class HeadlinesActivity {
 	boolean errorFlag1 = false;
 	boolean errorFlag2 = false;
 	boolean canceled = false;
-	boolean started = false;
 	boolean wordTapped1 = false;
 	boolean wordTapped2 = false;
 
 	ArticleContainer body1, body2;
-	//ImageZone imgZone1, imgZone2;
-	RectZone middleZone, background1, background2, swipeBackground1, swipeBackground2;
+	RectZone background1, background2, swipeBackground1, swipeBackground2;
 	TextZone backButton1, backButton2;
-
+	MiddleWord middleZone;
+	
+	
+	
+	
 	final int NUM_HEADLINES = 3;
 	final int MAX_HEADLINES = 100;
 	final int MAX_CHARACTERS = 100;
@@ -598,7 +591,7 @@ public class HeadlinesActivity {
 							background1.setDrawBorder(false);
 							background1.setColour(Colours.backgroundColour);
 							sketch.client.addZone(background1);
-							sketch.client.pullToTop(middleZone);
+							sketch.client.pullToTop(middleZone.middleZone);
 
 							// Create new article container for display article text
 							body1 = new ArticleContainer(sketch, sketch.lineX + widthOffset, bodyStartY, widthBody, bodyHeight, sketch.radius, pg, 
@@ -659,9 +652,9 @@ public class HeadlinesActivity {
 									colourPicker1 = sketch.color(backBuffer.get((int)(e.getX()-getX()), (int)(e.getY()-getY() + getYOffset())));
 
 									if(wordMap1.containsKey(sketch.color(backBuffer.get((int)(e.getX()-getX()), (int)(e.getY()-getY() + getYOffset()))))){
-										setMiddleText(wordMap1.get(sketch.color(backBuffer.get((int)(e.getX()-getX()), (int)(e.getY()-getY() + getYOffset())))));
+										middleZone.setMiddleText(wordMap1.get(sketch.color(backBuffer.get((int)(e.getX()-getX()), (int)(e.getY()-getY() + getYOffset())))));
 										lastUser = 1;
-										started = true;
+										middleZone.started = true;
 										wordTapped1 = true;
 									}
 								}
@@ -799,7 +792,7 @@ public class HeadlinesActivity {
 							background2.setDrawBorder(false);
 							background2.setColour(Colours.backgroundColour);
 							sketch.client.addZone(background2);
-							sketch.client.pullToTop(middleZone);
+							sketch.client.pullToTop(middleZone.middleZone);
 
 							body2 = new ArticleContainer(sketch, sketch.lineX + widthOffset, 0, widthBody, bodyHeight, sketch.radius, pg, 
 									textYSpacing, textSize, xMargin, yMargin, graphicsHeight){
@@ -864,9 +857,9 @@ public class HeadlinesActivity {
 
 									colourPicker2 = sketch.color(backBuffer.get((int)newX, (int)(newY + getYOffset())));
 									if(wordMap2.containsKey(colourPicker2)){
-										setMiddleText(wordMap2.get(colourPicker2));
+										middleZone.setMiddleText(wordMap2.get(colourPicker2));
 										lastUser = 2;
-										started = true;
+										middleZone.started = true;
 										wordTapped2 = true;
 										
 									}
@@ -934,70 +927,10 @@ public class HeadlinesActivity {
 	}
 
 	public void createMiddleZone(){
-		int width = (int) (sketch.getWidth()- sketch.lineX - 2*widthOffset);
-		int height = (int) (5.5*tweetTextSize);
-		int x = sketch.lineX + widthOffset;
-		middleX = x;
-		middleWidth = width;
-
-		middleZone = new RectZone(x, sketch.getHeight()/2-height/2, width/2, height, sketch.radius){
-			public void drawZone(){
-				super.drawZone();
-				this.setX(middleX);
-				this.setWidth(middleWidth);
-				sketch.fill(0);
-				sketch.textFont(Colours.pFont, tweetTextSize*2);
-				sketch.textAlign(PConstants.LEFT, PConstants.BOTTOM);
-				sketch.text(middleText, this.getX() + (this.getWidth() - sketch.textWidth(middleText))/2, this.getY() + 7*this.getHeight()/8);
-
-				sketch.pushMatrix();
-				sketch.translate(this.getX() + (this.getWidth() + sketch.textWidth(middleText))/2, this.getY() + this.getHeight()/8);
-				sketch.rotate((float) Colours.PI);
-				sketch.text(middleText, 0, 0);
-				sketch.popMatrix();
-				sketch.textFont(Colours.pFont, textSize);
-			}
-
-			public void tapEvent(TapEvent e){
-				if(started){
-					hg.translateMiddleWord();
-				} else {
-					setMiddleText("Tap A Word!");
-				}
-				e.setHandled(true);
-			}
-		};
-
-		middleZone.setColour(Colours.boundingBox.getRed(), Colours.boundingBox.getGreen(), Colours.boundingBox.getBlue());
-		middleZone.setShadow(true);
-		middleZone.setShadowColour(Colours.shadow.getRed(), Colours.shadow.getGreen(), Colours.shadow.getBlue());
-		middleZone.setStroke(false);
-		middleZone.setDrawBorder(false);
-		middleZone.setShadowX(-sketch.shadowOffset);
-		middleZone.setShadowY(-sketch.shadowOffset);
-		middleZone.setShadowW(2*sketch.shadowOffset);
-		middleZone.setShadowH(2*sketch.shadowOffset);
-		middleZone.setGestureEnabled("Tap", true);
-		setMiddleText(" ");
-		sketch.client.addZone(middleZone);
-
-		animMiddleZone = PropertySetter.createAnimator(middleAnimTime, middleZone, 
-				"Colour", new ColourEval(), Colours.boundingBox, Color.ORANGE);
-
-
-		animMiddleZone.setRepeatBehavior(RepeatBehavior.REVERSE);
-		animMiddleZone.setRepeatCount(Animator.INFINITE);
-
-
+		middleZone = new MiddleWord(sketch, hg);
 	}
 
-	public void setMiddleText(String str){
-		middleText = str;
-		int middleSpace = sketch.getWidth()/20;
-		sketch.textFont(Colours.pFont, tweetTextSize*2);
-		middleX = (int) (sketch.lineX + (sketch.getWidth()-sketch.lineX)/2 - sketch.textWidth(str)/2 - middleSpace);
-		middleWidth = (int) (sketch.textWidth(str) + middleSpace*2);
-	}
+	
 
 	public void inactivateHeadlines(int user){
 		if(user == 1){
@@ -1044,6 +977,10 @@ public class HeadlinesActivity {
 			sketch.client.removeZone(headlines1[i]);
 			sketch.client.removeZone(headlines2[i]);
 		}
+		
+		if(middleZone.fadedBack != null) {
+			middleZone.removeTransButtons();
+		}
 
 		sketch.client.removeZone(hg.loading);
 		sketch.client.removeZone(backButton1);
@@ -1056,8 +993,10 @@ public class HeadlinesActivity {
 		sketch.client.removeZone(body2);
 		sketch.client.removeZone(background2);
 
-		sketch.client.removeZone(middleZone);
+		sketch.client.removeZone(middleZone.middleZone);
 		sketch.client.removeZone(swipeBackground1);
 		sketch.client.removeZone(swipeBackground2);
 	}
+	
+	
 }

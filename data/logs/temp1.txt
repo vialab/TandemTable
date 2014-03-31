@@ -1,0 +1,32 @@
+Utterance number 1
+Total Time of Utterances: 70
+Utterance number 2
+Total Time of Utterances: 130
+Utterance number 3
+Total Time of Utterances: 190
+Utterance number 4
+Total Time of Utterances: 310
+Utterance number 5
+Total Time of Utterances: 370
+Utterance number 6
+Total Time of Utterances: 430
+Utterance number 7
+Total Time of Utterances: 500
+Utterance number 8
+Total Time of Utterances: 560
+Utterance number 9
+Total Time of Utterances: 620
+Utterance number 10
+Total Time of Utterances: 680
+Utterance number 11
+Total Time of Utterances: 740
+Utterance number 12
+Total Time of Utterances: 810
+Utterance number 13
+Total Time of Utterances: 870
+Utterance number 14
+Total Time of Utterances: 930
+Utterance number 15
+Total Time of Utterances: 991
+Utterance number 16
+Total Time of Utterances: 1121
