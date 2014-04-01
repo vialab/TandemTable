@@ -38,12 +38,12 @@ public class AudioIn implements AudioProcessor {
 	//int talkingAmount = 1;
 	int user;
 	
-	ArrayList<SlidingWindow> windowArray;
+	//ArrayList<SlidingWindow> windowArray;
 	
 	// Size of sliding window in milliseconds
-	int windowSize = 500;
+	//int windowSize = 500;
 	// To use sliding window approach
-	boolean slidingWindowFlag = true;
+	//boolean slidingWindowFlag = true;
 	
 	ArrayList<Float> pcmData = null;
 	
@@ -70,7 +70,7 @@ public class AudioIn implements AudioProcessor {
 	// Start of noise capture in milliseconds
 	long startTime = 0;
 	// Utterance start threshold factor
-	float noiseMult = 1.1f;
+	float noiseMult = 1.05f;
 	// Maximum positive noise level detected 
 	float maxNoiseLvlPos = 0;
 	// Maximum negative noise level detected 
@@ -89,15 +89,15 @@ public class AudioIn implements AudioProcessor {
 	boolean startedUtter = false;
 	// Pseudo time threshold for combining two groups of sound
 	// Some words have more than one group of sound
-	int combineUtterTheshold = 200;
-	int combineUtterThesholdPaper = 100;
+	//int combineUtterTheshold = 200;
+	int endThesholdPaper = 500;
 	// Pseudo time for utterances
 	int utterTime = 0;
 	// If the two groups of sound should be combined
 	boolean combineSounds = false;
 	// Pseudo time length of utterance threshold
-	int utterLengthThresh = 400;
-	int utterLengthThreshPaper = 500;
+	//int utterLengthThresh = 400;
+	int utterLengthThreshPaper = 550;
 	// If last sound was added to the utterArray
 	boolean utterAdded = false;
 
@@ -108,7 +108,7 @@ public class AudioIn implements AudioProcessor {
 		this.mixer = mixer;
 		this.user = user;
 		threshold = -65;//SilenceDetector.DEFAULT_SILENCE_THRESHOLD;
-		windowArray = new ArrayList<SlidingWindow>();
+		//windowArray = new ArrayList<SlidingWindow>();
 		pcmData = new ArrayList<Float>();
 		utterArray = new ArrayList<Utterance>();
 	}
@@ -186,7 +186,7 @@ public class AudioIn implements AudioProcessor {
 		new Thread(dispatcher,"Audio dispatching").start();
 	}
 	
-	public void draw() {
+	/*public void draw() {
 		//sketch.background(0);
 		sketch.stroke(255);
 		sketch.strokeWeight(1);
@@ -285,7 +285,7 @@ public class AudioIn implements AudioProcessor {
 		
 		
 		
-	}
+	}*/
 	
 	public void startSoundCapture() {
 		try {
@@ -327,7 +327,12 @@ public class AudioIn implements AudioProcessor {
 				}
 			}
 		// Processing input
-		} else if(sketch.login.loggedIn){
+		} else if(!noiseProfileComplete) {
+			System.out.println("Noise profile is complete");
+			noiseProfileComplete = true;
+		}
+		
+		if(sketch.loggedIn && noiseProfileComplete){
 			if(timeOfLastUtter == 0) {
 				timeOfLastUtter = timeNow;
 				timeUtterContent = timeOfLastUtter;
@@ -346,9 +351,6 @@ public class AudioIn implements AudioProcessor {
 			
 			sketch.audioFrame.repaint();
 			
-		} else if(!noiseProfileComplete) {
-			System.out.println("Noise profile is complete");
-			noiseProfileComplete = true;
 		}
 		
 		//handleSoundDetection();
@@ -404,7 +406,7 @@ public class AudioIn implements AudioProcessor {
 			}
 		}
 		
-		if(startedUtter && curUtter.getCounter() >= combineUtterThesholdPaper) {
+		if(startedUtter && curUtter.getCounter() >= endThesholdPaper) {
 			startedUtter = false;
 			
 			if(curUtter.getEndIndex() - curUtter.getStartIndex() > utterLengthThreshPaper) {

@@ -25,9 +25,6 @@ public class LoginScreen {
 	public ProfileCreation profileCreation;
 
 	boolean langSelect1 = false, langSelect2 = false;
-
-	// If the learners have logged in and selected a language
-	public boolean loggedIn = false;
 	
 	// Language buttons
 	ImageZone english1, french1, portuguese1, spanish1, english2, french2, portuguese2, spanish2;
@@ -473,7 +470,7 @@ public class LoginScreen {
 				pickedLang1 = lang;
 
 				if(langSelect2){
-					loggedIn = true;
+					sketch.loggedIn = true;
 					removeZones();
 					sketch.initializeMainScreen(pickedLang1, pickedLang2);
 				}
@@ -505,7 +502,7 @@ public class LoginScreen {
 				pickedLang2 = lang;
 
 				if(langSelect1){
-					loggedIn = true;
+					sketch.loggedIn = true;
 					removeZones();
 					sketch.initializeMainScreen(pickedLang1, pickedLang2);
 				}

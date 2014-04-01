@@ -81,7 +81,7 @@ public class AudioFrame extends JFrame {
 			//sketch.fill(255, 0, 0);
 			float heightY = (float) ((getHeight()/2)*0.9);
 			float x = 100;
-			float length = x + audioIn.utterLengthThresh*indexAdd;
+			float length = x + audioIn.utterLengthThreshPaper*indexAdd;
 			g.drawLine((int) x, (int) heightY, (int) length, (int) heightY);
 			//sketch.text("Min Utterance Length", length, (float) (heightY*0.99));
 			
@@ -89,7 +89,7 @@ public class AudioFrame extends JFrame {
 			//sketch.stroke(255, 255, 255);
 			//sketch.fill(255, 255, 255);
 			heightY = (float) ((getHeight()/2)*0.95);
-			length = x + audioIn.combineUtterTheshold*indexAdd;
+			length = x + audioIn.endThesholdPaper*indexAdd;
 			g.drawLine((int) x, (int) heightY, (int) length, (int) heightY);
 			//sketch.text("Combined Utter Length", length, (float) (heightY*0.99));
 			

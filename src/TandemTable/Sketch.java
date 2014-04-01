@@ -66,7 +66,8 @@ public class Sketch extends PApplet {
 	// If the learners have already 
 	//gone through the intro phase
 	public boolean doneIntro = false;
-	
+	// If the learners have logged in and selected a language
+	public boolean loggedIn = false;
 	// Recording of audio with mics
 	public boolean recordAudio = true;
 	// Testing of mic inputs by drawing PCM data
@@ -90,6 +91,8 @@ public class Sketch extends PApplet {
 	public boolean removeVideoAct = true;
 	// Activate all activities for all topics
 	public boolean activateAllAct = true;
+	// Only audio recording - No TandemTable
+	public boolean onlyAudioRecording = true;
 	///////////////////////////////////////
 	
 	// If content prompts are active
@@ -172,11 +175,15 @@ public class Sketch extends PApplet {
 			audioFrame = new AudioFrame(this);
 		}
 		
-		keyboard = new KeyboardInput(this);
-		addKeyListener(keyboard);
-		
-		login = new LoginScreen();
-		login.initialize(client, this);
+		if(!onlyAudioRecording) {
+			keyboard = new KeyboardInput(this);
+			addKeyListener(keyboard);
+			
+			login = new LoginScreen();
+			login.initialize(client, this);
+		} else {
+			loggedIn = true;
+		}
 	}
 
 	public void draw(){
@@ -209,7 +216,7 @@ public class Sketch extends PApplet {
 		///////////////////////////
 		long timeNow = System.currentTimeMillis();
 		
-		if(recordAudio && login.loggedIn && audioIn[0].getTimeLastUtter() != 0 && audioIn[1].getTimeLastUtter() != 0) {
+		if(recordAudio && loggedIn && audioIn[0].getTimeLastUtter() != 0 && audioIn[1].getTimeLastUtter() != 0) {
 			
 			if(timeNow - audioIn[0].getTimeLastUtter() > UTTER_PROMPT_THRESH
 				&& timeNow - audioIn[1].getTimeLastUtter() > UTTER_PROMPT_THRESH) {
