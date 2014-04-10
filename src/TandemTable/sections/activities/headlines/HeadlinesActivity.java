@@ -983,8 +983,12 @@ public class HeadlinesActivity {
 			sketch.client.removeZone(headlines2[i]);
 		}
 		
-		if(middleZone.fadedBack != null) {
-			middleZone.removeTransButtons();
+		if(middleZone != null) {
+			sketch.client.removeZone(middleZone.middleZone);
+
+			if(middleZone.fadedBack != null) {
+				middleZone.removeTransButtons();
+			}
 		}
 
 		sketch.client.removeZone(hg.loading);
@@ -998,7 +1002,6 @@ public class HeadlinesActivity {
 		sketch.client.removeZone(body2);
 		sketch.client.removeZone(background2);
 
-		sketch.client.removeZone(middleZone.middleZone);
 		sketch.client.removeZone(swipeBackground1);
 		sketch.client.removeZone(swipeBackground2);
 	}

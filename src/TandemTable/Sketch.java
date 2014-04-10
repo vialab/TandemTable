@@ -92,7 +92,7 @@ public class Sketch extends PApplet {
 	// Activate all activities for all topics
 	public boolean activateAllAct = true;
 	// Only audio recording - No TandemTable
-	public boolean onlyAudioRecording = true;
+	public boolean onlyAudioRecording = false;
 	///////////////////////////////////////
 	
 	// If content prompts are active

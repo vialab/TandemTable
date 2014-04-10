@@ -319,9 +319,11 @@ public class MainSection {
 		createGraph();
 		createActivityButtons();
 		
-		long timeNow = System.currentTimeMillis();
-		sketch.audioIn[0].setTimeLastContent(timeNow);
-		sketch.audioIn[1].setTimeLastContent(timeNow);
+		if(sketch.recordAudio) {
+			long timeNow = System.currentTimeMillis();
+			sketch.audioIn[0].setTimeLastContent(timeNow);
+			sketch.audioIn[1].setTimeLastContent(timeNow);
+		}
 		
 		createContentPrompts();
 	}

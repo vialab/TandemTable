@@ -7,6 +7,7 @@ public class AudioMixers {
 
 	Mixer[] mixers;
 	final String INPUT = "Microphone";
+	final String BRAND = "C-Media";
 	int mixerIndex = 0;
 	
 	
@@ -30,7 +31,7 @@ public class AudioMixers {
 	            
 	            //try {
 	            
-	            	if(mixerInfo.getName().startsWith(INPUT) && !m.isOpen() && mixerIndex < mixers.length) {
+	            	if(mixerInfo.getName().startsWith(INPUT) && mixerInfo.getName().contains(BRAND) && !m.isOpen() && mixerIndex < mixers.length) {
 	            		mixers[mixerIndex++] = m;
 		                System.out.println("Found Mixer: " + mixerInfo);
 		                //return;

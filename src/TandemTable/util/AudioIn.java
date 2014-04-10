@@ -66,7 +66,7 @@ public class AudioIn implements AudioProcessor {
 	int indexScrollUtter = 0;
 	int sliderCounter = 0;
 	// Amount of time for capturing noise
-	int delayNoise = 3000;
+	int delayNoise = 10000;
 	// Start of noise capture in milliseconds
 	long startTime = 0;
 	// Utterance start threshold factor
@@ -97,7 +97,7 @@ public class AudioIn implements AudioProcessor {
 	boolean combineSounds = false;
 	// Pseudo time length of utterance threshold
 	//int utterLengthThresh = 400;
-	int utterLengthThreshPaper = 550;
+	int utterLengthThreshPaper = 150; //550
 	// If last sound was added to the utterArray
 	boolean utterAdded = false;
 
