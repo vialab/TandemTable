@@ -56,7 +56,7 @@ public class Colours {
 	public static Color disabledZone = new Color(200, 200, 200, 255);
 	//Title Screen Colours
 	//Colours of the circles used in the Title Screen
-	public static Color[] circTitle = {new Color(130, 210, 90, 255), new Color(142, 214, 105, 255)};
+	public static Color[] circTitle = {new Color(130, 210, 90, 255), new Color(172, 225, 145, 255)};
 	//Colour of "TandemTable" title
 	public static Color titleColor = new Color(185, 122, 87, 255);
 	// Colour of activity content prompts

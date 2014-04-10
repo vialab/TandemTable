@@ -55,7 +55,7 @@ public class AudioFrame extends JFrame {
 			
 			float yHeight = getHeight()/4 + (getHeight()/2)*user;
 			float lastX = 0, lastY = yHeight;
-			float mult = 2000;
+			float mult = 1000;
 			float index = 0;
 			float indexAdd = (float) 0.01;
 			
@@ -78,9 +78,9 @@ public class AudioFrame extends JFrame {
 			
 			//sketch.textSize(22);
 			
-			////////////////////////////////////////////
-			// Draw thresholds
-			////////////////////////////////////////////
+			///////////////////////////////////////////////////
+			// Draw Utterance Length and End Length Thresholds
+			//////////////////////////////////////////////////
 			g.setColor(new Color(255, 0, 0));
 			//sketch.stroke(255, 0, 0);
 			//sketch.fill(255, 0, 0);
@@ -97,8 +97,13 @@ public class AudioFrame extends JFrame {
 			length = x + audioIn.endThesholdPaper*indexAdd;
 			g.drawLine((int) x, (int) heightY, (int) length, (int) heightY);
 			//sketch.text("Combined Utter Length", length, (float) (heightY*0.99));
+			/////////////////////////////////////////////////
 			
 			//sketch.stroke(0, 0, 255);
+			
+			///////////////////////////////////////////////////
+			// Draw Positive and Negative Noise Thresholds
+			//////////////////////////////////////////////////
 			g.setColor(new Color(0, 0, 255));
 			heightY = yHeight + audioIn.maxNoiseLvlPos*mult;
 			g.drawLine((int) 0, (int) heightY, (int) getWidth(), (int) heightY);
@@ -138,7 +143,7 @@ public class AudioFrame extends JFrame {
 				
 				lastX = utterance.getStartIndex()*indexAdd - sliderCounter*getWidth();
 				index = lastX;
-				float mainY = (3*yHeight)/2;
+				float mainY = yHeight;
 				lastY = mainY;
 				
 				ArrayList<Float> tempPCM = new ArrayList<Float>(utterance.getPCM());

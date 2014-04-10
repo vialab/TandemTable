@@ -10,6 +10,7 @@ import javax.sound.sampled.Mixer;
 import javax.sound.sampled.TargetDataLine;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
+import TandemTable.Colours;
 import TandemTable.Sketch;
 import be.hogent.tarsos.dsp.AudioDispatcher;
 import be.hogent.tarsos.dsp.AudioEvent;
@@ -334,6 +335,12 @@ public class AudioIn implements AudioProcessor {
 		} else if(!noiseProfileComplete) {
 			System.out.println("Noise profile is complete");
 			noiseProfileComplete = true;
+			
+			if(user == 1) {
+				sketch.login.titleZone1.setColour(Colours.titleColor);
+			} else if(user == 2) {
+				sketch.login.titleZone2.setColour(Colours.titleColor);
+			}
 		}
 		
 		if(sketch.loggedIn && noiseProfileComplete){

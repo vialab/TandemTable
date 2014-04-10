@@ -36,7 +36,7 @@ public class LoginScreen {
 	//Zone responsible for graphics rendered during title screen
 	RectZone bkgZone;
 	//Zones used in the title screen
-	TextZone titleZone1, titleZone2;
+	public TextZone titleZone1, titleZone2;
 
 	String pickedLang1, pickedLang2;
 
@@ -118,6 +118,10 @@ public class LoginScreen {
 		};
 
 		titleZone1.setTextColour(Colours.titleColor.getRed(), Colours.titleColor.getGreen(), Colours.titleColor.getBlue(), Colours.titleColor.getAlpha());
+		
+		if(sketch.recordAudio) {
+			titleZone1.setTextColour(0, 0, 0);
+		}
 		titleZone1.setGestureEnabled("Tap", true);
 		titleZone1.setDrawBorder(false);
 		client.addZone(titleZone1);
@@ -137,6 +141,10 @@ public class LoginScreen {
 		};
 
 		titleZone2.setTextColour(Colours.titleColor.getRed(), Colours.titleColor.getGreen(), Colours.titleColor.getBlue());
+		
+		if(sketch.recordAudio) {
+			titleZone2.setTextColour(0, 0, 0);
+		}
 		titleZone2.rotate((float) Colours.PI);
 		titleZone2.setGestureEnabled("Tap", true);
 		titleZone2.setDrawBorder(false);
