@@ -41,17 +41,19 @@ public class AudioFrame extends JFrame {
 			Graphics2D g2 = (Graphics2D) g;
 			g2.setBackground(Color.black);
 			g2.clearRect(0,  0, getWidth(), getHeight());
-			draw(g2, sketch.audioIn[0]);
-			draw(g2, sketch.audioIn[1]);
+			draw(g2, sketch.audioIn[0], 0);
+			draw(g2, sketch.audioIn[1], 1);
 		}
 		
-		public void draw(Graphics2D g, AudioIn audioIn) {
-
+		public void draw(Graphics2D g, AudioIn audioIn, int user) {
+			////////////////////////////////////////////
+			// Draw PCM Data
+			////////////////////////////////////////////
 			g.setColor(new Color(255, 255, 255));
 			g.setStroke(new BasicStroke(1));
 			ArrayList<Float> tempData = new ArrayList<Float>(audioIn.getPCMData());
 			
-			float yHeight = getHeight()/2;
+			float yHeight = getHeight()/4 + (getHeight()/2)*user;
 			float lastX = 0, lastY = yHeight;
 			float mult = 2000;
 			float index = 0;
@@ -72,14 +74,17 @@ public class AudioFrame extends JFrame {
 					indexScrollPCM = i;
 				}
 			}
+			/////////////////////////////////////////////
 			
 			//sketch.textSize(22);
 			
+			////////////////////////////////////////////
 			// Draw thresholds
+			////////////////////////////////////////////
 			g.setColor(new Color(255, 0, 0));
 			//sketch.stroke(255, 0, 0);
 			//sketch.fill(255, 0, 0);
-			float heightY = (float) ((getHeight()/2)*0.9);
+			float heightY = (float) (yHeight*0.9);
 			float x = 100;
 			float length = x + audioIn.utterLengthThreshPaper*indexAdd;
 			g.drawLine((int) x, (int) heightY, (int) length, (int) heightY);
@@ -88,30 +93,32 @@ public class AudioFrame extends JFrame {
 			g.setColor(new Color(255, 22, 225));
 			//sketch.stroke(255, 255, 255);
 			//sketch.fill(255, 255, 255);
-			heightY = (float) ((getHeight()/2)*0.95);
+			heightY = (float) (yHeight*0.95);
 			length = x + audioIn.endThesholdPaper*indexAdd;
 			g.drawLine((int) x, (int) heightY, (int) length, (int) heightY);
 			//sketch.text("Combined Utter Length", length, (float) (heightY*0.99));
 			
 			//sketch.stroke(0, 0, 255);
 			g.setColor(new Color(0, 0, 255));
-			heightY = getHeight()/2 + audioIn.maxNoiseLvlPos*mult;
+			heightY = yHeight + audioIn.maxNoiseLvlPos*mult;
 			g.drawLine((int) 0, (int) heightY, (int) getWidth(), (int) heightY);
 			
-			heightY = getHeight()/2 + audioIn.maxNoiseLvlNeg*mult;
+			heightY = yHeight + audioIn.maxNoiseLvlNeg*mult;
 			g.drawLine((int) 0, (int) heightY, (int) getWidth(), (int) heightY);
 			
 			g.setColor(new Color(0, 255, 0));
-			heightY = getHeight()/2 + audioIn.maxNoiseLvlPos*mult*audioIn.noiseMult;
+			heightY = yHeight + audioIn.maxNoiseLvlPos*mult*audioIn.noiseMult;
 			g.drawLine((int) 0, (int) heightY, (int) getWidth(), (int) heightY);
 			
-			heightY = getHeight()/2 + audioIn.maxNoiseLvlNeg*mult*audioIn.noiseMult;
+			heightY = yHeight + audioIn.maxNoiseLvlNeg*mult*audioIn.noiseMult;
 			g.drawLine((int) 0, (int) heightY, (int) getWidth(), (int) heightY);
+			////////////////////////////////////////////
 			
-			
+			////////////////////////////////////////////
 			// Draw captured utterances
+			////////////////////////////////////////////
 			ArrayList<Utterance> tempUtter = new ArrayList<Utterance>(audioIn.utterArray);
-			float y = (float) ((getHeight()/2)*0.75);
+			float y = (float) (yHeight*0.75);
 			
 			
 			for(int i = indexScrollUtter; i < tempUtter.size(); i++) {
@@ -131,7 +138,7 @@ public class AudioFrame extends JFrame {
 				
 				lastX = utterance.getStartIndex()*indexAdd - sliderCounter*getWidth();
 				index = lastX;
-				float mainY = (float) (getHeight()/1.5);
+				float mainY = (3*yHeight)/2;
 				lastY = mainY;
 				
 				ArrayList<Float> tempPCM = new ArrayList<Float>(utterance.getPCM());
@@ -144,6 +151,7 @@ public class AudioFrame extends JFrame {
 					
 				}
 			}
+			//////////////////////////////////////////////
 		}
 	}
 }

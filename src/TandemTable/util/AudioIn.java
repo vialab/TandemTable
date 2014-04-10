@@ -153,37 +153,41 @@ public class AudioIn implements AudioProcessor {
 	public void setMixer(Mixer mixer) throws LineUnavailableException,
 		UnsupportedAudioFileException {
 	
-		if(dispatcher!= null){
-			dispatcher.stop();
+		if(mixer != null) {
+			if(dispatcher!= null){
+				dispatcher.stop();
+			}
+			
+			float sampleRate = 44100;
+			int bufferSize = 512;
+			int overlap = 0;
+			
+			
+			audioFormat = new AudioFormat(sampleRate, 16, 1, true,
+					true);
+			final DataLine.Info dataLineInfo = new DataLine.Info(
+					TargetDataLine.class, audioFormat);
+			TargetDataLine line;
+			line = (TargetDataLine) mixer.getLine(dataLineInfo);
+			final int numberOfSamples = bufferSize;
+			line.open(audioFormat, numberOfSamples);
+			line.start();
+			final AudioInputStream stream = new AudioInputStream(line);
+			
+			// create a new dispatcher
+			dispatcher = new AudioDispatcher(stream, bufferSize,
+					overlap);
+			
+			// add a processor, handle percussion event.
+			silenceDetector = new SilenceDetector(threshold, false);
+			dispatcher.addAudioProcessor(silenceDetector);
+			dispatcher.addAudioProcessor(this);
+			
+			// run the dispatcher (on a new thread).
+			new Thread(dispatcher,"Audio dispatching").start();
+		} else {
+			System.out.println("Mixer/Input does not exist");
 		}
-		
-		float sampleRate = 44100;
-		int bufferSize = 512;
-		int overlap = 0;
-		
-		
-		audioFormat = new AudioFormat(sampleRate, 16, 1, true,
-				true);
-		final DataLine.Info dataLineInfo = new DataLine.Info(
-				TargetDataLine.class, audioFormat);
-		TargetDataLine line;
-		line = (TargetDataLine) mixer.getLine(dataLineInfo);
-		final int numberOfSamples = bufferSize;
-		line.open(audioFormat, numberOfSamples);
-		line.start();
-		final AudioInputStream stream = new AudioInputStream(line);
-		
-		// create a new dispatcher
-		dispatcher = new AudioDispatcher(stream, bufferSize,
-				overlap);
-		
-		// add a processor, handle percussion event.
-		silenceDetector = new SilenceDetector(threshold, false);
-		dispatcher.addAudioProcessor(silenceDetector);
-		dispatcher.addAudioProcessor(this);
-		
-		// run the dispatcher (on a new thread).
-		new Thread(dispatcher,"Audio dispatching").start();
 	}
 	
 	/*public void draw() {
