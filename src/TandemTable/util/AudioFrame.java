@@ -6,6 +6,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
+import java.awt.KeyEventDispatcher;
+import java.awt.KeyboardFocusManager;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -49,6 +52,7 @@ public class AudioFrame extends JFrame {
 		maxNoisePos1 = new JLabel("Learner 1 - Max Noise Pos");
 		
 		minTNeg1 = new JTextField("0");
+		minTNeg1.setEditable(false);
 		maxTNeg1 = new JTextField("0");
 		minTPos1 = new JTextField("0");
 		maxTPos1 = new JTextField("0");
@@ -99,6 +103,9 @@ public class AudioFrame extends JFrame {
 		
 		
 		setVisible(true);
+		
+		KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
+        manager.addKeyEventDispatcher(new MyDispatcher());
 	}
 	
 	class DrawPane extends JPanel {
@@ -236,4 +243,43 @@ public class AudioFrame extends JFrame {
 			//////////////////////////////////////////////
 		}
 	}
+	
+	private class MyDispatcher implements KeyEventDispatcher {
+        @Override
+        public boolean dispatchKeyEvent(KeyEvent e) {
+            if (e.getID() == KeyEvent.KEY_PRESSED) {
+
+            } else if (e.getID() == KeyEvent.KEY_RELEASED) {
+
+            } else if (e.getID() == KeyEvent.KEY_TYPED) {
+            	char input = e.getKeyChar();
+            	
+            	if(input == '1') {
+        			sketch.audioIn[0].maxNoiseLvlNeg++;
+        			sketch.audioIn[0].maxNoiseLvlPos--;
+        		}
+        		else if(input == '2') {
+        			sketch.audioIn[0].maxNoiseLvlNeg--;
+        			sketch.audioIn[0].maxNoiseLvlPos++;
+        		}
+        		else if(input == '3') {
+        			sketch.audioIn[1].maxNoiseLvlNeg++;
+        			sketch.audioIn[1].maxNoiseLvlPos--;
+        		}
+        		else if(input == '4') {
+        			sketch.audioIn[1].maxNoiseLvlNeg--;
+        			sketch.audioIn[1].maxNoiseLvlPos++;
+        		}
+        		else if(input == '5') {
+        			sketch.audioIn[0].noiseMult += 0.1;
+        			sketch.audioIn[1].noiseMult += 0.1;
+        		}
+        		else if(input == '6') {
+        			sketch.audioIn[0].noiseMult -= 0.1;
+        			sketch.audioIn[1].noiseMult -= 0.1;
+        		}
+            }
+            return false;
+        }
+    }
 }
