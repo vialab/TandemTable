@@ -107,11 +107,11 @@ public class LoginScreen {
 				Colours.pFont, "TandemTable", sketch.textSize*4, "CENTER", "CENTER"){
 			public void tapEvent(TapEvent e){
 				if (isTappable()){
-					createLoginButtons();
+					titleZone1.setGestureEnabled("Tap", false);
 					client.removeZone(bkgZone);
 					client.removeZone(this);
 					client.removeZone(titleZone2);
-
+					createLoginButtons();
 					e.setHandled(tappableHandled);
 				}
 			}
@@ -130,10 +130,12 @@ public class LoginScreen {
 				Colours.pFont, "TandemTable", sketch.textSize*4, "CENTER", "CENTER"){
 			public void tapEvent(TapEvent e){
 				if (isTappable()){
-					createLoginButtons();
+					titleZone2.setGestureEnabled("Tap", false);
+
 					client.removeZone(bkgZone);
 					client.removeZone(this);
 					client.removeZone(titleZone1);
+					createLoginButtons();
 
 					e.setHandled(tappableHandled);
 				}

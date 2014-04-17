@@ -22,8 +22,7 @@ public class KeyboardInput extends KeyAdapter {
 			sketch.mainLogger.log("Played language prompt");
 			System.out.println("Played language prompt");
 		}
-		
-		if(input == 't') {
+		else if(input == 't') {
 			sketch.talkingPrompt.play();
 			long timeNow = System.currentTimeMillis();
 			sketch.audioIn[0].timeOfLastUtter = timeNow;
@@ -32,8 +31,7 @@ public class KeyboardInput extends KeyAdapter {
 			sketch.mainLogger.log("Played talking prompt");
 			System.out.println("Played talking prompt");
 		}
-		
-		if(input == 's') {
+		else if(input == 's') {
 			//sketch.logger1.close();
 			//sketch.logger2.close();
 			//System.out.println("Closed logging files");
@@ -41,6 +39,30 @@ public class KeyboardInput extends KeyAdapter {
 			
 			//sketch.audioIn[0].saveAudio();
 			//sketch.audioIn[1].saveAudio();
+		}
+		else if(input == '1') {
+			sketch.audioIn[0].maxNoiseLvlNeg++;
+			sketch.audioIn[0].maxNoiseLvlPos--;
+		}
+		else if(input == '2') {
+			sketch.audioIn[0].maxNoiseLvlNeg--;
+			sketch.audioIn[0].maxNoiseLvlPos++;
+		}
+		else if(input == '3') {
+			sketch.audioIn[1].maxNoiseLvlNeg++;
+			sketch.audioIn[1].maxNoiseLvlPos--;
+		}
+		else if(input == '4') {
+			sketch.audioIn[1].maxNoiseLvlNeg--;
+			sketch.audioIn[1].maxNoiseLvlPos++;
+		}
+		else if(input == '5') {
+			sketch.audioIn[0].noiseMult += 0.1;
+			sketch.audioIn[1].noiseMult += 0.1;
+		}
+		else if(input == '6') {
+			sketch.audioIn[0].noiseMult -= 0.1;
+			sketch.audioIn[1].noiseMult -= 0.1;
 		}
 	}
 }

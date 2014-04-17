@@ -67,7 +67,7 @@ public class AudioIn implements AudioProcessor {
 	int indexScrollUtter = 0;
 	int sliderCounter = 0;
 	// Amount of time for capturing noise
-	int delayNoise = 10000;
+	int delayNoise = 8000;
 	// Start of noise capture in milliseconds
 	long startTime = 0;
 	// Utterance start threshold factor
@@ -337,9 +337,9 @@ public class AudioIn implements AudioProcessor {
 			noiseProfileComplete = true;
 			
 			if(user == 1) {
-				sketch.login.titleZone1.setColour(Colours.titleColor);
+				sketch.login.titleZone1.setTextColour(Colours.titleColor);
 			} else if(user == 2) {
-				sketch.login.titleZone2.setColour(Colours.titleColor);
+				sketch.login.titleZone2.setTextColour(Colours.titleColor);
 			}
 		}
 		
