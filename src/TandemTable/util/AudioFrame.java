@@ -121,12 +121,12 @@ public class AudioFrame extends JFrame {
 			minTNeg1.setText(String.valueOf(sketch.audioIn[0].maxNoiseLvlNeg));
 			minTNeg2.setText(String.valueOf(sketch.audioIn[1].maxNoiseLvlNeg));
 			maxTNeg1.setText(String.valueOf(sketch.audioIn[0].maxNoiseLvlNeg*sketch.audioIn[0].noiseMult));
-			maxTNeg1.setText(String.valueOf(sketch.audioIn[1].maxNoiseLvlNeg*sketch.audioIn[1].noiseMult));
+			maxTNeg2.setText(String.valueOf(sketch.audioIn[1].maxNoiseLvlNeg*sketch.audioIn[1].noiseMult));
 			
 			minTPos1.setText(String.valueOf(sketch.audioIn[0].maxNoiseLvlPos));
 			minTPos2.setText(String.valueOf(sketch.audioIn[1].maxNoiseLvlPos));
 			maxTPos1.setText(String.valueOf(sketch.audioIn[0].maxNoiseLvlPos*sketch.audioIn[0].noiseMult));
-			maxTPos1.setText(String.valueOf(sketch.audioIn[1].maxNoiseLvlPos*sketch.audioIn[1].noiseMult));
+			maxTPos2.setText(String.valueOf(sketch.audioIn[1].maxNoiseLvlPos*sketch.audioIn[1].noiseMult));
 		}
 		
 		public void draw(Graphics2D g, AudioIn audioIn, int user) {
@@ -253,30 +253,31 @@ public class AudioFrame extends JFrame {
 
             } else if (e.getID() == KeyEvent.KEY_TYPED) {
             	char input = e.getKeyChar();
+            	float chngAmnt = 0.001f;
             	
             	if(input == '1') {
-        			sketch.audioIn[0].maxNoiseLvlNeg++;
-        			sketch.audioIn[0].maxNoiseLvlPos--;
+        			sketch.audioIn[0].maxNoiseLvlNeg += chngAmnt;
+        			sketch.audioIn[0].maxNoiseLvlPos -= chngAmnt;
         		}
         		else if(input == '2') {
-        			sketch.audioIn[0].maxNoiseLvlNeg--;
-        			sketch.audioIn[0].maxNoiseLvlPos++;
+        			sketch.audioIn[0].maxNoiseLvlNeg -= chngAmnt;
+        			sketch.audioIn[0].maxNoiseLvlPos += chngAmnt;
         		}
         		else if(input == '3') {
-        			sketch.audioIn[1].maxNoiseLvlNeg++;
-        			sketch.audioIn[1].maxNoiseLvlPos--;
+        			sketch.audioIn[1].maxNoiseLvlNeg += chngAmnt;
+        			sketch.audioIn[1].maxNoiseLvlPos -= chngAmnt;
         		}
         		else if(input == '4') {
-        			sketch.audioIn[1].maxNoiseLvlNeg--;
-        			sketch.audioIn[1].maxNoiseLvlPos++;
+        			sketch.audioIn[1].maxNoiseLvlNeg -= chngAmnt;
+        			sketch.audioIn[1].maxNoiseLvlPos += chngAmnt;
         		}
         		else if(input == '5') {
-        			sketch.audioIn[0].noiseMult += 0.1;
-        			sketch.audioIn[1].noiseMult += 0.1;
+        			sketch.audioIn[0].noiseMult += chngAmnt;
+        			sketch.audioIn[1].noiseMult += chngAmnt;
         		}
         		else if(input == '6') {
-        			sketch.audioIn[0].noiseMult -= 0.1;
-        			sketch.audioIn[1].noiseMult -= 0.1;
+        			sketch.audioIn[0].noiseMult -= chngAmnt;
+        			sketch.audioIn[1].noiseMult -= chngAmnt;
         		}
             }
             return false;
