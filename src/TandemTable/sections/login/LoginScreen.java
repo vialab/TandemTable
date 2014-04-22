@@ -72,10 +72,10 @@ public class LoginScreen {
 	 * Loads the flag images for language buttons
 	 */
 	public void getFlagImages() {
-		engImg = sketch.loadImage("england.jpg");
-		frenchImg = sketch.loadImage("france.jpg");
-		portImg = sketch.loadImage("brazil.jpg");
-		spanImg = sketch.loadImage("spain.jpg");
+		engImg = sketch.loadImage(Colours.ENG_FLAG);
+		frenchImg = sketch.loadImage(Colours.FRN_FLAG);
+		portImg = sketch.loadImage(Colours.BRZ_FLAG);
+		spanImg = sketch.loadImage(Colours.SPN_FLAG);
 	}
 
 	/**

@@ -9,7 +9,7 @@
 	
 	<question lang="english">Get to know your partner.  Ask them:</question>
 	<question lang="french">Te familiariser avec votre partenaire, demander-les:</question>
-	<question lang="portuguese">Conheça o seu parceiro. Pergunte-lhes:</question>
+	<question lang="portuguese">Conheça o seu parceiro. Pergunte:</question>
 	<question lang="spanish">Conozca a su pareja. Pregúnteles:</question>
 	
 	<question lang="english">Where are you from?</question>
@@ -34,17 +34,17 @@
 	
 	<question lang="english">Where did you last attend school?</question>
 	<question lang="french">Où êtes-vous allé à l'école et pour quoi?</question>
-	<question lang="portuguese">Onde foi a última vez que vão à escola?</question>
+	<question lang="portuguese">Onde você estudou mais recentemente?</question>
 	<question lang="spanish">¿Dónde usted dura asistió la escuela?</question>
 	
 	<question lang="english">What program did you take?</question>
 	<question lang="french">Quel programme avez-vous pris?</question>
-	<question lang="portuguese">Que programa você tomou?</question>
+	<question lang="portuguese">O que você cursou?</question>
 	<question lang="spanish">¿Qué programa tomaste?</question>
 	
 	<question lang="english">Discuss the following things:</question>
 	<question lang="french">Discuter les choses suivantes:</question>
-	<question lang="portuguese">Discuta as seguintes coisas:</question>
+	<question lang="portuguese">Discuta os seguintes assuntos:</question>
 	<question lang="spanish">Discuta las siguientes cosas:</question>
 	
 	<question lang="english">Your interests and hobbies.</question>
@@ -54,17 +54,17 @@
 	
 	<question lang="english">Why you are learning this language?</question>
 	<question lang="french">Pourquoi vous essayez d'apprendre cette langue?</question>
-	<question lang="portuguese">Por que você está aprendendo esta língua?</question>
+	<question lang="portuguese">Por que você está aprendendo esta idioma?</question>
 	<question lang="spanish">¿Por qué usted está aprendiendo este idioma?</question>
 	
 	<question lang="english">What areas of the language you are good at</question>
 	<question lang="french">Quels parties de la langue vous êtes bon en</question>
-	<question lang="portuguese">Que áreas da língua que você é bom</question>
+	<question lang="portuguese">Em quais áreas do idioma você é bom</question>
 	<question lang="spanish">¿Qué áreas de la lengua que está bien</question>
 	
 	<question lang="english">and what area you are trying to improve the most?</question>
 	<question lang="french">et quel parties vous essayez d'ameliorer le plus?</question>
-	<question lang="portuguese">e qual a área que você está tentando melhorar mais?</question>
+	<question lang="portuguese">e qual a área você está tentando melhorar mais?</question>
 	<question lang="spanish">y qué el área usted trata de mejorarse el más?</question>
 	
 	<question lang="english">- Vocabulary</question> 
@@ -79,7 +79,7 @@
 	
 	<question lang="english">- Speaking</question> 
 	<question lang="french">- Parlant</question>
-	<question lang="portuguese">- Falante</question>
+	<question lang="portuguese">- Fala</question>
 	<question lang="spanish">- Hablando</question>
 	
 	<question lang="english">- Reading</question>
@@ -110,7 +110,7 @@
 	
 	<ranTopics lang="english">Randomize Topics</ranTopics>
 	<ranTopics lang="french">Randomisez les Sujets </ranTopics>
-	<ranTopics lang="portuguese">Randomize Tópicos</ranTopics>
+	<ranTopics lang="portuguese">Sorteie Tópicos</ranTopics>
 	<ranTopics lang="spanish">Randomize Asuntos</ranTopics>
 	
 	<choAnoTop lang="english">Choose Another Topic</choAnoTop>
@@ -175,23 +175,23 @@
 	
 	<playVideo lang="english">Your Partner Selected a Video</playVideo>
 	<playVideo lang="french">Votre Partenaire A Sélectionné une Vidéo</playVideo>
-	<playVideo lang="portuguese">Seu Parceiro Seleccionado um Vídeo</playVideo>
+	<playVideo lang="portuguese">Seu Parceiro Selecionou um Vídeo</playVideo>
 	<playVideo lang="spanish">Su Pareja Ha Seleccionado un Vídeo</playVideo>
 	
 	<utterVis lang="english">Speaking Amount</utterVis>
 	<utterVis lang="french">Quantité de Discours</utterVis>
-	<utterVis lang="portuguese">Quantidade de Falar</utterVis>
+	<utterVis lang="portuguese">Quantidade de Conversa</utterVis>
 	<utterVis lang="spanish">Cantidad de Hablando</utterVis>
 </buttons>
 <contentPrompts>
 	<tweetPrompt1 lang="english">Tell your partner what these Tweets are about</tweetPrompt1>
 	<tweetPrompt1 lang="french">Discutez avec votre partenaire ce que ces Tweets parle de</tweetPrompt1>
-	<tweetPrompt1 lang="portuguese">Discuta com seu parceiro o que esses Tweets são sobre</tweetPrompt1>
+	<tweetPrompt1 lang="portuguese">Discuta com seu parceiro sobre o que esses Tweets falam</tweetPrompt1>
 	<tweetPrompt1 lang="spanish">Hable con su pareja lo que estos Tweets están a punto</tweetPrompt1>
 	
 	<tweetPrompt2 lang="english">Ask your partner to talk about what they are reading</tweetPrompt2>
 	<tweetPrompt2 lang="french">Demandez à votre partenaire de parler de ce qu'ils lisent</tweetPrompt2>
-	<tweetPrompt2 lang="portuguese">Peça ao seu parceiro para falar sobre o que estão lendo</tweetPrompt2>
+	<tweetPrompt2 lang="portuguese">Peça ao seu parceiro para falar sobre o que ele está lendo</tweetPrompt2>
 	<tweetPrompt2 lang="spanish">Pregúntele a su pareja para hablar de lo que están leyendo</tweetPrompt2>
 	
 	<newsPrompt1 lang="english">Tell your partner what this article is about</newsPrompt1>
@@ -201,7 +201,7 @@
 	
 	<newsPrompt2 lang="english">Ask your partner to talk about what they are reading</newsPrompt2>
 	<newsPrompt2 lang="french">Demandez à votre partenaire de parler de ce qu'ils lisent</newsPrompt2>
-	<newsPrompt2 lang="portuguese">Peça ao seu parceiro para falar sobre o que estão lendo</newsPrompt2>
+	<newsPrompt2 lang="portuguese">Peça ao seu parceiro para falar sobre o que ele está lendo</newsPrompt2>
 	<newsPrompt2 lang="spanish">Pregúntele a su pareja para hablar de lo que están leyendo</newsPrompt2>
 	
 	<photosPrompt1 lang="english">Talk about what you like about these photos</photosPrompt1>
@@ -226,7 +226,7 @@
 	
 	<videoPrompt1 lang="english">Talk about what you find interesting about the video</videoPrompt1>
 	<videoPrompt1 lang="french">Parlez de ce que vous trouvez intéressants avec la vidéo</videoPrompt1>
-	<videoPrompt1 lang="portuguese">Fale sobre o que você achar interessante com o vídeo</videoPrompt1>
+	<videoPrompt1 lang="portuguese">Fale sobre o que você achar interessante no vídeo</videoPrompt1>
 	<videoPrompt1 lang="spanish">Hable sobre lo que le parezca interesante con el vídeo</videoPrompt1>
 	
 	<videoPrompt2 lang="english">Ask your partner to describe the video to you</videoPrompt2>
@@ -236,12 +236,12 @@
 	
 	<topicPrompt1 lang="english">Discuss the topics that interest you</topicPrompt1>
 	<topicPrompt1 lang="french">Discuter les sujets qui vous intéressent</topicPrompt1>
-	<topicPrompt1 lang="portuguese">Discutir os temas que lhe interessam</topicPrompt1>
+	<topicPrompt1 lang="portuguese">Discuta os temas que lhe interessam</topicPrompt1>
 	<topicPrompt1 lang="spanish">Discutir los temas que te interesan</topicPrompt1>
 	
 	<topicPrompt2 lang="english">Ask your partner what topic they would like to talk about</topicPrompt2>
 	<topicPrompt2 lang="french">Demandez à votre partenaire ce sujet qu'ils aimeraient parler</topicPrompt2>
-	<topicPrompt2 lang="portuguese">Peça ao seu parceiro que eles gostariam de falar</topicPrompt2>
+	<topicPrompt2 lang="portuguese">Pergunte ao seu parceiro sobre o que ele gostaria de conversar</topicPrompt2>
 	<topicPrompt2 lang="spanish">Pregúntele a su pareja lo que les gustaría hablar</topicPrompt2>
 </contentPrompts>
 <activities>

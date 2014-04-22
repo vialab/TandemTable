@@ -121,8 +121,6 @@ public class Sketch extends PApplet {
 	
 	// Stroke weight of lines
 	public int strokeW = 5;
-	// Name of the loading GIF picture
-	final public String loadGIF = "ajaxGIF-blue.gif";
 	// Regex for replacement
 	public String replaceRegex ="[^a-zA-Z_0-9_'_Á_á_À _Â_à_Â_â_Ä_ä_Ã_ã_Å_å_Ç_ç_É_é_È_è_Ê_ê_Ë_ë_Í_í_Ì_ì_Î_î_Ï_ï_Ñ_ñ_Ó_ó_Ò_ò_Ô_ô_Ö_ö_Õ_õ_Ú_ú_Ù_ù_Û_û_Ü_ü_Ý_ý_ÿ]";
 	
@@ -168,7 +166,9 @@ public class Sketch extends PApplet {
 		logger2 = new UserLogger(".\\data\\logs\\" + name2 + ".txt", 2);
 		mainLogger = new UserLogger(".\\data\\logs\\" + mainName + ".txt", -1);
 		
-		setupAudioOut();
+		// set up audio out
+		languagePrompt = new AudioOut(Colours.LANG_PROMPT);
+		talkingPrompt = new AudioOut(Colours.TALK_PROMPT);
 		
 		if(recordAudio) {
 			initializeAudioRecording();
@@ -293,11 +293,6 @@ public class Sketch extends PApplet {
 
 	public static void main(String[] args) {
 		PApplet.main(new String[]{"--present", "TandemTable.Sketch"});
-	}
-	
-	public void setupAudioOut() {
-		languagePrompt = new AudioOut("data/Language Prompt.wav");
-		talkingPrompt = new AudioOut("data/Talking Prompt.wav");
 	}
 	
 	public void initializeAudioRecording() {

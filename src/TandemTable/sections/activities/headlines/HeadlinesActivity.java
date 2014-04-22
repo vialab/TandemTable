@@ -73,14 +73,13 @@ public class HeadlinesActivity {
 	boolean canceled = false;
 	boolean wordTapped1 = false;
 	boolean wordTapped2 = false;
+	// Enable "Back To Headlines" buttons
+	boolean b2Headlines = false;
 
 	ArticleContainer body1, body2;
 	RectZone background1, background2, swipeBackground1, swipeBackground2;
-	TextZone backButton1, backButton2;
+    TextZone backButton1, backButton2;
 	MiddleWord middleZone;
-	
-	
-	
 	
 	final int NUM_HEADLINES = 3;
 	final int MAX_HEADLINES = 100;
@@ -183,7 +182,6 @@ public class HeadlinesActivity {
 		createBackground4Swipe();
 		createHeadlineZones1();
 		createHeadlineZones2();
-		//createMoreNewsButtons();
 		hg = new HeadlineGetter(sketch, this);
 		hg.setPriority(Thread.MAX_PRIORITY);
 		hg.start();
@@ -376,148 +374,86 @@ public class HeadlinesActivity {
 	}
 
 	public void setBackButton(TextZone tZone, int user, boolean activated){
-		if(activated){
-			if(user == 1){
-				backButton1.setGestureEnabled("Tap", true);
-				backButton1.setColour(Colours.unselectedZone);
-				backButton1.setTextColour(Colours.zoneText.getRed(),Colours. zoneText.getGreen(), Colours.zoneText.getBlue());
-
+		if(b2Headlines) {
+			if(activated){
+				if(user == 1){
+					backButton1.setGestureEnabled("Tap", true);
+					backButton1.setColour(Colours.unselectedZone);
+					backButton1.setTextColour(Colours.zoneText.getRed(),Colours. zoneText.getGreen(), Colours.zoneText.getBlue());
+	
+				} else {
+					backButton2.setGestureEnabled("Tap", true);
+					backButton2.setColour(Colours.unselectedZone);
+					backButton2.setTextColour(Colours.zoneText.getRed(),Colours. zoneText.getGreen(), Colours.zoneText.getBlue());
+	
+				}
 			} else {
-				backButton2.setGestureEnabled("Tap", true);
-				backButton2.setColour(Colours.unselectedZone);
-				backButton2.setTextColour(Colours.zoneText.getRed(),Colours. zoneText.getGreen(), Colours.zoneText.getBlue());
-
-			}
-		} else {
-			if(user == 1){
-				backButton1.setGestureEnabled("Tap", false);
-				backButton1.setColour(Colours.fadedOutZone);
-				backButton1.setTextColour(Colours.fadedText.getRed(),Colours. fadedText.getGreen(), Colours.fadedText.getBlue());
-
-			} else {
-				backButton2.setGestureEnabled("Tap", false);
-				backButton2.setColour(Colours.fadedOutZone);
-				backButton2.setTextColour(Colours.fadedText.getRed(),Colours. fadedText.getGreen(), Colours.fadedText.getBlue());
-
+				if(user == 1){
+					backButton1.setGestureEnabled("Tap", false);
+					backButton1.setColour(Colours.fadedOutZone);
+					backButton1.setTextColour(Colours.fadedText.getRed(),Colours. fadedText.getGreen(), Colours.fadedText.getBlue());
+	
+				} else {
+					backButton2.setGestureEnabled("Tap", false);
+					backButton2.setColour(Colours.fadedOutZone);
+					backButton2.setTextColour(Colours.fadedText.getRed(),Colours. fadedText.getGreen(), Colours.fadedText.getBlue());
+	
+				}
 			}
 		}
 	}
 
 	public void createBackButtons(){
-
-		// Back Button for user 1		
-		backButton1 = new TextZone(mainSection.buttonX, mainSection.buttonYb2, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, back1, sketch.textSize, "CENTER", "CENTER"){
-			public void tapEvent(TapEvent e){
-				if (isTappable()){
-					sketch.client.removeZone(body1);
-					setBackButton(this, 1, false);
-					activateHeadlines(1);
-					tapFlag1 = false;
-					wordTapped1 = false;
-					//if(imgFlag){
-					//	sketch.client.removeZone(imgZone1);
-					//}
-					e.setHandled(tappableHandled);
+		if(b2Headlines) {
+			// Back Button for user 1		
+			backButton1 = new TextZone(mainSection.buttonX, mainSection.buttonYb2, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, back1, sketch.textSize, "CENTER", "CENTER"){
+				public void tapEvent(TapEvent e){
+					if (isTappable()){
+						sketch.client.removeZone(body1);
+						setBackButton(this, 1, false);
+						activateHeadlines(1);
+						tapFlag1 = false;
+						wordTapped1 = false;
+						//if(imgFlag){
+						//	sketch.client.removeZone(imgZone1);
+						//}
+						e.setHandled(tappableHandled);
+					}
 				}
-			}
-		};
-
-		backButton1.setTextColour(Colours.fadedText.getRed(), Colours.fadedText.getGreen(), Colours.fadedText.getBlue());
-		backButton1.setColour(Colours.fadedOutZone.getRed(), Colours.fadedOutZone.getGreen(), Colours.fadedOutZone.getBlue());
-		backButton1.setGestureEnabled("TAP", true, true);
-		backButton1.setDrawBorder(false);
-		sketch.client.addZone(backButton1);
-
-		// Back Button for user 2	
-		backButton2 = new TextZone(mainSection.buttonX, mainSection.buttonYt2, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, back2, sketch.textSize, "CENTER", "CENTER"){
-
-			public void tapEvent(TapEvent e){
-				if (isTappable()){
-					sketch.client.removeZone(body2);
-					setBackButton(this, 2, false);
-					activateHeadlines(2);
-					tapFlag2 = false;
-					wordTapped2 = false;
-					//if(imgFlag){
-					//	sketch.client.removeZone(imgZone1);
-					//}
-					e.setHandled(tappableHandled);
+			};
+	
+			backButton1.setTextColour(Colours.fadedText.getRed(), Colours.fadedText.getGreen(), Colours.fadedText.getBlue());
+			backButton1.setColour(Colours.fadedOutZone.getRed(), Colours.fadedOutZone.getGreen(), Colours.fadedOutZone.getBlue());
+			backButton1.setGestureEnabled("TAP", true, true);
+			backButton1.setDrawBorder(false);
+			sketch.client.addZone(backButton1);
+	
+			// Back Button for user 2	
+			backButton2 = new TextZone(mainSection.buttonX, mainSection.buttonYt2, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, back2, sketch.textSize, "CENTER", "CENTER"){
+	
+				public void tapEvent(TapEvent e){
+					if (isTappable()){
+						sketch.client.removeZone(body2);
+						setBackButton(this, 2, false);
+						activateHeadlines(2);
+						tapFlag2 = false;
+						wordTapped2 = false;
+						//if(imgFlag){
+						//	sketch.client.removeZone(imgZone1);
+						//}
+						e.setHandled(tappableHandled);
+					}
 				}
-			}
-		};
-
-		backButton2.rotate((float) (Colours.PI));
-		backButton2.setTextColour(Colours.fadedText.getRed(), Colours.fadedText.getGreen(), Colours.fadedText.getBlue());
-		backButton2.setColour(Colours.fadedOutZone.getRed(), Colours.fadedOutZone.getGreen(), Colours.fadedOutZone.getBlue());
-		backButton2.setGestureEnabled("TAP", true, true);
-		backButton2.setDrawBorder(false);
-		sketch.client.addZone(backButton2);
+			};
+	
+			backButton2.rotate((float) (Colours.PI));
+			backButton2.setTextColour(Colours.fadedText.getRed(), Colours.fadedText.getGreen(), Colours.fadedText.getBlue());
+			backButton2.setColour(Colours.fadedOutZone.getRed(), Colours.fadedOutZone.getGreen(), Colours.fadedOutZone.getBlue());
+			backButton2.setGestureEnabled("TAP", true, true);
+			backButton2.setDrawBorder(false);
+			sketch.client.addZone(backButton2);
+		}
 	}
-
-	/*public void createMoreNewsButtons(){
-		String s = "";
-
-		//More News Button for user 1
-		if(lang1.equalsIgnoreCase("English")){
-			s = English.moreNews;
-		} else if(lang1.equalsIgnoreCase("French")){
-			s = French.moreNews;
-		}
-
-		//More News Button for user 1		
-		moreNews1 = new TextZone(mainSection.buttonX, mainSection.buttonYb2, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, s, sketch.textSize, "CENTER", "CENTER"){
-
-			public void tapEvent(TapEvent e){
-				if (tappable && !tapFlag1 && !errorFlag){
-					if(index1 >= MAX_HEADLINES - NUM_HEADLINES - (MAX_HEADLINES % NUM_HEADLINES) || index1 >= results1.length()){
-						index1 = 0; 
-					} else {
-						index1 += NUM_HEADLINES;
-					}
-					setHeadlines(1);
-					e.setHandled(tappableHandled);
-				}
-			}
-		};
-
-		moreNews1.setTextColour(Colours.zoneText.getRed(), Colours.zoneText.getGreen(), Colours.zoneText.getBlue());
-		moreNews1.setColour(Colours.unselectedZone.getRed(), Colours.unselectedZone.getGreen(), Colours.unselectedZone.getBlue());
-		moreNews1.setGestureEnabled("TAP", true, true);
-		moreNews1.setDrawBorder(false);
-		sketch.client.addZone(moreNews1);
-
-
-		//More News Button for user 2
-		if(lang2.equalsIgnoreCase("English")){
-			s = English.moreNews;
-		} else if(lang2.equalsIgnoreCase("French")){
-			s = French.moreNews;
-		}
-
-		//More News Button for user 2	
-		moreNews2 = new TextZone(mainSection.buttonX, mainSection.buttonYt2, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, s, sketch.textSize, "CENTER", "CENTER"){
-
-			public void tapEvent(TapEvent e){
-				if (tappable && !tapFlag2 && !errorFlag){
-					if(index2 >= MAX_HEADLINES - NUM_HEADLINES - (MAX_HEADLINES % NUM_HEADLINES)|| index2 >= results2.length()){
-						index2 = 0; 
-					} else {
-						index2 += NUM_HEADLINES;
-					}
-					setHeadlines(2);
-					e.setHandled(tappableHandled);
-				}
-			}
-		};
-
-		moreNews2.rotate((float) (Colours.PI));
-		moreNews2.setTextColour(Colours.zoneText.getRed(), Colours.zoneText.getGreen(), Colours.zoneText.getBlue());
-		moreNews2.setColour(Colours.unselectedZone.getRed(), Colours.unselectedZone.getGreen(), Colours.unselectedZone.getBlue());
-		moreNews2.setGestureEnabled("TAP", true, true);
-		moreNews2.setDrawBorder(false);
-		sketch.client.addZone(moreNews2);
-
-	}*/
 
 	public void createHeadlineZones1(){
 		final int y1 = sketch.getHeight()/2 + textYOffset/2;
@@ -992,12 +928,15 @@ public class HeadlinesActivity {
 		}
 
 		sketch.client.removeZone(hg.loading);
-		sketch.client.removeZone(backButton1);
+		
+		if(b2Headlines) {
+			sketch.client.removeZone(backButton1);
+			sketch.client.removeZone(backButton2);
+		}
 		//sketch.client.removeZone(imgZone1);
 		sketch.client.removeZone(body1);
 		sketch.client.removeZone(background1);
 
-		sketch.client.removeZone(backButton2);
 		//sketch.client.removeZone(imgZone2);
 		sketch.client.removeZone(body2);
 		sketch.client.removeZone(background2);

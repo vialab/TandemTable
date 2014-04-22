@@ -50,30 +50,6 @@ public class VideoController {
 		videSpaceX = sketch.getWidth()-sketch.lineX - videoWidth - sketch.buttonWidth;
 		videoControlsX = sketch.getWidth() - sketch.buttonWidth - videSpaceX/2;
 		
-		/*if(tAct.lang1.equalsIgnoreCase("English")){
-			playStr1 = sketch.playE;
-			pauseStr1 = sketch.pauseE;
-			stopStr1 = sketch.stopE;
-			playVideoStr1 = sketch.playVideoE;
-		} else if(tAct.lang1.equalsIgnoreCase("French")){
-			playStr1 = sketch.playF;
-			pauseStr1 = sketch.pauseF;
-			stopStr1 = sketch.stopF;
-			playVideoStr1 = sketch.playVideoF;
-		}
-
-		if(tAct.lang2.equalsIgnoreCase("English")){
-			playStr2 = sketch.playE;
-			pauseStr2 = sketch.pauseE;
-			stopStr2 = sketch.stopE;
-			playVideoStr2 = sketch.playVideoE;
-		} else if(tAct.lang2.equalsIgnoreCase("French")){
-			playStr2 = sketch.playF;
-			pauseStr2 = sketch.pauseF;
-			stopStr2 = sketch.stopF;
-			playVideoStr2 = sketch.playVideoF;
-		}
-		*/
 		createWhiteRect();
 		createVideoControlButtons1();
 		createVideoControlButtons2();

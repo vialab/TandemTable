@@ -71,36 +71,7 @@ public class PGame {
 		
 		createBoxes();
 		tagArray1 = sketch.learner1.tags[topicIndex];
-		tagArray2 = sketch.learner2.tags[topicIndex];
-
-		/*if(lang1.equalsIgnoreCase("English")){	
-			tagArray1 = Languages.tagsE[topicIndex];
-			//play1 = sketch.playAgainE;
-		} else if(lang1.equalsIgnoreCase("French")){
-			tagArray1 = Languages.tagsF[topicIndex];
-			//play1 = sketch.playAgainF;
-		} else if(lang1.equalsIgnoreCase("Portuguese")){	
-			tagArray1 = Languages.tagsP[topicIndex];
-			//play1 = sketch.playAgainP;
-		} else if(lang1.equalsIgnoreCase("Spanish")){
-			tagArray1 = Languages.tagsS[topicIndex];
-			//play1 = sketch.playAgainS;
-		}
-		
-		if(lang2.equalsIgnoreCase("English")){	
-			tagArray2 = Languages.tagsE[topicIndex];
-			//play2 = sketch.playAgainE;
-		} else if(lang2.equalsIgnoreCase("French")){
-			tagArray2 = Languages.tagsF[topicIndex];
-			//play2 = sketch.playAgainF;
-		} else if(lang2.equalsIgnoreCase("Portuguese")){	
-			tagArray2 = Languages.tagsP[topicIndex];
-			//play2 = sketch.playAgainP;
-		} else if(lang2.equalsIgnoreCase("Spanish")){
-			tagArray2 = Languages.tagsS[topicIndex];
-			//play2 = sketch.playAgainS;
-		}*/
-				
+		tagArray2 = sketch.learner2.tags[topicIndex];				
 		
 		sketch.mainSection.contentPrompt1.setText(sketch.learner1.pGamePrompts[0]);
 		sketch.mainSection.contentPrompt2.setText(sketch.learner2.pGamePrompts[0]);

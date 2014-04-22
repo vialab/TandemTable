@@ -98,9 +98,12 @@ public class ProfilePicker {
 		int arrowTY = applet.getY() + applet.screenHeight/2 -arrowSize - arrowSize/2;
 
 
+		PImage lArrow = applet.loadImage(Colours.ARROW_LEFT);
+		PImage rArrow = applet.loadImage(Colours.ARROW_RIGHT);
+		
 		//For User1
 
-		arrows[0] = new ImageZone(applet.loadImage("lArrow.png"), leftSideX, arrowBY, arrowSize, arrowSize){
+		arrows[0] = new ImageZone(lArrow, leftSideX, arrowBY, arrowSize, arrowSize){
 			public void tapEvent(TapEvent e){
 				if (isTappable()){
 					if (index1 > 0){
@@ -118,7 +121,7 @@ public class ProfilePicker {
 			}
 		};
 
-		arrows[1] = new ImageZone(applet.loadImage("rArrow.png"), rightSizeX, arrowBY, arrowSize, arrowSize){
+		arrows[1] = new ImageZone(rArrow, rightSizeX, arrowBY, arrowSize, arrowSize){
 			public void tapEvent(TapEvent e){
 
 				if (isTappable()){
@@ -146,7 +149,7 @@ public class ProfilePicker {
 
 
 		//For User2
-		arrows[2] = new ImageZone(applet.loadImage("rArrow.png"), rightSizeX, arrowTY, arrowSize, arrowSize){
+		arrows[2] = new ImageZone(rArrow, rightSizeX, arrowTY, arrowSize, arrowSize){
 			public void tapEvent(TapEvent e){
 				if (isTappable()){
 					if (index2 > 0){
@@ -164,7 +167,7 @@ public class ProfilePicker {
 			}
 		};
 
-		arrows[3] = new ImageZone(applet.loadImage("lArrow.png"), leftSideX, arrowTY, arrowSize, arrowSize){
+		arrows[3] = new ImageZone(lArrow, leftSideX, arrowTY, arrowSize, arrowSize){
 			public void tapEvent(TapEvent e){
 
 				if (isTappable()){

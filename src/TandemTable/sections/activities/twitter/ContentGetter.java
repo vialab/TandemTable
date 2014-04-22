@@ -87,7 +87,7 @@ public class ContentGetter extends Thread{
 		textYSpacing = (int) (textSize*1.2);
 		
 
-		final Gif ajaxGIF = new Gif(sketch, sketch.loadGIF);
+		final Gif ajaxGIF = new Gif(sketch, Colours.LOAD_GIF);
 		final PApplet app = sketch;
 		ajaxGIF.loop();
 

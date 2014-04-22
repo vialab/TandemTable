@@ -41,7 +41,7 @@ public class TwitterGetter extends Thread {
 		this.twitterAct = twitterAct;
 		this.sketch = sketch;
 
-		final Gif ajaxGIF = new Gif(sketch, sketch.loadGIF);
+		final Gif ajaxGIF = new Gif(sketch, Colours.LOAD_GIF);
 		final PApplet app = sketch;
 		ajaxGIF.loop();
 

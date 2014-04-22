@@ -83,10 +83,7 @@ public class Colours {
 
 	//From VideoActivity.java
 	public static Color currentColour = new Color(240,248,255);
-	public static Color elementShadow = new Color(72, 181, 17);
-	public static final String PLAY_BUTTON = "./play.png";
-	public static final String PLAY_BUTTON_SELECTED = "./play-red.png"; 
-	
+	public static Color elementShadow = new Color(72, 181, 17);	
 	
 	//From Graph.java
 	public static Color unselectedNode = new Color(79, 129, 189);
@@ -102,6 +99,35 @@ public class Colours {
 	public static Color pictures = new Color(141, 160, 203);//(204, 235, 197);
 	public static Color videos = new Color(231, 138, 195);//(222, 203, 228);
 	public static Color pGame = new Color(166, 216, 84);//(254, 217, 166);
-
 	
+	/////////////////////////////////
+	// Images
+	/////////////////////////////////
+	// Name of the loading GIF picture
+	public static final String LOAD_GIF = "imgs/ajaxGIF-blue.gif";
+	/////////////////////////////////
+	// Profile
+	/////////////////////////////////
+	public static final String ENG_FLAG = "imgs/england.jpg";
+	public static final String FRN_FLAG = "imgs/france.jpg";
+	public static final String BRZ_FLAG = "imgs/brazil.jpg";
+	public static final String SPN_FLAG = "imgs/spain.jpg";
+	public static final String ARROW_LEFT = "imgs/lArrow.png";
+	public static final String ARROW_RIGHT = "imgs/rArrow.png";
+	/////////////////////////////////
+	// Video Activity
+	/////////////////////////////////
+	public static final String PLAY_BUTTON = "imgs/play.png";
+	public static final String PLAY_BUTTON_SELECTED = "imgs/play-red.png"; 
+	/////////////////////////////////
+	// Picture Activity
+	/////////////////////////////////
+	// Name of the garbage bin picture
+	public static final String GB_PIC = "imgs/gb-blue.jpg";
+	
+	///////////////////////////////////
+	// Audio
+	///////////////////////////////////
+	public static final String LANG_PROMPT = "data/audio/Language Prompt.wav";
+	public static final String TALK_PROMPT = "data/audio/Talking Prompt.wav";
 }
