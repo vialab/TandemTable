@@ -35,7 +35,7 @@
 	<question lang="english">Where did you last attend school?</question>
 	<question lang="french">Où êtes-vous allé à l'école et pour quoi?</question>
 	<question lang="portuguese">Onde você estudou mais recentemente?</question>
-	<question lang="spanish">¿Dónde usted dura asistió la escuela?</question>
+	<question lang="spanish">¿Donde fue la última escuela que usted asistió?</question>
 	
 	<question lang="english">What program did you take?</question>
 	<question lang="french">Quel programme avez-vous pris?</question>
@@ -60,12 +60,12 @@
 	<question lang="english">What areas of the language you are good at</question>
 	<question lang="french">Quels parties de la langue vous êtes bon en</question>
 	<question lang="portuguese">Em quais áreas do idioma você é bom</question>
-	<question lang="spanish">¿Qué áreas de la lengua que está bien</question>
+	<question lang="spanish">¿En que áreas del lenguaje es usted bueno</question>
 	
 	<question lang="english">and what area you are trying to improve the most?</question>
 	<question lang="french">et quel parties vous essayez d'ameliorer le plus?</question>
 	<question lang="portuguese">e qual a área você está tentando melhorar mais?</question>
-	<question lang="spanish">y qué el área usted trata de mejorarse el más?</question>
+	<question lang="spanish">y que es lo que más esta tratando de mejorar?</question>
 	
 	<question lang="english">- Vocabulary</question> 
 	<question lang="french">- Vocabulaire</question>
@@ -90,12 +90,12 @@
 	<question lang="english">Discuss how your partner can help you.</question>
 	<question lang="french">Discutez comment votre partenaire peut vous aider.</question>
 	<question lang="portuguese">Discuta como o seu parceiro pode ajudá-lo.</question>
-	<question lang="spanish">Hable como su compañero puede ayudarle.</question>
+	<question lang="spanish">Analize como su compañero puede ayudarle.</question>
 	
 	<question lang="english">Discuss how you and your partner will correct each other's language use.</question>
 	<question lang="french">Discutez comment vous et votre partenaire corrigera l'usage de langue</question>
 	<question lang="portuguese">Discuta como você e seu parceiro vai corrigir o uso do outro idioma.</question>
-	<question lang="spanish">Hable como usted y su compañero corregirán el empleo de lengua de cada uno.</question>
+	<question lang="spanish">Analize con usted y su compañero pueden corregir el lenguaje del otro.</question>
 </questions>
 <buttons>
 	<next lang="english">Next</next>
@@ -111,12 +111,12 @@
 	<ranTopics lang="english">Randomize Topics</ranTopics>
 	<ranTopics lang="french">Randomisez les Sujets </ranTopics>
 	<ranTopics lang="portuguese">Sorteie Tópicos</ranTopics>
-	<ranTopics lang="spanish">Randomize Asuntos</ranTopics>
+	<ranTopics lang="spanish">Randomize Temas</ranTopics>
 	
 	<choAnoTop lang="english">Choose Another Topic</choAnoTop>
 	<choAnoTop lang="french">Choisissez une Autre Sujet</choAnoTop>
 	<choAnoTop lang="portuguese">Escolha Outro Tópico</choAnoTop>
-	<choAnoTop lang="spanish">Escoja Otro Asunto</choAnoTop>
+	<choAnoTop lang="spanish">Escoja Otro Tema</choAnoTop>
 	
 	<choAnoAct lang="english">Choose Another Activity</choAnoAct>
 	<choAnoAct lang="french">Choisissez une Autre Activité</choAnoAct>
@@ -146,7 +146,7 @@
 	<back2Heads lang="english">Back To Headlines</back2Heads>
 	<back2Heads lang="french">Revenir à Titres de l'Actualité</back2Heads>
 	<back2Heads lang="portuguese">Voltar Para Manchetes</back2Heads>
-	<back2Heads lang="spanish">Detrás a Titulares</back2Heads>
+	<back2Heads lang="spanish">Volver a Titulares</back2Heads>
 	
 	<moreVideos lang="english">More Videos</moreVideos>
 	<moreVideos lang="french">Plus de Vidéos</moreVideos>
@@ -187,22 +187,22 @@
 	<tweetPrompt1 lang="english">Tell your partner what these Tweets are about</tweetPrompt1>
 	<tweetPrompt1 lang="french">Discutez avec votre partenaire ce que ces Tweets parle de</tweetPrompt1>
 	<tweetPrompt1 lang="portuguese">Discuta com seu parceiro sobre o que esses Tweets falam</tweetPrompt1>
-	<tweetPrompt1 lang="spanish">Hable con su pareja lo que estos Tweets están a punto</tweetPrompt1>
+	<tweetPrompt1 lang="spanish">Digale a su pareja acerca de que son esos Tweets</tweetPrompt1>
 	
 	<tweetPrompt2 lang="english">Ask your partner to talk about what they are reading</tweetPrompt2>
 	<tweetPrompt2 lang="french">Demandez à votre partenaire de parler de ce qu'ils lisent</tweetPrompt2>
 	<tweetPrompt2 lang="portuguese">Peça ao seu parceiro para falar sobre o que ele está lendo</tweetPrompt2>
-	<tweetPrompt2 lang="spanish">Pregúntele a su pareja para hablar de lo que están leyendo</tweetPrompt2>
+	<tweetPrompt2 lang="spanish">Pidale a su pareja que hable acerca de lo que están leyendo</tweetPrompt2>
 	
 	<newsPrompt1 lang="english">Tell your partner what this article is about</newsPrompt1>
 	<newsPrompt1 lang="french">Discutez avec votre partenaire ce que ce article parle de</newsPrompt1>
 	<newsPrompt1 lang="portuguese">Diga ao seu parceiro o que este artigo é sobre</newsPrompt1>
-	<newsPrompt1 lang="spanish">Dígale a su pareja lo que este artículo se trata de</newsPrompt1>
+	<newsPrompt1 lang="spanish">Digale a su pareja de que se trata este artículo</newsPrompt1>
 	
 	<newsPrompt2 lang="english">Ask your partner to talk about what they are reading</newsPrompt2>
 	<newsPrompt2 lang="french">Demandez à votre partenaire de parler de ce qu'ils lisent</newsPrompt2>
 	<newsPrompt2 lang="portuguese">Peça ao seu parceiro para falar sobre o que ele está lendo</newsPrompt2>
-	<newsPrompt2 lang="spanish">Pregúntele a su pareja para hablar de lo que están leyendo</newsPrompt2>
+	<newsPrompt2 lang="spanish">Pidale a su pareja que hable acerca de lo que están leyendo</newsPrompt2>
 	
 	<photosPrompt1 lang="english">Talk about what you like about these photos</photosPrompt1>
 	<photosPrompt1 lang="french">Parlez de ce que vous aimez à propos de ces photos</photosPrompt1>
@@ -222,7 +222,7 @@
 	<pGamePrompt2 lang="english">Ask your partner to talk about what the pictures mean</pGamePrompt2>
 	<pGamePrompt2 lang="french">Demandez à votre partenaire pour parler de ce que les images signifient</pGamePrompt2>
 	<pGamePrompt2 lang="portuguese">Peça ao seu parceiro para falar sobre o que as imagens significam</pGamePrompt2>
-	<pGamePrompt2 lang="spanish">Pregúntele a su pareja para hablar de lo que significan las fotos</pGamePrompt2>
+	<pGamePrompt2 lang="spanish">Pidale a su pareja que hable de lo que esas fotos significan</pGamePrompt2>
 	
 	<videoPrompt1 lang="english">Talk about what you find interesting about the video</videoPrompt1>
 	<videoPrompt1 lang="french">Parlez de ce que vous trouvez intéressants avec la vidéo</videoPrompt1>
@@ -232,17 +232,17 @@
 	<videoPrompt2 lang="english">Ask your partner to describe the video to you</videoPrompt2>
 	<videoPrompt2 lang="french">Demandez à votre partenaire pour décrire la vidéo pour vous</videoPrompt2>
 	<videoPrompt2 lang="portuguese">Peça ao seu parceiro para descrever o vídeo para você</videoPrompt2>
-	<videoPrompt2 lang="spanish">Pregúntele a su pareja para describir el video para usted</videoPrompt2>
+	<videoPrompt2 lang="spanish">Pidale a su pareja que le describa el vídeo</videoPrompt2>
 	
 	<topicPrompt1 lang="english">Discuss the topics that interest you</topicPrompt1>
 	<topicPrompt1 lang="french">Discuter les sujets qui vous intéressent</topicPrompt1>
 	<topicPrompt1 lang="portuguese">Discuta os temas que lhe interessam</topicPrompt1>
-	<topicPrompt1 lang="spanish">Discutir los temas que te interesan</topicPrompt1>
+	<topicPrompt1 lang="spanish">Discuta los temas que le interesan</topicPrompt1>
 	
 	<topicPrompt2 lang="english">Ask your partner what topic they would like to talk about</topicPrompt2>
 	<topicPrompt2 lang="french">Demandez à votre partenaire ce sujet qu'ils aimeraient parler</topicPrompt2>
 	<topicPrompt2 lang="portuguese">Pergunte ao seu parceiro sobre o que ele gostaria de conversar</topicPrompt2>
-	<topicPrompt2 lang="spanish">Pregúntele a su pareja lo que les gustaría hablar</topicPrompt2>
+	<topicPrompt2 lang="spanish">Preguntele a su pareja lo que les gustaría hablar</topicPrompt2>
 </contentPrompts>
 <activities>
 	<twitter lang="english">Twitter</twitter>
