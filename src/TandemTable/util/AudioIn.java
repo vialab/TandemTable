@@ -37,7 +37,12 @@ public class AudioIn implements AudioProcessor {
 	// Threshold for dB sound pressure level
 	int threshold;
 	//int talkingAmount = 1;
+	
+	// User ID
 	int user;
+	// Prevent both microphones from picking up 
+	// same utterance data
+	public boolean userUtterFlag = false;
 	
 	//ArrayList<SlidingWindow> windowArray;
 	
@@ -354,8 +359,10 @@ public class AudioIn implements AudioProcessor {
 			for(int i = overlap; i < pcmAudio.length; i++) {
 				float value = pcmAudio[i];					
 				
-				//detectUtterance(value, timeNow);
-				detectUtterancePaper(value, timeNow);	
+				if(!userUtterFlag) {
+					//detectUtterance(value, timeNow);
+					detectUtterancePaper(value, timeNow);
+				}
 			}
 			
 			determineUtterRate();
@@ -397,7 +404,8 @@ public class AudioIn implements AudioProcessor {
 	// 2012. Ogawa et al. Table talk enhancer: a tabletop system for enhancing and balancing mealtime conversations using utterance rates. 
 	// http://doi.acm.org/10.1145/2390776.2390783
 	public void detectUtterancePaper(float value, long timeNow) {
-		if(!startedUtter && (value < maxNoiseLvlNeg*noiseMult || value > maxNoiseLvlPos*noiseMult)) {
+		if(!userUtterFlag && !startedUtter && (value < maxNoiseLvlNeg*noiseMult || value > maxNoiseLvlPos*noiseMult)) {
+			sketch.setAudioToggle(user);
 			startedUtter = true;
 			curUtter = new Utterance(utterTime, timeNow);
 			curUtter.addFloat(value);
@@ -425,6 +433,7 @@ public class AudioIn implements AudioProcessor {
 				totalTimeUtterances += curUtter.getEndTime() - curUtter.getStartTime();
 				timeOfLastUtter = timeNow;
 				timeUtterContent = timeOfLastUtter;
+				sketch.setAudioToggle(user);
 				
 				if(user == 1) {
 					sketch.logger1.log("Utterance number " + utterArray.size());

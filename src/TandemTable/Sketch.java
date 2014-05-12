@@ -304,6 +304,15 @@ public class Sketch extends PApplet {
 		audioIn[0].startSoundCapture();
 		audioIn[1].startSoundCapture();
 	}
+	
+	// Sets the flag for the opposite user's recording
+	public void setAudioToggle(int user) {
+		if(user == 1) {
+			audioIn[1].userUtterFlag = !audioIn[1].userUtterFlag;
+		} else if(user == 2) {
+			audioIn[0].userUtterFlag = !audioIn[0].userUtterFlag;
+		}
+	}
 
 	
 	public void initializeMainScreen(String lang1, String lang2){
