@@ -359,10 +359,10 @@ public class AudioIn implements AudioProcessor {
 			for(int i = overlap; i < pcmAudio.length; i++) {
 				float value = pcmAudio[i];					
 				
-				if(!userUtterFlag) {
+				//if(!userUtterFlag) {
 					//detectUtterance(value, timeNow);
 					detectUtterancePaper(value, timeNow);
-				}
+				//}
 			}
 			
 			determineUtterRate();
@@ -404,52 +404,53 @@ public class AudioIn implements AudioProcessor {
 	// 2012. Ogawa et al. Table talk enhancer: a tabletop system for enhancing and balancing mealtime conversations using utterance rates. 
 	// http://doi.acm.org/10.1145/2390776.2390783
 	public void detectUtterancePaper(float value, long timeNow) {
-		if(!userUtterFlag && !startedUtter && (value < maxNoiseLvlNeg*noiseMult || value > maxNoiseLvlPos*noiseMult)) {
-			sketch.setAudioToggle(user);
-			startedUtter = true;
-			curUtter = new Utterance(utterTime, timeNow);
-			curUtter.addFloat(value);
-		
-		} else if(startedUtter && (value < maxNoiseLvlNeg || value > maxNoiseLvlPos)) {
-			curUtter.addFloat(value);
-			curUtter.resetCounter();
-			curUtter.setEndIndex(-1);
-			curUtter.setEndTime(-1);
-		} else if(startedUtter && (value >= maxNoiseLvlNeg || value <= maxNoiseLvlPos)) {			
-			curUtter.addCounter(1);
-			curUtter.addFloat(value);
-			
-			if(curUtter.getEndIndex() == -1) {
-				curUtter.setEndIndex(utterTime);
-				curUtter.setEndTime(timeNow);
-			}
-		}
-		
-		if(startedUtter && curUtter.getCounter() >= endThesholdPaper) {
-			startedUtter = false;
-			
-			if(curUtter.getEndIndex() - curUtter.getStartIndex() > utterLengthThreshPaper) {
-				utterArray.add(curUtter);
-				totalTimeUtterances += curUtter.getEndTime() - curUtter.getStartTime();
-				timeOfLastUtter = timeNow;
-				timeUtterContent = timeOfLastUtter;
+		if(!userUtterFlag) {
+			if(!startedUtter && (value < maxNoiseLvlNeg*noiseMult || value > maxNoiseLvlPos*noiseMult)) {
 				sketch.setAudioToggle(user);
+				startedUtter = true;
+				curUtter = new Utterance(utterTime, timeNow);
+				curUtter.addFloat(value);
+			
+			} else if(startedUtter && (value < maxNoiseLvlNeg || value > maxNoiseLvlPos)) {
+				curUtter.addFloat(value);
+				curUtter.resetCounter();
+				curUtter.setEndIndex(-1);
+				curUtter.setEndTime(-1);
+			} else if(startedUtter && (value >= maxNoiseLvlNeg || value <= maxNoiseLvlPos)) {			
+				curUtter.addCounter(1);
+				curUtter.addFloat(value);
 				
-				if(user == 1) {
-					sketch.logger1.log("Utterance number " + utterArray.size());
-					sketch.logger1.log("Total Time of Utterances: " + totalTimeUtterances);
-				} else if(user == 2) {
-					sketch.logger2.log("Utterance number " + utterArray.size());
-					sketch.logger2.log("Total Time of Utterances: " + totalTimeUtterances);
+				if(curUtter.getEndIndex() == -1) {
+					curUtter.setEndIndex(utterTime);
+					curUtter.setEndTime(timeNow);
 				}
-				
-				System.out.println("User: " + user + ". Utterance number " + utterArray.size() + " added and ended at " + utterTime + ". Total Time of Utterances: " + totalTimeUtterances);
 			}
+			
+			if(startedUtter && curUtter.getCounter() >= endThesholdPaper) {
+				startedUtter = false;
+				
+				if(curUtter.getEndIndex() - curUtter.getStartIndex() > utterLengthThreshPaper) {
+					utterArray.add(curUtter);
+					totalTimeUtterances += curUtter.getEndTime() - curUtter.getStartTime();
+					timeOfLastUtter = timeNow;
+					timeUtterContent = timeOfLastUtter;
+					sketch.setAudioToggle(user);
+					
+					if(user == 1) {
+						sketch.logger1.log("Utterance number " + utterArray.size());
+						sketch.logger1.log("Total Time of Utterances: " + totalTimeUtterances);
+					} else if(user == 2) {
+						sketch.logger2.log("Utterance number " + utterArray.size());
+						sketch.logger2.log("Total Time of Utterances: " + totalTimeUtterances);
+					}
+					
+					System.out.println("User: " + user + ". Utterance number " + utterArray.size() + " added and ended at " + utterTime + ". Total Time of Utterances: " + totalTimeUtterances);
+				}
+			}
+			
+			
+		
 		}
-		
-		
-		
-		
 		pcmData.add(value);
 		utterTime += 1;					
 	}
