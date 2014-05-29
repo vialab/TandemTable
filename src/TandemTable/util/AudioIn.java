@@ -21,7 +21,7 @@ public class AudioIn implements AudioProcessor {
 
 	// Number of milliseconds for calculating
 	// long utterance rate
-	public static final int utterRateTimeLong = 20000;
+	public static final int utterRateTimeLong = 25000;
 	// Number of milliseconds for calculating
 	// short utterance rate
 	public static final int utterRateTimeShort = 5000;
@@ -86,9 +86,12 @@ public class AudioIn implements AudioProcessor {
 	// Utterance rate for number of milliseconds
 	// in utterRateTimeLong
 	int utterRateLong = 0;
+	long utterRateLongTime = 0;
 	// Utterance rate for number of milliseconds
 	// in utterRateTimeLong
 	int utterRateShort = 0;
+	long utterRateShortTime = 0;
+	
 	// Current utterance
 	Utterance curUtter = null;
 	// If the utterance has started
@@ -153,6 +156,14 @@ public class AudioIn implements AudioProcessor {
 	
 	public int getUtterRateShort() {
 		return utterRateShort;
+	}
+	
+	public long getUtterRateLongTime() {
+		return utterRateLongTime;
+	}
+	
+	public long getUtterRateShortTime() {
+		return utterRateShortTime;
 	}
 	
 	
@@ -377,27 +388,33 @@ public class AudioIn implements AudioProcessor {
 	
 	public void determineUtterRate() {
 		long timeNow = System.currentTimeMillis();
-		long timePast = timeNow - utterRateTimeLong;
+		long timePast = (timeNow - utterRateTimeShort) - utterRateTimeLong;
 		int numUtters = 0;
+		long time = 0;
 		
 		for(int i = utterArray.size() - 1; i >= 0; i--) {
 			if(utterArray.get(i).getEndTime() != -1 && utterArray.get(i).getEndTime() > timePast) {
 				numUtters++;
+				time += utterArray.get(i).getEndTime() - utterArray.get(i).getStartTime();
 			}
 		}
 		
 		utterRateLong = numUtters;
+		utterRateLongTime = time;
 		
 		timePast = timeNow - utterRateTimeShort;
 		numUtters = 0;
+		time = 0;
 		
 		for(int i = utterArray.size() - 1; i >= 0; i--) {
 			if(utterArray.get(i).getEndTime() != -1 && utterArray.get(i).getEndTime() > timePast) {
 				numUtters++;
+				time += utterArray.get(i).getEndTime() - utterArray.get(i).getStartTime();
 			}
 		}
 		
 		utterRateShort = numUtters;
+		utterRateLongTime = time;
 	}
 	
 	// Algorithm from 
