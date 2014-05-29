@@ -72,6 +72,15 @@ public class Colours {
 	public static int zoneBorder = 103; //56. 93, 138
 	public static Color loginBColor = new Color(79, 129, 189);
 
+	// For Picture Game
+	// Colours signalling completion status for each image
+	public static Color halfCompletedC = new Color(220,220,112);
+	public static Color completedC = new Color(112,220,112);
+	// Colours of the top and bottom boxes that
+	// contain the tag words at beginning of each round
+	public static Color bottomBoxC = new Color(0, 0, 200, 30);
+	public static Color topBoxC = new Color(0, 200, 0, 30);
+	
 	// For News Headlines
 	public static Color newsTitleShadow = new Color(127,194,245);
 	public static Color highlightTextColour = new Color(233, 255, 31);

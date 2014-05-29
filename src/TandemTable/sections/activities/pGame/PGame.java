@@ -1,7 +1,5 @@
 package TandemTable.sections.activities.pGame;
 
-import java.awt.Color;
-
 import org.jdesktop.animation.timing.Animator;
 
 import TandemTable.Colours;
@@ -15,6 +13,7 @@ import vialab.simpleMultiTouch.events.TapEvent;
 import vialab.simpleMultiTouch.zones.ImageZone;
 import vialab.simpleMultiTouch.zones.RectZone;
 import vialab.simpleMultiTouch.zones.TextZone;
+import vialab.simpleMultiTouch.zones.Zone;
 
 public class PGame {
 	Sketch sketch;
@@ -50,16 +49,6 @@ public class PGame {
 	TextZone license;
 	RectZone bottomBox, topBox, msgBox;
 	
-	// Colours of the top and bottom boxes that
-	// contain the tag words at beginning of each round
-	Color bottomBoxC = new Color(0, 0, 200, 30);
-	Color topBoxC = new Color(0, 200, 0, 30);
-	
-	// Colours signalling completion status
-	// for each image
-	Color halfCompletedC = new Color(248, 144, 32);
-	Color completedC = new Color(71, 178, 0);
-	
 	//String play1, play2;
 	
 	String[] tagArray1 = null;
@@ -91,16 +80,6 @@ public class PGame {
 	}
 	
 	public void createTagZones(){
-		
-		if(started){
-			for(int i = 0; i < tagZones1.length; i++){
-				sketch.client.removeZone(tagZones1[i]);
-			}
-			
-			for(int i = 0; i < tagZones2.length; i++){
-				sketch.client.removeZone(tagZones2[i]);
-			}
-		}
 		int boxHeight = sketch.getHeight()/5;
 		float textSize = sketch.getHeight()/40;
 		completed = new boolean[NUM_IMAGES];
@@ -133,7 +112,7 @@ public class PGame {
 			tagZones1[tag] = new TextZone(x + xOff, y, zoneWidth, textSize, Colours.pFont, c, textSize, "LEFT", "BOTTOM");
 			tagZones1[tag].setDrawBorder(false);
 			tagZones1[tag].setGestureEnabled("Drag", true);
-			tagZones1[tag].setThresholdTouch(threshXY, threshXY);
+			tagZones1[tag].setInteractionOffset(threshXY, threshXY);
 			sketch.client.addZone(tagZones1[tag]);
 			xOff += dist*2;
 		}
@@ -159,7 +138,7 @@ public class PGame {
 			tagZones2[tag].setDrawBorder(false);
 			tagZones2[tag].rotate((float) Colours.PI);
 			tagZones2[tag].setGestureEnabled("Drag", true);
-			tagZones2[tag].setThresholdTouch(threshXY, threshXY);
+			tagZones2[tag].setInteractionOffset(threshXY, threshXY);
 
 			sketch.client.addZone(tagZones2[tag]);
 			xOff -= dist*2;
@@ -169,15 +148,6 @@ public class PGame {
 
 	}
 	
-	public void inactivateTagZones(){
-		
-		for(int i = 0; i < NUM_IMAGES; i++){
-			tagZones1[i].setActive(false);
-			tagZones2[i].setActive(false);
-		}
-
-	}
-
 	// Top and bottom boxes that contain the tag 
 	// words at beginning of each round
 	public void createBoxes(){
@@ -188,12 +158,12 @@ public class PGame {
 
 
 		bottomBox = new RectZone(sketch.lineX, sketch.getHeight()-boxHeight+spacingY, sketch.getWidth()-sketch.lineX , boxHeight-spacingY);
-		bottomBox.setColour(bottomBoxC);
+		bottomBox.setColour(Colours.bottomBoxC);
 		bottomBox.setDrawBorder(false);
 		sketch.client.addZone(bottomBox);
 
 		topBox = new RectZone(sketch.lineX, 0, sketch.getWidth()-sketch.lineX, boxHeight-spacingY);
-		topBox.setColour(topBoxC);
+		topBox.setColour(Colours.topBoxC);
 		topBox.setDrawBorder(false);
 		sketch.client.addZone(topBox);
 	}
@@ -236,7 +206,7 @@ public class PGame {
 				
 				textWidth = sketch.textWidth(sketch.learner2.playAgain);
 				sketch.pushMatrix();
-				sketch.translate((float) (sketch.getWidth()-sketch.lineX - (textWidth*1.5)),  sketch.getHeight()/2 - sketch.textSize*4);
+				sketch.translate((float) (sketch.getWidth()-sketch.lineX - (textWidth*1)),  sketch.getHeight()/2 - sketch.textSize*4);
 				sketch.rotate((float) Colours.PI);
 				sketch.text(sketch.learner2.playAgain, 0, 0);
 				sketch.popMatrix();
@@ -279,6 +249,11 @@ public class PGame {
 							e.setHandled(true);
 						}
 
+						public void drawZone() {
+							super.drawZone();
+							checkTagInImg(1, index, this);
+							checkTagInImg(2, index, this);
+						}
 
 					};
 					imgs[index].setColour(0, 0, 0);
@@ -301,117 +276,25 @@ public class PGame {
 					box1[index] = new RectZone(myX, (float) (myY + myHeight +(myHeight * 0.2 - myHeight/6)), myWidth, myHeight/6){
 						public void drawZone(){
 							super.drawZone();
-
-
-							if(started){
-								TextZone t = tagZones1[index];
-								if(this.contains(t.getXTimesMatrix() + t.getWidth()/2, t.getYTimesMatrix() + t.getHeight()/2) && !flag1[index]){
-									if(t.getNumIds() == 0){
-										if(!flag2[index]){
-											this.setColour(halfCompletedC);
-											imgs[index].setShadowColour(halfCompletedC);
-											completed[index] = false;
-
-										} else {
-											this.setColour(completedC);
-											box2[index].setColour(completedC);
-											imgs[index].setShadowColour(completedC);
-											completed[index] = true;
-										}
-										
-										boolean notDone = false;
-										for(boolean flag: completed){
-											if(!flag){
-												notDone = true;
-											}
-										}
-										
-										if(!notDone){
-											
-											if(!msgBoxFlag){
-												inactivateTagZones();
-												msgBox.setActive(true);
-												msgBoxFlag = true;
-											}
-										} else {
-
-											imgs[index].setShadow(true);
-											flag1[index] = true;
-										}
-										t.setGestureEnabled("Drag", false);
-
-										t.resetMatrix();
-										t.setChanged(true);
-										t.setX(box1[index].getX() + box1[index].getWidth()/2 - t.getWidth()/2);
-										t.setY(box1[index].getY() + box1[index].getHeight()/2 - t.getHeight()/2);
-									}
-								} 
-							}
-
+							checkTagInImg(1, index, this);	
 						}
 					};
 					box1[index].setBorderColour(0);
 					box1[index].setBorderWeight(5);
-					box1[index].setColour(bottomBoxC);
+					box1[index].setColour(Colours.bottomBoxC);
+					box1[index].setInteractionOffset(myWidth/10, myHeight/4);
 					sketch.client.addZone(box1[index]);
 
 					box2[index] = new RectZone(myX, (float) (myY - (myHeight * 0.2)), myWidth, myHeight/6){
 						public void drawZone(){
 							super.drawZone();
-
-							if(started){
-								TextZone t = tagZones2[index];
-								if(this.contains(t.getXTimesMatrix() - t.getWidth()/2, t.getYTimesMatrix() - t.getHeight()/2) && !flag2[index]){
-									if(t.getNumIds() == 0){
-										if(!flag1[index]){
-											this.setColour(halfCompletedC);
-											imgs[index].setShadowColour(halfCompletedC);
-											completed[index] = false;
-
-										} else {
-											this.setColour(completedC);
-											box1[index].setColour(completedC);
-											imgs[index].setShadowColour(completedC);
-											completed[index] = true;
-										}
-										
-										boolean notDone = false;
-										for(boolean flag: completed){
-											if(!flag){
-												notDone = true;
-											}
-										}
-										
-										if(!notDone){
-											
-											if(!msgBoxFlag){
-												inactivateTagZones();
-												msgBox.setActive(true);
-												msgBoxFlag = true;
-											}
-										} else {
-										
-											imgs[index].setShadow(true);
-											flag2[index] = true;
-										}
-										t.setGestureEnabled("Drag", false);
-										
-										
-
-										t.resetMatrix();
-										t.setChanged(true);
-										t.setX(box2[index].getX() + box2[index].getWidth()/2 - t.getWidth()/2);
-										t.setY(box2[index].getY() + box2[index].getHeight()/2 - t.getHeight()/2);
-										t.rotate((float) Colours.PI);
-
-									}
-								}
-							}
+							checkTagInImg(2, index, this);	
 						}
 					};
 					box2[index].setBorderColour(0);
 					box2[index].setBorderWeight(5);
-					box2[index].setColour(topBoxC);
+					box2[index].setColour(Colours.topBoxC);
+					box2[index].setInteractionOffset(myWidth/10, myHeight/4);
 					sketch.client.addZone(box2[index]);
 					myX += myWidth + spacingX;
 				//}
@@ -419,6 +302,116 @@ public class PGame {
 			myX = sketch.lineX + spacingX/2;
 			myY = myY + myHeight + spacingY*2;
 		}
+	}
+	
+	public void checkTagInImg(int user, final int index, Zone z) {
+		if(started){
+			if(user == 1) {
+				TextZone t = tagZones1[index];
+				if(z.contains(t.getXTimesMatrix() + t.getWidth()/2, t.getYTimesMatrix() + t.getHeight()/2) && !flag1[index]){
+					if(t.getNumIds() == 0){
+						if(!flag2[index]){
+							z.setColour(Colours.halfCompletedC);
+							imgs[index].setShadowColour(Colours.halfCompletedC);
+							completed[index] = false;
+	
+						} else {
+							z.setColour(Colours.completedC);
+							box2[index].setColour(Colours.completedC);
+							imgs[index].setShadowColour(Colours.completedC);
+							completed[index] = true;
+						}
+						
+						boolean notDone = false;
+						for(boolean flag: completed){
+							if(!flag){
+								notDone = true;
+							}
+						}
+						
+						if(!notDone){
+							
+							if(!msgBoxFlag){
+								resetGame();
+							}
+						} else {
+	
+							imgs[index].setShadow(true);
+							flag1[index] = true;
+						}
+						t.setGestureEnabled("Drag", false);
+						t.resetMatrix();
+						t.setInteractionOffset(-t.getWidth(), -t.getHeight());
+						t.setChanged(true);
+						t.setX(box1[index].getX() + box1[index].getWidth()/2 - t.getWidth()/2);
+						t.setY(box1[index].getY() + box1[index].getHeight()/2 - t.getHeight()/2);
+					}
+				} 
+			} else if (user == 2) {
+				TextZone t = tagZones2[index];
+				if(z.contains(t.getXTimesMatrix() - t.getWidth()/2, t.getYTimesMatrix() - t.getHeight()/2) && !flag2[index]){
+					if(t.getNumIds() == 0){
+						if(!flag1[index]){
+							z.setColour(Colours.halfCompletedC);
+							imgs[index].setShadowColour(Colours.halfCompletedC);
+							completed[index] = false;
+
+						} else {
+							z.setColour(Colours.completedC);
+							box1[index].setColour(Colours.completedC);
+							imgs[index].setShadowColour(Colours.completedC);
+							completed[index] = true;
+						}
+						
+						boolean notDone = false;
+						for(boolean flag: completed){
+							if(!flag){
+								notDone = true;
+							}
+						}
+						
+						if(!notDone){
+							
+							if(!msgBoxFlag){
+								resetGame();
+							}
+						} else {
+						
+							imgs[index].setShadow(true);
+							flag2[index] = true;
+						}
+						t.setGestureEnabled("Drag", false);
+						t.resetMatrix();
+						t.setInteractionOffset(-t.getWidth(), -t.getHeight());
+						t.setChanged(true);
+						t.setX(box2[index].getX() + box2[index].getWidth()/2 - t.getWidth()/2);
+						t.setY(box2[index].getY() + box2[index].getHeight()/2 - t.getHeight()/2);
+						t.rotate((float) Colours.PI);
+
+					}
+				}
+			}
+		}
+	}
+	/**
+	 * Reset the colours and the game
+	 */
+	public void resetGame() {
+		started = false;
+		
+		removeTagZones();
+	
+		msgBox.setActive(true);
+		msgBoxFlag = true;
+		
+		for(int j = 0; j < ROWS; ++j){
+			for(int i = 0; i < COLUMNS; ++i){
+				int index = j*COLUMNS + i;
+				box1[index].setColour(Colours.bottomBoxC);
+				box2[index].setColour(Colours.topBoxC);
+			}
+		}
+		
 	}
 	
 	public void loadImages(int offset){
@@ -465,13 +458,7 @@ public class PGame {
 			sketch.client.removeZone(z);
 		}
 
-		for(TextZone z: tagZones1){
-			sketch.client.removeZone(z);
-		}
-
-		for(TextZone z: tagZones2){
-			sketch.client.removeZone(z);
-		}
+		removeTagZones();
 
 		for(RectZone z: box1){
 			sketch.client.removeZone(z);
@@ -481,7 +468,17 @@ public class PGame {
 			sketch.client.removeZone(z);
 		}
 
-	}		
+	}	
+	
+	public void removeTagZones() {
+		for(TextZone z: tagZones1){
+			sketch.client.removeZone(z);
+		}
+
+		for(TextZone z: tagZones2){
+			sketch.client.removeZone(z);
+		}
+	}
 }
 
 
