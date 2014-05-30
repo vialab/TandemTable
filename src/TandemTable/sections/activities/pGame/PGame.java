@@ -182,15 +182,7 @@ public class PGame {
 				} else {
 					level = 0;
 				}
-				
-				for(TextZone z: tagZones1){
-					sketch.client.removeZone(z);
-				}
-
-				for(TextZone z: tagZones2){
-					sketch.client.removeZone(z);
-				}
-				
+				removeTagZones();
 				loadImages(NUM_IMAGES*level);
 				
 				e.setHandled(true);
@@ -397,12 +389,18 @@ public class PGame {
 	 * Reset the colours and the game
 	 */
 	public void resetGame() {
+		msgBoxFlag = true;
 		started = false;
 		
-		removeTagZones();
-	
+		for(TextZone z: tagZones1){
+			z.setActive(false);
+		}
+		for(TextZone z: tagZones2){
+			z.setActive(false);
+		}
+		
 		msgBox.setActive(true);
-		msgBoxFlag = true;
+		
 		
 		for(int j = 0; j < ROWS; ++j){
 			for(int i = 0; i < COLUMNS; ++i){
@@ -419,6 +417,7 @@ public class PGame {
 		getImages();
 		createTagZones();
 		msgBoxFlag = false;
+		
 		for(ImageZone iZone: imgs){
 			iZone.setShadow(false);
 		}
@@ -454,29 +453,28 @@ public class PGame {
 		sketch.client.removeZone(msgBox);
 
 
-		for(ImageZone z: imgs){
-			sketch.client.removeZone(z);
+		for(int i = 0; i < imgs.length; i++){
+			sketch.client.removeZone(imgs[i]);
 		}
 
 		removeTagZones();
 
-		for(RectZone z: box1){
-			sketch.client.removeZone(z);
+		for(int i = 0; i < box1.length; i++){
+			sketch.client.removeZone(box1[i]);
 		}
-
-		for(RectZone z: box2){
-			sketch.client.removeZone(z);
+		
+		for(int i = 0; i < box2.length; i++){
+			sketch.client.removeZone(box2[i]);
 		}
-
 	}	
 	
 	public void removeTagZones() {
-		for(TextZone z: tagZones1){
-			sketch.client.removeZone(z);
+		for(int i = 0; i < tagZones1.length; i++){
+			sketch.client.removeZone(tagZones1[i]);
 		}
 
-		for(TextZone z: tagZones2){
-			sketch.client.removeZone(z);
+		for(int i = 0; i < tagZones2.length; i++){
+			sketch.client.removeZone(tagZones2[i]);
 		}
 	}
 }

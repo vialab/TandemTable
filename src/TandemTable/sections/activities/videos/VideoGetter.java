@@ -645,13 +645,13 @@ public class VideoGetter extends Thread {
 
 	public void removeZones() {
 		if(currentImgs1 != null){
-			for(Zone z: currentImgs1){
-				sketch.client.removeZone(z);
+			for(int i = 0; i < currentImgs1.length; i++){
+				sketch.client.removeZone(currentImgs1[i]);
 			}
 		}
 		if(currentImgs2 != null){
-			for(Zone z: currentImgs2){
-				sketch.client.removeZone(z);
+			for(int i = 0; i < currentImgs2.length; i++){
+				sketch.client.removeZone(currentImgs2[i]);
 			}
 		}
 		if(elementTapped1){

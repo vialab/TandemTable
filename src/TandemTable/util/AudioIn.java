@@ -21,12 +21,12 @@ public class AudioIn implements AudioProcessor {
 
 	// Number of milliseconds for calculating
 	// long utterance rate
-	public static final int utterRateTimeLong = 20000;
+	public static final int utterVisTimeLong = 20000;
 	// Number of milliseconds for calculating
 	// short utterance rate
-	public static final int utterRateTimeShort = 5000;
+	public static final int utterVisTimeShort = 5000;
 	// Ratio of utter rate times
-	public static final int utterRateTimeRatio = 4;
+	//public static final int utterRateTimeRatio = 4;
 		
 	Sketch sketch;
 	AudioDispatcher dispatcher;
@@ -86,9 +86,11 @@ public class AudioIn implements AudioProcessor {
 	// Utterance rate for number of milliseconds
 	// in utterRateTimeLong
 	int utterRateLong = 0;
+	long utterTimeLong = 0;
 	// Utterance rate for number of milliseconds
 	// in utterRateTimeLong
 	int utterRateShort = 0;
+	long utterTimeShort = 0;
 	// Current utterance
 	Utterance curUtter = null;
 	// If the utterance has started
@@ -155,6 +157,13 @@ public class AudioIn implements AudioProcessor {
 		return utterRateShort;
 	}
 	
+	public long getUtterTimeLong() {
+		return utterTimeLong;
+	}
+	
+	public long getUtterTimeShort() {
+		return utterTimeShort;
+	}	
 	
 	public void setMixer(Mixer mixer) throws LineUnavailableException,
 		UnsupportedAudioFileException {
@@ -195,107 +204,6 @@ public class AudioIn implements AudioProcessor {
 			System.out.println("Mixer/Input does not exist");
 		}
 	}
-	
-	/*public void draw() {
-		//sketch.background(0);
-		sketch.stroke(255);
-		sketch.strokeWeight(1);
-		ArrayList<Float> tempData = new ArrayList<Float>(pcmData);
-		
-		float yHeight = sketch.height/2;
-		float lastX = 0, lastY = yHeight;
-		float mult = 2000;
-		float index = 0;
-		float indexAdd = (float) 0.01;
-		
-		for(int i = indexScrollPCM; i < tempData.size(); i++) {
-			float sample = tempData.get(i);
-			
-			//System.out.println(sample + " " + index);
-			sketch.line(lastX, lastY, index, yHeight + sample*mult);
-			lastX = index;
-			lastY = yHeight + sample*mult;
-			//sketch.ellipse(index, sketch.height/2 + sample*mult, 0.1f, 0.1f);
-			index += indexAdd;
-			
-			if(index > sketch.getWidth()) {
-				index = lastX = 0;
-				indexScrollPCM = i;
-			}
-		}
-		
-		sketch.textSize(22);
-		
-		// Draw thresholds
-		sketch.stroke(255, 0, 0);
-		sketch.fill(255, 0, 0);
-		float heightY = (float) ((sketch.height/2)*0.9);
-		float x = 100;
-		float length = x + utterLengthThresh*indexAdd;
-		sketch.line(x, heightY, length, heightY);
-		sketch.text("Min Utterance Length", length, (float) (heightY*0.99));
-		
-		sketch.stroke(255, 255, 255);
-		sketch.fill(255, 255, 255);
-		heightY = (float) ((sketch.height/2)*0.95);
-		length = x + combineUtterTheshold*indexAdd;
-		sketch.line(x, heightY, length, heightY);
-		sketch.text("Combined Utter Length", length, (float) (heightY*0.99));
-		
-		sketch.stroke(0, 0, 255);
-		heightY = sketch.height/2 + maxNoiseLvlPos*mult;
-		sketch.line(0, heightY, sketch.getWidth(), heightY);
-		
-		heightY = sketch.height/2 + maxNoiseLvlNeg*mult;
-		sketch.line(0, heightY, sketch.getWidth(), heightY);
-		
-		sketch.stroke(0, 255, 0);
-		heightY = sketch.height/2 + maxNoiseLvlPos*mult*noiseMult;
-		sketch.line(0, heightY, sketch.getWidth(), heightY);
-		
-		heightY = sketch.height/2 + maxNoiseLvlNeg*mult*noiseMult;
-		sketch.line(0, heightY, sketch.getWidth(), heightY);
-		
-		
-		// Draw captured utterances
-		ArrayList<Utterance> tempUtter = new ArrayList<Utterance>(utterArray);
-		float y = (float) ((sketch.height/2)*0.75);
-		
-		
-		for(int i = indexScrollUtter; i < tempUtter.size(); i++) {
-			Utterance utterance = tempUtter.get(i);
-			
-			if(utterance.getEndIndex()*indexAdd - sliderCounter*sketch.getWidth()  > sketch.getWidth()) {
-				sliderCounter++;
-				indexScrollUtter = i;
-			}
-			
-			sketch.stroke(utterance.r, utterance.g, utterance.b);
-			
-			sketch.line(utterance.getStartIndex()*indexAdd - sliderCounter*sketch.getWidth(), y, utterance.getEndIndex()*indexAdd - sliderCounter*sketch.getWidth(), y);
-			
-			
-			
-			
-			lastX = utterance.getStartIndex()*indexAdd - sliderCounter*sketch.getWidth();
-			index = lastX;
-			float mainY = (float) (sketch.height/1.5);
-			lastY = mainY;
-			
-			ArrayList<Float> tempPCM = new ArrayList<Float>(utterance.getPCM());
-			
-			for(Float f: tempPCM) {
-				sketch.line(lastX, lastY, index, mainY + f.floatValue()*mult);
-				lastX = index;
-				lastY = mainY + f.floatValue()*mult;
-				index += indexAdd;
-				
-			}
-		}
-		
-		
-		
-	}*/
 	
 	public void startSoundCapture() {
 		try {
@@ -377,27 +285,33 @@ public class AudioIn implements AudioProcessor {
 	
 	public void determineUtterRate() {
 		long timeNow = System.currentTimeMillis();
-		long timePast = timeNow - utterRateTimeLong;
+		long timePast = timeNow - utterVisTimeLong;
 		int numUtters = 0;
+		long time = 0;
 		
 		for(int i = utterArray.size() - 1; i >= 0; i--) {
 			if(utterArray.get(i).getEndTime() != -1 && utterArray.get(i).getEndTime() > timePast) {
 				numUtters++;
+				time += utterArray.get(i).getEndTime() - utterArray.get(i).getStartTime();
 			}
 		}
 		
 		utterRateLong = numUtters;
+		utterTimeLong = time;
 		
-		timePast = timeNow - utterRateTimeShort;
+		timePast = timeNow - utterVisTimeShort;
 		numUtters = 0;
+		time = 0;
 		
 		for(int i = utterArray.size() - 1; i >= 0; i--) {
 			if(utterArray.get(i).getEndTime() != -1 && utterArray.get(i).getEndTime() > timePast) {
 				numUtters++;
+				time += utterArray.get(i).getEndTime() - utterArray.get(i).getStartTime();
 			}
 		}
 		
 		utterRateShort = numUtters;
+		utterTimeShort = time;
 	}
 	
 	// Algorithm from 

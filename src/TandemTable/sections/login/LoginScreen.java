@@ -913,8 +913,8 @@ public class LoginScreen {
 		client.removeZone(profilePicker.swipe1);
 		client.removeZone(profilePicker.swipe2);
 
-		for(Zone z: profilePicker.userImg){
-			client.removeZone(z);
+		for(int i = 0; i < profilePicker.userImg.length; i++){
+			client.removeZone(profilePicker.userImg[i]);
 		}
 
 		

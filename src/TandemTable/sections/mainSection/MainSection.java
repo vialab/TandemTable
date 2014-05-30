@@ -252,7 +252,7 @@ public class MainSection {
 			
 			float barHeight1 = 0, barHeight2 = 0;
 			// Amount of talking for each learner
-			float utterRateShort1 = sketch.audioIn[0].getUtterRateShort();
+			/*float utterRateShort1 = sketch.audioIn[0].getUtterRateShort();
 			float utterRateLong1 = sketch.audioIn[0].getUtterRateLong();
 			
 			if(utterRateShort1 > utterRateLong1/AudioIn.utterRateTimeRatio) {
@@ -277,11 +277,11 @@ public class MainSection {
 					
 			if(lrgUtterRateLong < 1) {
 				lrgUtterRateLong = 1;
-			}
+			}*/
 			
 			//System.out.println(utterRateShort1 + " " + utterRateLong1 + " " + utterRateShort2 + " " + utterRateLong2 + " " + lrgUtterRateLong);
-			barHeight1 = (utterRateShort1/lrgUtterRateLong)*sizeNode;
-			barHeight2 = (utterRateShort2/lrgUtterRateLong)*sizeNode;
+			barHeight1 = (sketch.audioIn[0].getUtterTimeLong()/AudioIn.utterVisTimeLong)*sizeNode;
+			barHeight2 = (sketch.audioIn[1].getUtterTimeLong()/AudioIn.utterVisTimeLong)*sizeNode;
 			
 			
 			/*int talkAmount1 = sketch.audioIn[0].getTalkingAmount();
