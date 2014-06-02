@@ -25,6 +25,10 @@ public class AudioIn implements AudioProcessor {
 	// Number of milliseconds for calculating
 	// short utterance rate
 	public static final int utterVisTimeShort = 5000;
+	public static final float WEIGHTED_CUR = 0.75f;
+	public static final float WEIGHTED_LAST = 0.25f;
+	
+	
 	// Ratio of utter rate times
 	//public static final int utterRateTimeRatio = 4;
 		
@@ -87,10 +91,12 @@ public class AudioIn implements AudioProcessor {
 	// in utterRateTimeLong
 	int utterRateLong = 0;
 	long utterTimeLong = 0;
+	long lastUtterTimeLong = 0;
 	// Utterance rate for number of milliseconds
 	// in utterRateTimeLong
 	int utterRateShort = 0;
 	long utterTimeShort = 0;
+	long lastUtterTimeShort = 0;
 	// Current utterance
 	Utterance curUtter = null;
 	// If the utterance has started
@@ -163,7 +169,15 @@ public class AudioIn implements AudioProcessor {
 	
 	public long getUtterTimeShort() {
 		return utterTimeShort;
-	}	
+	}
+	
+	public long getLastUtterTimeLong() {
+		return lastUtterTimeLong;
+	}
+	
+	public long getLastUtterTimeShort() {
+		return lastUtterTimeShort;
+	}
 	
 	public void setMixer(Mixer mixer) throws LineUnavailableException,
 		UnsupportedAudioFileException {
@@ -297,6 +311,7 @@ public class AudioIn implements AudioProcessor {
 		}
 		
 		utterRateLong = numUtters;
+		lastUtterTimeLong = utterTimeLong;
 		utterTimeLong = time;
 		
 		timePast = timeNow - utterVisTimeShort;
@@ -311,6 +326,7 @@ public class AudioIn implements AudioProcessor {
 		}
 		
 		utterRateShort = numUtters;
+		lastUtterTimeShort = utterTimeShort;
 		utterTimeShort = time;
 	}
 	

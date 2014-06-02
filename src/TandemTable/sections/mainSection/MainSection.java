@@ -250,7 +250,8 @@ public class MainSection {
 			sketch.rect(sketch.lineX/2, sketch.getHeight()/2 - yDifference, sizeNode + borderDif, heightBar/2 + borderDif);
 			
 			
-			float barHeight1 = 0, barHeight2 = 0;
+			float barHeight1 = 0, barHeight2 = 0, utterRatio1 = 0, utterRatio2 = 0,
+					lastUtterRatio1 = 0, lastUtterRatio2 = 0;
 			// Amount of talking for each learner
 			/*float utterRateShort1 = sketch.audioIn[0].getUtterRateShort();
 			float utterRateLong1 = sketch.audioIn[0].getUtterRateLong();
@@ -280,10 +281,19 @@ public class MainSection {
 			}*/
 			
 			//System.out.println(utterRateShort1 + " " + utterRateLong1 + " " + utterRateShort2 + " " + utterRateLong2 + " " + lrgUtterRateLong);
-			barHeight1 = (sketch.audioIn[0].getUtterTimeLong()/AudioIn.utterVisTimeLong)*sizeNode;
-			barHeight2 = (sketch.audioIn[1].getUtterTimeLong()/AudioIn.utterVisTimeLong)*sizeNode;
+			utterRatio1 = ((float)sketch.audioIn[0].getUtterTimeLong())/AudioIn.utterVisTimeLong;
+			utterRatio2 = ((float)sketch.audioIn[1].getUtterTimeLong())/AudioIn.utterVisTimeLong;
+			
+			lastUtterRatio1 = ((float)sketch.audioIn[0].getLastUtterTimeLong())/AudioIn.utterVisTimeLong;
+			lastUtterRatio2 = ((float)sketch.audioIn[1].getLastUtterTimeLong())/AudioIn.utterVisTimeLong;
 			
 			
+			barHeight1 = (utterRatio1 * AudioIn.WEIGHTED_CUR + lastUtterRatio1 * AudioIn.WEIGHTED_LAST)*sizeNode;
+			barHeight2 = (utterRatio2 * AudioIn.WEIGHTED_CUR + lastUtterRatio2 * AudioIn.WEIGHTED_LAST)*sizeNode;
+			
+			System.out.println(sketch.audioIn[0].getUtterTimeLong() + " " + barHeight1);
+			System.out.println(sketch.audioIn[1].getUtterTimeLong() + " " + barHeight2);
+
 			/*int talkAmount1 = sketch.audioIn[0].getTalkingAmount();
 			int talkAmount2 = sketch.audioIn[1].getTalkingAmount();
 			
