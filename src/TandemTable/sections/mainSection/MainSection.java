@@ -234,94 +234,81 @@ public class MainSection {
 		// Drawing speaking amount
 		///////////////////////////////////////
 		if(sketch.recordAudio) {
-
-			sketch.rectMode(Sketch.CENTER);
-			
-			// Containing rectangle
-			sketch.strokeWeight(sketch.strokeW);
-			sketch.noFill();
-			sketch.stroke(Colours.lineColour.getRed(), Colours.lineColour.getGreen(), Colours.lineColour.getBlue());
-			
-			
-			float yDifference = (float) (sizeNode/1.5);
-			//Above node
-			sketch.rect(sketch.lineX/2, sketch.getHeight()/2 + yDifference, sizeNode + borderDif, heightBar/2 + borderDif);
-			//Below node
-			sketch.rect(sketch.lineX/2, sketch.getHeight()/2 - yDifference, sizeNode + borderDif, heightBar/2 + borderDif);
-			
-			
-			float barHeight1 = 0, barHeight2 = 0, utterRatio1 = 0, utterRatio2 = 0,
-					lastUtterRatio1 = 0, lastUtterRatio2 = 0;
-			// Amount of talking for each learner
-			/*float utterRateShort1 = sketch.audioIn[0].getUtterRateShort();
-			float utterRateLong1 = sketch.audioIn[0].getUtterRateLong();
-			
-			if(utterRateShort1 > utterRateLong1/AudioIn.utterRateTimeRatio) {
-				utterRateLong1 = utterRateShort1*AudioIn.utterRateTimeRatio;
-			}
-			
-			float utterRateShort2 = sketch.audioIn[1].getUtterRateShort();
-			float utterRateLong2 = sketch.audioIn[1].getUtterRateLong();
-			
-			if(utterRateShort2 > utterRateLong2/AudioIn.utterRateTimeRatio) {
-				utterRateLong2 = utterRateShort2*AudioIn.utterRateTimeRatio;
-			}
-			
-			float lrgUtterRateLong;
-			if(utterRateLong1 >= utterRateLong2) {
-				lrgUtterRateLong = utterRateLong1;
-			} else {
-				lrgUtterRateLong = utterRateLong2;
-			}
-			
-			lrgUtterRateLong = lrgUtterRateLong/AudioIn.utterRateTimeRatio;
-					
-			if(lrgUtterRateLong < 1) {
-				lrgUtterRateLong = 1;
-			}*/
-			
-			//System.out.println(utterRateShort1 + " " + utterRateLong1 + " " + utterRateShort2 + " " + utterRateLong2 + " " + lrgUtterRateLong);
-			utterRatio1 = ((float)sketch.audioIn[0].getUtterTimeLong())/AudioIn.utterVisTimeLong;
-			utterRatio2 = ((float)sketch.audioIn[1].getUtterTimeLong())/AudioIn.utterVisTimeLong;
-			
-			lastUtterRatio1 = ((float)sketch.audioIn[0].getLastUtterTimeLong())/AudioIn.utterVisTimeLong;
-			lastUtterRatio2 = ((float)sketch.audioIn[1].getLastUtterTimeLong())/AudioIn.utterVisTimeLong;
-			
-			
-			barHeight1 = (utterRatio1 * AudioIn.WEIGHTED_CUR + lastUtterRatio1 * AudioIn.WEIGHTED_LAST)*sizeNode;
-			barHeight2 = (utterRatio2 * AudioIn.WEIGHTED_CUR + lastUtterRatio2 * AudioIn.WEIGHTED_LAST)*sizeNode;
-			
-			System.out.println(sketch.audioIn[0].getUtterTimeLong() + " " + barHeight1);
-			System.out.println(sketch.audioIn[1].getUtterTimeLong() + " " + barHeight2);
-
-			/*int talkAmount1 = sketch.audioIn[0].getTalkingAmount();
-			int talkAmount2 = sketch.audioIn[1].getTalkingAmount();
-			
-			if(talkAmount1 > talkAmount2) {
-				barHeight1 = sizeNode;
-				barHeight2 = ((float) (talkAmount2)/talkAmount1)*sizeNode;
-			} else if(talkAmount1 < talkAmount2){
-				barHeight2 = sizeNode;
-				barHeight1 = ((float) (talkAmount1)/talkAmount2)*sizeNode;
-			} else {
-				barHeight1 = barHeight2 = sizeNode;
-			}*/
-			
-			
-			sketch.noStroke();
-			// Learner 1's bar
-			sketch.fill(Colours.learner1TalkBar.getRed(), Colours.learner1TalkBar.getGreen(), Colours.learner1TalkBar.getBlue());
-			//Above topic node
-			sketch.rect(sketch.lineX/2, sketch.getHeight()/2 + yDifference, barHeight1, heightBar/2);
-			
-			// Learner 2's bar
-			sketch.fill(Colours.learner2TalkBar.getRed(), Colours.learner2TalkBar.getGreen(), Colours.learner2TalkBar.getBlue());
-			//Below topic node
-			sketch.rect(sketch.lineX/2, sketch.getHeight()/2 - yDifference, barHeight2, heightBar/2);
-
-			sketch.rectMode(Sketch.CORNER);
+			drawUtterVis();
 		}
 	}	
+	
+	public void drawUtterVis() {
+		sketch.rectMode(Sketch.CENTER);
+		
+		// Containing rectangle
+		sketch.strokeWeight(sketch.strokeW);
+		sketch.noFill();
+		sketch.stroke(Colours.lineColour.getRed(), Colours.lineColour.getGreen(), Colours.lineColour.getBlue());
+		
+		
+		float yDifference = (float) (sizeNode/1.5);
+		//Above node
+		sketch.rect(sketch.lineX/2, sketch.getHeight()/2 + yDifference, sizeNode + borderDif, heightBar/2 + borderDif);
+		//Below node
+		sketch.rect(sketch.lineX/2, sketch.getHeight()/2 - yDifference, sizeNode + borderDif, heightBar/2 + borderDif);
+		
+		
+		float barWidth1 = 0, barWidth2 = 0, utterRatio1 = 0, utterRatio2 = 0,
+				lastUtterRatio1 = 0, lastUtterRatio2 = 0, time = AudioIn.utterVisTimeLong/2;
+		boolean maxed1 = false, maxed2 = false;
+		
+		// Amount of talking for each learner
+		//System.out.println(utterRateShort1 + " " + utterRateLong1 + " " + utterRateShort2 + " " + utterRateLong2 + " " + lrgUtterRateLong);
+		utterRatio1 = ((float)sketch.audioIn[0].getUtterTimeLong())/time;
+		utterRatio2 = ((float)sketch.audioIn[1].getUtterTimeLong())/time;
+		
+		lastUtterRatio1 = ((float)sketch.audioIn[0].getLastUtterTimeLong())/time;
+		lastUtterRatio2 = ((float)sketch.audioIn[1].getLastUtterTimeLong())/time;
+		
+		
+		barWidth1 = (utterRatio1 * AudioIn.WEIGHTED_CUR) + (lastUtterRatio1 * AudioIn.WEIGHTED_LAST);
+		barWidth2 = (utterRatio2 * AudioIn.WEIGHTED_CUR) + (lastUtterRatio2 * AudioIn.WEIGHTED_LAST);
+		
+		if(barWidth1 >= 1) {
+			maxed1 = true;
+			barWidth1 = 1;
+		}
+		
+		if(barWidth2 >= 1) {
+			maxed2 = true;
+			barWidth2 = 1;
+		}
+		
+		barWidth1 *= sizeNode;
+		barWidth2 *= sizeNode;
+		
+		
+		//System.out.println(sketch.audioIn[0].getUtterTimeLong() + " " + barHeight1);
+		//System.out.println(sketch.audioIn[1].getUtterTimeLong() + " " + barHeight2);			
+		
+		sketch.noStroke();
+		
+		// Learner 1's bar
+		if(maxed1) {
+			sketch.fill(Colours.selectedZone.getRed(), Colours.selectedZone.getGreen(), Colours.selectedZone.getBlue());
+		} else {
+			sketch.fill(Colours.learner1TalkBar.getRed(), Colours.learner1TalkBar.getGreen(), Colours.learner1TalkBar.getBlue());
+		}
+		
+		sketch.rect(sketch.lineX/2, sketch.getHeight()/2 + yDifference, barWidth1, heightBar/2);
+		
+		// Learner 2's bar
+		if(maxed2) {
+			sketch.fill(Colours.selectedZone.getRed(), Colours.selectedZone.getGreen(), Colours.selectedZone.getBlue());
+		} else {
+			sketch.fill(Colours.learner2TalkBar.getRed(), Colours.learner2TalkBar.getGreen(), Colours.learner2TalkBar.getBlue());
+		}
+		
+		sketch.rect(sketch.lineX/2, sketch.getHeight()/2 - yDifference, barWidth2, heightBar/2);
+
+		sketch.rectMode(Sketch.CORNER);
+	}
 	
 	public void createMainScreen() {
 		centerLineFlag = false;
