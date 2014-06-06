@@ -21,7 +21,7 @@ public class AudioIn implements AudioProcessor {
 
 	// Number of milliseconds for calculating
 	// long utterance rate
-	public static final int utterVisTimeLong = 20000;
+	public static final int utterVisTimeLong = 120000;
 	// Number of milliseconds for calculating
 	// short utterance rate
 	public static final int utterVisTimeShort = 5000;
