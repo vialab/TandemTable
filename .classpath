@@ -15,7 +15,6 @@
 	<classpathentry kind="lib" path="libs/Google/gdata-youtube-2.0.jar"/>
 	<classpathentry kind="lib" path="libs/Google/gdata-youtube-meta-2.0.jar"/>
 	<classpathentry kind="lib" path="libs/Google/guava-r07.jar"/>
-	<classpathentry kind="lib" path="libs/flickrapi-1.2.jar"/>
 	<classpathentry kind="lib" path="libs/Google/mailapi.jar"/>
 	<classpathentry kind="lib" path="libs/microsoft-translator-java-api-0.6.1-jar-with-dependencies.jar"/>
 	<classpathentry kind="lib" path="libs/gifAnimation.jar"/>
@@ -25,9 +24,10 @@
 	<classpathentry kind="lib" path="libs/twitter4j-core-3.0.5.jar"/>
 	<classpathentry kind="lib" path="libs/mouseToTUIO.jar"/>
 	<classpathentry kind="lib" path="libs/TarsosDSP.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/SMT-v1"/>
+	<classpathentry kind="lib" path="libs/SMT-v1.jar"/>
 	<classpathentry kind="lib" path="libs/vlcj-3.0.1.jar"/>
 	<classpathentry kind="lib" path="libs/jna-3.5.2.jar"/>
 	<classpathentry kind="lib" path="libs/platform-3.5.2.jar"/>
+	<classpathentry kind="lib" path="libs/flickj-custom.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
