@@ -114,9 +114,19 @@ public class HeadlineGetter extends Thread {
 
 			} else {
 				if(user == 1){
-					headAct.errorFlag1 = true;
+					if (failedOnce) {
+						headAct.errorFlag1 = true;
+					} else {
+						getResults(headAct.topic1, 1, true);
+						return;
+					}
 				} else if (user == 2){
-					headAct.errorFlag2 = true;
+					if (failedOnce) {
+						headAct.errorFlag2 = true;
+					} else {
+						getResults(headAct.topic2, 2, true);
+						return;
+					}
 				}
 
 			}
