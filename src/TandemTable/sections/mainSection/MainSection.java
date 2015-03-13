@@ -114,6 +114,14 @@ public class MainSection {
 	float textOffsetY, textOffsetX, lastNodeX, lastNodeY;
 
 	String lang1, lang2;
+	
+	
+	//////////////
+	// for video
+	////////////
+	public float lastUtterBar1 = 0.3f;
+	public float lastUtterBar2 = 0.7f;
+	public long lastUtterUpdate = 0;
 
 
 	/**
@@ -162,7 +170,19 @@ public class MainSection {
 		////////////////////////////////
 		utterVisText = new TextZone[2];
 		float utterTextSize = sketch.textSize/2;
-		utterVisText[0] = new TextZone(0, sketch.getHeight()/2 + (float) (sizeNode/1.5) + utterTextSize, sketch.lineX, sizeNode/5, Colours.pFont, sketch.learner1.utterVis, utterTextSize, "CENTER", "CENTER");
+		utterVisText[0] = new TextZone(0, sketch.getHeight()/2 + (float) (sizeNode/1.5) + utterTextSize, sketch.lineX, sizeNode/5, Colours.pFont, sketch.learner1.utterVis, utterTextSize, "CENTER", "CENTER") {
+			
+			public void drawZone() {
+				super.drawZone();
+				
+				///////////////////////////////////////
+				// Drawing speaking amount
+				///////////////////////////////////////
+				if(sketch.recordAudio) {
+					drawUtterVis();
+				}
+			}
+		};
 		utterVisText[0].setTextColour(Colours.unselectedZone);
 		utterVisText[0].setDrawBorder(false);
 		sketch.client.addZone(utterVisText[0]);
@@ -233,9 +253,9 @@ public class MainSection {
 		///////////////////////////////////////
 		// Drawing speaking amount
 		///////////////////////////////////////
-		if(sketch.recordAudio) {
-			drawUtterVis();
-		}
+		//if(sketch.recordAudio) {
+		//	drawUtterVis();
+		//}
 	}	
 	
 	public void drawUtterVis() {
@@ -269,6 +289,31 @@ public class MainSection {
 		
 		barWidth1 = (utterRatio1 * AudioIn.WEIGHTED_CUR) + (lastUtterRatio1 * AudioIn.WEIGHTED_LAST);
 		barWidth2 = (utterRatio2 * AudioIn.WEIGHTED_CUR) + (lastUtterRatio2 * AudioIn.WEIGHTED_LAST);
+		
+		//////////////////////////////////////////////////////////////////
+		//////////////////////////////////////////////////////////////////
+		// for video
+		//////////////////////////////////////////////////////////////////
+		
+		
+		if (System.currentTimeMillis() - lastUtterUpdate > 50) {
+			lastUtterBar1 += (Math.random() * 0.03125f) - 0.015625;
+			lastUtterBar2 += (Math.random() * 0.03125f) - 0.015625;
+			lastUtterUpdate = System.currentTimeMillis();
+			
+			if(lastUtterBar1 >= 1) {
+				lastUtterBar1 = 1;
+			}
+			
+			if(lastUtterBar2 >= 1) {
+				lastUtterBar2 = 1;
+			}
+		}
+		
+		barWidth1 = lastUtterBar1;
+		barWidth2 = lastUtterBar2;
+		/////////////////////////////////////////////////////////////////////
+		
 		
 		if(barWidth1 >= 1) {
 			maxed1 = true;

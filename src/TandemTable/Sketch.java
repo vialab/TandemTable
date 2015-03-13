@@ -88,7 +88,7 @@ public class Sketch extends PApplet {
 	// Deactivating video activity for study
 	public boolean deactivateVideo = false;
 	// Removing video activity for study
-	public boolean removeVideoAct = true;
+	public boolean removeVideoAct = false;
 	// Activate all activities for all topics
 	public boolean activateAllAct = true;
 	// Only audio recording - No TandemTable
@@ -209,84 +209,91 @@ public class Sketch extends PApplet {
 			audioIn[0].draw();
 			audioIn[1].draw();
 		}*/
-		
-		
+	}
+	
+	public void contentPrompts() {
 		///////////////////////////
 		// Play conversation prompt
 		///////////////////////////
 		long timeNow = System.currentTimeMillis();
 		
 		if(recordAudio && loggedIn && audioIn[0].getTimeLastUtter() != 0 && audioIn[1].getTimeLastUtter() != 0) {
-			
-			if(timeNow - audioIn[0].getTimeLastUtter() > UTTER_PROMPT_THRESH
-				&& timeNow - audioIn[1].getTimeLastUtter() > UTTER_PROMPT_THRESH) {
 		
+			if(timeNow - audioIn[0].getTimeLastUtter() > UTTER_PROMPT_THRESH
+					&& timeNow - audioIn[1].getTimeLastUtter() > UTTER_PROMPT_THRESH) {
+			
 				talkingPrompt.play();
 				audioIn[0].setTimeLastUtter(timeNow);
 				audioIn[0].setTimeLastUtter(timeNow);
 			}
 			
-			////////////////////////////////
-			// Content prompts
-			///////////////////////////////
-			if(mainSection != null && mainSection.contentPrompt1 != null && mainSection.contentPrompt2 != null) {
-				
-				// Fade out prompts
-				if((timeNow - audioIn[0].getTimeLastContent() <= CONTENT_PROMPT_THRESH
-					|| timeNow - audioIn[1].getTimeLastContent() <= CONTENT_PROMPT_THRESH)
+			textualPrompts(timeNow, false);
+		}
+	}
+	
+	public void textualPrompts(long timeNow, boolean keyPressed) {
+		////////////////////////////////
+		// Content prompts
+		///////////////////////////////
+		if(mainSection != null && mainSection.contentPrompt1 != null && mainSection.contentPrompt2 != null) {
+		
+			// Fade out prompts
+			if((timeNow - audioIn[0].getTimeLastContent() <= CONTENT_PROMPT_THRESH
+					|| timeNow - audioIn[1].getTimeLastContent() <= CONTENT_PROMPT_THRESH
+					|| keyPressed)
 					&& conPromptActive) {
-					
-					
-					if(mainSection.animContentPrompt[0].isRunning()) {
-						mainSection.animContentPrompt[0].pause();
-					}
-					
-					if(mainSection.animContentPrompt[1].isRunning()) {
-						mainSection.animContentPrompt[1].pause();
-					}
-					
-					mainSection.animContentPrompt[0].setInitialFraction(1);
-					mainSection.animContentPrompt[1].setInitialFraction(1);
-					mainSection.animContentPrompt[0].setDirection(Direction.BACKWARD);
-					mainSection.animContentPrompt[1].setDirection(Direction.BACKWARD);
-					mainSection.animContentPrompt[0].start();
-					mainSection.animContentPrompt[1].start();
-					conPromptActive = false;
-					System.out.println("Fade out content prompts");
+			
+			
+			if(mainSection.animContentPrompt[0].isRunning()) {
+				mainSection.animContentPrompt[0].pause();
+			}
+			
+			if(mainSection.animContentPrompt[1].isRunning()) {
+				mainSection.animContentPrompt[1].pause();
+			}
+			
+			mainSection.animContentPrompt[0].setInitialFraction(1);
+			mainSection.animContentPrompt[1].setInitialFraction(1);
+			mainSection.animContentPrompt[0].setDirection(Direction.BACKWARD);
+			mainSection.animContentPrompt[1].setDirection(Direction.BACKWARD);
+			mainSection.animContentPrompt[0].start();
+			mainSection.animContentPrompt[1].start();
+			conPromptActive = false;
+			System.out.println("Fade out content prompts");
+			
+			// Fade in prompts
+			} else if((timeNow - audioIn[0].getTimeLastContent() > CONTENT_PROMPT_THRESH
+				&& timeNow - audioIn[1].getTimeLastContent() > CONTENT_PROMPT_THRESH
+				&& !conPromptActive)
+				|| (conPromptActive && timeNow - promptStartTime > SWITCH_PROMPT_TIME)
+					|| (!conPromptActive && keyPressed)) {
 				
-				// Fade in prompts
-				} else if((timeNow - audioIn[0].getTimeLastContent() > CONTENT_PROMPT_THRESH
-						&& timeNow - audioIn[1].getTimeLastContent() > CONTENT_PROMPT_THRESH
-						&& !conPromptActive)
-						|| (conPromptActive && timeNow - promptStartTime > SWITCH_PROMPT_TIME)) {
-					
-					mainSection.cPromptOverlay1.setColour(Colours.backgroundColour);
-					mainSection.cPromptOverlay1.setColour(Colours.backgroundColour);
-					
-					if(mainSection.animContentPrompt[0].isRunning()) {
-						mainSection.animContentPrompt[0].stop();
-					}
-					
-					if(mainSection.animContentPrompt[1].isRunning()) {
-						mainSection.animContentPrompt[1].stop();
-					}
-					
-					mainSection.animContentPrompt[0].setInitialFraction(0);
-					mainSection.animContentPrompt[1].setInitialFraction(0);
-					mainSection.animContentPrompt[0].setDirection(Direction.FORWARD);
-					mainSection.animContentPrompt[1].setDirection(Direction.FORWARD);
-					mainSection.animContentPrompt[0].start();
-					mainSection.animContentPrompt[1].start();
-					
-					changeContentPrompts(mainSection.contentPrompt1, learner1);
-					changeContentPrompts(mainSection.contentPrompt2, learner2);
-					
-					//audioIn[0].setTimeLastContent(timeNow);
-					//audioIn[1].setTimeLastContent(timeNow);\
-					promptStartTime = timeNow;
-					conPromptActive = true;
-					System.out.println("Fade in content prompts");
+				mainSection.cPromptOverlay1.setColour(Colours.backgroundColour);
+				mainSection.cPromptOverlay1.setColour(Colours.backgroundColour);
+				
+				if(mainSection.animContentPrompt[0].isRunning()) {
+					mainSection.animContentPrompt[0].stop();
 				}
+				
+				if(mainSection.animContentPrompt[1].isRunning()) {
+					mainSection.animContentPrompt[1].stop();
+				}
+				
+				mainSection.animContentPrompt[0].setInitialFraction(0);
+				mainSection.animContentPrompt[1].setInitialFraction(0);
+				mainSection.animContentPrompt[0].setDirection(Direction.FORWARD);
+				mainSection.animContentPrompt[1].setDirection(Direction.FORWARD);
+				mainSection.animContentPrompt[0].start();
+				mainSection.animContentPrompt[1].start();
+				
+				changeContentPrompts(mainSection.contentPrompt1, learner1);
+				changeContentPrompts(mainSection.contentPrompt2, learner2);
+				
+				//audioIn[0].setTimeLastContent(timeNow);
+				//audioIn[1].setTimeLastContent(timeNow);\
+				promptStartTime = timeNow;
+				conPromptActive = true;
+				System.out.println("Fade in content prompts");
 			}
 		}
 	}

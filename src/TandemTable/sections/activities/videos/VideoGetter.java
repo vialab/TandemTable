@@ -579,6 +579,8 @@ public class VideoGetter extends Thread {
 
 	public void pullToTop(){
 		sketch.client.pullToTop(vAct.coverRect);
+		sketch.client.pullToTop(sketch.mainSection.utterVisText[0]);
+		sketch.client.pullToTop(sketch.mainSection.utterVisText[1]);
 
 		sketch.client.pullToTop(sketch.mainSection.graph.nodes[sketch.mainSection.graph.lastSelectedNode]);
 		sketch.client.pullToTop(sketch.mainSection.switchAct1);

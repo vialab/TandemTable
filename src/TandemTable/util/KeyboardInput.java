@@ -17,12 +17,11 @@ public class KeyboardInput extends KeyAdapter {
 		char input = e.getKeyChar();
 		//System.out.println("Key Pressed: " + input);
 		
-		if(input == ' ') {
+		if (input == ' ') {
 			sketch.languagePrompt.play();
 			sketch.mainLogger.log("Played language prompt");
 			System.out.println("Played language prompt");
-		}
-		else if(input == 't') {
+		} else if (input == 't') {
 			sketch.talkingPrompt.play();
 			long timeNow = System.currentTimeMillis();
 			sketch.audioIn[0].timeOfLastUtter = timeNow;
@@ -30,8 +29,8 @@ public class KeyboardInput extends KeyAdapter {
 			
 			sketch.mainLogger.log("Played talking prompt");
 			System.out.println("Played talking prompt");
-		}
-		else if(input == 's') {
+		
+		} else if (input == 's') {
 			//sketch.logger1.close();
 			//sketch.logger2.close();
 			//System.out.println("Closed logging files");
@@ -39,6 +38,8 @@ public class KeyboardInput extends KeyAdapter {
 			
 			//sketch.audioIn[0].saveAudio();
 			//sketch.audioIn[1].saveAudio();
+		} else if (input == 'c') {
+			sketch.textualPrompts(System.currentTimeMillis(), true);
 		}
 		
 	}

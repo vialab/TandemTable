@@ -35,7 +35,7 @@ public class VideoActivity {
 	CurrentZone current1, current2;
 	VideoGetter vGetter;
 
-	TextZone moreVideos1, moreVideos2, changeL1, changeL2; 
+	TextZone moreVideos1, moreVideos2, changeL1, changeL2;
 	RectZone coverRect, cBackground;
 
 	VideoFeed videoFeed1 = null;
@@ -175,7 +175,7 @@ public class VideoActivity {
 	
 	public void createChangeLang(){
 		
-		changeL1 = new TextZone(sketch.mainSection.buttonX, sketch.mainSection.buttonYb3, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner1.newLang, sketch.textSize, "CENTER", "CENTER"){
+		changeL1 = new TextZone(sketch.mainSection.buttonX, sketch.mainSection.buttonYb2, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner1.newLang, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
 				if (isTappable() && !errorFlag){
@@ -221,7 +221,7 @@ public class VideoActivity {
 		
 		
 		
-		changeL2 = new TextZone(sketch.mainSection.buttonX, sketch.mainSection.buttonYt3, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner2.newLang, sketch.textSize, "CENTER", "CENTER"){
+		changeL2 = new TextZone(sketch.mainSection.buttonX, sketch.mainSection.buttonYt2, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner2.newLang, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
 				if (isTappable() && !errorFlag){
@@ -314,7 +314,9 @@ public class VideoActivity {
 		coverRect.setColour(Colours.backgroundColour);
 		coverRect.setDrawBorder(false);
 		sketch.client.addZone(coverRect);
-
+		
+		sketch.client.pullToTop(sketch.mainSection.utterVisText[0]);
+		sketch.client.pullToTop(sketch.mainSection.utterVisText[1]);
 
 	}
 
@@ -330,6 +332,14 @@ public class VideoActivity {
 
 	}
 
+	/////////////////////////
+	///
+	///
+	/// Currently, moreVideos zones are not added to sketch
+	/// since they occluded the utterVis and textual prompts
+	///
+	//////////////////////////	
+	
 	public void createMoreVidoes(){
 		// User 1
 		moreVideos1 = new TextZone(sketch.mainSection.buttonX, sketch.mainSection.buttonYb2, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner1.moreVideos, sketch.textSize, "CENTER", "CENTER"){
@@ -370,7 +380,7 @@ public class VideoActivity {
 		moreVideos1.setColour(Colours.fadedOutZone.getRed(), Colours.fadedOutZone.getGreen(), Colours.fadedOutZone.getBlue());
 		moreVideos1.setGestureEnabled("TAP", true, true);
 		moreVideos1.setDrawBorder(false);
-		sketch.client.addZone(moreVideos1);
+		//sketch.client.addZone(moreVideos1);
 		
 		animMV1 = PropertySetter.createAnimator(sketch.mainSection.animationTime, moreVideos1, 
 				"colour", new ColourEval(), Colours.unselectedZone, Colours.selectedZone);
@@ -420,7 +430,7 @@ public class VideoActivity {
 		moreVideos2.setGestureEnabled("TAP", true, true);
 		moreVideos2.setDrawBorder(false);
 		moreVideos2.rotate((float) Colours.PI);
-		sketch.client.addZone(moreVideos2);
+		//sketch.client.addZone(moreVideos2);
 		
 		animMV2 = PropertySetter.createAnimator(sketch.mainSection.animationTime, moreVideos2, 
 				"colour", new ColourEval(), Colours.unselectedZone, Colours.selectedZone);
