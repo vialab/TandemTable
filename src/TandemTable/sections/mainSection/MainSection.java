@@ -295,23 +295,24 @@ public class MainSection {
 		// for video
 		//////////////////////////////////////////////////////////////////
 		
+		if (sketch.videoRecording) {
+			if (System.currentTimeMillis() - lastUtterUpdate > 50) {
+				lastUtterBar1 += (Math.random() * 0.03125f) - 0.015625;
+				lastUtterBar2 += (Math.random() * 0.03125f) - 0.015625;
+				lastUtterUpdate = System.currentTimeMillis();
 		
-		if (System.currentTimeMillis() - lastUtterUpdate > 50) {
-			lastUtterBar1 += (Math.random() * 0.03125f) - 0.015625;
-			lastUtterBar2 += (Math.random() * 0.03125f) - 0.015625;
-			lastUtterUpdate = System.currentTimeMillis();
-			
-			if(lastUtterBar1 >= 1) {
-				lastUtterBar1 = 1;
+				if(lastUtterBar1 >= 1) {
+					lastUtterBar1 = 1;
+				}
+		
+				if(lastUtterBar2 >= 1) {
+					lastUtterBar2 = 1;
+				}
 			}
-			
-			if(lastUtterBar2 >= 1) {
-				lastUtterBar2 = 1;
-			}
+		
+			barWidth1 = lastUtterBar1;
+			barWidth2 = lastUtterBar2;
 		}
-		
-		barWidth1 = lastUtterBar1;
-		barWidth2 = lastUtterBar2;
 		/////////////////////////////////////////////////////////////////////
 		
 		

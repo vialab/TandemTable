@@ -175,7 +175,7 @@ public class VideoActivity {
 	
 	public void createChangeLang(){
 		
-		changeL1 = new TextZone(sketch.mainSection.buttonX, sketch.mainSection.buttonYb2, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner1.newLang, sketch.textSize, "CENTER", "CENTER"){
+		changeL1 = new TextZone(sketch.mainSection.buttonX, sketch.mainSection.buttonYb3, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner1.newLang, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
 				if (isTappable() && !errorFlag){
@@ -221,7 +221,7 @@ public class VideoActivity {
 		
 		
 		
-		changeL2 = new TextZone(sketch.mainSection.buttonX, sketch.mainSection.buttonYt2, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner2.newLang, sketch.textSize, "CENTER", "CENTER"){
+		changeL2 = new TextZone(sketch.mainSection.buttonX, sketch.mainSection.buttonYt3, sketch.buttonWidth, sketch.buttonHeight, sketch.radius, Colours.pFont, sketch.learner2.newLang, sketch.textSize, "CENTER", "CENTER"){
 
 			public void tapEvent(TapEvent e){
 				if (isTappable() && !errorFlag){
@@ -380,7 +380,7 @@ public class VideoActivity {
 		moreVideos1.setColour(Colours.fadedOutZone.getRed(), Colours.fadedOutZone.getGreen(), Colours.fadedOutZone.getBlue());
 		moreVideos1.setGestureEnabled("TAP", true, true);
 		moreVideos1.setDrawBorder(false);
-		//sketch.client.addZone(moreVideos1);
+		sketch.client.addZone(moreVideos1);
 		
 		animMV1 = PropertySetter.createAnimator(sketch.mainSection.animationTime, moreVideos1, 
 				"colour", new ColourEval(), Colours.unselectedZone, Colours.selectedZone);
@@ -430,7 +430,7 @@ public class VideoActivity {
 		moreVideos2.setGestureEnabled("TAP", true, true);
 		moreVideos2.setDrawBorder(false);
 		moreVideos2.rotate((float) Colours.PI);
-		//sketch.client.addZone(moreVideos2);
+		sketch.client.addZone(moreVideos2);
 		
 		animMV2 = PropertySetter.createAnimator(sketch.mainSection.animationTime, moreVideos2, 
 				"colour", new ColourEval(), Colours.unselectedZone, Colours.selectedZone);
