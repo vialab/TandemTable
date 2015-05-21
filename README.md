@@ -8,3 +8,5 @@ TandemTable is open source and licensed under [GPLv3](http://www.gnu.org/copylef
 
 **Caveat:** 
 I do not own most of the images used in the project. For example, the images used in the Picture Game activity are from [FreeDigitalPhotos.net](http://www.freedigitalphotos.net/).
+
+You must enter your own Twitter, DiffBot, Bing Translator, flickr, and YouTube tokens, keys, secret,s client ids, etc. in Colours.java file.
