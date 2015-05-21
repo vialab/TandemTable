@@ -6,11 +6,41 @@ import processing.core.PFont;
 
 
 public class Colours {
+	///////////////////////////////////////////////////////////
+	// Insert Twitter, DiffBot, Bing Translator, flickr, and YouTube 
+	// tokens, keys, secret, client ids, etc. here
+	//////////////////////////////////////////////////////////
 	// For twitter!!
-	public static final String consumerKeyTwitter = "WWlZXooRI0aPV66hEp18yQ";
-	public static final String consumerSecretTwitter = "XnSRDtJ2tQMSo54Wx4iSiO2bTd90IoqbBxUbXtonw";
-	public static final String tokenTwitter = "436221506-Ou4542xd9boPlf0HHs4Ibqn5K0qclsbdXEAm1fdK";
-	public static final String tokenSecretTwitter ="WMMmFUKQTLwnpRALv5sPydSmhUzc2tki5EiJJkdY2sw";
+	public static final String consumerKeyTwitter = "";
+	public static final String consumerSecretTwitter = "";
+	public static final String tokenTwitter = "";
+	public static final String tokenSecretTwitter ="";
+	// For diffbot
+	public static final String diffbotToken = "";
+	public static final String diffbotEndpoint = "http://www.diffbot.com/api/article?";
+	
+	// For Bing Translator Web Service
+	public static final String clientSecret = "";
+	public static final String clientId = "";
+	
+	// For flickr!!
+	public static final String apiKeyFlickr = "";
+	public static final String secretFlickr = "";
+	
+	// For New York Times API!!
+	//public static final String apiKeyNYT = "";
+	//public static final String baseURLNYT = "http://api.nytimes.com/svc/search/v1/article";
+	
+	// For YouTube API
+	public static final String apiKeyTube = "";
+	public static final String appNameTube = "";
+	//////////////////////////////////////////////////////////////////
+	
+	public static String font = "Dialog.bold-225.vlw";//"CooperBlack-48.vlw";//"Consolas-Bold-48.vlw";//Aharoni-Bold-48.vlw";
+	public static PFont pFont;
+	public static final double PI = 3.14159265358979;
+	
+	// Twitter Activity
 	public static Color boundingBox = new Color(236, 250, 254);//(200, 240, 253);//(78, 163, 233);
 	public static Color shadow = new Color(188, 188, 188);
 	public static Color tweetText = new Color(0,0,0);
@@ -18,30 +48,6 @@ public class Colours {
 	public static Color imageIndicator = new Color(188, 188, 2);
 	public static Color textIndicator = new Color(3, 188, 188);
 	public static Color searchTweet = new Color(111,206,57);
-	// For diffbot
-	public static final String diffbotToken = "32c6d7dcc7e1f722f0ca7184cadf5b13";
-	public static final String diffbotEndpoint = "http://www.diffbot.com/api/article?";
-	
-	// For Bing Translator Web Service
-	public static final String clientSecret = "GLEJGnL6x5dxJPtvOiDjE5YlK48+UGFKNQkM9NXCWV0=";
-	public static final String clientId = "EP";
-	
-	// For flickr!!
-	public static final String apiKeyFlickr = "60be7b8070e765b1f7ca00165e10cd84";
-	public static final String secretFlickr = "bc2b8cc23599d52b";
-	
-	// For New York Times API!!
-	public static final String apiKeyNYT = "be779e860522d0b7b007f27c82978c24:9:65789053";
-	public static final String baseURLNYT = "http://api.nytimes.com/svc/search/v1/article";
-	
-	// For YouTube API
-	public static final String apiKeyTube = "AI39si65RBMm12llmp81wJ64-WUFhwYWvJfr1YuONwlTXgIQqDQRtjZsK--tbVtG4Wd8L2uK7rQNztfOLTHHUMiYg38zAdO3VA";
-	public static final String appNameTube = "TanLangLearn";
-	
-	
-	public static String font = "Dialog.bold-225.vlw";//"CooperBlack-48.vlw";//"Consolas-Bold-48.vlw";//Aharoni-Bold-48.vlw";
-	public static PFont pFont;
-	public static final double PI = 3.14159265358979;
 
 	//From MainSketch.java
 	public static Color backgroundColour = new Color(250, 253, 255);
