@@ -296,17 +296,21 @@ public class MainSection {
 		//////////////////////////////////////////////////////////////////
 		
 		if (sketch.videoRecording) {
-			if (System.currentTimeMillis() - lastUtterUpdate > 50) {
+			if (System.currentTimeMillis() - lastUtterUpdate > 200) {
 				lastUtterBar1 += (Math.random() * 0.03125f) - 0.015625;
 				lastUtterBar2 += (Math.random() * 0.03125f) - 0.015625;
 				lastUtterUpdate = System.currentTimeMillis();
 		
 				if(lastUtterBar1 >= 1) {
 					lastUtterBar1 = 1;
+				} else if (lastUtterBar1 < 0) {
+					lastUtterBar1 = 0;
 				}
 		
 				if(lastUtterBar2 >= 1) {
 					lastUtterBar2 = 1;
+				} else if (lastUtterBar2 < 0) {
+					lastUtterBar2 = 0;
 				}
 			}
 		
