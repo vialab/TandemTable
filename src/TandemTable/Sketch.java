@@ -128,9 +128,8 @@ public class Sketch extends PApplet {
 	// Stroke weight of lines
 	public int strokeW = 5;
 	// Regex for replacement
+	//public String replaceRegex = "[^a-zA-Z_0-9_'_Ã�_Ã¡_Ã€ _Ã‚_Ã _Ã‚_Ã¢_Ã„_Ã¤_Ãƒ_Ã£_Ã…_Ã¥_Ã‡_Ã§_Ã‰_Ã©_Ãˆ_Ã¨_ÃŠ_Ãª_Ã‹_Ã«_Ã�_Ã­_ÃŒ_Ã¬_ÃŽ_Ã®_Ã�_Ã¯_Ã‘_Ã±_Ã“_Ã³_Ã’_Ã²_Ã”_Ã´_Ã–_Ã¶_Ã•_Ãµ_Ãš_Ãº_Ã™_Ã¹_Ã›_Ã»_Ãœ_Ã¼_Ã�_Ã½_Ã¿]";
 	public String replaceRegex = "[^a-zA-Z_0-9_'_Á_á_À _Â_à_Â_â_Ä_ä_Ã_ã_Å_å_Ç_ç_É_é_È_è_Ê_ê_Ë_ë_Í_í_Ì_ì_Î_î_Ï_ï_Ñ_ñ_Ó_ó_Ò_ò_Ô_ô_Ö_ö_Õ_õ_Ú_ú_Ù_ù_Û_û_Ü_ü_Ý_ý_ÿ]";
-	//public String replaceRegex = "[^a-zA-Z_0-9_'_縫塺餛斷趌斷槂寶踆儳粿鰭嬅蓲殳嶱醂佤獥灺螒狉燲岯餩壴螵柉駻娕鎕罝醭浨瀖偫瀴牿鐻惛騶焥揕鸐萣酟廆]";	
-	//public String replaceRegex ="[^a-zA-Z_0-9_'_縫塺餛斷趌斷槂寶踆儳粿鰭嬅蓲殳嶱醂佤獥灺螒狉燲岯餩壴螵柉駻娕鎕罝醭浨瀖偫瀴牿鐻惛騶焥揕鸐萣酟廆]";
 	
 	
 	public void setup() {
@@ -150,6 +149,7 @@ public class Sketch extends PApplet {
 		//Languages.writeOut("Portuguese");
 		//Languages.writeOut("Spanish");
 		
+		checkAPIs();
 		
 		yOffset = screenHeight/100;
 		textSize = screenWidth/50;
@@ -194,6 +194,30 @@ public class Sketch extends PApplet {
 		}
 	}
 
+	public void checkAPIs() {
+		
+		if (Colours.consumerKeyTwitter.equalsIgnoreCase("") || Colours.consumerSecretTwitter.equalsIgnoreCase("")
+				|| Colours.tokenTwitter.equalsIgnoreCase("") || Colours.tokenSecretTwitter.equalsIgnoreCase("")) {
+			System.err.println("Missing Twitter API key, token or secret.");
+		}
+
+		if (Colours.diffbotToken.equalsIgnoreCase("")) {
+			System.err.println("Missing Diffbot API token.");
+		}
+				
+		if (Colours.clientSecret.equalsIgnoreCase("") || Colours.clientId.equalsIgnoreCase("")) {
+			System.err.println("Missing Bing Translator client secret or id.");
+		}
+		
+		if (Colours.apiKeyFlickr.equalsIgnoreCase("") || Colours.secretFlickr.equalsIgnoreCase("")) {
+			System.err.println("Missing Flickr API key or secret.");
+		}		
+		
+		if (Colours.apiKeyTube.equalsIgnoreCase("") || Colours.appNameTube.equalsIgnoreCase("")) {
+			System.err.println("Missing YouTube API key or app name.");
+		}
+	}
+	
 	public void draw(){
 		background(Colours.backgroundColour.getRed(), Colours.backgroundColour.getGreen(), Colours.backgroundColour.getBlue());
 
